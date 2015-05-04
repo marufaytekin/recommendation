@@ -272,5 +272,34 @@ public final class DataParser
     
     }
 
+    public static void calculateDataSetHistogram(HashMap<String, HashMap<String, Integer>> userRateMap)
+    {
+        Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = userRateMap.entrySet().iterator();
+        HashMap <Integer, Integer>histogram = new HashMap();
+        for (int i=0; i <= 100; i++) {
+            histogram.put(i,0); //init historgram
+        }
+        while (iter.hasNext()) {
+            Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
+            int ratings = entry.getValue().size();
+            Integer key = (ratings / 10);
+            histogram.put(key, histogram.get(key) + 1);
+        }
+
+        Iterator<Map.Entry<Integer, Integer>> iterator = histogram.entrySet().iterator();
+        int total = 0;
+        while (iterator.hasNext()) {
+            total += iterator.next().getValue();
+        }
+        LinkedHashMap<Integer, Integer> histo = SortHashMap.sortByKeys(histogram);
+        LOG.info("Total number of Ratings: " + total);
+        LOG.info("Histogram = " + histo);
+        LOG.info("Ratings = " + histo.keySet());
+        LOG.info("Values = " + histo.values());
+
+
+
+
+    }
 
 }

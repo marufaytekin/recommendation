@@ -80,6 +80,12 @@ public final class Main {
                 itemRateMap = DataParser.getItemRateMap();
                 testDataMap = DataParser.getTestDataMap();
                 break;
+            case "00":
+                DataParser.processDataFile(dataFilePath, seperator, 0, 100);
+                userRateMap = DataParser.getUserRateMap();
+                DataParser.calculateDataSetHistogram(userRateMap);
+                break;
+
             case "1":
                 System.out.println("Enter k-NN: ");
                 kNN = Integer.parseInt(scanner.nextLine());
