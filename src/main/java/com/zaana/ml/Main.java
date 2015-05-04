@@ -104,8 +104,7 @@ public final class Main {
                 runCFPredictionSimulation("UB");
                 break;
             case "51":
-                //runCFPredictionSimulation("IB");
-                LOG.info("NOT implemented yet..!");
+                runCFPredictionSimulation("IB");
                 break;
             case "52":
                 LOG.info("Running User-based LSH Prediction...");
