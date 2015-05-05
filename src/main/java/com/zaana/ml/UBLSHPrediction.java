@@ -41,6 +41,7 @@ public class UBLSHPrediction extends AbstractPrediction {
      * @param testDataMap
      * @param kNN
      * @param alpha
+     * @param y
      * @return
      * */
     public static long runUserBasedLSHPredictionOnTestData(
@@ -49,7 +50,7 @@ public class UBLSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            int kNN, int alpha)
+            int kNN, int alpha, int y)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -66,7 +67,7 @@ public class UBLSHPrediction extends AbstractPrediction {
                     .next();
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
-            if (userRateList == null || userRateList.size() < 5) {
+            if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             cnt++;
@@ -74,7 +75,7 @@ public class UBLSHPrediction extends AbstractPrediction {
             total_candidate_set_size += candidateSet.size();
 
             predictRatingsForTestUsers(
-                    testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, alpha);
+                    testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, alpha, y);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -95,7 +96,7 @@ public class UBLSHPrediction extends AbstractPrediction {
             Set<String> candidateSet, String userId,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
-            final int kNN, int alpha)
+            final int kNN, int alpha, int y)
     {
 
         HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
@@ -112,11 +113,11 @@ public class UBLSHPrediction extends AbstractPrediction {
                         intersectionOfCandidateRatedUserSets.size() < alpha) {
                     similarityListMap =
                             Similarity.getCosineSimilarityListWithCandidateSet(userId,
-                                    ratedUserSet, userRateMap);
+                                    ratedUserSet, userRateMap, y);
                 } else {
                     similarityListMap =
                             Similarity.getCosineSimilarityListWithCandidateSet(userId,
-                                    intersectionOfCandidateRatedUserSets, userRateMap);
+                                    intersectionOfCandidateRatedUserSets, userRateMap, y);
                 }
                 LinkedHashMap<String, Double> kNNList = Common.getkNNList(
                         similarityListMap, userRateMap, movieId, kNN);

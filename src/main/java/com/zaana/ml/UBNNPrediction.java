@@ -50,12 +50,13 @@ public final class UBNNPrediction
      * @param testDataMap
      * @param simType
      * @param kNN
+     * @param y
      * @return
      */
     public static long runUserBasedNNPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            final int simType, final int kNN)
+            final int simType, final int kNN, int y)
     {
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
@@ -68,11 +69,11 @@ public final class UBNNPrediction
             Entry <String, HashMap<String, Integer>> testDataEntry = testDataIter.next();
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
-            if (userRateList == null || userRateList.size() < 5) {
+            if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             LinkedHashMap<String, Double> similarityListMap =
-                    Similarity.getCosineSimilarityListWithCandidateSet(userId, candidateUserSet, userRateMap);
+                    Similarity.getCosineSimilarityListWithCandidateSet(userId, candidateUserSet, userRateMap, y);
             predictRatingsForTestUsers(testDataEntry, userRateMap, similarityListMap, outputList, targetList, kNN);
         }
 

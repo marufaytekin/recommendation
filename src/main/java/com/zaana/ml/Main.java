@@ -11,6 +11,7 @@ public final class Main {
     static Logger LOG = Logger.getLogger(Main.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
 
+
     private Main() {
     }
 
@@ -18,8 +19,8 @@ public final class Main {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/jester.data";
-    static String dataFileBase = "data/ml";
+    static String dataFilePath = "data/amazon-movies-tv-1m.data";
+    static String dataFileBase = "data/100k/ml";
     static String trainDataFilePath;
     static String testDataFilePath;
     static final String seperator = "\\t";
@@ -27,9 +28,11 @@ public final class Main {
     // “in most real-world situations, a neighborhood of 20 to 50 neighbors
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int kNN = 20;
+    static int y = 1; // significance value. Must not be 0!
     static int alpha = 0;
     static int numOfRun = 10;
     static final int smoothRun = 3;
+    static int kStep = 5;
     // l: number of bands
     // k: number of hash functions
     static int l = 5;
@@ -48,12 +51,17 @@ public final class Main {
             System.out.println("");
             System.out.println("10 - Model Build Time - All");
 
-            System.out.println("50 - User-based; prediction vs. k");
-            System.out.println("51 - Item-based; prediction vs. k");
-            System.out.println("52 - UBLSH; prediction vs. k");
-            System.out.println("54 - UB-LSH - Prediction - HashTables change ( inc. by 1 )");
-            System.out.println("55 - UB-LSH - Prediction - HashFunctions change ( inc. by 1 )");
-            System.out.println("56 - UB-LSH - Prediciton - 2D test");
+            System.out.println("50 - User-based - Prediction vs. k");
+            System.out.println("500 - User-based - Prediction 2D (y & k) test");
+            System.out.println("51 - Item-based - Prediction vs. k");
+            System.out.println("52 - UBLSH - Prediction vs. k");
+            System.out.println("54 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
+            System.out.println("55 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
+            System.out.println("56 - UBLSH - Predicton - 2D test");
+            System.out.println("57 - UBLSH - Predicton - 2D (Hash Functions & k) test");
+            System.out.println("58 - UBLSH - Predicton - 2D (Hash Functions & y) test");
+
+
 
             System.out.println("99 - Exit");
             System.out.println("===================================");
@@ -109,6 +117,9 @@ public final class Main {
             case "50":
                 runCFPredictionSimulation("UB");
                 break;
+            case "500":
+                runCFPredictionSimulation2D("UB");
+                break;
             case "51":
                 runCFPredictionSimulation("IB");
                 break;
@@ -117,15 +128,21 @@ public final class Main {
                 runLSHPredictionSimulationForK("UBLSH", 0);
                 break;
             case "54":
-                //runLSHPredictionPerformanceTests("UBLSH", "HashTables");
+                runLSHPredictionPerformanceTests("UBLSH", "HashTables");
                 LOG.info("NOT implemented yet..!");
                 break;
             case "55":
-                //runLSHPredictionPerformanceTests("UBLSH", "HashFunctions");
+                runLSHPredictionPerformanceTests("UBLSH", "HashFunctions");
                 LOG.info("NOT implemented yet..!");
                 break;
             case "56":
                 runLSH2DPredictionTests("UBLSH");
+                break;
+            case "57":
+                runLSH2DHashFunctionsAndParamTests("UBLSH", "k");
+                break;
+            case "58":
+                runLSH2DHashFunctionsAndParamTests("UBLSH", "y");
                 break;
 
 
@@ -204,12 +221,12 @@ public final class Main {
                 preprocessDataForKFold(dataFileBase, (j+1));
                 if (type == "UB") {
                     runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
-                            testDataMap, simType, kNN);
+                            testDataMap, simType, kNN, y);
                     mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
                             UBNNPrediction.getTargetList());
                 } else if (type == "IB") {
                     runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
-                            testDataMap, simType, kNN);
+                            testDataMap, simType, kNN, y);
                     mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
                             IBNNPrediction.getTargetList());
                 } else {
@@ -219,7 +236,7 @@ public final class Main {
             LOG.info(type + "MAE = " + mae / smoothRun);
             maeList.add(mae/smoothRun);
             runTimeList.add(runTime/smoothRun);
-            kNN += 5;
+            kNN += kStep;
             LOG.info("k = " + kNN);
         }
         LOG2.info("# ========================================================");
@@ -228,6 +245,57 @@ public final class Main {
         LOG2.info("fileName = " + dataFilePath);
         LOG2.info(type + "MaeList = " + maeList.toString());
         LOG2.info(type + "Runtime = " + runTimeList.toString());
+
+    }
+
+
+    private static void runCFPredictionSimulation2D(String type)
+    {
+        ArrayList<Object> runTimeList2D = new ArrayList<>();
+        ArrayList<Object> maeList2D = new ArrayList<>();
+        kNN = 1;
+        y = 1;
+        for (int i = 0; i < numOfRun; i++) {
+            ArrayList<Long> runtimeList = new ArrayList<>();
+            ArrayList<Double> maeList = new ArrayList<>();
+            for (int j = 0; j < numOfRun; j++) {
+                long runTime = (long) 0;
+                double mae = 0;
+                for (int s = 0; s < smoothRun; s++) {
+                    preprocessDataForKFold(dataFileBase, (s+1));
+                    if (type == "UB") {
+                        runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
+                                testDataMap, simType, kNN, y);
+                        mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
+                                UBNNPrediction.getTargetList());
+                    } else if (type == "IB") {
+                        runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                                testDataMap, simType, kNN, y);
+                        mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
+                                IBNNPrediction.getTargetList());
+                    } else {
+                        throw new UnsupportedOperationException("Invalid operation for CF type.");
+                    }
+                }
+                LOG.info("k: " + kNN);
+                LOG.info("y: " + y);
+                LOG.info(type + "Mae2D: " + mae / smoothRun);
+                LOG.info(type + "Runtime2D: " + runTime / smoothRun);
+                maeList.add(mae / smoothRun);
+                runtimeList.add(runTime / smoothRun);
+                y += 5;
+            }
+            runTimeList2D.add(runtimeList);
+            maeList2D.add(maeList);
+            kNN += kStep;
+            y = 1;
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + type + " k and y 2D ");
+        LOG2.info("# ========================================================");
+        LOG2.info("fileName = " + dataFilePath);
+        LOG2.info(type + "MaeList2D = " + maeList2D.toString() + ";");
+        LOG2.info(type + "RunTimeList2D = " + runTimeList2D.toString() + ";");
 
     }
 
@@ -253,7 +321,7 @@ public final class Main {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap, numberOfHashTables);
                     runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(userRateMap,
-                            itemRateMap, testDataMap, hashTables, vmap, kNN, alpha);
+                            itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
@@ -266,11 +334,11 @@ public final class Main {
             maeList.add(totalMae / smoothRun);
             runTimeList.add(runTimeTotal / smoothRun);
             candidateSetList.add(totalCandSize / smoothRun);
-            kNN += 5;
+            kNN += kStep;
             LOG.info("k = " + kNN);
         }
         LOG2.info("# ========================================================");
-        LOG2.info("# test case " + type + " Prediction");
+        LOG2.info("# test case " + type + " vs. k - Prediction");
         LOG2.info("# ========================================================");
         LOG2.info("fileName = " + dataFilePath);
         LOG2.info(type + "MaeList = " + maeList.toString());
@@ -287,9 +355,9 @@ public final class Main {
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
-            ArrayList<Long> hashFuncRuntimeList = new ArrayList<Long>();
-            ArrayList<Double> hashFuncMaeList = new ArrayList<Double>();
-            ArrayList<Double> candidate_set_list = new ArrayList<Double>();
+            ArrayList<Long> hashFuncRuntimeList = new ArrayList<>();
+            ArrayList<Double> hashFuncMaeList = new ArrayList<>();
+            ArrayList<Double> candidate_set_list = new ArrayList<>();
             for (int j = 0; j < numOfRun; j++) {
                 long runTime = (long) 0;
                 double mae = 0;
@@ -305,7 +373,7 @@ public final class Main {
                                 numOfBands);
                         runTime += UBLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                        itemRateMap, testDataMap, hashTables, vmap, kNN, alpha);
+                                        itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -341,6 +409,80 @@ public final class Main {
 
     }
 
+
+    private static void runLSH2DHashFunctionsAndParamTests(String testType, String param) {
+        int numOfBands = 1; // set 1 band to measure only hash functions effect
+        int numOfHashFunctions = 1;
+        ArrayList<Object> runTimeList2D = new ArrayList<>();
+        ArrayList<Object> maeList2D = new ArrayList<>();
+        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
+        if (param == "k") {
+            kNN = 1;
+        } else if(param == "y") {
+            y = 1;
+        } else {
+            throw new UnsupportedOperationException("Invalid parameter: " + param);
+        }
+        for (int i = 0; i < numOfRun; i++) {
+            ArrayList<Long> hashFuncRuntimeList = new ArrayList<>();
+            ArrayList<Double> hashFuncMaeList = new ArrayList<>();
+            ArrayList<Double> candidate_set_list = new ArrayList<>();
+            for (int j = 0; j < numOfRun; j++) {
+                long runTime = (long) 0;
+                double mae = 0;
+                double candidate_set_size = 0;
+                for (int s = 0; s < smoothRun; s++) {
+                    preprocessDataForKFold(dataFileBase, (s+1));
+                    Set<String> itemSet = itemRateMap.keySet();
+                    HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
+                    HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+                    if (testType == "UBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                                numOfBands);
+                        runTime += UBLSHPrediction
+                                .runUserBasedLSHPredictionOnTestData(userRateMap,
+                                        itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
+                    } else {
+                        throw new UnsupportedOperationException("Invalid type.");
+                    }
+                    candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
+                    mae += MAE.calculateMAE(
+                            UBLSHPrediction.getOutputList(),
+                            UBLSHPrediction.getTargetList());
+                }
+                LOG.info("numOfBands:" + numOfBands
+                        + " numOfHashFunctions:" + numOfHashFunctions);
+                LOG.info("k: " + kNN);
+                LOG.info(testType + "MAE: " + mae / smoothRun);
+                LOG.info(testType + "Runtime: " + runTime / smoothRun);
+                hashFuncMaeList.add(mae / smoothRun);
+                hashFuncRuntimeList.add(runTime / smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
+                numOfHashFunctions += 1;
+            }
+            runTimeList2D.add(hashFuncRuntimeList);
+            maeList2D.add(hashFuncMaeList);
+            candidate_set_list2D.add(candidate_set_list);
+            if (param == "k") {
+                kNN += kStep;
+            } else if(param == "y") {
+                y += 5;
+            }
+            numOfHashFunctions = 1;
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + testType + " 2D - Hash Functions vs. " + param);
+        LOG2.info("# ========================================================");
+        LOG2.info("fileName = " + dataFilePath);
+        LOG2.info("k = " + kNN);
+        LOG2.info(testType + param + "Mae2D = " + maeList2D.toString() + ";");
+        LOG2.info(testType + param + "Runtime2D = " + runTimeList2D.toString() + ";");
+        LOG2.info(testType + param + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
+
+    }
+
+
     private static void runLSHPredictionPerformanceTests(String type, String testType)
     {
         int numOfBands;
@@ -373,7 +515,7 @@ public final class Main {
                             numOfBands);
                     runTime += UBLSHPrediction
                             .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                    itemRateMap, testDataMap, hashTables, vmap, kNN, alpha);
+                                    itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }

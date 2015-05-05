@@ -8,14 +8,14 @@ import java.util.Map.Entry;
 public final class Similarity {
     static Logger LOG = Logger.getLogger(Similarity.class);
 
-    private final static int minSharedNumber = 1; // non shared items 0 kabul et.
+    //private final static int minSharedNumber = 1; // non shared items 0 kabul et.
 
     private Similarity() {
     }
 
     public static LinkedHashMap<String, Double> getCosineSimilarityListWithCandidateSet(
             String itemId, Set<String> candidateSet,
-            HashMap<String, HashMap<String, Integer>> rateMap) {
+            HashMap<String, HashMap<String, Integer>> rateMap, int y) {
         
         LinkedHashMap<String, Double> similarityHashMap = new LinkedHashMap<>();
         HashMap<String, Integer> mapA = rateMap.get(itemId);
@@ -28,9 +28,9 @@ public final class Similarity {
                 mapB = rateMap.get(user);
                 intersectionAB = new HashSet<>(setA);
                 intersectionAB.retainAll(mapB.keySet());
-                if (intersectionAB.size() >= minSharedNumber) {
+                if (!intersectionAB.isEmpty()) {
                     similarity = calculateCosineSimilarity(intersectionAB, mapA,
-                            mapB);
+                            mapB, y);
                     similarityHashMap.put(user, similarity);
                 }
                 else {
@@ -48,7 +48,7 @@ public final class Similarity {
     }
 
     public static double getCosineSimilarity(String userId1, String userId2,
-            final HashMap<String, HashMap<String, Integer>> ratingMap)
+                                             final HashMap<String, HashMap<String, Integer>> ratingMap, int y)
     {
         HashMap<String, Integer> ratings1 = ratingMap.get(userId1);
         HashMap<String, Integer> ratings2 = ratingMap.get(userId2);
@@ -62,19 +62,18 @@ public final class Similarity {
             return 0;
         }
 
-        return calculateCosineSimilarity(intersection, ratings1, ratings2);
+        return calculateCosineSimilarity(intersection, ratings1, ratings2, y);
 
     }
 
     private static double calculateCosineSimilarity(
             final Set<String> intersection,
             final HashMap<String, Integer> map1,
-            final HashMap<String, Integer> map2)
+            final HashMap<String, Integer> map2, int y)
     {
         if (intersection.isEmpty()) return 0;
         Iterator<String> iter = intersection.iterator();
         int intersec_size = intersection.size();
-        int y = 10;
         int num = 0;
         int denum1 = 0;
         int denum2 = 0;
@@ -125,9 +124,9 @@ public final class Similarity {
                         ratedItemIDSetA);
                 intersectionAB.retainAll(ratedItemIDSetB);
                 Double similarity;
-                if (intersectionAB.size() >= minSharedNumber) {
+                if (!intersectionAB.isEmpty()) {
                     similarity = calculateCosineSimilarity(intersectionAB,
-                            userItemRatesA, userItemRatesB);
+                            userItemRatesA, userItemRatesB, 1);
                     if (similarityMatrix.containsKey(userIdA)) {
                         similarityMatrix.get(userIdA).put(userIdB, similarity);
                     } else {
