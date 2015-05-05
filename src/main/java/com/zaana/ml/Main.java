@@ -19,7 +19,7 @@ public final class Main {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/amazon-movies-tv-1m.data";
+    static String dataFilePath = "data/100k/ml";
     static String dataFileBase = "data/100k/ml";
     static String trainDataFilePath;
     static String testDataFilePath;
@@ -49,17 +49,20 @@ public final class Main {
             System.out.println("0 - preprocess train/test data sets");
             System.out.println("1 - Set k-NN ( " + kNN + " )");
             System.out.println("");
-            System.out.println("10 - Model Build Time - All");
-
+            System.out.println("Parameter CV Tests");
             System.out.println("50 - User-based - Prediction vs. k");
             System.out.println("500 - User-based - Prediction 2D (y & k) test");
             System.out.println("51 - Item-based - Prediction vs. k");
             System.out.println("52 - UBLSH - Prediction vs. k");
+            System.out.println("57 - UBLSH - Predicton - 2D (Hash Functions & k) test");
+            System.out.println("58 - UBLSH - Predicton - 2D (Hash Functions & y) test");
+            System.out.println("");
+            System.out.println("Experimental Tests");
+            System.out.println("10 - Model Build Time - All");
             System.out.println("54 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("55 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("56 - UBLSH - Predicton - 2D test");
-            System.out.println("57 - UBLSH - Predicton - 2D (Hash Functions & k) test");
-            System.out.println("58 - UBLSH - Predicton - 2D (Hash Functions & y) test");
+
 
 
 
@@ -82,11 +85,17 @@ public final class Main {
         switch (selection) {
 
             case "0":
-                DataParser.readTrainingDataFile(trainDataFilePath, seperator);
-                DataParser.readTestDataFile(testDataFilePath, seperator);
-                userRateMap = DataParser.getUserRateMap();
-                itemRateMap = DataParser.getItemRateMap();
-                testDataMap = DataParser.getTestDataMap();
+                runSelection("50",scanner,5);
+                runSelection("500",scanner,5);
+                runSelection("51",scanner,5);
+                runSelection("52",scanner,5);
+                runSelection("57",scanner,5);
+                runSelection("58",scanner,5);
+//                DataParser.readTrainingDataFile(trainDataFilePath, seperator);
+//                DataParser.readTestDataFile(testDataFilePath, seperator);
+//                userRateMap = DataParser.getUserRateMap();
+//                itemRateMap = DataParser.getItemRateMap();
+//                testDataMap = DataParser.getTestDataMap();
                 break;
             case "00":
                 DataParser.processDataFile(dataFilePath, seperator, 0, 100);
