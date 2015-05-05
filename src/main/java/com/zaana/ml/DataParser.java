@@ -276,13 +276,15 @@ public final class DataParser
     {
         Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = userRateMap.entrySet().iterator();
         HashMap <Integer, Integer>histogram = new HashMap();
-        for (int i=0; i <= 100; i++) {
+        for (int i=0; i <= 10; i++) {
             histogram.put(i,0); //init historgram
         }
         while (iter.hasNext()) {
             Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
             int ratings = entry.getValue().size();
-            Integer key = (ratings / 10);
+            Integer rate = (ratings / 10);
+            Integer key = Math.min(rate, 10);
+
             histogram.put(key, histogram.get(key) + 1);
         }
 
@@ -294,11 +296,8 @@ public final class DataParser
         LinkedHashMap<Integer, Integer> histo = SortHashMap.sortByKeys(histogram);
         LOG.info("Total number of Ratings: " + total);
         LOG.info("Histogram = " + histo);
-        LOG.info("Ratings = " + histo.keySet());
-        LOG.info("Values = " + histo.values());
-
-
-
+        LOG.info("numberOfRatings = " + histo.keySet());
+        LOG.info("numberOfUsers = " + histo.values());
 
     }
 

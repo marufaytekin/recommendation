@@ -18,7 +18,7 @@ public final class Main {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ml.data";
+    static String dataFilePath = "data/jester.data";
     static String dataFileBase = "data/ml";
     static String trainDataFilePath;
     static String testDataFilePath;
