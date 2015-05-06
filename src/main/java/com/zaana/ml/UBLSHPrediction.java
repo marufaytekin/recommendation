@@ -9,8 +9,6 @@ import java.util.*;
  */
 public class UBLSHPrediction extends AbstractPrediction {
 
-    private static final Logger LOG = Logger.getLogger(UBLSHPrediction.class);
-
     /**
      * This method uses LSH algorithm with k-NN to predict user/item rating.
      *

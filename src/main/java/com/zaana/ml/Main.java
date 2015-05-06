@@ -19,7 +19,7 @@ public final class Main {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/100k/ml";
+    static String dataFilePath = "data/100k/ml.data";
     static String dataFileBase = "data/100k/ml";
     static String trainDataFilePath;
     static String testDataFilePath;
@@ -85,8 +85,8 @@ public final class Main {
         switch (selection) {
 
             case "0":
-                runSelection("50",scanner,5);
-                runSelection("500",scanner,5);
+                runSelection("50", scanner, 5);
+                runSelection("500", scanner, 5);
                 runSelection("51",scanner,5);
                 runSelection("52",scanner,5);
                 runSelection("57",scanner,5);
@@ -227,7 +227,7 @@ public final class Main {
             double mae = 0;
             double runTime = 0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForKFold(dataFileBase, (j+1));
+                preprocessDataForValidation(dataFileBase, (j + 1), "val");
                 if (type == "UB") {
                     runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                             testDataMap, simType, kNN, y);
@@ -271,7 +271,7 @@ public final class Main {
                 long runTime = (long) 0;
                 double mae = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForKFold(dataFileBase, (s+1));
+                    preprocessDataForValidation(dataFileBase, (s + 1), "val");
                     if (type == "UB") {
                         runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                                 testDataMap, simType, kNN, y);
@@ -324,7 +324,7 @@ public final class Main {
             double runTimeTotal = 0;
             double totalCandSize = 0.0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForKFold(dataFileBase, (j+1));
+                preprocessDataForValidation(dataFileBase, (j + 1), "val");
                 Set<String> itemSet = itemRateMap.keySet();
                 if (type == "UBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
@@ -372,7 +372,7 @@ public final class Main {
                 double mae = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForKFold(dataFileBase, (s+1));
+                    preprocessDataForValidation(dataFileBase, (s + 1), "test");
                     Set<String> itemSet = itemRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
@@ -441,7 +441,7 @@ public final class Main {
                 double mae = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForKFold(dataFileBase, (s+1));
+                    preprocessDataForValidation(dataFileBase, (s + 1), "val");
                     Set<String> itemSet = itemRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
@@ -515,7 +515,7 @@ public final class Main {
             double mae = 0;
             double candidate_set_size = 0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForKFold(dataFileBase, (j+1));
+                preprocessDataForValidation(dataFileBase, (j + 1), "val");
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 if (type == "UBLSH") {
@@ -562,10 +562,10 @@ public final class Main {
                 + ";");
     }
 
-    private static void preprocessDataForKFold(String baseUrl, int k)
+    private static void preprocessDataForValidation(String baseUrl, int num, String type)
     {
-        trainDataFilePath = baseUrl + k + ".base";
-        testDataFilePath = baseUrl + k + ".test";
+        trainDataFilePath = baseUrl + num + ".base";
+        testDataFilePath = baseUrl + num + "." + type;
         DataParser.readTrainingDataFile(trainDataFilePath, seperator);
         DataParser.readTestDataFile(testDataFilePath, seperator);
         userRateMap = DataParser.getUserRateMap();

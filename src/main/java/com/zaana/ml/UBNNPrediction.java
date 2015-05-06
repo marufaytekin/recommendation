@@ -5,27 +5,13 @@ import org.apache.log4j.Logger;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class UBNNPrediction
+public final class UBNNPrediction extends AbstractPrediction
 {
-
-    static Logger LOG = Logger.getLogger(UBNNPrediction.class);
 
     private UBNNPrediction()
     {
     }
 
-    private static LinkedList<Double> outputList;
-    private static LinkedList<Integer> targetList;
-
-    public static LinkedList<Double> getOutputList()
-    {
-        return outputList;
-    }
-
-    public static LinkedList<Integer> getTargetList()
-    {
-        return targetList;
-    }
 
     /**
      * This method uses k-NN algorithm to predict user/item rating.
