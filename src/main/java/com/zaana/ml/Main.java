@@ -3,6 +3,9 @@ package com.zaana.ml;
 import java.io.IOException;
 import java.util.*;
 
+import com.zaana.ml.tests.AbstractTests;
+import com.zaana.ml.tests.CFPredictionAndKTest;
+import com.zaana.ml.tests.ModelBuildTimeTest;
 import org.apache.log4j.Logger;
 
 
@@ -10,7 +13,6 @@ import org.apache.log4j.Logger;
 public final class Main {
     static Logger LOG = Logger.getLogger(Main.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
-
 
     private Main() {
     }
@@ -27,10 +29,10 @@ public final class Main {
     static int simType = 2;
     // “in most real-world situations, a neighborhood of 20 to 50 neighbors
     // seems reasonable” ( Herlocker et al. 2002 ).
-    static int kNN = 20;
-    static int y = 1; // significance value. Must not be 0!
+    static int kNN = 30;
+    static int y = 10; // significance value. Must not be 0!
     static int alpha = 0;
-    static int numOfRun = 10;
+    static int numOfRun = 15;
     static final int smoothRun = 3;
     static int kStep = 5;
     // l: number of bands
@@ -51,20 +53,17 @@ public final class Main {
             System.out.println("");
             System.out.println("Parameter CV Tests");
             System.out.println("50 - User-based - Prediction vs. k");
-            System.out.println("500 - User-based - Prediction 2D (y & k) test");
-            System.out.println("51 - Item-based - Prediction vs. k");
-            System.out.println("52 - UBLSH - Prediction vs. k");
+            System.out.println("51 - User-based - Prediction 2D (y & k) test");
+            System.out.println("53 - UBLSH - LSH Prediction & k");
+            System.out.println("54 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
+            System.out.println("55 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("57 - UBLSH - Predicton - 2D (Hash Functions & k) test");
             System.out.println("58 - UBLSH - Predicton - 2D (Hash Functions & y) test");
             System.out.println("");
+                        System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
-            System.out.println("54 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
-            System.out.println("55 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("56 - UBLSH - Predicton - 2D test");
-
-
-
 
             System.out.println("99 - Exit");
             System.out.println("===================================");
@@ -85,10 +84,6 @@ public final class Main {
         switch (selection) {
 
             case "0":
-                runSelection("50", scanner, 5);
-                runSelection("500", scanner, 5);
-                runSelection("51",scanner,5);
-                runSelection("52",scanner,5);
                 runSelection("57",scanner,5);
                 runSelection("58",scanner,5);
 //                DataParser.readTrainingDataFile(trainDataFilePath, seperator);
@@ -119,39 +114,39 @@ public final class Main {
                 break;
 
             case "10": //old 8
-                runModelBuildTimeTest("UB");
-                runModelBuildTimeTest("UBLSH");
+                ModelBuildTimeTest.runModelBuildTimeTest("UB", dataFilePath, seperator, k, l);
+                ModelBuildTimeTest.runModelBuildTimeTest("UBLSH", dataFilePath, seperator, k, l);
                 break;
 
             case "50":
-                runCFPredictionSimulation("UB");
-                break;
-            case "500":
-                runCFPredictionSimulation2D("UB");
+                CFPredictionAndKTest.runCFPredictionSimulation(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kStep, y);
                 break;
             case "51":
-                runCFPredictionSimulation("IB");
+                runCFPredictionSimulation2D("UB");
                 break;
             case "52":
+                CFPredictionAndKTest.runCFPredictionSimulation(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kStep, y);
+                break;
+            case "53":
                 LOG.info("Running User-based LSH Prediction...");
                 runLSHPredictionSimulationForK("UBLSH", 0);
                 break;
             case "54":
-                runLSHPredictionPerformanceTests("UBLSH", "HashTables");
+                runLSHPredictionPerformanceTests("UBLSH", "HashTables", "val");
                 LOG.info("NOT implemented yet..!");
                 break;
             case "55":
-                runLSHPredictionPerformanceTests("UBLSH", "HashFunctions");
+                runLSHPredictionPerformanceTests("UBLSH", "HashFunctions", "val");
                 LOG.info("NOT implemented yet..!");
                 break;
             case "56":
                 runLSH2DPredictionTests("UBLSH");
                 break;
             case "57":
-                runLSH2DHashFunctionsAndParamTests("UBLSH", "k");
+                runLSH2DHashFunctionsAndParamTests("UBLSH", "k", "val");
                 break;
             case "58":
-                runLSH2DHashFunctionsAndParamTests("UBLSH", "y");
+                runLSH2DHashFunctionsAndParamTests("UBLSH", "y", "val");
                 break;
 
 
@@ -163,97 +158,6 @@ public final class Main {
                 LOG.info("Command not recognized...\n");
                 break;
         }
-
-    }
-
-
-
-    private static void runModelBuildTimeTest (String type)
-    {
-        ArrayList<Long> modelBuildTimeList = new ArrayList<>();
-        ArrayList<Integer> numOfUsersList = new ArrayList<>();
-        ArrayList<Integer> numOfItemsList = new ArrayList<>();
-        long startTime ;
-        long endTime;
-        long runningTime;
-        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
-        for (int i = 1; i <= 10; i++) {
-            preprocessDataForModelBuildTest(dataFilePath, seperator, (100-i*10));
-            numOfUsersList.add(userRateMap.keySet().size());
-            numOfItemsList.add(itemRateMap.keySet().size());
-            Set<String> itemSet = DataParser.getItemSet();
-            Set<String> userSet = DataParser.getUserSet();
-            startTime = System.currentTimeMillis();
-            int numOfBands = l;
-            if (type == "UB") {
-                Similarity.createCosineSimilarityMatrix(userRateMap);
-            } else if (type == "IB") {
-                Similarity.createCosineSimilarityMatrix(itemRateMap);
-            } else if (type == "UBLSH") {
-                vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-                startTime = System.currentTimeMillis();
-                LSH.buildIndexTables(userRateMap, vmap,
-                        numOfBands);
-            } else if (type == "IBLSH") {
-                vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
-                startTime = System.currentTimeMillis();
-                LSH.buildIndexTables(itemRateMap, vmap,
-                        numOfBands);
-            } else {
-                throw new UnsupportedOperationException("Invalid type for Model build.");
-            }
-            endTime = System.currentTimeMillis();
-            runningTime = (endTime - startTime);
-            modelBuildTimeList.add(runningTime);
-            LOG.info("modelBuildTimeList: " + modelBuildTimeList);
-        }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case : " + type + " Model Build");
-        LOG2.info("# ========================================================");
-        LOG2.info("fileName = " + dataFilePath + ";");
-        LOG2.info(type + "numOfUsersList = " + numOfUsersList.toString() + ";");
-        LOG2.info(type + "numOfItemsList = " + numOfItemsList.toString() + ";");
-        LOG2.info(type + "modelBuildTimeList = " + modelBuildTimeList.toString() + ";");
-    }
-
-
-    private static void runCFPredictionSimulation(String type)
-    {
-        ArrayList<Double> maeList = new ArrayList<>();
-        ArrayList<Double> runTimeList = new ArrayList<>();
-        kNN = 1;
-        LOG.info("Running" + type + " PredictionSimulation for k = " + kNN);
-        for (int i = 0; i < 10; i++) {
-            double mae = 0;
-            double runTime = 0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j + 1), "val");
-                if (type == "UB") {
-                    runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
-                            testDataMap, simType, kNN, y);
-                    mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
-                            UBNNPrediction.getTargetList());
-                } else if (type == "IB") {
-                    runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
-                            testDataMap, simType, kNN, y);
-                    mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
-                            IBNNPrediction.getTargetList());
-                } else {
-                    throw new UnsupportedOperationException("Invalid operation for CF type.");
-                }
-            }
-            LOG.info(type + "MAE = " + mae / smoothRun);
-            maeList.add(mae/smoothRun);
-            runTimeList.add(runTime/smoothRun);
-            kNN += kStep;
-            LOG.info("k = " + kNN);
-        }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + type + " Prediction");
-        LOG2.info("# ========================================================");
-        LOG2.info("fileName = " + dataFilePath);
-        LOG2.info(type + "MaeList = " + maeList.toString());
-        LOG2.info(type + "Runtime = " + runTimeList.toString());
 
     }
 
@@ -271,15 +175,15 @@ public final class Main {
                 long runTime = (long) 0;
                 double mae = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "val");
+                    AbstractTests.preprocessDataForValidation(dataFileBase, (s + 1), "val", seperator);
                     if (type == "UB") {
                         runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
-                                testDataMap, simType, kNN, y);
+                                testDataMap, kNN, y);
                         mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
                                 UBNNPrediction.getTargetList());
                     } else if (type == "IB") {
                         runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
-                                testDataMap, simType, kNN, y);
+                                testDataMap, kNN, y);
                         mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
                                 IBNNPrediction.getTargetList());
                     } else {
@@ -324,13 +228,13 @@ public final class Main {
             double runTimeTotal = 0;
             double totalCandSize = 0.0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j + 1), "val");
+                AbstractTests.preprocessDataForValidation(dataFileBase, (j + 1), "val", seperator);
                 Set<String> itemSet = itemRateMap.keySet();
                 if (type == "UBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap, numberOfHashTables);
                     runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(userRateMap,
-                            itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
+                            itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
@@ -372,7 +276,7 @@ public final class Main {
                 double mae = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "test");
+                    AbstractTests.preprocessDataForValidation(dataFileBase, (s + 1), "test", seperator);
                     Set<String> itemSet = itemRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
@@ -382,7 +286,7 @@ public final class Main {
                                 numOfBands);
                         runTime += UBLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                        itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
+                                        itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -419,7 +323,7 @@ public final class Main {
     }
 
 
-    private static void runLSH2DHashFunctionsAndParamTests(String testType, String param) {
+    private static void runLSH2DHashFunctionsAndParamTests(String testType, String param, String val) {
         int numOfBands = 1; // set 1 band to measure only hash functions effect
         int numOfHashFunctions = 1;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
@@ -441,7 +345,7 @@ public final class Main {
                 double mae = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "val");
+                    AbstractTests.preprocessDataForValidation(dataFileBase, (s + 1), val, seperator);
                     Set<String> itemSet = itemRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
@@ -451,7 +355,7 @@ public final class Main {
                                 numOfBands);
                         runTime += UBLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                        itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
+                                        itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -492,7 +396,7 @@ public final class Main {
     }
 
 
-    private static void runLSHPredictionPerformanceTests(String type, String testType)
+    private static void runLSHPredictionPerformanceTests(String type, String testType, String val)
     {
         int numOfBands;
         int numOfHashFunctions;
@@ -507,6 +411,7 @@ public final class Main {
         }
         ArrayList<Long> runtimeList = new ArrayList<>();
         ArrayList<Double> maeList = new ArrayList<>();
+        ArrayList<Double> predictedItemsList = new ArrayList<>();
         ArrayList<Double> candidate_set_list = new ArrayList<>();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
         HashMap<Integer, HashMap<String, Set<String>>> hashTables;
@@ -514,8 +419,9 @@ public final class Main {
             long runTime = (long) 0;
             double mae = 0;
             double candidate_set_size = 0;
+            double predictedItems = 0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j + 1), "val");
+                AbstractTests.preprocessDataForValidation(dataFileBase, (j + 1), val, seperator);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 if (type == "UBLSH") {
@@ -524,7 +430,7 @@ public final class Main {
                             numOfBands);
                     runTime += UBLSHPrediction
                             .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                    itemRateMap, testDataMap, hashTables, vmap, kNN, alpha, y);
+                                    itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
@@ -533,15 +439,18 @@ public final class Main {
                 mae += MAE.calculateMAE(
                         AbstractPrediction.getOutputList(),
                         AbstractPrediction.getTargetList());
+                predictedItems += AbstractPrediction.getOutputList().size();
             }
             maeList.add(mae / smoothRun);
             runtimeList.add(runTime / smoothRun);
             candidate_set_list.add(candidate_set_size / smoothRun);
+            predictedItemsList.add(predictedItems / smoothRun);
 
             LOG.info("numOfBands:" + numOfBands
                     + " numOfHashFunctions:" + numOfHashFunctions);
             LOG.info("Mae: " + mae/smoothRun);
             LOG.info("Runtime: " + runTime/smoothRun);
+            LOG.info("Predicted Items :" + (predictedItems/smoothRun));
             if (testType == "HashFunctions") {
                 numOfHashFunctions++;
             } else {
@@ -560,54 +469,8 @@ public final class Main {
                 + ";");
         LOG2.info(type + "CandidateSetList = " + candidate_set_list
                 + ";");
+        LOG2.info("PredictedItemsList  = " + predictedItemsList.toString() + ";");
     }
 
-    private static void preprocessDataForValidation(String baseUrl, int num, String type)
-    {
-        trainDataFilePath = baseUrl + num + ".base";
-        testDataFilePath = baseUrl + num + "." + type;
-        DataParser.readTrainingDataFile(trainDataFilePath, seperator);
-        DataParser.readTestDataFile(testDataFilePath, seperator);
-        userRateMap = DataParser.getUserRateMap();
-        itemRateMap = DataParser.getItemRateMap();
-        testDataMap = DataParser.getTestDataMap();
-    }
-
-
-    private static void preprocessDataForModelBuildTest(String _dataFilePath,
-                                                        String _seperator, int num)
-    {
-        final long startTime = System.currentTimeMillis();
-        DataParser.processDataFile(_dataFilePath, _seperator, 0, 100);
-        userRateMap = DataParser.getUserRateMap();
-        itemRateMap = DataParser.getItemRateMap();
-        Set<String> itemSet = DataParser.getItemSet();
-        Set<String> userSet = DataParser.getUserSet();
-        int itemDataPercentage = itemSet.size()/100;
-        int userDataPercentage = userSet.size()/100;
-        LOG.info("itemRateMap Size:");
-        LOG.info(itemRateMap.size());
-        LOG.info("userRateMap Size:");
-        LOG.info(userRateMap.size());
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> userDataIter =
-                userRateMap.entrySet().iterator();
-        for (int i = 0; i < num * userDataPercentage; i++) {
-            userDataIter.next();
-            userDataIter.remove();
-        }
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> itemDataIter =
-                itemRateMap.entrySet().iterator();
-        for (int i = 0; i < num * itemDataPercentage; i++) {
-            itemDataIter.next();
-            itemDataIter.remove();
-        }
-        LOG.info("itemRateMap Size After:");
-        LOG.info(itemRateMap.size());
-        LOG.info("userRateMap Size After:");
-        LOG.info(userRateMap.size());
-        final long endTime = System.currentTimeMillis();
-        LOG.info("preprocessDataForModelBuildTest completed in " +
-                (endTime - startTime) + " ms.");
-    }
 
 }

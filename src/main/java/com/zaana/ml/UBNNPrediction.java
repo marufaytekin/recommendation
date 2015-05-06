@@ -34,7 +34,6 @@ public final class UBNNPrediction extends AbstractPrediction
      *   
      * @param userRateMap
      * @param testDataMap
-     * @param simType
      * @param kNN
      * @param y
      * @return
@@ -42,7 +41,7 @@ public final class UBNNPrediction extends AbstractPrediction
     public static long runUserBasedNNPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            final int simType, final int kNN, int y)
+            final int kNN, int y)
     {
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();

@@ -1,7 +1,5 @@
 package com.zaana.ml;
 
-import org.apache.log4j.Logger;
-
 import java.util.*;
 
 /**
@@ -38,7 +36,6 @@ public class UBLSHPrediction extends AbstractPrediction {
      * @param itemRateMap
      * @param testDataMap
      * @param kNN
-     * @param alpha
      * @param y
      * @return
      * */
@@ -48,7 +45,7 @@ public class UBLSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            int kNN, int alpha, int y)
+            int kNN, int y)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -71,9 +68,8 @@ public class UBLSHPrediction extends AbstractPrediction {
             cnt++;
             Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, userId, userRateList);
             total_candidate_set_size += candidateSet.size();
-
             predictRatingsForTestUsers(
-                    testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, alpha, y);
+                    testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -94,36 +90,33 @@ public class UBLSHPrediction extends AbstractPrediction {
             Set<String> candidateSet, String userId,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
-            final int kNN, int alpha, int y)
+            final int kNN, int y)
     {
-
         HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
 
         for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
             try {
                 String movieId = entry.getKey();
+                Integer givenRating = entry.getValue();
                 LinkedHashMap<String, Double> similarityListMap;
                 Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-                if (intersectionOfCandidateRatedUserSets.isEmpty() ||
-                        intersectionOfCandidateRatedUserSets.size() < alpha) {
-                    similarityListMap =
-                            Similarity.getCosineSimilarityListWithCandidateSet(userId,
-                                    ratedUserSet, userRateMap, y);
-                } else {
+                if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
                     similarityListMap =
                             Similarity.getCosineSimilarityListWithCandidateSet(userId,
                                     intersectionOfCandidateRatedUserSets, userRateMap, y);
-                }
-                LinkedHashMap<String, Double> kNNList = Common.getkNNList(
-                        similarityListMap, userRateMap, movieId, kNN);
-                if (!kNNList.isEmpty()){ // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
-                    prediction = Prediction.calculateUserBasedPredicitonRate(
-                            userRateMap, kNNList, movieId);
+                    LinkedHashMap<String, Double> kNNList = Common.getkNNList(
+                            similarityListMap, userRateMap, movieId, kNN);
+                    if (!kNNList.isEmpty()) { // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
+                        prediction = Prediction.calculateUserBasedPredicitonRate(
+                                userRateMap, kNNList, movieId);
+                    } else {
+                        prediction = 0;
+                    }
                     outputList.add(prediction);
-                    targetList.add(entry.getValue());
+                    targetList.add(givenRating);
                 }
             } catch (NullPointerException e) {
                 // do nothing

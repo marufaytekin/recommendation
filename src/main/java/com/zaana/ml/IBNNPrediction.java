@@ -44,18 +44,16 @@ public final class IBNNPrediction {
      *     sort similarity list l based on similarity s ( m*log(m) ) 
      * return the top k items that user u rated for, ranked by similarity 
      * compute u's preference for i, by using top k item's rated by user u, weighted by s (k)
-     *  @param itemRateMap
+     * @param itemRateMap
      * @param userRateMap
      * @param testDataMap
-     * @param simType
      * @param kNN    @return
-     * @param y
-     * */
+     * @param y     */
     public static long runItemBasedNNPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            final int simType, final int kNN, int y) {
+            final int kNN, int y) {
 
         LOG.info("Running prediction tests on test data set...");
         final long startTime = System.currentTimeMillis();
@@ -73,7 +71,7 @@ public final class IBNNPrediction {
                 continue;
             }
             Set<String> ratedItemsSet = userRateMap.get(testUserId).keySet();
-            predictRatingsForTestUsers(testDataEntry,userRateMap,itemRateMap, ratedItemsSet, testUserId, outputList,targetList,kNN,simType, y);
+            predictRatingsForTestUsers(testDataEntry,userRateMap,itemRateMap, ratedItemsSet, testUserId, outputList,targetList,kNN, y);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -92,7 +90,7 @@ public final class IBNNPrediction {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             Set<String> ratedItemsSet, String testUserId, LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
-            final int kNN, int simType, int y)
+            final int kNN, int y)
     {
 
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
@@ -100,7 +98,7 @@ public final class IBNNPrediction {
             try {
                 String testMovieId = entry.getKey();
                 LinkedHashMap<String, Double> kNNList = getSimilarItemsListRatedByUser(
-                        itemRateMap, testMovieId, ratedItemsSet, simType, kNN, y);
+                        itemRateMap, testMovieId, ratedItemsSet, kNN, y);
                 if (kNNList != null && !kNNList.isEmpty()) { //BUG: computing prediction with lt k NN
                     double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap,
                             kNNList, testUserId);
@@ -115,17 +113,15 @@ public final class IBNNPrediction {
 
     /**
      * This method computes and returns the similar items list that testUserId
-     * is rated. *
-     *  @param itemRateMap
+     * is rated.
+     * @param itemRateMap
      * @param itemId
      * @param ratedItemsSet
-     * @param simType
      * @param kNN   @return
-     * @param y
-     * */
+     * @param y     */
     public static LinkedHashMap<String, Double> getSimilarItemsListRatedByUser(
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            String itemId, Set<String> ratedItemsSet, final int simType,
+            String itemId, Set<String> ratedItemsSet,
             final int kNN, int y)
     {
 
