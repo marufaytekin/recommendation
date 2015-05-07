@@ -1,3 +1,13 @@
 # Created by .gitignore support plugin (hsz.mobi)
 .idea/**
 recomm.log
+data/ml-1m.data
+data/ymusic-test.data
+data/ymusic3.base
+data/ymusic.data
+data/ymusic2.base
+data/xaa
+data/ymusic3.test
+data/ymusic2.test
+data/ymusic1.test
+data/ymusic1.base
