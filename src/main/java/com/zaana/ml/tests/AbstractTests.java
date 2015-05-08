@@ -32,4 +32,16 @@ public abstract class AbstractTests {
         testDataMap = DataParser.getTestDataMap();
     }
 
+
+    public static void preprocessDataForRecommendation(
+            String filePath, String seperator,
+            int numOfUserPercentage, int numOfRatingsForUsers)
+    {
+        DataParser.processDataFileForRecommendation(
+                filePath,seperator,numOfRatingsForUsers,numOfUserPercentage);
+        userRateMap = DataParser.getUserRateMap();
+        itemRateMap = DataParser.getItemRateMap();
+        testDataMap = DataParser.getTestDataMap();
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.zaana.ml;
+package com.zaana.ml.prediction;
 
 import org.apache.log4j.Logger;
 

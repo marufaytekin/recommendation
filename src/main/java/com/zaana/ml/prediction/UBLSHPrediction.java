@@ -1,4 +1,8 @@
-package com.zaana.ml;
+package com.zaana.ml.prediction;
+
+import com.zaana.ml.Common;
+import com.zaana.ml.LSH;
+import com.zaana.ml.similarity.Cosine;
 
 import java.util.*;
 
@@ -105,7 +109,7 @@ public class UBLSHPrediction extends AbstractPrediction {
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
                     similarityListMap =
-                            Similarity.getCosineSimilarityListWithCandidateSet(userId,
+                            Cosine.getSimilarityListWithCandidateSet(userId,
                                     intersectionOfCandidateRatedUserSets, userRateMap, y);
                     LinkedHashMap<String, Double> kNNList = Common.getkNNList(
                             similarityListMap, userRateMap, movieId, kNN);

@@ -1,5 +1,6 @@
-package com.zaana.ml;
+package com.zaana.ml.prediction;
 
+import com.zaana.ml.similarity.Cosine;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -126,7 +127,7 @@ public final class IBNNPrediction {
     {
 
         LinkedHashMap<String, Double> sortedSimilarItemsListMap =
-                Similarity.getCosineSimilarityListWithCandidateSet(itemId, ratedItemsSet, itemRateMap, y);
+                Cosine.getSimilarityListWithCandidateSet(itemId, ratedItemsSet, itemRateMap, y);
         if (sortedSimilarItemsListMap == null) {
         	return null;
         }

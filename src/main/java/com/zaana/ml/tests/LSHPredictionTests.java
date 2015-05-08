@@ -1,6 +1,8 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
+import com.zaana.ml.prediction.AbstractPrediction;
+import com.zaana.ml.prediction.UBLSHPrediction;
 
 import java.util.ArrayList;
 import java.util.HashMap;

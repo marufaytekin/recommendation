@@ -1,9 +1,8 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.IBNNPrediction;
+import com.zaana.ml.prediction.IBNNPrediction;
 import com.zaana.ml.MAE;
-import com.zaana.ml.Main;
-import com.zaana.ml.UBNNPrediction;
+import com.zaana.ml.prediction.UBNNPrediction;
 
 import java.util.ArrayList;
 

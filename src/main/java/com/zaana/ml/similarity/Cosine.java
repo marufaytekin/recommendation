@@ -1,19 +1,21 @@
-package com.zaana.ml;
+package com.zaana.ml.similarity;
 
+import com.zaana.ml.SortHashMap;
 import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class Similarity {
-    static Logger LOG = Logger.getLogger(Similarity.class);
+public final class Cosine implements Similarity {
+    static Logger LOG = Logger.getLogger(Cosine.class);
 
     //private final static int minSharedNumber = 1; // non shared items 0 kabul et.
 
-    private Similarity() {
+    private Cosine() {
     }
 
-    public static LinkedHashMap<String, Double> getCosineSimilarityListWithCandidateSet(
+
+    public static LinkedHashMap<String, Double> getSimilarityListWithCandidateSet(
             String itemId, Set<String> candidateSet,
             HashMap<String, HashMap<String, Integer>> rateMap, int y) {
         
@@ -97,7 +99,7 @@ public final class Similarity {
      * Use following methods to create a similarity matrix in
      * HashMap format.
      */
-    public static HashMap<String, LinkedHashMap<String, Double>> createCosineSimilarityMatrix(
+    public static HashMap<String, LinkedHashMap<String, Double>> createSimilarityMatrix(
             final HashMap<String, HashMap<String, Integer>> userRateMap)
     {
         HashMap<String, LinkedHashMap<String, Double>> similarityMatrix = new HashMap<>();

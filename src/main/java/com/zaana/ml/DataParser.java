@@ -301,4 +301,198 @@ public final class DataParser
 
     }
 
+
+    public static void processDataFileForRecommendation (
+            final String filePath,
+            final String seperator,
+            int numOfTestItemsForEachUser, int nuOfTestUserPercentage)
+    {
+        readDataFile(filePath, seperator);
+        selectTestData(userRateMap, itemRateMap, testDataMap, numOfTestItemsForEachUser, nuOfTestUserPercentage);
+        removeDuplicateData(userRateMap, itemRateMap, testDataMap);
+        Integer numOfUsers = userRateMap.keySet().size();
+        Integer numOfItems = itemRateMap.keySet().size();
+        LOG.info("Selected test users number: " + testDataMap.size());
+        LOG.info("Selected test data size : " + numOfTestItemsForEachUser * testDataMap.size());
+        LOG.info("numOfUsers = " + numOfUsers);
+        LOG.info("numOfItems = " + numOfItems);
+        LOG.info("Data file parsing completed...");
+    }
+
+
+    private static void readDataFile(final String filePath, final String seperator)
+    {
+        userRateMap = new HashMap<>();
+        itemRateMap = new HashMap<>();
+        testDataMap = new HashMap<>();
+        userSet = new HashSet<>();
+        itemSet = new HashSet<>();
+        itemSetCount = new HashMap<>();
+        userSetCount = new HashMap<>();
+
+        BufferedReader in = null;
+        try {
+            in = new BufferedReader(new FileReader(filePath));
+        } catch (FileNotFoundException e) {
+            LOG.error(e);
+        }
+
+        int totalDataSampleSize = 0;
+
+        try {
+            while (in.ready()) {
+                String line = in.readLine();
+                String[] data = line.split(seperator);
+                if (data.length < 3) {
+                    continue;
+                }
+                String userID = data[0];
+                String itemID = data[1];
+                Integer rating = (int) Math.round(Double.parseDouble(data[2]));
+                userSet.add(userID);
+                itemSet.add(itemID);
+                insertDataInMap(userID, itemID, rating, userRateMap);
+                insertDataInMap(itemID, userID, rating, itemRateMap);
+                updateCounter(itemID, itemSetCount);
+                updateCounter(userID, userSetCount);
+                totalDataSampleSize++;
+            }
+        }  catch (NumberFormatException e) {
+            LOG.error(e.getStackTrace());
+        } catch (IOException e) {
+            LOG.error(e.getStackTrace());
+        } finally {
+            if (in != null) {
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    // Do nothing
+                }
+            }
+        }
+        LOG.info("Total datasize: " + totalDataSampleSize);
+    }
+
+
+    private static void selectTestData (
+            HashMap<String, HashMap<String, Integer>> _userRateMap,
+            HashMap<String, HashMap<String, Integer>> _itemRateMap,
+            HashMap<String, HashMap<String, Integer>> _testDataMap,
+            final int numOfTestItemsForEachUser,
+            final int recommTestUserMinItemNumber)
+    {
+        HashMap<String, HashMap<String, Double>> userStatsMap = Stats
+                .calculateUserMeanVarianceMap(_userRateMap);
+
+        Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = _userRateMap
+                .entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
+            String userId = entry.getKey();
+            if (entry.getValue().size() < recommTestUserMinItemNumber) {
+                continue;
+            }
+            Random r = new Random();
+            if (r.nextInt(100) <= 50) {
+                Set<String> selectedTestItems = getUsersTestItems(userStatsMap, entry, numOfTestItemsForEachUser);
+                if (selectedTestItems != null) {
+                    updateUserItemTestRateMaps(_userRateMap, _itemRateMap, _testDataMap, userId, selectedTestItems);
+                }
+            }
+        }
+
+        LOG.info("Selected test users number: " + _testDataMap.size());
+
+    }
+
+    private static Set<String> getUsersTestItems(
+            HashMap<String,HashMap<String,Double>> userStatsMap,
+            Map.Entry<String, HashMap<String, Integer>> entry, int numOfTestItemsForEachUser)
+    {
+        String userId = entry.getKey();
+        double mean = userStatsMap.get(userId).get("mean");
+        double variance = userStatsMap.get(userId).get("variance");
+        Integer threshold = (int)(mean + variance);
+        //Integer threshold = (int)(mean);
+        Iterator<Map.Entry<String, Integer>> entryIter = entry.getValue().entrySet().iterator();
+        List<String> likedItemList = new ArrayList<>();
+        while (entryIter.hasNext()) {
+            Map.Entry<String, Integer> item = entryIter.next();
+            double rating = item.getValue();
+            if (rating >= Math.min(threshold, 5.0)) {
+                likedItemList.add(item.getKey());
+            }
+        }
+        Collections.shuffle(likedItemList);
+        try {
+            List<String> rand = likedItemList.subList(0, numOfTestItemsForEachUser);
+            return new HashSet<>(rand);
+        } catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            LOG.error(likedItemList.toString());
+            LOG.error(entry.toString());
+            LOG.error("Mean: " + mean);
+            LOG.error("Variance: " + variance);
+            LOG.error("Threshold: " + threshold);
+            return null;
+        }
+
+    }
+
+    private static void updateUserItemTestRateMaps(
+            HashMap<String, HashMap<String, Integer>> _userRateMap,
+            HashMap<String, HashMap<String, Integer>> _itemRateMap,
+            HashMap<String, HashMap<String, Integer>> _testDataMap,
+            String userId, Set<String> selectedTestItems)
+    {
+        Iterator <String>iter = selectedTestItems.iterator();
+        while (iter.hasNext()){
+            String itemId = iter.next();
+            Integer rating = _userRateMap.get(userId).get(itemId);
+            _userRateMap.get(userId).remove(itemId);
+            _itemRateMap.get(itemId).remove(userId);
+            insertDataInMap(userId, itemId, rating, _testDataMap);
+        }
+
+    }
+
+
+    private static void removeDuplicateData (
+            HashMap<String, HashMap<String, Integer>> _userRateMap,
+            HashMap<String, HashMap<String, Integer>> _itemRateMap,
+            HashMap<String, HashMap<String, Integer>> _testDataMap)
+    {
+        Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = _testDataMap
+                .entrySet().iterator();
+        while (testDataIter.hasNext()) {
+            Map.Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
+                    .next();
+            String userId = testDataEntry.getKey();
+            HashMap<String, Integer> movieRatePair = testDataEntry.getValue();
+            HashMap<String, Integer> userRateList = _userRateMap.get(userId);
+            if (userRateList == null) {
+                continue;
+            }
+            for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
+                try {
+                    String movieId = entry.getKey();
+                    if (_userRateMap.get(userId).get(movieId)!= null) {
+                        LOG.info("removing duplicate entry!");
+                        LOG.info(testDataEntry.toString());
+                        _userRateMap.get(userId).remove(movieId);
+                    }
+                    if (_itemRateMap.get(movieId).get(userId)!= null) {
+                        LOG.info("removing duplicate entry!");
+                        LOG.info(testDataEntry.toString());
+                        _itemRateMap.get(movieId).remove(userId);
+                    }
+
+                } catch (NullPointerException e) {
+                    //LOG.debug(e);
+                }
+            }
+        }
+    }
+
+
 }

@@ -1,6 +1,7 @@
-package com.zaana.ml;
+package com.zaana.ml.prediction;
 
-import org.apache.log4j.Logger;
+import com.zaana.ml.Common;
+import com.zaana.ml.similarity.Cosine;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -58,7 +59,7 @@ public final class UBNNPrediction extends AbstractPrediction
                 continue;
             }
             LinkedHashMap<String, Double> similarityListMap =
-                    Similarity.getCosineSimilarityListWithCandidateSet(userId, candidateUserSet, userRateMap, y);
+                    Cosine.getSimilarityListWithCandidateSet(userId, candidateUserSet, userRateMap, y);
             predictRatingsForTestUsers(testDataEntry, userRateMap, similarityListMap, outputList, targetList, kNN);
         }
 

@@ -6,6 +6,7 @@ import java.util.*;
 import com.zaana.ml.tests.CFPredictionTests;
 import com.zaana.ml.tests.LSHPredictionTests;
 import com.zaana.ml.tests.ModelBuildTimeTest;
+import com.zaana.ml.tests.PrecisionTests;
 import org.apache.log4j.Logger;
 
 
@@ -26,6 +27,7 @@ public final class Main {
     static final String seperator = "\\t";
     // “in most real-world situations, a neighborhood of 20 to 50 neighbors
     // seems reasonable” ( Herlocker et al. 2002 ).
+    static int topN = 20;
     static int kNN = 16;
     static int y = 10; // significance value. Must not be 0!
     static int numOfRun = 10;
@@ -57,6 +59,8 @@ public final class Main {
             System.out.println("");
             System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
+            System.out.println("");
+            System.out.println("70 - User-based - Precision vs. k");
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
@@ -149,12 +153,15 @@ public final class Main {
                 break;
 
             case "60":
-                LSHPredictionTests.runLSHHashTablesAndKTest("UBLSH",dataFileBase,"val",numOfRun,smoothRun,seperator,kNN,y);
+                LSHPredictionTests.runLSHHashTablesAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "61":
-                LSHPredictionTests.runLSHHashTablesAndYTest("UBLSH",dataFileBase,"val",numOfRun,smoothRun,seperator,kNN,y);
+                LSHPredictionTests.runLSHHashTablesAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
 
+            case "70":
+                PrecisionTests.runUBPrecisionTests(dataFilePath, seperator, l, k, smoothRun, topN);
+                break;
 
             case "99":
                 LOG.info("bye...\n");
