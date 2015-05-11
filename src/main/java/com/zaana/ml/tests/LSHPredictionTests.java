@@ -36,7 +36,6 @@ public class LSHPredictionTests extends AbstractTests
     }
 
 
-
     /**
      * Runs the Number of Hash Tables and k near neighbor parameter tests.
      * To determine if k and Hash Functions correlate. */
@@ -112,8 +111,8 @@ public class LSHPredictionTests extends AbstractTests
                 if (type == "UBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap, numberOfHashTables);
-                    runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(userRateMap,
-                            itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
@@ -126,7 +125,7 @@ public class LSHPredictionTests extends AbstractTests
             maeList.add(totalMae / smoothRun);
             runTimeList.add(runTimeTotal / smoothRun);
             candidateSetList.add(totalCandSize / smoothRun);
-            kNN += 5;
+            kNN += 3;
             LOG.info("k = " + kNN);
         }
         LOG2.info("# ========================================================");
@@ -213,7 +212,7 @@ public class LSHPredictionTests extends AbstractTests
             String testType, String dataFileBase, String param, String val,
             int numOfRun, double smoothRun, String separator, int kNN, int y)
     {
-        int numOfBands = 1; // set 1 band to measure only hash functions effect
+        int numOfBands = 4; // set 1 band to measure only hash functions effect
         int numOfHashFunctions = 1;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
@@ -267,9 +266,9 @@ public class LSHPredictionTests extends AbstractTests
             maeList2D.add(hashFuncMaeList);
             candidate_set_list2D.add(candidate_set_list);
             if (param == "k") {
-               kNN += 5;
+               kNN += 3;
             } else if(param == "y") {
-               y += 5;
+               y += 3;
             }
             numOfHashFunctions = 1;
         }
@@ -295,7 +294,7 @@ public class LSHPredictionTests extends AbstractTests
             int numOfRun, double smoothRun, String separator, int kNN, int y)
     {
         int numOfBands = 1;
-        int numOfHashFunctions = 6;
+        int numOfHashFunctions = 4;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -348,9 +347,9 @@ public class LSHPredictionTests extends AbstractTests
             maeList2D.add(hashFuncMaeList);
             candidate_set_list2D.add(candidate_set_list);
             if (param == "k") {
-                kNN += 5;
+                kNN += 3;
             } else if(param == "y") {
-                y += 5;
+                y += 3;
             }
             numOfBands = 1;
         }
@@ -405,9 +404,8 @@ public class LSHPredictionTests extends AbstractTests
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
-                    runTime += UBLSHPrediction
-                            .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                    itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
@@ -442,10 +440,8 @@ public class LSHPredictionTests extends AbstractTests
         LOG2.info("numOfHashTables = " + l);
         LOG2.info("numOfHashFunctions = " + k);
         LOG2.info(type + testType+ "MaeList =  " + maeList.toString() + ";");
-        LOG2.info(type + testType + "RuntimeList = " + runtimeList.toString()
-                + ";");
-        LOG2.info(type + "CandidateSetList = " + candidate_set_list
-                + ";");
+        LOG2.info(type + testType + "RuntimeList = " + runtimeList.toString() + ";");
+        LOG2.info(type + "CandidateSetList = " + candidate_set_list + ";");
         LOG2.info("PredictedItemsList  = " + predictedItemsList.toString() + ";");
     }
 

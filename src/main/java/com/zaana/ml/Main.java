@@ -11,10 +11,9 @@ import org.apache.log4j.Logger;
 
 
 
-public final class Main {
+public final class Main
+{
     static Logger LOG = Logger.getLogger(Main.class);
-    static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
-
     private Main() {
     }
 
@@ -22,6 +21,8 @@ public final class Main {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
     static String dataFilePath = "data/100k/ml.data";
     static String dataFileBase = "data/100k/ml";
     static final String seperator = "\\t";
@@ -29,13 +30,13 @@ public final class Main {
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 16;
-    static int y = 10; // significance value. Must not be 0!
+    static int y = 1; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
-    static int l = 8;
-    static int k = 6;
+    static int l = 4;
+    static int k = 4;
 
     public static void main(final String[] args) throws IOException
     {
@@ -61,6 +62,9 @@ public final class Main {
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
             System.out.println("");
             System.out.println("70 - User-based - Precision vs. k");
+            System.out.println("71 - UBLSH - Precision vs. k");
+            System.out.println("72 - UBLSH - Precision - 2D - (HashFunctions & k) test");
+            System.out.println("73 - UBLSH - Precision - 2D - (HashTables & k) test");
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
@@ -160,8 +164,18 @@ public final class Main {
                 break;
 
             case "70":
-                PrecisionTests.runUBPrecisionTests(dataFilePath, seperator, l, k, smoothRun, topN);
+                PrecisionTests.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN);
                 break;
+            case "71":
+                PrecisionTests.runUBLSHPrecisionTest(dataFileBase, seperator, l, k, smoothRun, topN);
+                break;
+            case "72":
+                PrecisionTests.run2DPrecisionHashFunctionsAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN);
+                break;
+            case "73":
+                PrecisionTests.run2DPrecisionHashTablesAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN);
+                break;
+
 
             case "99":
                 LOG.info("bye...\n");

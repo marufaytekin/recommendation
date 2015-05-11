@@ -42,7 +42,7 @@ public class CFPredictionTests extends AbstractTests
             LOG.info(type + "MAE = " + mae / smoothRun);
             maeList.add(mae/ smoothRun);
             runTimeList.add(runTime/ smoothRun);
-            kNN += 5;
+            kNN += 3;
             LOG.info("k = " + kNN);
         }
         LOG2.info("# ========================================================");
@@ -88,11 +88,11 @@ public class CFPredictionTests extends AbstractTests
                 LOG.info(type + "Runtime2D: " + runTime / smoothRun);
                 maeList.add(mae / smoothRun);
                 runtimeList.add(runTime / smoothRun);
-                y += 5;
+                y += 3;
             }
             runTimeList2D.add(runtimeList);
             maeList2D.add(maeList);
-            kNN += 5;
+            kNN += 3;
             y = 1;
         }
         LOG2.info("# ========================================================");

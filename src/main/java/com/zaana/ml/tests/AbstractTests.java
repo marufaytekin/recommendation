@@ -34,11 +34,12 @@ public abstract class AbstractTests {
 
 
     public static void preprocessDataForRecommendation(
-            String filePath, String seperator,
-            int numOfUserPercentage, int numOfRatingsForUsers)
+            String baseUrl, int num, String seperator)
     {
-        DataParser.processDataFileForRecommendation(
-                filePath,seperator,numOfRatingsForUsers,numOfUserPercentage);
+        String trainDataFilePath = baseUrl + num + ".recomm.base";
+        String testDataFilePath = baseUrl + num + ".recomm.test";
+        DataParser.readTrainingDataFile(trainDataFilePath, seperator);
+        DataParser.readTestDataFile(testDataFilePath, seperator);
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
