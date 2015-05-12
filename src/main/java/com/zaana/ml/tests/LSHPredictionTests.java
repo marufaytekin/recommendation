@@ -278,7 +278,7 @@ public class LSHPredictionTests extends AbstractTests
        LOG2.info("dataFileBase = " + dataFileBase);
        LOG2.info("k = " + kNN);
        LOG2.info("y = " + y);
-       LOG2.info(testType + param + "Mae2D = " + maeList2D.toString() + ";");
+       LOG2.info(testType + param + "HashFunctionsMae2D = " + maeList2D.toString() + ";");
        LOG2.info(testType + param + "Runtime2D = " + runTimeList2D.toString() + ";");
        LOG2.info(testType + param + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
 
@@ -359,7 +359,7 @@ public class LSHPredictionTests extends AbstractTests
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("k = " + kNN);
         LOG2.info("y = " + y);
-        LOG2.info(testType + param + "Mae2D = " + maeList2D.toString() + ";");
+        LOG2.info(testType + param + "HashTablesMae2D = " + maeList2D.toString() + ";");
         LOG2.info(testType + param + "Runtime2D = " + runTimeList2D.toString() + ";");
         LOG2.info(testType + param + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
 

@@ -99,8 +99,8 @@ public class CFPredictionTests extends AbstractTests
         LOG2.info("# test case: " + type + " k and y 2D ");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info(type + "MaeList2D = " + maeList2D.toString() + ";");
-        LOG2.info(type + "RunTimeList2D = " + runTimeList2D.toString() + ";");
+        LOG2.info(type + "UBMaeKAndYList2D = " + maeList2D.toString() + ";");
+        LOG2.info(type + "RunTimeKAndYList2D = " + runTimeList2D.toString() + ";");
 
     }
 }
