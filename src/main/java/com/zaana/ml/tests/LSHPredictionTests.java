@@ -158,7 +158,7 @@ public class LSHPredictionTests extends AbstractTests
                 double mae = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "test", separator);
+                    preprocessDataForValidation(dataFileBase, (s + 1), "val", separator);
                     Set<String> itemSet = itemRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;

@@ -30,7 +30,7 @@ public final class Main
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
-    static int y = 7; // significance value. Must not be 0!
+    static int y = 5; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
@@ -57,6 +57,7 @@ public final class Main
             System.out.println("56 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("57 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("58 - UBLSH - LSH Prediction & k");
+            System.out.println("59 - UBLSH - Predicton - 2D test");
             System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
             System.out.println("");
@@ -67,7 +68,6 @@ public final class Main
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
-            System.out.println("59 - UBLSH - Predicton - 2D test");
 
             System.out.println("99 - Exit");
             System.out.println("===================================");
