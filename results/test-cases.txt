@@ -1,0 +1,21 @@
+50. User-based: Run  this test to select best k for data set with cross validation. (use val data sets)
+
+51. User-based: Run this test for k and y 2D test to detect if there is a correlation between k and y values. (use val datasets)
+
+54. UB-LSH: Run this test 2D test to detect if there is a correlation between HashFunctions and k. (use val data sets) performs best when k is about 15-20. On the other hand increasing number of hash functions effects accuracy in better way when k is too low.
+
+55. UB-LSH: Run this test 2D test to detect if there is a correlation between HashFunctions and y. (Use best k value from test 54 and val data sets).  When we increase the number of hash functions increasing y has negative effect on the accuracy ('test-55-ml-mae-lsh-y-hash-functions'). We need to keep y as low as possible (around 5) for LSH tests.
+
+60. UB-LSH: Run this test 2D test to detect if there is a correlation between HashTables and k. (use val data sets, and HashFunctions and y from 54 and 55) (optimum k is around 20)
+
+61. UB-LSH: Run this test 2D test to detect if there is a correlation between HashTables and y. (Use best k value from test 54 and val data sets) optimum y is around 5.
+
+59. Use the best k and y values from (54, 55) and run this test to find out how HashFunctions and Tables effect accuracy. (use val sets) Used k = 20 and y = 5
+
+56. Select best HashFunctions from 59 then run this test to see prediction accuracy and HashTables change. (use test data sets)
+
+57. Select best  HashTables from 59 and run this test to see prediction accuracy and HashFunctions change. (use test data sets)
+
+72. UB-LSH: Run this test to see relationship between k and HashFunctions
+
+73. UB-LSH: Run this test to see relationship between k and HashTables
