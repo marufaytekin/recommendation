@@ -34,14 +34,15 @@ public class PrecisionTests extends AbstractTests {
     {
         LOG.info("Running precision simulation...");
         double totalPrecision;
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+        HashMap<Integer, HashMap<String, Set<String>>> tables;
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
         ArrayList<Double> precisionList = new ArrayList<>();
+        prepareHashTables(dataFileBase, smoothRun, separator, l, k);
         int kNN = 1;
         for (int i = 0; i < 10; i++) {
             totalPrecision = 0.0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForRecommendation(dataFileBase, (j+1), separator);
+                preprocessDataForRecommendation(dataFileBase, (j+1), separator, smoothRun, l, k);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 double precision;
@@ -52,10 +53,10 @@ public class PrecisionTests extends AbstractTests {
                     precision = IBPrecision.calculateItemBasedPrecision(
                             userRateMap, itemRateMap, testDataMap, itemSet, kNN, topN);
                 }*/ else if (type == "UBLSH") {
-                    vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-                    hashTables = LSH.buildIndexTables(userRateMap, vmap, l);
+                    vmap = vmaps.get(j);
+                    tables = hashTables.get(j);
                     precision = UBLSHPrecision.calculateUBLSHPrecision(
-                            userRateMap, testDataMap, hashTables, vmap, itemSet, kNN, topN);
+                            userRateMap, testDataMap, tables, vmap, itemSet, kNN, topN);
                 }/*else if (type == "IBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
                     hashTables = LSH.buildIndexTables(itemRateMap, vmap, l);
@@ -99,7 +100,7 @@ public class PrecisionTests extends AbstractTests {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator);
+                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -156,7 +157,7 @@ public class PrecisionTests extends AbstractTests {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator);
+                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;

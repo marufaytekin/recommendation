@@ -21,10 +21,12 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
+   // static String dataFilePath = "data/ymusic/ymusic.data";
+   // static String dataFileBase = "data/ymusic/ymusic";
     static String dataFilePath = "data/100k/ml.data";
     static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/1m/ml-1m.data";
+    //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
     // “in most real-world situations, a neighborhood of 20 to 50 neighbors
     // seems reasonable” ( Herlocker et al. 2002 ).
