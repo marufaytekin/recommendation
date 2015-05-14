@@ -2,7 +2,9 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.prediction.AbstractPrediction;
+import com.zaana.ml.prediction.IBNNPrediction;
 import com.zaana.ml.prediction.UBLSHPrediction;
+import com.zaana.ml.prediction.UBNNPrediction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,6 +85,64 @@ public class LSHPredictionTests extends AbstractTests
         runLSHPredictionPerformanceTests(
                 type, "HashFunctions", dataFileBase, val, numOfRun, numberOfHashTables, numOfHashFunctions,
                 separator, smoothRun, kNN, y);
+    }
+
+    /**
+     * Runs the k and y parameters 2D test for LSH.*/
+    public static void runLSHYAndKTest(
+            String type, String dataFileBase, String val,
+            int numOfRun, double smoothRun,
+            String separator, int l, int k) {
+        runLSH2DYAndKTests(type, dataFileBase, val, numOfRun, smoothRun, separator, l, k);
+    }
+
+    private static void runLSH2DYAndKTests(String type, String dataFileBase, String val,
+                                           int numOfRun, double smoothRun, String separator, int l, int k) {
+        ArrayList<Object> runTimeList2D = new ArrayList<>();
+        ArrayList<Object> maeList2D = new ArrayList<>();
+        HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
+        int kNN = 1;
+        int y = 1;
+        for (int i = 0; i < numOfRun; i++) {
+            ArrayList<Double> runtimeList = new ArrayList<>();
+            ArrayList<Double> maeList = new ArrayList<>();
+            for (int j = 0; j < numOfRun; j++) {
+                double totalMae = 0;
+                long runTimeTotal = 0;
+                for (int s = 0; s < smoothRun; s++) {
+                    preprocessDataForValidation(dataFileBase, (s + 1), val, separator);
+                    if (type == "UBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
+                        hashTables = LSH.buildIndexTables(userRateMap, vmap, l);
+                        runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    } else {
+                        throw new UnsupportedOperationException("Invalid operation for LSH type.");
+                    }
+                    totalMae += MAE.calculateMAE(
+                            AbstractPrediction.getOutputList(),
+                            AbstractPrediction.getTargetList());
+                }
+                LOG.info("k: " + kNN);
+                LOG.info("y: " + y);
+                LOG.info(type + "Mae2D: " + totalMae / smoothRun);
+                LOG.info(type + "Runtime2D: " + runTimeTotal / smoothRun);
+                maeList.add(totalMae / smoothRun);
+                runtimeList.add(runTimeTotal / smoothRun);
+                y += 3;
+            }
+            runTimeList2D.add(runtimeList);
+            maeList2D.add(maeList);
+            kNN += 3;
+            y = 1;
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + type + " k and y 2D ");
+        LOG2.info("# ========================================================");
+        LOG2.info("dataFileBase = " + dataFileBase);
+        LOG2.info(type + "MaeKAndYList2D = " + maeList2D.toString() + ";");
+        LOG2.info(type + "RunTimeKAndYList2D = " + runTimeList2D.toString() + ";");
     }
 
 

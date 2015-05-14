@@ -62,6 +62,7 @@ public final class Main
             System.out.println("59 - UBLSH - Predicton - 2D test");
             System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
+            System.out.println("62 - UBLSH - Prediction - 2D (y & k) test");
             System.out.println("");
             System.out.println("70 - User-based - Precision vs. k");
             System.out.println("71 - UBLSH - Precision vs. k");
@@ -162,6 +163,9 @@ public final class Main
                 break;
             case "61":
                 LSHPredictionTests.runLSHHashTablesAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                break;
+            case "62":
+                LSHPredictionTests.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
                 break;
 
             case "70":
