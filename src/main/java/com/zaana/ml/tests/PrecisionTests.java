@@ -28,14 +28,12 @@ public class PrecisionTests extends AbstractTests {
         runPrecisionTests(dataFileBase, "UBLSH", separator, l, k, smoothRun, topN, y);
     }
 
-
     /**
      * Runs UBLSH precision 2D test for k and y parameters */
     public static void runUBLSHPrecisionKAndYTest(String dataFileBase, String separator,
                                                   int l, int k, int smoothRun, int topN, int numOfRun) {
         runPrecisionKAndYTest(dataFileBase, "UBLSH", separator, l, k, smoothRun, numOfRun, topN);
     }
-
 
     /**
      * Runs user-based precision 2D test for k and y parameters */
@@ -128,7 +126,6 @@ public class PrecisionTests extends AbstractTests {
                         precision += UBLSHPrecision.calculateUBLSHPrecision(
                                 userRateMap, testDataMap, hashTables, vmap, itemSet, kNN, topN, y);
                         candidate_set_size += UBLSHPrecision.getCandidate_size();
-
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -201,7 +198,7 @@ public class PrecisionTests extends AbstractTests {
             precisionList2D.add(precisionList);
             candidate_set_list2D.add(candidate_set_list);
 
-            kNN += 2;
+            kNN += 3;
             numOfBands = 1;
         }
         LOG2.info("# ========================================================");
@@ -303,7 +300,7 @@ public class PrecisionTests extends AbstractTests {
                 LOG.info(type + "precision = " + precision /smoothRun);
                 precisionList.add(precision / smoothRun);
                 candidate_set_list.add(candidate_set_size /smoothRun);
-                y += 5;
+                y += 3;
             }
             precisionList2D.add(precisionList);
             candidate_set_list2D.add(candidate_set_list);

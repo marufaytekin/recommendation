@@ -21,10 +21,10 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-   // static String dataFilePath = "data/ymusic/ymusic.data";
-   // static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
@@ -32,7 +32,7 @@ public final class Main
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
-    static int y = 25; // significance value. Must not be 0!
+    static int y = 50; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
@@ -81,7 +81,7 @@ public final class Main
 
             selection = scanner.nextLine();
             LOG.info("Selected menu: " + selection);
-            runSelection(selection, scanner, 25);
+            runSelection(selection, scanner);
 
         } while (!selection.equals("99"));
 
@@ -89,18 +89,17 @@ public final class Main
 
     }
 
-    private static void runSelection(final String selection, Scanner scanner, int numOfTestUserPercentage)
+    private static void runSelection(final String selection, Scanner scanner)
     {
         switch (selection) {
 
             case "0":
-                runSelection("57",scanner,5);
-                runSelection("58",scanner,5);
-//                DataParser.readTrainingDataFile(trainDataFilePath, seperator);
-//                DataParser.readTestDataFile(testDataFilePath, seperator);
-//                userRateMap = DataParser.getUserRateMap();
-//                itemRateMap = DataParser.getItemRateMap();
-//                testDataMap = DataParser.getTestDataMap();
+                dataFilePath = "data/100k/ml.data";
+                dataFileBase = "data/100k/ml";
+                runnAllTests(scanner);
+                dataFilePath = "data/ymusic/ymusic.data";
+                dataFileBase = "data/ymusic/ymusic";
+                runnAllTests(scanner);
                 break;
             case "00":
                 DataParser.processDataFile(dataFilePath, seperator, 0, 100);
@@ -181,7 +180,7 @@ public final class Main
                 PrecisionTests.run2DPrecisionHashFunctionsAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN, y);
                 break;
             case "73":
-                PrecisionTests.run2DPrecisionHashTablesAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN, y);
+                PrecisionTests.run2DPrecisionHashTablesAndKTests("UBLSH", dataFileBase, numOfRun,smoothRun,seperator,topN, y);
                 break;
             case "74":
                 PrecisionTests.runUBLSHPrecisionAndYTest(dataFileBase, "UBLSH", seperator, l, k, smoothRun, topN, kNN);
@@ -205,5 +204,27 @@ public final class Main
 
     }
 
+    private static void runnAllTests(Scanner scanner) {
+        runSelection("50",scanner);
+        runSelection("51",scanner);
+        runSelection("54",scanner);
+        runSelection("55",scanner);
+        runSelection("56",scanner);
+        runSelection("57",scanner);
+        runSelection("58",scanner);
+        runSelection("59",scanner);
+
+        runSelection("60",scanner);
+        runSelection("61",scanner);
+        runSelection("62",scanner);
+
+        runSelection("70",scanner);
+        runSelection("71",scanner);
+        runSelection("72",scanner);
+        runSelection("73",scanner);
+        runSelection("74",scanner);
+        runSelection("75",scanner);
+        runSelection("76",scanner);
+    }
 
 }
