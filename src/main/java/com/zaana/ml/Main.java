@@ -32,7 +32,7 @@ public final class Main
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
-    static int y = 5; // significance value. Must not be 0!
+    static int y = 25; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
@@ -68,6 +68,9 @@ public final class Main
             System.out.println("71 - UBLSH - Precision vs. k");
             System.out.println("72 - UBLSH - Precision - 2D - (HashFunctions & k) test");
             System.out.println("73 - UBLSH - Precision - 2D - (HashTables & k) test");
+            System.out.println("74 - UBLSH - Precision vs. y");
+            System.out.println("75 - UBLSH - Precision - 2D (k & y) test");
+            System.out.println("76 - User-based - Precision - 2D (k & y) test");
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
@@ -169,16 +172,25 @@ public final class Main
                 break;
 
             case "70":
-                PrecisionTests.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN);
+                PrecisionTests.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, y);
                 break;
             case "71":
-                PrecisionTests.runUBLSHPrecisionTest(dataFileBase, seperator, l, k, smoothRun, topN);
+                PrecisionTests.runUBLSHPrecisionTest(dataFileBase, seperator, l, k, smoothRun, topN, y);
                 break;
             case "72":
-                PrecisionTests.run2DPrecisionHashFunctionsAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN);
+                PrecisionTests.run2DPrecisionHashFunctionsAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN, y);
                 break;
             case "73":
-                PrecisionTests.run2DPrecisionHashTablesAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN);
+                PrecisionTests.run2DPrecisionHashTablesAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN, y);
+                break;
+            case "74":
+                PrecisionTests.runUBLSHPrecisionAndYTest(dataFileBase, "UBLSH", seperator, l, k, smoothRun, topN, kNN);
+                break;
+            case "75":
+                PrecisionTests.runUBLSHPrecisionKAndYTest(dataFileBase, seperator, l, k, smoothRun, topN, numOfRun );
+                break;
+            case "76":
+                PrecisionTests.runUBPrecisionKAndYTest(dataFileBase, seperator, l, k, smoothRun, topN, numOfRun );
                 break;
 
 

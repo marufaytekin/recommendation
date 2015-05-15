@@ -12,14 +12,14 @@ public final class UBRecommendation extends AbstractRecommendation
     public static List<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             Set<String> itemSet, String targetUserId, Set<String> candidateUserSet,
-            final int kNN, final int topN)
+            int kNN, int topN, int y)
     {
 
         try {
             Set<String> nonRatedItemSet = Common.getUserNonRatedItemList(userRateMap,
                     itemSet, targetUserId);
             LinkedHashMap<String, Double> targetUserSimilarityList =
-                    Cosine.getSimilarityListWithCandidateSet(targetUserId, candidateUserSet, userRateMap, 1);
+                    Cosine.getSimilarityListWithCandidateSet(targetUserId, candidateUserSet, userRateMap, y);
             LinkedHashMap<String, Double> itemPredictionList = new LinkedHashMap<>();
             Iterator<String> iter = nonRatedItemSet.iterator();
             while (iter.hasNext()) {

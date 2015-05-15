@@ -112,6 +112,7 @@ public class LSHPredictionTests extends AbstractTests
                 long runTimeTotal = 0;
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), val, separator);
+                    Set<String> itemSet = itemRateMap.keySet();
                     if (type == "UBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                         hashTables = LSH.buildIndexTables(userRateMap, vmap, l);
@@ -130,7 +131,7 @@ public class LSHPredictionTests extends AbstractTests
                 LOG.info(type + "Runtime2D: " + runTimeTotal / smoothRun);
                 maeList.add(totalMae / smoothRun);
                 runtimeList.add(runTimeTotal / smoothRun);
-                y += 3;
+                y += 5;
             }
             runTimeList2D.add(runtimeList);
             maeList2D.add(maeList);

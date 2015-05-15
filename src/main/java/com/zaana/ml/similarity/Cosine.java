@@ -91,7 +91,12 @@ public final class Cosine implements Similarity {
         }
         double sim = (double) num / (Math.sqrt(denum1) * Math.sqrt(denum2));
 
-        return (Math.min(y, intersec_size) / y) * sim; // account for significance
+        int numerator = Math.min(y, intersec_size);
+
+        double signif_sim = ((double)numerator / y) * sim;
+
+
+        return signif_sim;// account for significance
 
     }
 

@@ -1,7 +1,6 @@
 package com.zaana.ml;
 
 import com.zaana.ml.recomm.UBRecommendation;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -17,7 +16,7 @@ public class UBPrecision extends Precision {
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             Set<String> itemSet,
-            int kNN, int topN)
+            int kNN, int topN, int y)
     {
 
         double totalPrecision = 0;
@@ -28,7 +27,7 @@ public class UBPrecision extends Precision {
             Set<String> candidateUserSet = userRateMap.keySet();
             try {
                 List<String> userBasedTopNRecom = UBRecommendation.recommendItems(
-                        userRateMap, itemSet, userId, candidateUserSet, kNN, topN);
+                        userRateMap, itemSet, userId, candidateUserSet, kNN, topN, y);
                 Set<String> retrieved = new HashSet<>(userBasedTopNRecom);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved, topN);
