@@ -21,10 +21,10 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ymusic/ymusic.data";
-    static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/100k/ml.data";
-    //static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
+    static String dataFilePath = "data/100k/ml.data";
+    static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
@@ -63,6 +63,8 @@ public final class Main
             System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
             System.out.println("62 - UBLSH - Prediction - 2D (y & k) test");
+            System.out.println("63 - LSH - Prediction - HashTables change ( inc. by 1 )");
+            System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("");
             System.out.println("70 - User-based - Precision vs. k");
             System.out.println("71 - UBLSH - Precision vs. k");
@@ -168,6 +170,14 @@ public final class Main
                 break;
             case "62":
                 LSHPredictionTests.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
+                break;
+            case "63":
+                LSHPredictionTests.runLSHHashTablesAndPrediction("LSH", dataFileBase, "val", seperator,
+                        numOfRun, l, k, smoothRun, kNN, y);
+                break;
+            case "64":
+                LSHPredictionTests.runLSHHashFunctionsAndPrediction("LSH", dataFileBase, "val", seperator,
+                        numOfRun, l, k, smoothRun, kNN, y);
                 break;
 
             case "70":

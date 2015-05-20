@@ -2,9 +2,8 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.prediction.AbstractPrediction;
-import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.LSHPrediction;
 import com.zaana.ml.prediction.UBLSHPrediction;
-import com.zaana.ml.prediction.UBNNPrediction;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,7 +62,7 @@ public class LSHPredictionTests extends AbstractTests
     /**
      * Runs LSH prediction tests for HashTables to detect the effect of changes
      * in HashTable to the prediction accuracy.*/
-    public static void  runLSHHashTablesAndPrediction(
+    public static void runLSHHashTablesAndPrediction(
             String type, String dataFileBase, String val, String separator,
             int numOfRun, int numberOfHashTables, int numOfHashFunctions,
             double smoothRun, int kNN, int y) {
@@ -77,7 +76,7 @@ public class LSHPredictionTests extends AbstractTests
     /**
      * Runs LSH prediction tests for HashFunctions to detect the effect of changes
      * in HashFunctions to the prediction accuracy.*/
-    public static void  runLSHHashFunctionsAndPrediction(
+    public static void runLSHHashFunctionsAndPrediction(
             String type, String dataFileBase, String val, String separator,
             int numOfRun, int numberOfHashTables, int numOfHashFunctions,
             double smoothRun, int kNN, int y) {
@@ -428,9 +427,8 @@ public class LSHPredictionTests extends AbstractTests
 
 
     /**
-     * Runs 2D LSH HashTables and HashFunctions tests to determine the effect
-     * of these parameters on prediction accuracy. Output will be 2D graph.
-     * Called from runLSH2DHashFunctionsTablesTest method. */
+     * Runs 2D UB LSH HashTables and HashFunctions tests to determine the effect
+     * of these parameters on prediction accuracy. Output will be 2D graph.*/
     private static void runLSHPredictionPerformanceTests(
             String type, String testType, String dataFileBase, String val,
             int numOfRun, int l, int k, String separator, double smoothRun, int kNN, int y)
@@ -466,6 +464,12 @@ public class LSHPredictionTests extends AbstractTests
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
                     runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                } else if (type == "LSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                    hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                            numOfBands);
+                    runTime += LSHPrediction.runLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
