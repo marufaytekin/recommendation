@@ -107,6 +107,28 @@ public final class LSH {
     }
 
 
+
+    /**
+     * Returns candidate sets with frequency as an ArrayList.*/
+    public static List<String> getCandidateSetsWithFrequency(
+            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
+            HashMap<String, Integer> userRates) {
+
+        List<String> candidateSets = new ArrayList();
+
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
+            String hashKey = generateHashKeyForVector(vmap, userRates,
+                    hashTableNum);
+            Set<String> candidates = hashTables.get(
+                    Integer.valueOf(hashTableNum)).get(hashKey);
+            candidateSets.addAll(candidates);
+        }
+
+        return candidateSets;
+    }
+
+
     /**
      * This method calculates candidate set for a user/item based on its
      * ratings. Generates hashkey for each hash table(band) and queries the

@@ -1,8 +1,6 @@
 package com.zaana.ml.prediction;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.Map.Entry;
 
 public class Prediction
@@ -59,7 +57,6 @@ public class Prediction
             final LinkedHashMap<String, Double> kNNList,
             final String testUserId)
     {
-
         Iterator<Entry<String, Double>> entry = kNNList.entrySet().iterator();
         double itemRate = 0.0D;
         double wijRujTotal = 0.0D;
@@ -76,5 +73,31 @@ public class Prediction
         }
         return itemRate;
     }
+
+    /**
+     * Calculates LSH prediction */
+    public static double calculateLSHBasedPredicitonRate(HashMap<String, HashMap<String, Integer>> userRateMap,
+                                                         Set<String> intersectionOfCandidateRatedUserSets,
+                                                         List<String> candidateSetList, String movieId)
+    {
+        Iterator<String> entry = intersectionOfCandidateRatedUserSets.iterator();
+        double weightedRatingsTotal = 0;
+        double weightsTotal = 0;
+        while (entry.hasNext()) {
+            String candidateUser = entry.next();
+            Integer frequency = Collections.frequency(candidateSetList, candidateUser);
+            double freqWeight = Math.sqrt(frequency);
+            Integer rating = userRateMap.get(candidateUser).get(movieId);
+            weightedRatingsTotal += rating * freqWeight;
+            weightsTotal += freqWeight;
+            //System.out.println("Frequency: " + frequency);
+        }
+
+        if (weightsTotal != 0) {
+            return weightedRatingsTotal / weightsTotal;
+        } else
+            return 0;
+    }
+
 
 }
