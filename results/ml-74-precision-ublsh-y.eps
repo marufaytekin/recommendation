@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ml-runtime.eps
-%%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Sun May  3 22:07:06 2015
+%%Title: ml-74-precision-ublsh-y.eps
+%%Creator: gnuplot 4.4 patchlevel 4
+%%CreationDate: Thu May 21 17:40:43 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,17 +15,15 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 2 def
+/Dashlength 1 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
-/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
-/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -66 def
 /dl1 {
@@ -40,6 +38,22 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
+Level1 {} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ml-74-precision-ublsh-y.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.4 patchlevel 4)
+  /Author (maytekin)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Thu May 21 17:40:43 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -47,7 +61,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 4.6 (September 2012)
+% Gnuplot Prolog Version 4.4 (August 2010)
 %
 %/SuppressPDFMark true def
 %
@@ -314,8 +328,7 @@ gnudict begin
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
-  clip
+  gsave 1 setgray fill grestore clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -448,26 +461,8 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
-Level1 SuppressPDFMark or 
-{} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (ml-runtime.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.6 patchlevel 6)
-  /Author (maruf)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Sun May  3 22:07:06 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 end
 %%EndProlog
-%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -476,7 +471,6 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 200 scalefont setfont
-BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -551,115 +545,155 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
-1.000 UL
-LTb
-1.00 1.00 1.00 C 1.000 1100 640 4298 3726 BoxColFill
-LCb setrgbcolor
-1100 640 M
-0 3726 V
-4298 0 V
-0 -3726 V
--4298 0 V
-stroke
 0.500 UL
 LTb
-1100 640 M
+1220 826 M
 88 0 V
-4211 0 R
+4091 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 640 M
-[ [({}) 200.0 0.0 true true 0 (10000)]
+0.00 0.00 0.00 C 1100 826 M
+[ [({}) 200.0 0.0 true true 0 (0.0046)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 1572 M
+1220 1199 M
 88 0 V
-4211 0 R
+4091 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 1572 M
-[ [({}) 200.0 0.0 true true 0 (15000)]
+0.00 0.00 0.00 C 1100 1199 M
+[ [({}) 200.0 0.0 true true 0 (0.0048)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 2504 M
+1220 1572 M
 88 0 V
-4211 0 R
+4091 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 2504 M
-[ [({}) 200.0 0.0 true true 0 (20000)]
+0.00 0.00 0.00 C 1100 1572 M
+[ [({}) 200.0 0.0 true true 0 (0.005)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 3435 M
+1220 1944 M
 88 0 V
-4211 0 R
+4091 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 3435 M
-[ [({}) 200.0 0.0 true true 0 (25000)]
+0.00 0.00 0.00 C 1100 1944 M
+[ [({}) 200.0 0.0 true true 0 (0.0052)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 4367 M
+1220 2317 M
 88 0 V
-4211 0 R
+4091 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 4367 M
-[ [({}) 200.0 0.0 true true 0 (30000)]
+0.00 0.00 0.00 C 1100 2317 M
+[ [({}) 200.0 0.0 true true 0 (0.0054)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 640 M
+1220 2690 M
+88 0 V
+4091 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 1100 2690 M
+[ [({}) 200.0 0.0 true true 0 (0.0056)]
+] -66.7 MRshow
+0.500 UL
+LTb
+1220 3063 M
+88 0 V
+4091 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 1100 3063 M
+[ [({}) 200.0 0.0 true true 0 (0.0058)]
+] -66.7 MRshow
+0.500 UL
+LTb
+1220 3435 M
+88 0 V
+4091 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 1100 3435 M
+[ [({}) 200.0 0.0 true true 0 (0.006)]
+] -66.7 MRshow
+0.500 UL
+LTb
+1220 3808 M
+88 0 V
+4091 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 1100 3808 M
+[ [({}) 200.0 0.0 true true 0 (0.0062)]
+] -66.7 MRshow
+0.500 UL
+LTb
+1220 4181 M
+88 0 V
+4091 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 1100 4181 M
+[ [({}) 200.0 0.0 true true 0 (0.0064)]
+] -66.7 MRshow
+0.500 UL
+LTb
+1220 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1100 440 M
+0.00 0.00 0.00 C 1220 440 M
 [ [({}) 200.0 0.0 true true 0 (0)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-1960 640 M
+2056 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1960 440 M
-[ [({}) 200.0 0.0 true true 0 (2)]
+0.00 0.00 0.00 C 2056 440 M
+[ [({}) 200.0 0.0 true true 0 (10)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-2820 640 M
+2892 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 2820 440 M
-[ [({}) 200.0 0.0 true true 0 (4)]
+0.00 0.00 0.00 C 2892 440 M
+[ [({}) 200.0 0.0 true true 0 (20)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-3679 640 M
+3727 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 3679 440 M
-[ [({}) 200.0 0.0 true true 0 (6)]
+0.00 0.00 0.00 C 3727 440 M
+[ [({}) 200.0 0.0 true true 0 (30)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-4539 640 M
+4563 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 4539 440 M
-[ [({}) 200.0 0.0 true true 0 (8)]
+0.00 0.00 0.00 C 4563 440 M
+[ [({}) 200.0 0.0 true true 0 (40)]
 ] -66.7 MCshow
 0.500 UL
 LTb
@@ -669,105 +703,47 @@ LTb
 0 -88 V
 stroke
 0.00 0.00 0.00 C 5399 440 M
-[ [({}) 200.0 0.0 true true 0 (10)]
+[ [({}) 200.0 0.0 true true 0 (50)]
 ] -66.7 MCshow
 0.500 UL
 LTb
 0.500 UL
 LTb
-1100 4367 N
+1220 4367 N
 0 -3727 V
-4299 0 V
+4179 0 V
 0 3727 V
--4299 0 V
+-4179 0 V
 Z stroke
 0.00 0.00 0.00 C 160 2503 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 200.0 0.0 true true 0 (Running Time \(ms\))]
+[ [({}) 200.0 0.0 true true 0 (Precision)]
 ] -66.7 MCshow
 grestore
 LTb
-0.00 0.00 0.00 C 3249 140 M
-[ [({}) 200.0 0.0 true true 0 (k)]
+0.00 0.00 0.00 C 3309 140 M
+[ [({}) 200.0 0.0 true true 0 (y)]
 ] -66.7 MCshow
 LTb
 1.000 UP
 0.500 UL
 LTb
-1.000 UL
-LTb
-3296 3904 N
-0 400 V
-1983 0 V
-0 -400 V
--1983 0 V
-Z stroke
 % Begin plot #1
-2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 4204 M
-[ [({}) 200.0 0.0 true true 0 (user-based)]
-] -66.7 MRshow
-LT0
-0.00 0.00 0.00 C 3416 4204 M
-543 0 V
-1530 1155 M
-430 -39 V
-430 0 V
-430 -6 V
-430 14 V
-429 -73 V
-430 146 V
-430 -27 V
-430 -51 V
-430 90 V
-1530 1155 Dia
-1960 1116 Dia
-2390 1116 Dia
-2820 1110 Dia
-3250 1124 Dia
-3679 1051 Dia
-4109 1197 Dia
-4539 1170 Dia
-4969 1119 Dia
-5399 1209 Dia
-3688 4204 Dia
+0.00 0.00 1.00 C 1304 2120 M
+417 -366 V
+418 0 V
+418 366 V
+2975 1024 L
+418 1096 V
+418 1827 V
+4229 1024 L
+418 3288 V
+5065 2120 L
 % End plot #1
-% Begin plot #2
-2.000 UP
-0.500 UL
-LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 4004 M
-[ [({}) 200.0 0.0 true true 0 (LSH)]
-] -66.7 MRshow
-LT0
-0.00 0.00 0.00 C 3416 4004 M
-543 0 V
-1530 4205 M
-430 -285 V
-430 -10 V
-430 2 V
-430 151 V
-429 -135 V
-430 20 V
-430 46 V
-430 -53 V
-430 148 V
-1530 4205 Crs
-1960 3920 Crs
-2390 3910 Crs
-2820 3912 Crs
-3250 4063 Crs
-3679 3928 Crs
-4109 3948 Crs
-4539 3994 Crs
-4969 3941 Crs
-5399 4089 Crs
-3688 4004 Crs
-% End plot #2
 1.000 UP
-0.500 UL
+stroke
 LTb
 grestore % colour palette end
 stroke

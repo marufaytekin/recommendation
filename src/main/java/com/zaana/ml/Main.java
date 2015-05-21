@@ -32,7 +32,7 @@ public final class Main
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
-    static int y = 50; // significance value. Must not be 0!
+    static int y = 10; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
@@ -58,7 +58,7 @@ public final class Main
             System.out.println("55 - UBLSH - Predicton - 2D (Hash Functions & y) test");
             System.out.println("56 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("57 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
-            System.out.println("58 - UBLSH - LSH Prediction & k");
+            System.out.println("58 - UBLSH - Prediction & k");
             System.out.println("59 - UBLSH - Predicton - 2D test");
             System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
             System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
@@ -98,10 +98,12 @@ public final class Main
             case "0":
                 dataFilePath = "data/100k/ml.data";
                 dataFileBase = "data/100k/ml";
-                runnAllTests(scanner);
+                y = 10;
+                runnCompTests(scanner);
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
-                runnAllTests(scanner);
+                y = 4;
+                runnCompTests(scanner);
                 break;
             case "00":
                 DataParser.processDataFile(dataFilePath, seperator, 0, 100);
@@ -214,11 +216,13 @@ public final class Main
 
     }
 
-    private static void runnAllTests(Scanner scanner) {
-        runSelection("50",scanner);
-        runSelection("51",scanner);
+    private static void runnCompTests(Scanner scanner) {
         runSelection("54",scanner);
         runSelection("55",scanner);
+
+    }
+
+    private static void runConfiguredTests(Scanner scanner) {
         runSelection("56",scanner);
         runSelection("57",scanner);
         runSelection("58",scanner);

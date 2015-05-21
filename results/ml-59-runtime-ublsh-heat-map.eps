@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: model-build.eps
-%%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Sun May  3 19:49:23 2015
+%%Title: ml-59-runtime-ublsh-heat-map.eps
+%%Creator: gnuplot 4.4 patchlevel 4
+%%CreationDate: Thu May 21 15:35:10 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,17 +15,15 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 2 def
+/Dashlength 1 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
-/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
-/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -66 def
 /dl1 {
@@ -40,6 +38,22 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
+Level1 {} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ml-59-runtime-ublsh-heat-map.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.4 patchlevel 4)
+  /Author (maytekin)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Thu May 21 15:35:10 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -47,7 +61,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 4.6 (September 2012)
+% Gnuplot Prolog Version 4.4 (August 2010)
 %
 %/SuppressPDFMark true def
 %
@@ -314,8 +328,7 @@ gnudict begin
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
-  clip
+  gsave 1 setgray fill grestore clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -448,26 +461,8 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
-Level1 SuppressPDFMark or 
-{} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (model-build.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.6 patchlevel 6)
-  /Author (maruf)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Sun May  3 19:49:23 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 end
 %%EndProlog
-%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -476,7 +471,6 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 200 scalefont setfont
-BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -551,264 +545,1187 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
-1.000 UL
-LTb
-1.00 1.00 1.00 C 1.000 980 640 4418 3366 BoxColFill
-LCb setrgbcolor
-980 640 M
-0 3366 V
-4418 0 V
-0 -3366 V
-980 640 L
-stroke
 0.500 UL
 LTb
-980 640 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 640 M
-[ [({}) 200.0 0.0 true true 0 (0)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 1061 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 1061 M
-[ [({}) 200.0 0.0 true true 0 (1000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 1482 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 1482 M
-[ [({}) 200.0 0.0 true true 0 (2000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 1903 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 1903 M
-[ [({}) 200.0 0.0 true true 0 (3000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 2324 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 2324 M
-[ [({}) 200.0 0.0 true true 0 (4000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 2744 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 2744 M
-[ [({}) 200.0 0.0 true true 0 (5000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 3165 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 3165 M
-[ [({}) 200.0 0.0 true true 0 (6000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 3586 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 3586 M
-[ [({}) 200.0 0.0 true true 0 (7000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 4007 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 4007 M
-[ [({}) 200.0 0.0 true true 0 (8000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 980 440 M
-[ [({}) 200.0 0.0 true true 0 (0)]
-] -66.7 MCshow
-0.500 UL
-LTb
-1864 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 1864 440 M
-[ [({}) 200.0 0.0 true true 0 (200)]
-] -66.7 MCshow
-0.500 UL
-LTb
-2748 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 2748 440 M
-[ [({}) 200.0 0.0 true true 0 (400)]
-] -66.7 MCshow
-0.500 UL
-LTb
-3631 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 3631 440 M
-[ [({}) 200.0 0.0 true true 0 (600)]
-] -66.7 MCshow
-0.500 UL
-LTb
-4515 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 4515 440 M
-[ [({}) 200.0 0.0 true true 0 (800)]
-] -66.7 MCshow
-0.500 UL
-LTb
-5399 640 M
-0 88 V
-0 3279 R
-0 -88 V
-stroke
-0.00 0.00 0.00 C 5399 440 M
-[ [({}) 200.0 0.0 true true 0 (1000)]
-] -66.7 MCshow
-0.500 UL
-LTb
-0.500 UL
-LTb
-980 4007 N
-980 640 L
-4419 0 V
-0 3367 V
--4419 0 V
+748 4169 N
+748 599 L
+3571 0 V
+0 3570 V
+-3571 0 V
 Z stroke
-0.00 0.00 0.00 C 160 2323 M
+0.00 0.00 0.00 C 168 2384 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 200.0 0.0 true true 0 (Running Time \(ms\))]
+[ [({}) 200.0 0.0 true true 0 (Hash Tables)]
 ] -66.7 MCshow
 grestore
 LTb
-0.00 0.00 0.00 C 3189 140 M
-[ [({}) 200.0 0.0 true true 0 (Number of Users)]
+0.00 0.00 0.00 C 2533 99 M
+[ [({}) 200.0 0.0 true true 0 (Hash Functions)]
 ] -66.7 MCshow
 LTb
-3189 4307 M
-[ [({}) 200.0 0.0 true true 0 (Model Build Time)]
+2533 4469 M
+[ [({}) 200.0 0.0 true true 0 (Running Time \(sec\))]
 ] -66.7 MCshow
 1.000 UP
 0.500 UL
 LTb
-1.000 UL
-LTb
-3296 3544 N
-0 400 V
-1983 0 V
-0 -400 V
--1983 0 V
-Z stroke
 % Begin plot #1
-2.000 UP
-0.500 UL
+1.000 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 3844 M
-[ [({}) 200.0 0.0 true true 0 (user-based)]
-] -66.7 MRshow
-LT0
-0.00 0.00 0.00 C 3416 3844 M
-543 0 V
-1568 687 M
-397 205 V
-398 194 V
-398 169 V
-398 225 V
-397 242 V
-398 507 V
-398 416 V
-397 391 V
-398 812 V
-1568 687 Dia
-1965 892 Dia
-2363 1086 Dia
-2761 1255 Dia
-3159 1480 Dia
-3556 1722 Dia
-3954 2229 Dia
-4352 2645 Dia
-4749 3036 Dia
-5147 3848 Dia
-3688 3844 Dia
+0.00 0.00 0.50 C gsave 748 599 N 0 0 V 0 0 V 397 0 V 397 0 V 396 0 V 397 0 V 397 0 V 397 0 V 396 0 V 397 0 V 397 0 V 0 0 V 0 397 V 0 396 V 0 397 V 0 397 V 0 396 V 0 397 V 0 397 V 0 396 V 0 397 V 0 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+397 0 V
+397 0 V
+396 0 V
+397 0 V
+397 0 V
+397 0 V
+396 0 V
+397 0 V
+397 0 V
+0 397 V
+0 396 V
+0 397 V
+0 397 V
+0 396 V
+0 397 V
+0 397 V
+0 396 V
+0 397 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
 % End plot #1
 % Begin plot #2
-2.000 UP
+stroke
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 3644 M
-[ [({}) 200.0 0.0 true true 0 (LSH)]
-] -66.7 MRshow
-LT0
-0.00 0.00 0.00 C 3416 3644 M
-543 0 V
-1568 651 M
-397 19 V
-398 -1 V
-398 29 V
-398 8 V
-397 5 V
-398 7 V
-398 -5 V
-397 25 V
-398 -8 V
-1568 651 Crs
-1965 670 Crs
-2363 669 Crs
-2761 698 Crs
-3159 706 Crs
-3556 711 Crs
-3954 718 Crs
-4352 713 Crs
-4749 738 Crs
-5147 730 Crs
-3688 3644 Crs
+0.00 0.00 0.00 C 748 599 M
+397 0 V
+397 0 V
+396 0 V
+397 0 V
+397 0 V
+397 0 V
+396 0 V
+397 0 V
+397 0 V
+0 397 V
+0 396 V
+0 397 V
+0 397 V
+0 396 V
+0 397 V
+0 397 V
+0 396 V
+0 397 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
 % End plot #2
+% Begin plot #3
+stroke
+1.000 UL
+LT2
+0.00 0.00 0.88 C gsave 748 599 N 0 0 V 0 0 V 397 0 V 397 0 V 396 0 V 172 0 V 225 239 V 347 158 V 50 43 V 284 353 V 113 95 V 261 302 V 52 397 V 83 180 V 178 216 V 135 397 V 84 233 V 183 164 V 44 396 V 5 397 V -232 0 V -397 0 V -396 0 V -397 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+397 0 V
+397 0 V
+396 0 V
+172 0 V
+225 239 V
+347 158 V
+50 43 V
+284 353 V
+113 95 V
+261 302 V
+52 397 V
+83 180 V
+178 216 V
+135 397 V
+84 233 V
+183 164 V
+44 396 V
+5 397 V
+-232 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #3
+% Begin plot #4
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+397 0 V
+397 0 V
+396 0 V
+172 0 V
+225 239 V
+347 158 V
+50 43 V
+284 353 V
+113 95 V
+261 302 V
+52 397 V
+83 180 V
+178 216 V
+135 397 V
+84 233 V
+183 164 V
+44 396 V
+5 397 V
+-232 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #4
+% Begin plot #5
+stroke
+1.000 UL
+LT4
+0.00 0.33 1.00 C gsave 748 599 N 0 0 V 0 0 V 397 0 V 395 0 V 2 1 V 342 396 V 54 78 V 397 291 V 31 27 V 328 397 V 38 375 V 8 22 V 219 396 V 170 377 V 23 20 V -23 161 V -14 236 V 14 37 V 258 359 V 19 397 V -277 0 V -397 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+397 0 V
+395 0 V
+2 1 V
+342 396 V
+54 78 V
+397 291 V
+31 27 V
+328 397 V
+38 375 V
+8 22 V
+219 396 V
+170 377 V
+23 20 V
+-23 161 V
+-14 236 V
+14 37 V
+258 359 V
+19 397 V
+-277 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #5
+% Begin plot #6
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+397 0 V
+395 0 V
+2 1 V
+342 396 V
+54 78 V
+397 291 V
+31 27 V
+328 397 V
+38 375 V
+8 22 V
+219 396 V
+170 377 V
+23 20 V
+-23 161 V
+-14 236 V
+14 37 V
+258 359 V
+19 397 V
+-277 0 V
+-397 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #6
+% Begin plot #7
+stroke
+1.000 UL
+LT6
+0.00 0.71 1.00 C gsave 748 599 N 0 0 V 0 0 V 397 0 V 83 0 V 314 205 V 165 192 V 231 330 V 86 66 V 266 397 V 17 397 V 28 79 V 321 317 V 14 397 V 62 157 V 101 240 V 65 396 V 112 397 V -278 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+397 0 V
+83 0 V
+314 205 V
+165 192 V
+231 330 V
+86 66 V
+266 397 V
+17 397 V
+28 79 V
+321 317 V
+14 397 V
+62 157 V
+101 240 V
+65 396 V
+112 397 V
+-278 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #7
+% Begin plot #8
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+397 0 V
+83 0 V
+314 205 V
+165 192 V
+231 330 V
+86 66 V
+266 397 V
+17 397 V
+28 79 V
+321 317 V
+14 397 V
+62 157 V
+101 240 V
+65 396 V
+112 397 V
+-278 0 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #8
+% Begin plot #9
+stroke
+1.000 UL
+LT8
+0.09 1.00 0.91 C gsave 748 599 N 0 0 V 0 0 V 321 0 V 76 115 V 384 282 V 13 18 V 247 378 V 149 230 V 124 167 V 63 397 V 150 396 V 60 233 V 70 164 V 141 397 V 50 396 V 136 396 V 0 1 V 0 0 V -397 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+321 0 V
+76 115 V
+384 282 V
+13 18 V
+247 378 V
+149 230 V
+124 167 V
+63 397 V
+150 396 V
+60 233 V
+70 164 V
+141 397 V
+50 396 V
+136 396 V
+0 1 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #9
+% Begin plot #10
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+321 0 V
+76 115 V
+384 282 V
+13 18 V
+247 378 V
+149 230 V
+124 167 V
+63 397 V
+150 396 V
+60 233 V
+70 164 V
+141 397 V
+50 396 V
+136 396 V
+0 1 V
+-397 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #10
+% Begin plot #11
+stroke
+1.000 UL
+LT1
+0.53 1.00 0.47 C gsave 748 599 N 0 0 V 0 0 V 218 0 V 179 272 V 170 125 V 227 325 V 46 71 V 228 397 V 122 378 V 5 19 V 170 396 V 96 397 V 78 397 V 48 237 V 40 159 V 87 397 V -127 0 V -397 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+218 0 V
+179 272 V
+170 125 V
+227 325 V
+46 71 V
+228 397 V
+122 378 V
+5 19 V
+170 396 V
+96 397 V
+78 397 V
+48 237 V
+40 159 V
+87 397 V
+-127 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #11
+% Begin plot #12
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+218 0 V
+179 272 V
+170 125 V
+227 325 V
+46 71 V
+228 397 V
+122 378 V
+5 19 V
+170 396 V
+96 397 V
+78 397 V
+48 237 V
+40 159 V
+87 397 V
+-127 0 V
+-397 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #12
+% Begin plot #13
+stroke
+1.000 UL
+LT3
+0.91 1.00 0.09 C gsave 748 599 N 0 0 V 0 0 V 114 0 V 255 397 V 28 47 V 263 349 V 134 383 V 7 14 V 229 397 V 160 367 V 13 29 V 87 397 V 69 397 V 100 396 V 38 397 V -307 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+114 0 V
+255 397 V
+28 47 V
+263 349 V
+134 383 V
+7 14 V
+229 397 V
+160 367 V
+13 29 V
+87 397 V
+69 397 V
+100 396 V
+38 397 V
+-307 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #13
+% Begin plot #14
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+114 0 V
+255 397 V
+28 47 V
+263 349 V
+134 383 V
+7 14 V
+229 397 V
+160 367 V
+13 29 V
+87 397 V
+69 397 V
+100 396 V
+38 397 V
+-307 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #14
+% Begin plot #15
+stroke
+1.000 UL
+LT5
+1.00 0.71 0.00 C gsave 748 599 N 0 0 V 0 0 V 11 0 V 219 397 V 167 278 V 89 118 V 186 397 V 122 272 V 72 125 V 45 396 V 187 397 V 81 397 V 11 32 V 113 364 V 24 397 V -137 0 V -396 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 599 M
+11 0 V
+978 996 L
+167 278 V
+89 118 V
+186 397 V
+122 272 V
+72 125 V
+45 396 V
+187 397 V
+81 397 V
+11 32 V
+113 364 V
+24 397 V
+-137 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #15
+% Begin plot #16
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 599 M
+11 0 V
+978 996 L
+167 278 V
+89 118 V
+186 397 V
+122 272 V
+72 125 V
+45 396 V
+187 397 V
+81 397 V
+11 32 V
+113 364 V
+24 397 V
+-137 0 V
+-396 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #16
+% Begin plot #17
+stroke
+1.000 UL
+LT7
+1.00 0.33 0.00 C gsave 748 996 N 0 0 V 0 -168 V 91 168 V 225 396 V 81 115 V 150 282 V 115 397 V 32 396 V 100 250 V 81 147 V 130 397 V 126 396 V 22 397 V -359 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 1 PolyFill
+748 996 M
+0 -168 V
+91 168 V
+225 396 V
+81 115 V
+150 282 V
+115 397 V
+32 396 V
+100 250 V
+81 147 V
+130 397 V
+126 396 V
+22 397 V
+-359 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+% End plot #17
+% Begin plot #18
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 996 M
+0 -168 V
+91 168 V
+225 396 V
+81 115 V
+150 282 V
+115 397 V
+32 396 V
+100 250 V
+81 147 V
+130 397 V
+126 396 V
+22 397 V
+-359 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #18
+% Begin plot #19
+stroke
+1.000 UL
+LT0
+0.88 0.00 0.00 C gsave 748 1392 N 0 0 V 0 -287 V 151 287 V 246 351 V 24 46 V 3 397 V 107 396 V 120 397 V 143 298 V 36 99 V 84 396 V 43 397 V -163 0 V -397 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 0 -397 V 1 PolyFill
+748 1392 M
+0 -287 V
+151 287 V
+246 351 V
+24 46 V
+3 397 V
+107 396 V
+120 397 V
+143 298 V
+36 99 V
+84 396 V
+43 397 V
+-163 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #19
+% Begin plot #20
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 1392 M
+0 -287 V
+151 287 V
+246 351 V
+24 46 V
+3 397 V
+107 396 V
+120 397 V
+143 298 V
+36 99 V
+84 396 V
+43 397 V
+-163 0 V
+-397 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+% End plot #20
+% Begin plot #21
+stroke
+1.000 UL
+LT2
+0.50 0.00 0.00 C gsave 748 1789 N 0 0 V 0 -351 V 178 351 V 4 397 V 152 396 V 63 227 V 29 170 V 100 397 V 67 396 V 133 397 V -329 0 V -397 0 V 0 0 V 0 -397 V 0 -396 V 0 -397 V 0 -397 V 0 -396 V 1 PolyFill
+748 1789 M
+0 -351 V
+178 351 V
+4 397 V
+152 396 V
+63 227 V
+29 170 V
+100 397 V
+67 396 V
+133 397 V
+-329 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+% End plot #21
+% Begin plot #22
+stroke
+0.500 UL
+LT0
+0.00 0.00 0.00 C 748 1789 M
+0 -351 V
+178 351 V
+4 397 V
+152 396 V
+63 227 V
+29 170 V
+100 397 V
+67 396 V
+133 397 V
+-329 0 V
+-397 0 V
+0 -397 V
+0 -396 V
+0 -397 V
+0 -397 V
+0 -396 V
+0 -397 V
+% End plot #22
+stroke
+LTb
+748 599 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 599 M
+[ [({}) 200.0 0.0 true true 0 (1)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 996 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 996 M
+[ [({}) 200.0 0.0 true true 0 (2)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 1392 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 1392 M
+[ [({}) 200.0 0.0 true true 0 (3)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 1789 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 1789 M
+[ [({}) 200.0 0.0 true true 0 (4)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 2186 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 2186 M
+[ [({}) 200.0 0.0 true true 0 (5)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 2582 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 2582 M
+[ [({}) 200.0 0.0 true true 0 (6)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 2979 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 2979 M
+[ [({}) 200.0 0.0 true true 0 (7)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 3376 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 3376 M
+[ [({}) 200.0 0.0 true true 0 (8)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 3772 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 3772 M
+[ [({}) 200.0 0.0 true true 0 (9)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 4169 M
+88 0 V
+3483 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 628 4169 M
+[ [({}) 200.0 0.0 true true 0 (10)]
+] -66.7 MRshow
+0.500 UL
+LTb
+748 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 748 399 M
+[ [({}) 200.0 0.0 true true 0 (1)]
+] -66.7 MCshow
+0.500 UL
+LTb
+1145 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 1145 399 M
+[ [({}) 200.0 0.0 true true 0 (2)]
+] -66.7 MCshow
+0.500 UL
+LTb
+1542 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 1542 399 M
+[ [({}) 200.0 0.0 true true 0 (3)]
+] -66.7 MCshow
+0.500 UL
+LTb
+1938 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 1938 399 M
+[ [({}) 200.0 0.0 true true 0 (4)]
+] -66.7 MCshow
+0.500 UL
+LTb
+2335 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 2335 399 M
+[ [({}) 200.0 0.0 true true 0 (5)]
+] -66.7 MCshow
+0.500 UL
+LTb
+2732 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 2732 399 M
+[ [({}) 200.0 0.0 true true 0 (6)]
+] -66.7 MCshow
+0.500 UL
+LTb
+3129 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 3129 399 M
+[ [({}) 200.0 0.0 true true 0 (7)]
+] -66.7 MCshow
+0.500 UL
+LTb
+3525 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 3525 399 M
+[ [({}) 200.0 0.0 true true 0 (8)]
+] -66.7 MCshow
+0.500 UL
+LTb
+3922 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 3922 399 M
+[ [({}) 200.0 0.0 true true 0 (9)]
+] -66.7 MCshow
+0.500 UL
+LTb
+4319 599 M
+0 88 V
+0 3482 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 4319 399 M
+[ [({}) 200.0 0.0 true true 0 (10)]
+] -66.7 MCshow
+0.500 UL
+LTb
+0.500 UL
+LTb
+748 4169 N
+748 599 L
+3571 0 V
+0 3570 V
+-3571 0 V
+Z stroke
+1.000 UP
+0.500 UL
+LTb
+grestore % colour palette end
+gsave % colour palette begin
+/maxcolors 64 def
+/HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
+  { /HSVs exch def /HSVv exch def 6.0 mul dup floor dup 3 1 roll sub
+     /HSVf exch def /HSVi exch cvi def /HSVp HSVv 1.0 HSVs sub mul def
+	 /HSVq HSVv 1.0 HSVs HSVf mul sub mul def 
+	 /HSVt HSVv 1.0 HSVs 1.0 HSVf sub mul sub mul def
+	 /HSVi HSVi 6 mod def 0 HSVi eq {HSVv HSVt HSVp}
+	 {1 HSVi eq {HSVq HSVv HSVp}{2 HSVi eq {HSVp HSVv HSVt}
+	 {3 HSVi eq {HSVp HSVq HSVv}{4 HSVi eq {HSVt HSVp HSVv}
+	 {HSVv HSVp HSVq} ifelse} ifelse} ifelse} ifelse} ifelse
+  } ifelse} def
+/Constrain {
+  dup 0 lt {0 exch pop}{dup 1 gt {1 exch pop} if} ifelse} def
+/YIQ2RGB {
+  3 copy -1.702 mul exch -1.105 mul add add Constrain 4 1 roll
+  3 copy -0.647 mul exch -0.272 mul add add Constrain 5 1 roll
+  0.621 mul exch -0.956 mul add add Constrain 3 1 roll } def
+/CMY2RGB {  1 exch sub exch 1 exch sub 3 2 roll 1 exch sub 3 1 roll exch } def
+/XYZ2RGB {  3 copy -0.9017 mul exch -0.1187 mul add exch 0.0585 mul exch add
+  Constrain 4 1 roll 3 copy -0.0279 mul exch 1.999 mul add exch
+  -0.9844 mul add Constrain 5 1 roll -0.2891 mul exch -0.5338 mul add
+  exch 1.91 mul exch add Constrain 3 1 roll} def
+/SelectSpace {ColorSpace (HSV) eq {HSV2RGB}{ColorSpace (XYZ) eq {
+  XYZ2RGB}{ColorSpace (CMY) eq {CMY2RGB}{ColorSpace (YIQ) eq {YIQ2RGB}
+  if} ifelse} ifelse} ifelse} def
+/InterpolatedColor true def
+/grayindex {/gidx 0 def
+  {GrayA gidx get grayv ge {exit} if /gidx gidx 1 add def} loop} def
+/dgdx {grayv GrayA gidx get sub GrayA gidx 1 sub get
+  GrayA gidx get sub div} def 
+/redvalue {RedA gidx get RedA gidx 1 sub get
+  RedA gidx get sub dgdxval mul add} def
+/greenvalue {GreenA gidx get GreenA gidx 1 sub get
+  GreenA gidx get sub dgdxval mul add} def
+/bluevalue {BlueA gidx get BlueA gidx 1 sub get
+  BlueA gidx get sub dgdxval mul add} def
+/interpolate {
+  grayindex grayv GrayA gidx get sub abs 1e-5 le
+    {RedA gidx get GreenA gidx get BlueA gidx get}
+    {/dgdxval dgdx def redvalue greenvalue bluevalue} ifelse} def
+/GrayA [0 .0159 .0317 .0476 .0635 .0794 .0952 .1111 .127 .1429 .1587 .1746 
+  .1905 .2063 .2222 .2381 .254 .2698 .2857 .3016 .3175 .3333 .3492 .3651 
+  .381 .3968 .4127 .4286 .4444 .4603 .4762 .4921 .5079 .5238 .5397 .5556 
+  .5714 .5873 .6032 .619 .6349 .6508 .6667 .6825 .6984 .7143 .7302 .746 
+  .7619 .7778 .7937 .8095 .8254 .8413 .8571 .873 .8889 .9048 .9206 .9365 
+  .9524 .9683 .9841 1 ] def
+/RedA [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .0238 .0873 .1508 
+  .2143 .2778 .3413 .4048 .4683 .5317 .5952 .6587 .7222 .7857 .8492 .9127 
+  .9762 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 .9444 .881 .8175 .754 .6905 .627 
+  .5635 .5 ] def
+/GreenA [0 0 0 0 0 0 0 0 .0079 .0714 .1349 .1984 .2619 .3254 .3889 .4524 
+  .5159 .5794 .6429 .7063 .7698 .8333 .8968 .9603 1 1 1 1 1 1 1 1 1 1 1 1 1 
+  1 1 1 .9603 .8968 .8333 .7698 .7063 .6429 .5794 .5159 .4524 .3889 .3254 
+  .2619 .1984 .1349 .0714 .0079 0 0 0 0 0 0 0 0 ] def
+/BlueA [.5 .5635 .627 .6905 .754 .8175 .881 .9444 1 1 1 1 1 1 1 1 1 1 1 1 1 
+  1 1 1 .9762 .9127 .8492 .7857 .7222 .6587 .5952 .5317 .4683 .4048 .3413 
+  .2778 .2143 .1508 .0873 .0238 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+  0 0 ] def
+/pm3dround {maxcolors 0 gt {dup 1 ge
+	{pop 1} {maxcolors mul floor maxcolors 1 sub div} ifelse} if} def
+/pm3dGamma 1.0 1.5 Gamma mul div def
+/ColorSpace (RGB) def
+Color InterpolatedColor or { % COLOUR vs. GRAY map
+  InterpolatedColor { %% Interpolation vs. RGB-Formula
+    /g {stroke pm3dround /grayv exch def interpolate
+        SelectSpace setrgbcolor} bind def
+  }{
+  /g {stroke pm3dround dup cF7 Constrain exch dup cF5 Constrain exch cF15 Constrain 
+       SelectSpace setrgbcolor} bind def
+  } ifelse
+}{
+  /g {stroke pm3dround pm3dGamma exp setgray} bind def
+} ifelse
+0.500 UL
+LTb
+4741 4261 N
+0 -3755 V
+267 0 V
+0 3755 V
+-267 0 V
+Z stroke
+1.000 UP
+0.500 UL
+LTb
+% Begin plot #1
+1.000 UL
+LT0
+LTb
+%%%%BeginImage
+gsave 4741 4261 N 4741 506 L 5008 506 L 5008 4261 L Z clip
+gsave
+4741 4261 translate
+267 -3755 scale
+%%%%BeginPalette
+[ /Indexed
+  /DeviceRGB 63
+  <
+   000080 000090 0000a0 0000b0 0000c0 0000d0 0000e1 0000f1
+   0002ff 0012ff 0022ff 0033ff 0043ff 0053ff 0063ff 0073ff
+   0084ff 0094ff 00a4ff 00b4ff 00c4ff 00d4ff 00e5ff 00f5ff
+   06fff9 16ffe9 26ffd9 37ffc8 47ffb8 57ffa8 67ff98 77ff88
+   88ff77 98ff67 a8ff57 b8ff47 c8ff37 d9ff26 e9ff16 f9ff06
+   fff500 ffe500 ffd400 ffc400 ffb400 ffa400 ff9400 ff8400
+   ff7300 ff6300 ff5300 ff4300 ff3300 ff2200 ff1200 ff0200
+   f10000 e10000 d00000 c00000 b00000 a00000 900000 800000
+  >
+] setcolorspace
+%%%%EndPalette
+<<
+  /ImageType 1
+  /Width 2
+  /Height 64
+  /BitsPerComponent 8
+  /ImageMatrix [ 2 0 0 64 0 0 ]
+  /Decode [ 0 255 ]
+  /imagebuf 128 string def
+  /DataSource {currentfile imagebuf readhexstring pop}
+  /MultipleDataSources false
+  /Interpolate false
+>>
+image
+3f3f3e3e3d3d3c3c3b3b3a3a39393838373736363535343433333232313130302f2f2e2e2d2d2c
+2c2b2b2a2a29292828272726262525242423232222212120201f1f1e1e1d1d1c1c1b1b1a1a1919
+1818171716161515141413131212111110100f0f0e0e0d0d0c0c0b0b0a0a090908080707060605
+0504040303020201010000
+grestore
+grestore
+%%%%EndImage
+% End plot #1
+0.500 UL
+LTb
+5008 1017 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 1017 M
+[ [({}) 200.0 0.0 true true 0 (2)]
+] -66.7 MLshow
+0.500 UL
+LTb
+5008 1612 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 1612 M
+[ [({}) 200.0 0.0 true true 0 (4)]
+] -66.7 MLshow
+0.500 UL
+LTb
+5008 2208 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 2208 M
+[ [({}) 200.0 0.0 true true 0 (6)]
+] -66.7 MLshow
+0.500 UL
+LTb
+5008 2803 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 2803 M
+[ [({}) 200.0 0.0 true true 0 (8)]
+] -66.7 MLshow
+0.500 UL
+LTb
+5008 3399 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 3399 M
+[ [({}) 200.0 0.0 true true 0 (10)]
+] -66.7 MLshow
+0.500 UL
+LTb
+5008 3994 M
+-88 0 V
+-179 0 R
+88 0 V
+stroke
+0.00 0.00 0.00 C 5128 3994 M
+[ [({}) 200.0 0.0 true true 0 (12)]
+] -66.7 MLshow
+0.500 UL
+LTb
+0.500 UL
+LTb
+4741 4261 N
+0 -3755 V
+267 0 V
+0 3755 V
+-267 0 V
+Z stroke
 1.000 UP
 0.500 UL
 LTb
