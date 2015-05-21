@@ -79,7 +79,7 @@ public class UBLSHPrediction extends AbstractPrediction {
         final long endTime = System.currentTimeMillis();
 
         avg_candidate_set_size = (double) total_candidate_set_size / cnt;
-        LOG.info("UserbasedNN-LSH Running time: " + (endTime - startTime) + " ms.");
+        LOG.info("UB-LSH Running time: " + (endTime - startTime) + " ms.");
         LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
 
         return (endTime - startTime);

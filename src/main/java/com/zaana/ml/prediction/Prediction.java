@@ -85,17 +85,14 @@ public class Prediction
         double weightsTotal = 0;
         while (entry.hasNext()) {
             String candidateUser = entry.next();
-            Integer frequency = Collections.frequency(candidateSetList, candidateUser);
-            double freqWeight = Math.sqrt(frequency);
+            Integer fraquency = Collections.frequency(candidateSetList, candidateUser);
             Integer rating = userRateMap.get(candidateUser).get(movieId);
-            weightedRatingsTotal += rating * freqWeight;
-            weightsTotal += freqWeight;
-            //System.out.println("Frequency: " + frequency);
+            weightedRatingsTotal += rating * fraquency;
+            weightsTotal += fraquency;
         }
-
-        if (weightsTotal != 0) {
+        if (weightsTotal != 0)
             return weightedRatingsTotal / weightsTotal;
-        } else
+        else
             return 0;
     }
 

@@ -65,6 +65,7 @@ public final class Main
             System.out.println("62 - UBLSH - Prediction - 2D (y & k) test");
             System.out.println("63 - LSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
+            System.out.println("65 - LSH - Predicton - 2D test");
             System.out.println("");
             System.out.println("70 - User-based - Precision vs. k");
             System.out.println("71 - UBLSH - Precision vs. k");
@@ -178,6 +179,10 @@ public final class Main
             case "64":
                 LSHPredictionTests.runLSHHashFunctionsAndPrediction("LSH", dataFileBase, "val", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
+                break;
+            case "65":
+                LOG.info("Running 2D HashFunctions-HashTables test...");
+                LSHPredictionTests.runLSH2DHashFunctionsTablesTest("LSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
                 break;
 
             case "70":

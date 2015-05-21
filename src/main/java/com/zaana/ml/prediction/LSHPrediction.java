@@ -1,9 +1,6 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.Common;
 import com.zaana.ml.LSH;
-import com.zaana.ml.similarity.Cosine;
-
 import java.util.*;
 
 /**
@@ -18,8 +15,7 @@ public class LSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            int kNN, int y)
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -44,7 +40,7 @@ public class LSHPrediction extends AbstractPrediction {
             Set <String> candidateSet = new HashSet<>(candidateSetList);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
-                    testDataEntry, userRateMap, itemRateMap, candidateSetList, candidateSet, outputList, targetList, kNN, y);
+                    testDataEntry, userRateMap, itemRateMap, candidateSetList, candidateSet, outputList, targetList);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -63,8 +59,7 @@ public class LSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             List<String> candidateSetList,
             Set<String> candidateSet, LinkedList<Double> outputList,
-            LinkedList<Integer> targetList,
-            final int kNN, int y)
+            LinkedList<Integer> targetList)
     {
         HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
@@ -77,7 +72,7 @@ public class LSHPrediction extends AbstractPrediction {
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                        prediction = Prediction.calculateLSHBasedPredicitonRate(
+                    prediction = Prediction.calculateLSHBasedPredicitonRate(
                                 userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
                     if (prediction != 0) {
                         outputList.add(prediction);
