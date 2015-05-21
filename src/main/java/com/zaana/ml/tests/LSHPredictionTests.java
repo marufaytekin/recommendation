@@ -229,13 +229,23 @@ public class LSHPredictionTests extends AbstractTests
                         runTime += UBLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
                                         itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                        candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
+                        mae += MAE.calculateMAE(
+                                UBLSHPrediction.getOutputList(),
+                                UBLSHPrediction.getTargetList());
+                    }  else if (testType == "LSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                                numOfBands);
+                        runTime += LSHPrediction.runLSHPredictionOnTestData(
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap);
+                        candidate_set_size += LSHPrediction.getAvg_candidate_set_size();
+                        mae += MAE.calculateMAE(
+                                LSHPrediction.getOutputList(),
+                                LSHPrediction.getTargetList());
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
-                    candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
-                    mae += MAE.calculateMAE(
-                            UBLSHPrediction.getOutputList(),
-                            UBLSHPrediction.getTargetList());
                 }
                 LOG.info("numOfBands:" + numOfBands
                         + " numOfHashFunctions:" + numOfHashFunctions);
@@ -470,7 +480,7 @@ public class LSHPredictionTests extends AbstractTests
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
                     runTime += LSHPrediction.runLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap);
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
