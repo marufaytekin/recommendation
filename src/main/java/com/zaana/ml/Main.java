@@ -21,10 +21,10 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
@@ -32,7 +32,7 @@ public final class Main
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
-    static int y = 10; // significance value. Must not be 0!
+    static int y = 5; // significance value. Must not be 0!
     static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands

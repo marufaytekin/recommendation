@@ -177,8 +177,8 @@ public class LSHPredictionTests extends AbstractTests
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
                 totalMae += MAE.calculateMAE(
-                        AbstractPrediction.getOutputList(),
-                        AbstractPrediction.getTargetList());
+                        UBLSHPrediction.getOutputList(),
+                        UBLSHPrediction.getTargetList());
 
                 totalCandSize += UBLSHPrediction.getAvg_candidate_set_size();
             }
