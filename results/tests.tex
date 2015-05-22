@@ -1,5 +1,4 @@
 50. User-based: Run  this test to select best k for data set with cross validation. (use val data sets)
-
 51. User-based: Run this test for k and y 2D test to detect if there is a correlation between k and y values. (use val datasets)
 
 54. UB-LSH: Run this test 2D test to detect if there is a correlation between HashFunctions and k. (use val data sets)
@@ -23,32 +22,43 @@
 73. UB-LSH: Run this test to see relationship between k and HashTables
 
 
-Test 51:
+Test 50-51-58-62:
 
 We run 2D tests for UB prediction and found out how k and y changes effect User-based accuracy (MAE).
-from ml-mae-k-y-runtime-heat-map.eps we see that y and k are independent from each other. If we select k too low or y too high that will decrease the accuracy. We will use these values for user-based tests. Note that y decreases MAE until around 7 then MAE starts to increase.
+from ml-mae-k-y-runtime-heat-map.eps we see that y and k are independent from each other. If we select
+k too low or y too high that will decrease the accuracy. We will use these values for user-based tests.
+
 
 k and y have different effect on LSH. based algorithms.
 
-Test 54:
-We run 2D tests for UB-LSH to find out how k and Hash Functions effect the accuracy. We found out that accuracy is best for this data set when k is about about 15-20  and  HashFunctions about 4. We set k=20 for the rest of UBLSH tests of this data set.
-On the other hand increasing number of hash functions effects accuracy in better way when k is too low.
+1. MAE and k
+
+50-58 : MAE and k
+51-62 : MAE and y
+
+Detected optimum k and y values. k is best around 20-25 and y is best around 10 for UB and 4 for LSH.
+Note that increasing y improves MAE first and if we keep to increase y this effects MAE in a negative way.
+We have run cross validation for k and y changes no correlation!
 
 
 
-Test 55:
+Test 54-55-60-61 :
+We run 2D tests for UB-LSH to find out how k, y and Hash Functions and Tables effect the accuracy.
+We found out that no correlation between hash functions, tables and k nor y.
+ No surprise.
 
-We set k = 20 and run 2D tests to see how y and HashFunctions change effect accuracy for UB-LSH. Increasing y increases error as well as increasing HashFunctions.
-When we increase the number of hash functions increasing y has negative effect on the accuracy
-('test-55-ml-mae-lsh-y-hash-functions'). We need to keep y as low as possible (around 5) for LSH tests. We will set HashFunctions to 4 and run the next tests.
-
-Test 60: optimum k is around 20
-
-Test 61: optimum y is around 5.
 
 Test 59: Use optimum k and y and run 2D UBLSH test for lower and upper bounds of HashTables/Functions
-When we increase hash functions we need to increase hash tables too to preserve MAE in  certain range.. Drow 1D hash table and function graphs on MAE.
+When we increase hash functions we need to increase hash tables too to preserve MAE in  certain range.
+Draw 1D hash table and function graphs on MAE. Beyond max number of hash functions predictions error increases.
 
-Test 56-57: These results can be retreived from test: 59.
 
-Test 58:
+Test 70-71: UB and UBLSH precision against k. As expected precision increased as we increased k parameter.
+
+Test 72: UBLSH precision and k and hash functions.
+Precision increases as k increase and decreases as number of hash functions increased. (ymusic)
+
+
+
+
+

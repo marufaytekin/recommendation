@@ -21,10 +21,10 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ymusic/ymusic.data";
-    static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/100k/ml.data";
-    //static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
+    static String dataFilePath = "data/100k/ml.data";
+    static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
@@ -99,7 +99,7 @@ public final class Main
             case "0":
                 dataFilePath = "data/100k/ml.data";
                 dataFileBase = "data/100k/ml";
-                y = 10;
+                y = 4;
                 runnCompTests(scanner);
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
@@ -222,8 +222,10 @@ public final class Main
     }
 
     private static void runnCompTests(Scanner scanner) {
-        runSelection("54",scanner);
-        runSelection("55",scanner);
+        runSelection("71",scanner);
+        runSelection("72",scanner);
+        runSelection("73",scanner);
+        runSelection("74",scanner);
 
     }
 
