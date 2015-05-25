@@ -1,38 +1,34 @@
 package com.zaana.ml;
 
-import com.zaana.ml.recomm.UBRecommendation;
+import com.zaana.ml.recomm.IBRecommendation;
 
 import java.util.*;
 
 /**
- * Created by maytekin on 20.01.2015.
+ * Created by maruf on 25/04/15.
  */
-public class UBPrecision extends Precision {
+public class IBPrecision extends Precision{
 
-    public UBPrecision() {
-    }
-
-    public static double calculateUBPrecision(
+    public static double calculateItemBasedPrecision(
             HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             Set<String> itemSet,
-            int topN, int kNN, int y)
-    {
+            int topN, int kNN, int y) {
 
         double totalPrecision = 0;
 
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
-            Set<String> candidateUserSet = userRateMap.keySet();
             try {
-                List<String> userBasedTopNRecom = UBRecommendation.recommendItems(
-                        userRateMap, itemSet, userId, candidateUserSet, topN, kNN, y);
-                Set<String> retrieved = new HashSet<>(userBasedTopNRecom);
+                List<String> itemBasedTopNRecommendationList = IBRecommendation.recommendItems(userRateMap,
+                        itemRateMap, itemSet, userId, kNN, topN, y);
+                Set<String> retrieved = new HashSet<>(itemBasedTopNRecommendationList);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved, topN);
             } catch (NullPointerException e) {
-                LOG.error(e.getLocalizedMessage());
+                continue;
             }
         }
 

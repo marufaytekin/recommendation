@@ -22,8 +22,8 @@ public class UBLSHPrecision extends Precision {
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesUB,
             final HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmapUB,
             Set<String> itemSet,
-            int kNN, int topN, int y) {
-
+            int topN, int kNN, int y)
+    {
         double totalPrecision = 0;
         double totalCandidateSetSize = 0;
 
@@ -32,7 +32,9 @@ public class UBLSHPrecision extends Precision {
             String userId = entry.getKey();
             try {
                 List<String> topNRecom =
-                        UBLSHRecommendation.recommendItems(userRateMap, hashTablesUB, vmapUB, itemSet, userId, kNN, topN, y);
+                        UBLSHRecommendation.recommendItems(
+                                userRateMap, hashTablesUB, vmapUB, itemSet, userId, topN, kNN, y);
+                //int kNN, int topN, int y)
                 totalCandidateSetSize += UBLSHRecommendation.getCandidateSetSize();
 
                 if (topNRecom == null) {

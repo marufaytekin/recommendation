@@ -8,10 +8,8 @@ import java.util.*;
 /**
  * Created by maruf on 06/02/15.
  */
-public class IBLSHPrediction extends LSHPrediction {
-
-    static Logger LOG = Logger.getLogger(IBLSHPrediction.class);
-
+public class IBLSHPrediction extends LSHPrediction
+{
     public static long runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
@@ -83,7 +81,6 @@ public class IBLSHPrediction extends LSHPrediction {
             LinkedList<Integer> targetList,
             final int kNN, int y)
     {
-
         String testUserId = testDataEntry.getKey();
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
         Set<String> ratedItemsSet = new HashSet<>(userRateMap.get(testUserId).keySet());
@@ -119,5 +116,6 @@ public class IBLSHPrediction extends LSHPrediction {
         }
         return total_candidate_set_size / cnt;
     }
+
 
 }

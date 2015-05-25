@@ -12,12 +12,11 @@ public final class UBRecommendation extends AbstractRecommendation
     public static List<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             Set<String> itemSet, String targetUserId, Set<String> candidateUserSet,
-            int kNN, int topN, int y)
+            int topN, int kNN, int y)
     {
 
         try {
-            Set<String> nonRatedItemSet = Common.getUserNonRatedItemList(userRateMap,
-                    itemSet, targetUserId);
+            Set<String> nonRatedItemSet = Common.getUserNonRatedItemList(userRateMap, itemSet, targetUserId);
             LinkedHashMap<String, Double> targetUserSimilarityList =
                     Cosine.getSimilarityListWithCandidateSet(targetUserId, candidateUserSet, userRateMap, y);
             LinkedHashMap<String, Double> itemPredictionList = new LinkedHashMap<>();
@@ -27,8 +26,8 @@ public final class UBRecommendation extends AbstractRecommendation
                 LinkedHashMap<String, Double> kNNList = Common.getkNNList(
                         targetUserSimilarityList, userRateMap, movieId, kNN);
                 if (kNNList != null && !kNNList.isEmpty()) { //BUG: used to compute prediction with lt k NN.
-                    double prediction = Prediction.calculateUserBasedPredicitonRate(userRateMap,
-                            kNNList, movieId);
+                    double prediction = Prediction.calculateUserBasedPredicitonRate(
+                            userRateMap, kNNList, movieId);
                     itemPredictionList.put(movieId, prediction);
                 }
             }

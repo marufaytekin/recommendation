@@ -21,14 +21,14 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
-    // “in most real-world situations, a neighborhood of 20 to 50 neighbors
+    // in most real-world situations, a neighborhood of 20 to 50 neighbors
     // seems reasonable” ( Herlocker et al. 2002 ).
     static int topN = 20;
     static int kNN = 20;
@@ -79,14 +79,16 @@ public final class Main
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
+            System.out.println("");
             System.out.println("100 - User-based - Prediction - test");
             System.out.println("101 - Item-based - Prediction - test");
             System.out.println("59 - UBLSH - Prediction - 2D test");
             System.out.println("83 - IBLSH - Prediction - 2D test");
+            System.out.println("");
             System.out.println("102 - User-based - Precision - test");
             System.out.println("103 - Item-based - Precision - test");
-            System.out.println("74 - UBLSH - Precision - 2D - test");
-            System.out.println("94 - IBLSH - Precision - 2D - test");
+            System.out.println("104 - UBLSH - Precision - 2D - test");
+            System.out.println("105 - IBLSH - Precision - 2D - test");
 
             System.out.println("99 - Exit");
             System.out.println("===================================");
@@ -107,14 +109,10 @@ public final class Main
         switch (selection) {
 
             case "0":
-                dataFilePath = "data/100k/ml.data";
-                dataFileBase = "data/100k/ml";
-                y = 4;
-                runnCompTests(scanner);
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
-                y = 4;
-                runnCompTests(scanner);
+                y = 5;
+                runCompTests(scanner);
                 break;
             case "00":
                 DataParser.processDataFile(dataFilePath, seperator, 0, 100);
@@ -200,10 +198,10 @@ public final class Main
                 break;
 
             case "70":
-                PrecisionTests.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, y);
+                PrecisionTests.runUBPrecisionAndKTests(dataFileBase, seperator, l, k, smoothRun, topN, y);
                 break;
             case "71":
-                PrecisionTests.runUBLSHPrecisionTest(dataFileBase, seperator, l, k, smoothRun, topN, y);
+                PrecisionTests.runUBLSHPrecisionAndKTest(dataFileBase, seperator, l, k, smoothRun, topN, y);
                 break;
             case "72":
                 PrecisionTests.run2DPrecisionHashFunctionsAndKTests("UBLSH",dataFileBase,numOfRun,smoothRun,seperator,topN, y);
@@ -241,6 +239,18 @@ public final class Main
             case "101":
                 CFPredictionTests.runCFPredictionTests(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN, y);
                 break;
+            case "102":
+                PrecisionTests.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, kNN, y);
+                break;
+            case "103":
+                PrecisionTests.runIBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, kNN, y);
+                break;
+            case "104":
+                PrecisionTests.run2DLSHPrecisionTests("UBLSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                break;
+            case "105":
+                PrecisionTests.run2DLSHPrecisionTests("IBLSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                break;
 
             case "99":
                 LOG.info("bye...\n");
@@ -253,11 +263,17 @@ public final class Main
 
     }
 
-    private static void runnCompTests(Scanner scanner) {
-        runSelection("71",scanner);
-        runSelection("72",scanner);
-        runSelection("73",scanner);
-        runSelection("74",scanner);
+    private static void runCompTests(Scanner scanner) {
+        runSelection("59",scanner);
+        runSelection("83",scanner);
+        runSelection("81",scanner);
+        runSelection("82",scanner);
+        runSelection("51",scanner);
+        runSelection("53",scanner);
+        runSelection("62",scanner);
+        runSelection("80",scanner);
+        runSelection("54",scanner);
+        runSelection("60",scanner);
 
     }
 

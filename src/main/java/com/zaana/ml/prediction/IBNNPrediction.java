@@ -6,22 +6,9 @@ import org.apache.log4j.Logger;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class IBNNPrediction {
-
-    static Logger LOG = Logger.getLogger(IBNNPrediction.class);
+public final class IBNNPrediction extends AbstractPrediction{
 
     private IBNNPrediction() {
-    }
-
-    private static LinkedList<Double> outputList;
-    private static LinkedList<Integer> targetList;
-
-    public static LinkedList<Double> getOutputList() {
-        return outputList;
-    }
-
-    public static LinkedList<Integer> getTargetList() {
-        return targetList;
     }
 
     /**
@@ -91,7 +78,7 @@ public final class IBNNPrediction {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             Set<String> ratedItemsSet, String testUserId, LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
-            final int kNN, int y)
+            int kNN, int y)
     {
 
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
@@ -122,8 +109,7 @@ public final class IBNNPrediction {
      * @param y     */
     public static LinkedHashMap<String, Double> getSimilarItemsListRatedByUser(
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            String itemId, Set<String> ratedItemsSet,
-            final int kNN, int y)
+            String itemId, Set<String> ratedItemsSet, int kNN, int y)
     {
 
         LinkedHashMap<String, Double> sortedSimilarItemsListMap =

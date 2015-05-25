@@ -15,7 +15,7 @@ public final class UBLSHRecommendation extends LSHRecommendation{
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            Set<String> itemSet, String targetUserId, int kNN, int topN, int y)
+            Set<String> itemSet, String targetUserId, int topN, int kNN, int y)
     {
         HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
         Set<String> candidateUserSet = LSH.getCandidateSet(hashTables, vmap, targetUserId,
@@ -23,8 +23,8 @@ public final class UBLSHRecommendation extends LSHRecommendation{
         candidateSetSize = candidateUserSet.size();
         List<String> userBasedTopNRecom = null;
         if (!candidateUserSet.isEmpty()) {
-            userBasedTopNRecom =
-                    UBRecommendation.recommendItems(userRateMap, itemSet, targetUserId, candidateUserSet, kNN, topN, y);
+            userBasedTopNRecom = UBRecommendation.recommendItems(
+                    userRateMap, itemSet, targetUserId, candidateUserSet, topN, kNN, y);
         }
 
         return userBasedTopNRecom;
