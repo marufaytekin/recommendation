@@ -351,6 +351,18 @@ legend ("y=10")
 write(f, strcat(fileName,'-62-mae-ublsh-k'));
 
 
+
+f= figure();
+k = 1:3:30;
+y = 1:3:30;
+data = IBLSHMaeKAndYList2D;
+contourf(y, k, data);
+axis square;
+colorbar;
+xlabel("y");
+ylabel("k");
+title("MAE");
+
 # ========================================================
 # test case: UB Precision & k
 # test case: 70

@@ -1,0 +1,158 @@
+
+# ========================================================
+# test case: UB Prediction
+# test case: 50 - 58
+# ========================================================
+k = 1:5:50;
+f= figure();
+ubmae = UBMaeList;
+plot (k, ubmae, '-dk');
+xlabel("k")
+ylabel("MAE")
+write (f, 'ub-mae-k');
+
+
+#Significance and k
+# k = 20
+mae =  UBMaeKAndYList2D (10,:)
+f = figure();
+plot (y, mae, '-dk');
+xlabel("y");
+ylabel("MAE");
+write(f, 'ub-mae-y');
+
+
+avg mae and runtime
+k = 30
+y = 7
+ub_mae =  0.79527
+ub_runtime = 9437.0 ms
+
+## LSH Results
+
+x = 1:10;
+y = 1:10;
+
+f= figure();
+
+# Heatmaps
+data = LSHMae2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("MAE");
+write(f, 'mae-lsh-heat-map');
+
+f= figure();
+data = LSHRuntime2D / 1000;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Running Time (sec)");
+write(f, 'runtime-lsh-heat-map');
+
+f= figure();
+data = LSHCandidate_Set_List2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Candidate Set Size");
+write(f, 'candidate-set-lsh-heat-map');
+
+
+#####################################
+# Hash Tables
+#####################################
+
+n = 10;
+x = 1:10
+
+ub_mae =  0.79527
+ub_runtime = 9437.0
+y1 = ub_mae;
+
+f= figure();
+
+
+f= figure();
+mae =  LSHMae2D(:,4);
+f = figure();
+plot ([1,n], [y1, y1],'-k', x, mae, '-dk');
+legend ("User-based", "LSH");
+xlabel("Hash Tables");
+ylabel("MAE");
+write(f, 'ub-mae-hash-tables');
+
+f= figure();
+y1 = ub_runtime/1000;
+
+runtime =  LSHRuntime2D(:,4) / 1000;
+plot ([1,n], [y1, y1],'-k', x, runtime, '-dk');
+legend ("User-based", "LSH", "location", "west");
+xlabel("Hash Tables");
+ylabel("Runtime (sec)");
+write(f, 'ub-runtime-hash-tables');
+
+
+
+f= figure();
+
+candidate_size =  LSHCandidate_Set_List2D(:,4);
+plot (x, candidate_size, '-dk');
+legend ("LSH","location", "northwest");
+xlabel("Hash Tables");
+ylabel("Candidate Set Size");
+write(f, 'lsh-canidate-hash-tables');
+
+
+
+#####################################
+# Hash Functions
+#####################################
+
+n = 10;
+x = 1:10
+
+ub_mae =  0.79527
+ub_runtime = 9437.0
+y1 = ub_mae;
+
+f= figure();
+
+
+f= figure();
+mae =  LSHMae2D(8,:);
+f = figure();
+plot ([1,n], [y1, y1],'-k', x, mae, '-dk');
+legend ("User-based", "LSH");
+xlabel("Hash Functions");
+ylabel("MAE");
+write(f, 'ub-mae-hash-functions');
+
+
+f= figure();
+y1 = ub_runtime/1000;
+runtime =  LSHRuntime2D(8,:) / 1000;
+plot ([1,n], [y1, y1],'-k', x, runtime, '-dk');
+legend ("User-based", "LSH");
+xlabel("Hash Functions");
+ylabel("Runtime (sec)");
+write(f, 'ub-runtime-hash-functions');
+
+
+f= figure();
+
+candidate_size =  LSHCandidate_Set_List2D(8,:);
+plot (x, candidate_size, '-dk');
+legend ("LSH");
+xlabel("Hash Functions");
+ylabel("Candidate Set Size");
+write(f, 'lsh-canidate-hash-functions');
+
+

@@ -103,4 +103,36 @@ public class CFPredictionTests extends AbstractTests
         LOG2.info(type + "RunTimeKAndYList2D = " + runTimeList2D.toString() + ";");
 
     }
+
+
+    public static void runCFPredictionTests(
+            String dataFilePath, String dataFileBase, String type,
+            int smoothRun, String seperator, int kNN, int y)
+    {
+        double mae = 0;
+        double runTime = 0;
+        for (int j = 0; j < smoothRun; j++) {
+            preprocessDataForValidation(dataFileBase, (j+1), "test", seperator);
+            if (type == "UB") {
+                runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
+                        testDataMap, kNN, y);
+                mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
+                        UBNNPrediction.getTargetList());
+            } else if (type == "IB") {
+                runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                        testDataMap, kNN, y);
+                mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
+                        IBNNPrediction.getTargetList());
+            } else {
+                throw new UnsupportedOperationException("Invalid operation for CF type.");
+            }
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + type + " Prediction");
+        LOG2.info("# ========================================================");
+        LOG2.info("fileName = " + dataFilePath);
+        LOG2.info(type + "MaeList = " + mae/ smoothRun);
+        LOG2.info(type + "Runtime = " + runTime / smoothRun);
+    }
+
 }

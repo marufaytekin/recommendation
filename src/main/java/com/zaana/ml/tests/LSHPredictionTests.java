@@ -2,6 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.prediction.AbstractPrediction;
+import com.zaana.ml.prediction.IBLSHPrediction;
 import com.zaana.ml.prediction.LSHPrediction;
 import com.zaana.ml.prediction.UBLSHPrediction;
 
@@ -112,11 +113,18 @@ public class LSHPredictionTests extends AbstractTests
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), val, separator);
                     Set<String> itemSet = itemRateMap.keySet();
+                    Set<String> userSet = userRateMap.keySet();
                     if (type == "UBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                         hashTables = LSH.buildIndexTables(userRateMap, vmap, l);
                         runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    } else if (type == "IBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
+                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, l);
+                        runTimeTotal += IBLSHPrediction.
+                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                        testDataMap, hashTables, vmap, kNN, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid operation for LSH type.");
                     }
@@ -130,7 +138,7 @@ public class LSHPredictionTests extends AbstractTests
                 LOG.info(type + "Runtime2D: " + runTimeTotal / smoothRun);
                 maeList.add(totalMae / smoothRun);
                 runtimeList.add(runTimeTotal / smoothRun);
-                y += 5;
+                y += 3;
             }
             runTimeList2D.add(runtimeList);
             maeList2D.add(maeList);
@@ -220,6 +228,7 @@ public class LSHPredictionTests extends AbstractTests
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), "val", separator);
                     Set<String> itemSet = itemRateMap.keySet();
+                    Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (testType == "UBLSH") {
@@ -233,7 +242,17 @@ public class LSHPredictionTests extends AbstractTests
                         mae += MAE.calculateMAE(
                                 UBLSHPrediction.getOutputList(),
                                 UBLSHPrediction.getTargetList());
-                    }  else if (testType == "LSH") {
+                    } else if (testType == "IBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        runTime += IBLSHPrediction.
+                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                        testDataMap, hashTables, vmap, kNN, y);
+                        candidate_set_size += IBLSHPrediction.getAvg_candidate_set_size();
+                        mae += MAE.calculateMAE(
+                                IBLSHPrediction.getOutputList(),
+                                IBLSHPrediction.getTargetList());
+                    } else if (testType == "LSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildIndexTables(userRateMap, vmap,
                                 numOfBands);
@@ -305,6 +324,7 @@ public class LSHPredictionTests extends AbstractTests
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), val,separator);
                     Set<String> itemSet = itemRateMap.keySet();
+                    Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (testType == "UBLSH") {
@@ -313,13 +333,19 @@ public class LSHPredictionTests extends AbstractTests
                                 numOfBands);
                         runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    }  else if (testType == "IBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        runTime += IBLSHPrediction.
+                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                        testDataMap, hashTables, vmap, kNN, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
-                    candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
+                    candidate_set_size += AbstractPrediction.getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
-                            UBLSHPrediction.getOutputList(),
-                            UBLSHPrediction.getTargetList());
+                            AbstractPrediction.getOutputList(),
+                            AbstractPrediction.getTargetList());
                 }
                 LOG.info("numOfBands = " + numOfBands
                         + " numOfHashFunctions = " + numOfHashFunctions);
@@ -386,6 +412,7 @@ public class LSHPredictionTests extends AbstractTests
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), val,separator);
                     Set<String> itemSet = itemRateMap.keySet();
+                    Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (testType == "UBLSH") {
@@ -394,13 +421,19 @@ public class LSHPredictionTests extends AbstractTests
                                 numOfBands);
                         runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    } else if (testType == "IBLSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        runTime += IBLSHPrediction.
+                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                        testDataMap, hashTables, vmap, kNN, y);
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
-                    candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
+                    candidate_set_size += AbstractPrediction.getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
-                            UBLSHPrediction.getOutputList(),
-                            UBLSHPrediction.getTargetList());
+                            AbstractPrediction.getOutputList(),
+                            AbstractPrediction.getTargetList());
                 }
                 LOG.info("numOfBands = " + numOfBands
                         + " numOfHashFunctions = " + numOfHashFunctions);

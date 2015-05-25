@@ -21,10 +21,10 @@ public final class Main
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ymusic/ymusic.data";
-    static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/100k/ml.data";
-    //static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
+    static String dataFilePath = "data/100k/ml.data";
+    static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
@@ -52,31 +52,41 @@ public final class Main
             System.out.println("1 - Set k-NN ( " + kNN + " )");
             System.out.println("");
             System.out.println("Parameter CV Tests");
-            System.out.println("50 - User-based - Prediction vs. k");
             System.out.println("51 - User-based - Prediction 2D (y & k) test");
-            System.out.println("54 - UBLSH - Predicton - 2D (Hash Functions & k) test");
-            System.out.println("55 - UBLSH - Predicton - 2D (Hash Functions & y) test");
-            System.out.println("56 - UBLSH - Prediction - HashTables change ( inc. by 1 )");
-            System.out.println("57 - UBLSH - Prediction - HashFunctions change ( inc. by 1 )");
-            System.out.println("58 - UBLSH - Prediction & k");
-            System.out.println("59 - UBLSH - Predicton - 2D test");
-            System.out.println("60 - UBLSH - Predicton - 2D (Hash Tables & k) test");
-            System.out.println("61 - UBLSH - Predicton - 2D (Hash Tables & y) test");
+            System.out.println("53 - Item-based - Prediction 2D (y & k) test");
             System.out.println("62 - UBLSH - Prediction - 2D (y & k) test");
+            System.out.println("80 - IBLSH - Prediction - 2D (y & k) test");
+            System.out.println("");
+            System.out.println("54 - UBLSH - Prediction - 2D (Hash Functions & k) test");
+            System.out.println("60 - UBLSH - Prediction - 2D (Hash Tables & k) test");
+
+            System.out.println("");
+            System.out.println("81 - IBLSH - Prediction - 2D (Hash Functions & k) test");
+            System.out.println("82 - IBLSH - Prediction - 2D (Hash Tables & k) test");
+            System.out.println("");
             System.out.println("63 - LSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
-            System.out.println("65 - LSH - Predicton - 2D test");
+            System.out.println("65 - LSH - Prediction - 2D test");
             System.out.println("");
             System.out.println("70 - User-based - Precision vs. k");
-            System.out.println("71 - UBLSH - Precision vs. k");
+            System.out.println("71 - Item-based - Precision vs. k");
             System.out.println("72 - UBLSH - Precision - 2D - (HashFunctions & k) test");
             System.out.println("73 - UBLSH - Precision - 2D - (HashTables & k) test");
-            System.out.println("74 - UBLSH - Precision vs. y");
-            System.out.println("75 - UBLSH - Precision - 2D (k & y) test");
-            System.out.println("76 - User-based - Precision - 2D (k & y) test");
+            System.out.println("");
+            System.out.println("92 - IBLSH - Precision - 2D - (HashFunctions & k) test");
+            System.out.println("93 - IBLSH - Precision - 2D - (HashTables & k) test");
+
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
+            System.out.println("100 - User-based - Prediction - test");
+            System.out.println("101 - Item-based - Prediction - test");
+            System.out.println("59 - UBLSH - Prediction - 2D test");
+            System.out.println("83 - IBLSH - Prediction - 2D test");
+            System.out.println("102 - User-based - Precision - test");
+            System.out.println("103 - Item-based - Precision - test");
+            System.out.println("74 - UBLSH - Precision - 2D - test");
+            System.out.println("94 - IBLSH - Precision - 2D - test");
 
             System.out.println("99 - Exit");
             System.out.println("===================================");
@@ -130,6 +140,8 @@ public final class Main
             case "10": //old 8
                 ModelBuildTimeTest.runModelBuildTimeTest("UB", dataFilePath, seperator, k, l);
                 ModelBuildTimeTest.runModelBuildTimeTest("UBLSH", dataFilePath, seperator, k, l);
+                ModelBuildTimeTest.runModelBuildTimeTest("IB", dataFilePath, seperator, k, l);
+                ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
 
             case "50":
@@ -209,6 +221,26 @@ public final class Main
                 PrecisionTests.runUBPrecisionKAndYTest(dataFileBase, seperator, l, k, smoothRun, topN, numOfRun );
                 break;
 
+            case "80":
+                LSHPredictionTests.runLSHYAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
+                break;
+            case "81":
+                LSHPredictionTests.runLSHHashFunctionsAndKTest("IBLSH",dataFileBase,"val",numOfRun,smoothRun,seperator,kNN,y);
+                break;
+            case "82":
+                LSHPredictionTests.runLSHHashTablesAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                break;
+            case "83":
+                LSHPredictionTests.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+                break;
+
+            case "100":
+                CFPredictionTests.runCFPredictionTests(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN, y);
+                break;
+
+            case "101":
+                CFPredictionTests.runCFPredictionTests(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN, y);
+                break;
 
             case "99":
                 LOG.info("bye...\n");

@@ -26,11 +26,12 @@ public class ModelBuildTimeTest extends AbstractTests{
             preprocessDataForModelBuildTest(dataFilePath, seperator, (100-i*10));
             numOfUsersList.add(userRateMap.keySet().size());
             numOfItemsList.add(itemRateMap.keySet().size());
-            startTime = System.currentTimeMillis();
             int numOfBands = l;
             if (type == "UB") {
+                startTime = System.currentTimeMillis();
                 Cosine.createSimilarityMatrix(userRateMap);
             } else if (type == "IB") {
+                startTime = System.currentTimeMillis();
                 Cosine.createSimilarityMatrix(itemRateMap);
             } else if (type == "UBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
