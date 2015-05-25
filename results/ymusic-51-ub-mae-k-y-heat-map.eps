@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: ymusic-51-ub-mae-k-y-heat-map.eps
-%%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Fri May 22 08:36:05 2015
+%%Creator: gnuplot 4.4 patchlevel 4
+%%CreationDate: Fri May 22 11:14:30 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,17 +15,15 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 2 def
+/Dashlength 1 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
-/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
-/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -66 def
 /dl1 {
@@ -40,6 +38,22 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
+Level1 {} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ymusic-51-ub-mae-k-y-heat-map.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.4 patchlevel 4)
+  /Author (maytekin)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Fri May 22 11:14:30 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -47,7 +61,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 4.6 (September 2012)
+% Gnuplot Prolog Version 4.4 (August 2010)
 %
 %/SuppressPDFMark true def
 %
@@ -314,8 +328,7 @@ gnudict begin
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
-  clip
+  gsave 1 setgray fill grestore clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -448,26 +461,8 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
-Level1 SuppressPDFMark or 
-{} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (ymusic-51-ub-mae-k-y-heat-map.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.6 patchlevel 6)
-  /Author (maruf)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Fri May 22 08:36:05 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 end
 %%EndProlog
-%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -476,7 +471,6 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 200 scalefont setfont
-BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -551,16 +545,6 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
-1.000 UL
-LTb
-1.00 1.00 1.00 C 1.000 748 599 3570 3569 BoxColFill
-LCb setrgbcolor
-748 599 M
-0 3569 V
-3570 0 V
-0 -3569 V
-748 599 L
-stroke
 0.500 UL
 LTb
 748 4169 N
@@ -998,7 +982,7 @@ LT0
 stroke
 1.000 UL
 LT3
-0.91 1.00 0.09 C gsave 1417 599 N 0 0 V 125 0 V 396 0 V 397 0 V 397 0 V 397 0 V 396 0 V 397 0 V 397 0 V 0 0 V 0 241 V -397 -1 V -397 -7 V -396 -3 V -397 -12 V -397 -29 V -397 -60 V -396 -113 V -125 -16 V 1 PolyFill
+0.91 1.00 0.09 C gsave 1417 599 N 0 0 V 125 0 V 396 0 V 397 0 V 397 0 V 397 0 V 396 0 V 397 0 V 397 0 V 0 0 V 0 241 V -397 -1 V -397 -7 V -396 -3 V -397 -12 V -397 -29 V -397 -60 V -396 -113 V 1 PolyFill
 1417 599 M
 125 0 V
 396 0 V
@@ -1016,7 +1000,6 @@ LT3
 2335 788 L
 1938 728 L
 1542 615 L
-1417 599 L
 % End plot #13
 % Begin plot #14
 stroke
@@ -1163,7 +1146,7 @@ LT0
 stroke
 1.000 UL
 LT2
-0.50 0.00 0.00 C gsave 2744 599 N 0 0 V 385 0 V 396 0 V 397 0 V 397 0 V 0 0 V 0 48 V -397 -3 V -397 -14 V -396 -7 V -385 -24 V 1 PolyFill
+0.50 0.00 0.00 C gsave 2744 599 N 0 0 V 385 0 V 396 0 V 397 0 V 397 0 V 0 0 V 0 48 V -397 -3 V -397 -14 V -396 -7 V 1 PolyFill
 2744 599 M
 385 0 V
 396 0 V
@@ -1173,7 +1156,6 @@ LT2
 -397 -3 V
 3525 630 L
 -396 -7 V
-2744 599 L
 % End plot #21
 % Begin plot #22
 stroke
@@ -1378,16 +1360,62 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
-1.000 UL
+0.500 UL
 LTb
-1.00 1.00 1.00 C 1.000 4741 506 266 3754 BoxColFill
-LCb setrgbcolor
-4741 506 M
-0 3754 V
-266 0 V
-0 -3754 V
--266 0 V
-stroke
+4741 4261 N
+0 -3755 V
+267 0 V
+0 3755 V
+-267 0 V
+Z stroke
+1.000 UP
+0.500 UL
+LTb
+% Begin plot #1
+1.000 UL
+LT0
+LTb
+%%%%BeginImage
+gsave 4741 4261 N 4741 506 L 5008 506 L 5008 4261 L Z clip
+gsave
+4741 4261 translate
+267 -3755 scale
+%%%%BeginPalette
+[ /Indexed
+  /DeviceRGB 63
+  <
+   000080 000090 0000a0 0000b0 0000c0 0000d0 0000e1 0000f1
+   0002ff 0012ff 0022ff 0033ff 0043ff 0053ff 0063ff 0073ff
+   0084ff 0094ff 00a4ff 00b4ff 00c4ff 00d4ff 00e5ff 00f5ff
+   06fff9 16ffe9 26ffd9 37ffc8 47ffb8 57ffa8 67ff98 77ff88
+   88ff77 98ff67 a8ff57 b8ff47 c8ff37 d9ff26 e9ff16 f9ff06
+   fff500 ffe500 ffd400 ffc400 ffb400 ffa400 ff9400 ff8400
+   ff7300 ff6300 ff5300 ff4300 ff3300 ff2200 ff1200 ff0200
+   f10000 e10000 d00000 c00000 b00000 a00000 900000 800000
+  >
+] setcolorspace
+%%%%EndPalette
+<<
+  /ImageType 1
+  /Width 2
+  /Height 64
+  /BitsPerComponent 8
+  /ImageMatrix [ 2 0 0 64 0 0 ]
+  /Decode [ 0 255 ]
+  /imagebuf 128 string def
+  /DataSource {currentfile imagebuf readhexstring pop}
+  /MultipleDataSources false
+  /Interpolate false
+>>
+image
+3f3f3e3e3d3d3c3c3b3b3a3a39393838373736363535343433333232313130302f2f2e2e2d2d2c
+2c2b2b2a2a29292828272726262525242423232222212120201f1f1e1e1d1d1c1c1b1b1a1a1919
+1818171716161515141413131212111110100f0f0e0e0d0d0c0c0b0b0a0a090908080707060605
+0504040303020201010000
+grestore
+grestore
+%%%%EndImage
+% End plot #1
 0.500 UL
 LTb
 5008 912 M
@@ -1448,54 +1476,6 @@ LTb
 0 3755 V
 -267 0 V
 Z stroke
-1.000 UP
-0.500 UL
-LTb
-% Begin plot #1
-1.000 UL
-LT0
-LC0 setrgbcolor
-%%%%BeginImage
-gsave 4741 4261 N 4741 506 L 5008 506 L 5008 4261 L Z clip
-gsave
-4741 4261 translate
-267 -3755 scale
-%%%%BeginPalette
-[ /Indexed
-  /DeviceRGB 63
-  <
-   000080 000090 0000a0 0000b0 0000c0 0000d0 0000e1 0000f1
-   0002ff 0012ff 0022ff 0033ff 0043ff 0053ff 0063ff 0073ff
-   0084ff 0094ff 00a4ff 00b4ff 00c4ff 00d4ff 00e5ff 00f5ff
-   06fff9 16ffe9 26ffd9 37ffc8 47ffb8 57ffa8 67ff98 77ff88
-   88ff77 98ff67 a8ff57 b8ff47 c8ff37 d9ff26 e9ff16 f9ff06
-   fff500 ffe500 ffd400 ffc400 ffb400 ffa400 ff9400 ff8400
-   ff7300 ff6300 ff5300 ff4300 ff3300 ff2200 ff1200 ff0200
-   f10000 e10000 d00000 c00000 b00000 a00000 900000 800000
-  >
-] setcolorspace
-%%%%EndPalette
-<<
-  /ImageType 1
-  /Width 2
-  /Height 64
-  /BitsPerComponent 8
-  /ImageMatrix [ 2 0 0 64 0 0 ]
-  /Decode [ 0 255 ]
-  /imagebuf 128 string def
-  /DataSource {currentfile imagebuf readhexstring pop}
-  /MultipleDataSources false
-  /Interpolate false
->>
-image
-3f3f3e3e3d3d3c3c3b3b3a3a39393838373736363535343433333232313130302f2f2e2e2d2d2c
-2c2b2b2a2a29292828272726262525242423232222212120201f1f1e1e1d1d1c1c1b1b1a1a1919
-1818171716161515141413131212111110100f0f0e0e0d0d0c0c0b0b0a0a090908080707060605
-0504040303020201010000
-grestore
-grestore
-%%%%EndImage
-% End plot #1
 1.000 UP
 0.500 UL
 LTb

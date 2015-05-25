@@ -109,7 +109,7 @@ public final class Main
             case "0":
                 dataFilePath = "data/100k/ml.data";
                 dataFileBase = "data/100k/ml";
-                y = 10;
+                y = 4;
                 runnCompTests(scanner);
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
@@ -254,8 +254,10 @@ public final class Main
     }
 
     private static void runnCompTests(Scanner scanner) {
-        runSelection("54",scanner);
-        runSelection("55",scanner);
+        runSelection("71",scanner);
+        runSelection("72",scanner);
+        runSelection("73",scanner);
+        runSelection("74",scanner);
 
     }
 
