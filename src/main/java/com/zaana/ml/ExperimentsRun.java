@@ -9,10 +9,10 @@ import java.util.Scanner;
 /**
  * Created by maytekin on 26.05.2015.
  */
-public class Experiments {
+public class ExperimentsRun {
 
-        static Logger LOG = Logger.getLogger(Experiments.class);
-        private Experiments() {
+        static Logger LOG = Logger.getLogger(ExperimentsRun.class);
+        private ExperimentsRun() {
         }
 
         static HashMap<String, HashMap<String, Integer>> userRateMap = null;

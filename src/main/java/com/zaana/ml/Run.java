@@ -33,17 +33,17 @@ public class Run {
 
             case "1":
                 System.out.println("Enter k-NN: ");
-                Main.kNN = Integer.parseInt(scanner.nextLine());
+                MainRun.kNN = Integer.parseInt(scanner.nextLine());
                 break;
             case "2":
                 System.out.println("Enter number of bands ( l ) :");
-                Main.l = Integer.parseInt(scanner.nextLine());
+                MainRun.l = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter of hash functions ( k ) :");
-                Main.k = Integer.parseInt(scanner.nextLine());
+                MainRun.k = Integer.parseInt(scanner.nextLine());
                 break;
             case "3":
                 System.out.println("Enter data file path: ");
-                Main.dataFilePath = scanner.nextLine();
+                MainRun.dataFilePath = scanner.nextLine();
                 break;
 
             case "10": //old 8

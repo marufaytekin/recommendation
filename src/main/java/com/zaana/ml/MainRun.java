@@ -7,10 +7,10 @@ import org.apache.log4j.Logger;
 
 
 
-public final class Main
+public final class MainRun
 {
-    static Logger LOG = Logger.getLogger(Main.class);
-    private Main() {
+    static Logger LOG = Logger.getLogger(MainRun.class);
+    private MainRun() {
     }
 
     static HashMap<String, HashMap<String, Integer>> userRateMap = null;

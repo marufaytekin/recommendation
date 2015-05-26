@@ -9,10 +9,10 @@ import java.util.Scanner;
 /**
  * Created by maytekin on 26.05.2015.
  */
-public class LSHRecommendation {
+public class LSHRecommRun {
 
-    static Logger LOG = Logger.getLogger(LSHRecommendation.class);
-    private LSHRecommendation() {
+    static Logger LOG = Logger.getLogger(LSHRecommRun.class);
+    private LSHRecommRun() {
     }
 
     static HashMap<String, HashMap<String, Integer>> userRateMap = null;
