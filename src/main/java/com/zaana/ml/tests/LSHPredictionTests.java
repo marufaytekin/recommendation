@@ -176,19 +176,30 @@ public class LSHPredictionTests extends AbstractTests
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j + 1), "test", separator);
                 Set<String> itemSet = itemRateMap.keySet();
+                Set<String> userSet = userRateMap.keySet();
                 if (type == "UBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap, numberOfHashTables);
                     runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                    totalMae += MAE.calculateMAE(
+                            UBLSHPrediction.getOutputList(),
+                            UBLSHPrediction.getTargetList());
+                    totalCandSize += UBLSHPrediction.getAvg_candidate_set_size();
+                } else if (type == "IBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numberOfHashTables);
+                    runTimeTotal += IBLSHPrediction.
+                            runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                    testDataMap, hashTables, vmap, kNN, y);
+                    totalMae += MAE.calculateMAE(
+                            IBLSHPrediction.getOutputList(),
+                            IBLSHPrediction.getTargetList());
+                    totalCandSize += IBLSHPrediction.getAvg_candidate_set_size();
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
-                totalMae += MAE.calculateMAE(
-                        UBLSHPrediction.getOutputList(),
-                        UBLSHPrediction.getTargetList());
 
-                totalCandSize += UBLSHPrediction.getAvg_candidate_set_size();
             }
             maeList.add(totalMae / smoothRun);
             runTimeList.add(runTimeTotal / smoothRun);

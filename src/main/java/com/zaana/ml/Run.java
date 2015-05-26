@@ -18,7 +18,7 @@ public class Run {
     {
         switch (selection) {
 
-            case "0":
+            case "02":
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
                 y = 5;
@@ -56,11 +56,17 @@ public class Run {
             case "50":
                 CFPredictionTests.runCFPredictionAndKTest(dataFilePath, dataFileBase, "UB", smoothRun, seperator, y);
                 break;
+            case "500":
+                CFPredictionTests.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN);
+                break;
             case "51":
                 CFPredictionTests.runCFPredictionKAndY2DTest("UB", dataFileBase, numOfRun, smoothRun, seperator);
                 break;
             case "52":
                 CFPredictionTests.runCFPredictionAndKTest(dataFilePath, dataFileBase, "IB", smoothRun, seperator, y);
+                break;
+            case "520":
+                CFPredictionTests.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN);
                 break;
             case "53":
                 CFPredictionTests.runCFPredictionKAndY2DTest("IB", dataFileBase, numOfRun, smoothRun, seperator);
@@ -82,6 +88,9 @@ public class Run {
                 break;
             case "58":
                 LSHPredictionTests.runLSHAndKTest("UBLSH", dataFileBase, l, k, smoothRun, seperator, y);
+                break;
+            case "580":
+                LSHPredictionTests.runLSHAndKTest("IBLSH", dataFileBase, l, k, smoothRun, seperator, y);
                 break;
             case "59":
                 LSHPredictionTests.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
@@ -194,11 +203,10 @@ public class Run {
     static void runValTests(String dataFilePath, String dataFileBase, Scanner scanner, String seperator,
                              HashMap<String, HashMap<String, Integer>> userRateMap,
                              int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN) {
-        runSelection("51", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-        runSelection("53", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-        runSelection("62", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-        runSelection("80", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-
+        runSelection("50", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("52", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("500", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("520", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
     }
 
    
