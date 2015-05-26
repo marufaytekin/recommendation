@@ -453,3 +453,33 @@ title("Precision");
 write(f, strcat(fileName,'-76-precision-ub-y-k-map'));
 
 
+# ========================================================
+# test case: UBLSH 2D - Precision (y & k) test
+# test case: 104
+# ========================================================
+dataFileBase = data/100k/ml
+
+x = 1:10;
+y = 1:10;
+
+f= figure();
+
+# Heatmaps
+data = UBLSHPrecision2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Precision");
+write(f, "precision-2D");
+
+f= figure();
+data = UBLSHCandidate_Set_List2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Candidate Set Size");
+write(f, 'candidate_set_size');
