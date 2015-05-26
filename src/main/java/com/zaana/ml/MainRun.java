@@ -53,7 +53,6 @@ public final class MainRun
             System.out.println("");
             System.out.println("54 - UBLSH - Prediction - 2D (Hash Functions & k) test");
             System.out.println("60 - UBLSH - Prediction - 2D (Hash Tables & k) test");
-
             System.out.println("");
             System.out.println("81 - IBLSH - Prediction - 2D (Hash Functions & k) test");
             System.out.println("82 - IBLSH - Prediction - 2D (Hash Tables & k) test");
@@ -69,7 +68,6 @@ public final class MainRun
             System.out.println("");
             System.out.println("92 - IBLSH - Precision - 2D - (HashFunctions & k) test");
             System.out.println("93 - IBLSH - Precision - 2D - (HashTables & k) test");
-
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
@@ -83,7 +81,7 @@ public final class MainRun
             System.out.println("103 - Item-based - Precision - test");
             System.out.println("104 - UBLSH - Precision - 2D - test");
             System.out.println("105 - IBLSH - Precision - 2D - test");
-
+            System.out.println("");
             System.out.println("99 - Exit");
             System.out.println("===================================");
             System.out.println("Enter a command number to execute:");
