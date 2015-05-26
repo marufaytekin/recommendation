@@ -44,7 +44,7 @@ public class Experiments {
                 System.out.println("");
                 System.out.println("Options");
                 System.out.println("===================================");
-                System.out.println("0 - preprocess train/test data sets");
+                System.out.println("02 - Run parameter CV tests");
                 System.out.println("1 - Set k-NN ( " + kNN + " )");
                 System.out.println("");
                 System.out.println("Parameter CV Tests");
