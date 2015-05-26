@@ -22,8 +22,9 @@ public class Run {
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
                 y = 5;
-                runCompTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runValTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
+
             case "00":
                 DataParser.processDataFile(dataFilePath, seperator, 0, 100);
                 userRateMap = DataParser.getUserRateMap();
@@ -60,6 +61,9 @@ public class Run {
                 break;
             case "52":
                 CFPredictionTests.runCFPredictionAndKTest(dataFilePath, dataFileBase, "IB", smoothRun, seperator, y);
+                break;
+            case "53":
+                CFPredictionTests.runCFPredictionKAndY2DTest("IB", dataFileBase, numOfRun, smoothRun, seperator);
                 break;
 
             case "54":
@@ -183,6 +187,17 @@ public class Run {
         runSelection("80", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("54", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("60", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+
+    }
+
+
+    static void runValTests(String dataFilePath, String dataFileBase, Scanner scanner, String seperator,
+                             HashMap<String, HashMap<String, Integer>> userRateMap,
+                             int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN) {
+        runSelection("51", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("53", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("62", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("80", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
 
     }
 
