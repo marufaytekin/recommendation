@@ -43,6 +43,7 @@ public class LSHRecommRun {
             System.out.println("Options");
             System.out.println("===================================");
             System.out.println("0 - preprocess train/test data sets");
+            System.out.println("1 - Set k-NN ( " + kNN + " )");
             System.out.println("");
             System.out.println("Parameter CV Tests");
             System.out.println("50 - User-based - Prediction vs. k - test");
@@ -56,7 +57,7 @@ public class LSHRecommRun {
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
-            System.out.println("11 - Create dist matrix");
+
             System.out.println("");
             System.out.println("99 - Exit");
             System.out.println("===================================");

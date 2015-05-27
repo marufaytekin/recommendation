@@ -100,7 +100,7 @@ public final class Cosine implements Similarity {
 
     }
 
-    /**
+    /*
      * Use following methods to create a similarity matrix in
      * HashMap format.
      */
@@ -144,54 +144,9 @@ public final class Cosine implements Similarity {
                 }
             }
         }
+
         return similarityMatrix;
-    }
 
-    /**
-     * Use following methods to create a similarity matrix in
-     * HashMap format.
-     */
-    public static HashMap<String, LinkedHashMap<String, Double>> createDistanceMatrix(
-            final HashMap<String, HashMap<String, Integer>> userRateMap, int y)
-    {
-        HashMap<String, LinkedHashMap<String, Double>> similarityMatrix = new HashMap<>();
-        HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(userRateMap);
-
-        Iterator<Entry<String, HashMap<String, Integer>>> entryAIter = userRateMap
-                .entrySet().iterator();
-
-        while (entryAIter.hasNext()) {
-            Entry<String, HashMap<String, Integer>> userItemRatesPairA = entryAIter
-                    .next();
-            String userIdA = userItemRatesPairA.getKey();
-            HashMap<String, Integer> userItemRatesA = userItemRatesPairA
-                    .getValue();
-            Set<String> ratedItemIDSetA = userItemRatesA.keySet();
-            userRateMapCopy.remove(userIdA);
-            for (Entry<String, HashMap<String, Integer>> entryB : userRateMapCopy
-                    .entrySet()) {
-                String userIdB = entryB.getKey();
-                //if ( userIdA == userIdB) continue;
-                HashMap<String, Integer> userItemRatesB = entryB.getValue();
-                Set<String> ratedItemIDSetB = userItemRatesB.keySet();
-                Set<String> intersectionAB = new HashSet<>(
-                        ratedItemIDSetA);
-                intersectionAB.retainAll(ratedItemIDSetB);
-                Double distance = 1.0;
-                if (!intersectionAB.isEmpty()) {
-                    distance = 1.0 - calculateCosineSimilarity(intersectionAB,
-                            userItemRatesA, userItemRatesB, y);
-                }
-                if (similarityMatrix.containsKey(userIdA)) {
-                    similarityMatrix.get(userIdA).put(userIdB, distance);
-                } else {
-                    LinkedHashMap<String, Double> map = new LinkedHashMap<>();
-                    map.put(userIdB, distance);
-                    similarityMatrix.put(userIdA, map);
-                }
-            }
-        }
-        return similarityMatrix;
     }
 
 }

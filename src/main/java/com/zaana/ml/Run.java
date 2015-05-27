@@ -1,7 +1,9 @@
 package com.zaana.ml;
 
-import com.zaana.ml.similarity.Cosine;
-import com.zaana.ml.tests.*;
+import com.zaana.ml.tests.CFPredictionTests;
+import com.zaana.ml.tests.LSHPredictionTests;
+import com.zaana.ml.tests.ModelBuildTimeTest;
+import com.zaana.ml.tests.PrecisionTests;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -49,9 +51,6 @@ public class Run {
                 ModelBuildTimeTest.runModelBuildTimeTest("UBLSH", dataFilePath, seperator, k, l);
                 ModelBuildTimeTest.runModelBuildTimeTest("IB", dataFilePath, seperator, k, l);
                 //ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
-                break;
-            case "11":
-                ClusterTests.runClusterTests(dataFileBase, seperator, y);
                 break;
 
             case "50":
