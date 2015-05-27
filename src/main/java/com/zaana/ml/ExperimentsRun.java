@@ -52,7 +52,7 @@ public class ExperimentsRun {
                 System.out.println("520 - Item-based  - Prediction - & y test");
                 System.out.println("");
                 System.out.println("58  - UBLSH - Prediction - & k test");
-                System.out.println("580 - IB - Prediction - & k test");
+                System.out.println("580 - IBLSH - Prediction - & k test");
                 System.out.println("");
                 System.out.println("Experimental Tests");
                 System.out.println("");
