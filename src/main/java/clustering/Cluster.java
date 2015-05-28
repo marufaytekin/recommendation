@@ -89,22 +89,6 @@ public class Cluster {
         return getChildren().contains(cluster);
     }
 
-    public Cluster findClusterByName(String name) {
-        return findClusterByName(this, name);
-    }
-
-    public Cluster findClusterByName(Cluster node, String name) {
-
-        if (node.isLeaf() && node.getName().equals(name)) {
-            return node.parent;
-        }
-        for (Cluster child : node.getChildren()) {
-            return child.findClusterByName(name);
-        }
-        //TODO
-        return null;
-    }
-
     @Override
     public String toString() {
         return "Cluster " + name;
@@ -151,6 +135,32 @@ public class Cluster {
             count += child.countLeafs();
         }
         return count;
+    }
+
+    public List<Cluster> getLeafs() {
+        List<Cluster> l = new ArrayList<>();
+        return getLeafs(this, l);
+    }
+
+    public List<Cluster> getLeafs(Cluster node, List<Cluster> list) {
+        if (node.isLeaf()) list.add(node);
+        for (Cluster child : node.getChildren()) {
+            list.addAll(child.getLeafs());
+        }
+        return list;
+    }
+
+    public List<String> getLeafIds() {
+        List<String> l = new ArrayList<>();
+        return getLeafIds(this, l);
+    }
+
+    public List<String> getLeafIds(Cluster node, List<String> list) {
+        if (node.isLeaf()) list.add(node.getName());
+        for (Cluster child : node.getChildren()) {
+            list.addAll(child.getLeafIds());
+        }
+        return list;
     }
 
     public void toConsole(int indent) {

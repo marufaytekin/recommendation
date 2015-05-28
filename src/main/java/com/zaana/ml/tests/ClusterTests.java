@@ -2,7 +2,6 @@ package com.zaana.ml.tests;
 
 import clustering.*;
 import clustering.visualization.DendrogramPanel;
-import com.zaana.ml.DataParser;
 import com.zaana.ml.similarity.Cosine;
 
 import javax.swing.*;
@@ -44,25 +43,56 @@ public class ClusterTests extends AbstractTests{
         }
         double [][] distanceMatrix = Cosine.createDistanceMatrix(userRateMap, y);
         ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
-        Cluster clusters = alg.performClustering(distanceMatrix, clusterNames, new AverageLinkageStrategy());
+        Cluster clusters = alg.performClustering(
+                distanceMatrix, clusterNames, new AverageLinkageStrategy());
         //ClusterPair user = new ClusterPair();
         //Cluster userCl= user.agglomerate("765");
-        Cluster cluster = clusters.findClusterByName("565");
+        //clusters.toConsole(1);
+        //System.out.println(clusters.getDistanceValue());
+        //System.out.println(clusters.getName());
 
-        System.out.println(cluster.getName());
+        List <Cluster> a = clusters.getLeafs();
 
+        Cluster targetNode = getLeafWithName(a, "306");
 
+        Cluster parent = getParentCluster(targetNode, 7);
+
+        System.out.println(parent.countLeafs());
+        List<String> neighbors = parent.getLeafIds();
+        System.out.println (neighbors.toString());
         DendrogramPanel dp = new DendrogramPanel();
-        dp.setModel(clusters);
+        dp.setModel(parent);
         JFrame.setDefaultLookAndFeelDecorated(true);
         JFrame frame = new JFrame();
         frame.setTitle("Clusters");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(dp, BorderLayout.CENTER);
-        frame.getContentPane().setPreferredSize(new Dimension(2024, 2024));
+        frame.getContentPane().setPreferredSize(new Dimension(2048, 1024));
         frame.pack();
         frame.setVisible(true);
 
-
     }
+
+    private static Cluster getParentCluster(Cluster targetNode, int num) {
+        for (int i=0;i<num;i++) {
+            if (targetNode.getParent() == null) return targetNode;
+            targetNode = targetNode.getParent();
+        }
+        return targetNode;
+    }
+
+    private static Cluster getLeafWithName(List<Cluster> a, String name) {
+        for (Cluster cluster: a) {
+            if (cluster.getName().equals(name)) return cluster;
+        }
+        return null;
+    }
+
+    private static List<Cluster> getSubClusters(Cluster clusters, int depth) {
+
+        List <Cluster> a = clusters.getChildren();
+        return null;
+    }
+
+
 }
