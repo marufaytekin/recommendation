@@ -483,3 +483,185 @@ xlabel("Hash Functions");
 ylabel("Hash Tables");
 title("Candidate Set Size");
 write(f, 'candidate_set_size');
+
+
+
+# ========================================================
+# Number of Hash Functions on the metrics
+# ========================================================
+
+max_x = n = 10;
+x = 1:max_x;
+
+numOfHashTables = 10;
+
+y1 = mean(UBDiversity);
+y2 = mean(IBDiversity);
+y3 = UBLSHHashFunctionsDiversityList0;
+y4 = IBLSHHashFunctionsDiversityList0;
+y5 = LSHDiversityList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2],'-.k', x,y3,'-dk', x,y4,'-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Diversity");
+write(f, strcat(fileName,'-diversity-hash-functions'));
+
+
+y1 = mean(UBAggrDiversityList);
+y2 = mean(IBAggrDiversityList);
+y3 = UBLSHHashFunctionsAggrDiversityList0;
+y4 = IBLSHHashFunctionsAggrDiversityList0;
+y5 = LSHAggrDiversityList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Aggregate Diversity");
+write(f, strcat(fileName,'-aggr-diversity-hash-functions'));
+
+y1 = mean(UBNolvelty);
+y2 = mean(IBNolvelty);
+y3 = UBLSHHashFunctionsNoveltyList0;
+y4 = IBLSHHashFunctionsNoveltyList0;
+y5 = LSHnoveltyList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Novelty");
+write(f, strcat(fileName,'-novelty-hash-functions'));
+
+y1 = mean(UBSerendipity);
+y2 = mean(IBSerendipity);
+y3 = UBLSHHashFunctionsSerendipityList0;
+y4 = IBLSHHashFunctionsSerendipityList0;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Serendipity");
+write(f, strcat(fileName,'-serendipity-hash-functions'));
+
+y1 = mean(UBPrecisionList);
+y2 = mean(IBPrecisionList);
+y3 = UBLSHHashFunctionsPrecisionList0;
+y4 = IBLSHHashFunctionsPrecisionList0;
+y5 = LSHPrecisionList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Precision");
+write(f, strcat(fileName,'-precision-hash-functions'));
+
+y1 = mean(UBRecallList);
+y2 = mean(IBRecallList);
+y3 = UBLSHHashFunctionsRecallList0;
+y4 = IBLSHHashFunctionsRecallList0;
+y5 = LSHRecallList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Recall")
+write(f, strcat(fileName,'-recall-hash-functions'));
+
+
+y3 = UBLSHHashFunctionsCandidateSetList0;
+y4 = IBLSHHashFunctionsCandidateSetList0;
+f= figure();
+plot (x, y3, '-dk',x, y4, '-*k');
+legend("UB-LSH", "IB-LSH");
+xlabel("Number of Hash Functions");
+ylabel("Candidate Set Size")
+write(f, strcat(fileName,'-candidate-set-hash-functions'));
+
+
+# ========================================================
+# Number of Hash Tables on the metrics
+# ========================================================
+
+n= 10;
+
+x = 1:1:n;
+numOfHashFunctions = 6;
+
+y1 = mean(UBDiversity);
+y2 = mean(IBDiversity);
+y3 = UBLSHHashTablesDiversityList0;
+y4 = IBLSHHashTablesDiversityList0;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Diversity");
+write(f, strcat(fileName,'-diversity-hash-tables'));
+
+y1 = mean(UBAggrDiversityList);
+y2 = mean(IBAggrDiversityList);
+y3 = UBLSHHashTablesAggrDiversityList0;
+y4 = IBLSHHashTablesAggrDiversityList0;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Aggregate Diversity");
+write(f, strcat(fileName,'-aggr-diversity-hash-tables'));
+
+y1 = mean(UBNolvelty);
+y2 = mean(IBNolvelty);
+y3 = UBLSHHashTablesNoveltyList0;
+y4 = IBLSHHashTablesNoveltyList0;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Novelty");
+write(f, strcat(fileName,'-novelty-hash-tables'));
+
+y1 = mean(UBSerendipity);
+y2 = mean(IBSerendipity);
+y3 = UBLSHHashTablesSerendipityList0;
+y4 = IBLSHHashTablesSerendipityList0;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Serendipity");
+write(f, strcat(fileName,'-Serendipity-hash-tables'));
+
+y1 = mean(UBPrecisionList);
+y2 = mean(IBPrecisionList);
+y3 = UBLSHHashTablesPrecisionList0;
+y4 = IBLSHHashTablesPrecisionList0;
+y5 = LSHPrecisionList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Precision");
+write(f, strcat(fileName,'-precision-hash-tables'));
+
+y1 = mean(UBRecallList);
+y2 = mean(IBRecallList);
+y3 = UBLSHHashTablesRecallList0;
+y4 = IBLSHHashTablesRecallList0;
+y5 = LSHRecallList;
+f= figure();
+plot ([1,n], [y1, y1],'-k', [1,n], [y2, y2], '-.k', x, y3, '-dk',x, y4, '-*k');
+legend("UB", "IB", "UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Recall")
+write(f, strcat(fileName,'-recall-hash-tables'));
+
+y3 = UBLSHHashTablesCandidateSetList0;
+y4 = IBLSHHashTablesCandidateSetList0;
+f= figure();
+plot (x, y3, '-dk',x, y4, '-*k');
+legend("UB-LSH", "IB-LSH");
+xlabel("Number of Hash Tables");
+ylabel("Candidate Set Size")
+write(f, strcat(fileName,'-candidate-set-hash-tables'));
+
+

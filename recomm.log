@@ -21751,3 +21751,1538 @@
 08:22:04,168  INFO main DataParser:processDataFileForRecommendation:317 - numOfUsers = 943
 08:22:04,168  INFO main DataParser:processDataFileForRecommendation:318 - numOfItems = 1682
 08:22:04,168  INFO main DataParser:processDataFileForRecommendation:319 - Data file parsing completed...
+18:23:44,112  INFO main LSHRecommRun:main:67 - Selected menu: 0
+18:23:44,126  INFO main Run:runSelection:180 - Command not recognized...
+
+18:24:51,979  INFO main LSHRecommRun:main:66 - Selected menu: 10
+18:24:52,000  INFO main DataParser:processDataFile:82 - 0
+18:24:52,002  INFO main DataParser:processDataFile:84 - 1
+18:24:52,784  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:52,784  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:52,785  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:52,785  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:52,785  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:52,785  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:52,785  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:52,788  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:52,788  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 242
+18:24:52,788  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:52,788  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 133
+18:24:52,788  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 794 ms.
+18:24:53,082  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293]
+18:24:53,085  INFO main DataParser:processDataFile:82 - 0
+18:24:53,085  INFO main DataParser:processDataFile:84 - 1
+18:24:53,501  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:53,502  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:53,502  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:53,502  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:53,503  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:53,503  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:53,503  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:53,503  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:53,504  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 402
+18:24:53,504  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:53,504  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 223
+18:24:53,504  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 419 ms.
+18:24:54,073  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569]
+18:24:54,073  INFO main DataParser:processDataFile:82 - 0
+18:24:54,074  INFO main DataParser:processDataFile:84 - 1
+18:24:54,571  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:54,571  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:54,571  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:54,572  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:54,572  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:54,572  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:54,572  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:54,573  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:54,573  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 562
+18:24:54,573  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:54,573  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 313
+18:24:54,573  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 500 ms.
+18:24:55,366  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792]
+18:24:55,366  INFO main DataParser:processDataFile:82 - 0
+18:24:55,366  INFO main DataParser:processDataFile:84 - 1
+18:24:55,591  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:55,591  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:55,591  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:55,592  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:55,592  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:55,592  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:55,592  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:55,593  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:55,593  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 722
+18:24:55,593  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:55,594  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 403
+18:24:55,594  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 228 ms.
+18:24:56,924  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330]
+18:24:56,925  INFO main DataParser:processDataFile:82 - 0
+18:24:56,925  INFO main DataParser:processDataFile:84 - 1
+18:24:57,210  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:57,210  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:57,210  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:57,210  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:57,210  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:57,210  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:57,211  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:57,211  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:57,211  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 882
+18:24:57,211  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:57,211  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 493
+18:24:57,212  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 287 ms.
+18:24:59,168  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956]
+18:24:59,176  INFO main DataParser:processDataFile:82 - 0
+18:24:59,176  INFO main DataParser:processDataFile:84 - 1
+18:24:59,411  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:24:59,411  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:24:59,411  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:24:59,412  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:24:59,412  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:24:59,412  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:24:59,412  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:24:59,413  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:24:59,413  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1042
+18:24:59,413  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:24:59,413  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 583
+18:24:59,414  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 238 ms.
+18:25:01,819  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956, 2405]
+18:25:01,820  INFO main DataParser:processDataFile:82 - 0
+18:25:01,820  INFO main DataParser:processDataFile:84 - 1
+18:25:02,060  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:02,060  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:02,060  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:02,060  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:02,060  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:02,061  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:02,061  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:02,061  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:02,061  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1202
+18:25:02,062  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:02,062  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 673
+18:25:02,062  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 243 ms.
+18:25:05,343  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956, 2405, 3281]
+18:25:05,343  INFO main DataParser:processDataFile:82 - 0
+18:25:05,344  INFO main DataParser:processDataFile:84 - 1
+18:25:05,580  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:05,581  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:05,581  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:05,581  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:05,581  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:05,581  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:05,582  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:05,582  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:05,582  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1362
+18:25:05,582  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:05,582  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 763
+18:25:05,583  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 240 ms.
+18:25:09,608  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956, 2405, 3281, 4025]
+18:25:09,608  INFO main DataParser:processDataFile:82 - 0
+18:25:09,608  INFO main DataParser:processDataFile:84 - 1
+18:25:09,843  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:09,843  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:09,843  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1522
+18:25:09,844  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:09,845  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 853
+18:25:09,845  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 237 ms.
+18:25:14,723  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956, 2405, 3281, 4025, 4877]
+18:25:14,731  INFO main DataParser:processDataFile:82 - 0
+18:25:14,731  INFO main DataParser:processDataFile:84 - 1
+18:25:14,959  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:14,959  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:14,959  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:14,959  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:14,959  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:14,959  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:14,959  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:14,960  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:14,960  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1682
+18:25:14,960  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:14,960  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 943
+18:25:14,960  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 229 ms.
+18:25:20,817  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [293, 569, 792, 1330, 1956, 2405, 3281, 4025, 4877, 5856]
+18:25:20,818  INFO main RESULTS_LOGGER:runModelBuildTimeTest:52 - # ========================================================
+18:25:20,826  INFO main RESULTS_LOGGER:runModelBuildTimeTest:53 - # test case : UB Model Build
+18:25:20,826  INFO main RESULTS_LOGGER:runModelBuildTimeTest:54 - # ========================================================
+18:25:20,826  INFO main RESULTS_LOGGER:runModelBuildTimeTest:55 - fileName = data/100k/ml.data;
+18:25:20,827  INFO main RESULTS_LOGGER:runModelBuildTimeTest:56 - UBnumOfUsersList = [133, 223, 313, 403, 493, 583, 673, 763, 853, 943];
+18:25:20,827  INFO main RESULTS_LOGGER:runModelBuildTimeTest:57 - UBnumOfItemsList = [242, 402, 562, 722, 882, 1042, 1202, 1362, 1522, 1682];
+18:25:20,827  INFO main RESULTS_LOGGER:runModelBuildTimeTest:58 - UBmodelBuildTimeList = [293, 569, 792, 1330, 1956, 2405, 3281, 4025, 4877, 5856];
+18:25:20,827  INFO main DataParser:processDataFile:82 - 0
+18:25:20,827  INFO main DataParser:processDataFile:84 - 1
+18:25:21,080  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:21,080  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:21,080  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:21,080  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:21,080  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 242
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:21,081  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 133
+18:25:21,082  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 255 ms.
+18:25:21,146  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 43 ms ...
+18:25:21,147  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 15.0
+18:25:21,147  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46]
+18:25:21,147  INFO main DataParser:processDataFile:82 - 0
+18:25:21,147  INFO main DataParser:processDataFile:84 - 1
+18:25:21,383  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:21,383  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:21,383  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:21,384  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:21,384  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:21,384  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:21,384  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:21,384  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:21,385  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 402
+18:25:21,385  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:21,385  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 223
+18:25:21,385  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 238 ms.
+18:25:21,425  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 37 ms ...
+18:25:21,426  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:21,426  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38]
+18:25:21,426  INFO main DataParser:processDataFile:82 - 0
+18:25:21,426  INFO main DataParser:processDataFile:84 - 1
+18:25:21,715  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:21,715  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:21,715  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:21,716  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:21,716  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:21,716  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:21,716  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:21,717  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:21,717  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 562
+18:25:21,717  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:21,717  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 313
+18:25:21,717  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 291 ms.
+18:25:21,745  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 25 ms ...
+18:25:21,745  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:21,745  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25]
+18:25:21,746  INFO main DataParser:processDataFile:82 - 0
+18:25:21,746  INFO main DataParser:processDataFile:84 - 1
+18:25:21,966  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:21,966  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:21,966  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:21,966  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:21,966  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 722
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 403
+18:25:21,967  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 221 ms.
+18:25:22,013  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 43 ms ...
+18:25:22,013  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:22,013  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43]
+18:25:22,014  INFO main DataParser:processDataFile:82 - 0
+18:25:22,014  INFO main DataParser:processDataFile:84 - 1
+18:25:22,249  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:22,249  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:22,249  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 882
+18:25:22,250  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:22,251  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 493
+18:25:22,251  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 237 ms.
+18:25:22,324  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 69 ms ...
+18:25:22,324  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:22,324  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69]
+18:25:22,324  INFO main DataParser:processDataFile:82 - 0
+18:25:22,324  INFO main DataParser:processDataFile:84 - 1
+18:25:22,565  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:22,565  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:22,565  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:22,566  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1042
+18:25:22,567  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:22,567  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 583
+18:25:22,567  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 243 ms.
+18:25:22,630  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 61 ms ...
+18:25:22,631  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:22,631  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69, 62]
+18:25:22,631  INFO main DataParser:processDataFile:82 - 0
+18:25:22,631  INFO main DataParser:processDataFile:84 - 1
+18:25:22,866  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:22,866  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:22,866  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:22,866  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:22,866  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:22,866  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:22,866  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:22,867  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:22,867  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1202
+18:25:22,867  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:22,867  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 673
+18:25:22,867  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 236 ms.
+18:25:22,975  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 105 ms ...
+18:25:22,975  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:22,976  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69, 62, 106]
+18:25:22,976  INFO main DataParser:processDataFile:82 - 0
+18:25:22,976  INFO main DataParser:processDataFile:84 - 1
+18:25:23,235  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:23,235  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:23,235  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:23,235  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:23,235  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:23,235  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1362
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 763
+18:25:23,236  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 260 ms.
+18:25:23,308  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 70 ms ...
+18:25:23,309  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:23,309  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69, 62, 106, 71]
+18:25:23,309  INFO main DataParser:processDataFile:82 - 0
+18:25:23,309  INFO main DataParser:processDataFile:84 - 1
+18:25:23,535  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:23,535  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:23,535  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1522
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 853
+18:25:23,536  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 227 ms.
+18:25:23,628  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 89 ms ...
+18:25:23,628  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:23,628  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69, 62, 106, 71, 89]
+18:25:23,628  INFO main DataParser:processDataFile:82 - 0
+18:25:23,628  INFO main DataParser:processDataFile:84 - 1
+18:25:23,881  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:23,882  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:23,882  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:23,882  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:23,882  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:23,882  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:23,882  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:23,883  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:23,883  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1682
+18:25:23,883  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:23,883  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 943
+18:25:23,883  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 255 ms.
+18:25:23,971  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 85 ms ...
+18:25:23,971  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+18:25:23,971  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [46, 38, 25, 43, 69, 62, 106, 71, 89, 85]
+18:25:23,971  INFO main RESULTS_LOGGER:runModelBuildTimeTest:52 - # ========================================================
+18:25:23,971  INFO main RESULTS_LOGGER:runModelBuildTimeTest:53 - # test case : UBLSH Model Build
+18:25:23,972  INFO main RESULTS_LOGGER:runModelBuildTimeTest:54 - # ========================================================
+18:25:23,972  INFO main RESULTS_LOGGER:runModelBuildTimeTest:55 - fileName = data/100k/ml.data;
+18:25:23,972  INFO main RESULTS_LOGGER:runModelBuildTimeTest:56 - UBLSHnumOfUsersList = [133, 223, 313, 403, 493, 583, 673, 763, 853, 943];
+18:25:23,972  INFO main RESULTS_LOGGER:runModelBuildTimeTest:57 - UBLSHnumOfItemsList = [242, 402, 562, 722, 882, 1042, 1202, 1362, 1522, 1682];
+18:25:23,972  INFO main RESULTS_LOGGER:runModelBuildTimeTest:58 - UBLSHmodelBuildTimeList = [46, 38, 25, 43, 69, 62, 106, 71, 89, 85];
+18:25:23,972  INFO main DataParser:processDataFile:82 - 0
+18:25:23,972  INFO main DataParser:processDataFile:84 - 1
+18:25:24,203  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:24,203  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:24,204  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:24,204  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:24,204  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:24,204  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:24,204  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:24,205  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:24,205  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 242
+18:25:24,205  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:24,205  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 133
+18:25:24,205  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 233 ms.
+18:25:24,460  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255]
+18:25:24,468  INFO main DataParser:processDataFile:82 - 0
+18:25:24,468  INFO main DataParser:processDataFile:84 - 1
+18:25:24,725  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:24,726  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:24,726  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:24,726  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:24,726  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:24,726  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:24,726  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:24,727  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:24,727  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 402
+18:25:24,727  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:24,727  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 223
+18:25:24,727  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 259 ms.
+18:25:25,409  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681]
+18:25:25,409  INFO main DataParser:processDataFile:82 - 0
+18:25:25,409  INFO main DataParser:processDataFile:84 - 1
+18:25:25,637  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:25,637  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:25,637  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:25,637  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:25,638  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:25,638  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:25,638  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:25,639  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:25,639  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 562
+18:25:25,639  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:25,639  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 313
+18:25:25,639  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 230 ms.
+18:25:26,614  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975]
+18:25:26,614  INFO main DataParser:processDataFile:82 - 0
+18:25:26,614  INFO main DataParser:processDataFile:84 - 1
+18:25:26,869  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:26,870  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:26,870  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:26,870  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:26,870  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:26,870  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:26,870  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:26,870  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:26,871  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 722
+18:25:26,871  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:26,871  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 403
+18:25:26,871  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 257 ms.
+18:25:27,948  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077]
+18:25:27,948  INFO main DataParser:processDataFile:82 - 0
+18:25:27,948  INFO main DataParser:processDataFile:84 - 1
+18:25:28,191  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:28,191  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:28,191  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:28,191  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 882
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:28,192  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 493
+18:25:28,193  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 245 ms.
+18:25:30,367  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174]
+18:25:30,374  INFO main DataParser:processDataFile:82 - 0
+18:25:30,375  INFO main DataParser:processDataFile:84 - 1
+18:25:30,618  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:30,619  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:30,619  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:30,619  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:30,619  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:30,619  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:30,619  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:30,619  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:30,620  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1042
+18:25:30,620  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:30,620  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 583
+18:25:30,620  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 246 ms.
+18:25:34,309  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174, 3689]
+18:25:34,309  INFO main DataParser:processDataFile:82 - 0
+18:25:34,310  INFO main DataParser:processDataFile:84 - 1
+18:25:34,551  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:34,551  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:34,552  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1202
+18:25:34,552  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:34,553  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 673
+18:25:34,553  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 244 ms.
+18:25:40,202  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174, 3689, 5649]
+18:25:40,203  INFO main DataParser:processDataFile:82 - 0
+18:25:40,203  INFO main DataParser:processDataFile:84 - 1
+18:25:40,491  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:40,500  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:40,500  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:40,500  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:40,500  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:40,500  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:40,500  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:40,500  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:40,501  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1362
+18:25:40,501  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:40,501  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 763
+18:25:40,501  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 299 ms.
+18:25:47,928  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174, 3689, 5649, 7427]
+18:25:47,928  INFO main DataParser:processDataFile:82 - 0
+18:25:47,929  INFO main DataParser:processDataFile:84 - 1
+18:25:48,155  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:48,156  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:48,156  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:48,156  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1522
+18:25:48,157  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:48,157  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 853
+18:25:48,157  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 229 ms.
+18:25:57,355  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174, 3689, 5649, 7427, 9198]
+18:25:57,355  INFO main DataParser:processDataFile:82 - 0
+18:25:57,355  INFO main DataParser:processDataFile:84 - 1
+18:25:57,645  INFO main DataParser:processDataFile:116 - Data file: data/100k/ml.data
+18:25:57,646  INFO main DataParser:processDataFile:117 - Total Ratings: 100000
+18:25:57,646  INFO main DataParser:processDataFile:118 - Selected test data: 0 of 100000 samples
+18:25:57,646  INFO main AbstractTests:preprocessDataForModelBuildTest:73 - itemRateMap Size:
+18:25:57,646  INFO main AbstractTests:preprocessDataForModelBuildTest:74 - 1682
+18:25:57,646  INFO main AbstractTests:preprocessDataForModelBuildTest:75 - userRateMap Size:
+18:25:57,646  INFO main AbstractTests:preprocessDataForModelBuildTest:76 - 943
+18:25:57,647  INFO main AbstractTests:preprocessDataForModelBuildTest:89 - itemRateMap Size After:
+18:25:57,647  INFO main AbstractTests:preprocessDataForModelBuildTest:90 - 1682
+18:25:57,647  INFO main AbstractTests:preprocessDataForModelBuildTest:91 - userRateMap Size After:
+18:25:57,647  INFO main AbstractTests:preprocessDataForModelBuildTest:92 - 943
+18:25:57,647  INFO main AbstractTests:preprocessDataForModelBuildTest:94 - preprocessDataForModelBuildTest completed in 292 ms.
+18:26:08,036  INFO main AbstractTests:runModelBuildTimeTest:50 - modelBuildTimeList: [255, 681, 975, 1077, 2174, 3689, 5649, 7427, 9198, 10389]
+18:26:08,036  INFO main RESULTS_LOGGER:runModelBuildTimeTest:52 - # ========================================================
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:53 - # test case : IB Model Build
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:54 - # ========================================================
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:55 - fileName = data/100k/ml.data;
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:56 - IBnumOfUsersList = [133, 223, 313, 403, 493, 583, 673, 763, 853, 943];
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:57 - IBnumOfItemsList = [242, 402, 562, 722, 882, 1042, 1202, 1362, 1522, 1682];
+18:26:08,045  INFO main RESULTS_LOGGER:runModelBuildTimeTest:58 - IBmodelBuildTimeList = [255, 681, 975, 1077, 2174, 3689, 5649, 7427, 9198, 10389];
+19:39:13,261  INFO main LSHRecommRun:main:66 - Selected menu: 63
+19:39:13,828  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:13,884  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:13,960  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 54 ms ...
+19:39:13,960  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:14,310  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 347 ms.
+19:39:14,310  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 65.45394736842105
+19:39:14,319  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:14,558  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:14,581  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:14,614  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 28 ms ...
+19:39:14,614  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:14,945  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 331 ms.
+19:39:14,945  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 94.89977973568281
+19:39:14,946  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:15,207  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:15,289  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:15,302  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 12 ms ...
+19:39:15,303  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:15,558  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 255 ms.
+19:39:15,559  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 84.64437012263099
+19:39:15,559  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:15,560  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:1 numOfHashFunctions:4
+19:39:15,560  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8715242177339843
+19:39:15,560  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 311.0
+19:39:15,561  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :7868.333333333333
+19:39:15,726  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:15,737  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:15,767  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 28 ms ...
+19:39:15,767  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:16,202  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 435 ms.
+19:39:16,203  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 143.33552631578948
+19:39:16,203  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:16,351  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:16,372  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:16,421  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 45 ms ...
+19:39:16,421  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:17,214  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 792 ms.
+19:39:17,214  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 153.21806167400882
+19:39:17,214  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:17,335  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:17,342  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:17,393  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 50 ms ...
+19:39:17,393  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:18,469  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1075 ms.
+19:39:18,470  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 200.50167224080266
+19:39:18,470  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:18,471  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:2 numOfHashFunctions:4
+19:39:18,471  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8369991942883047
+19:39:18,471  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 767.3333333333334
+19:39:18,472  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8238.666666666666
+19:39:18,640  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:18,646  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:18,696  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 48 ms ...
+19:39:18,697  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:19,617  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 920 ms.
+19:39:19,617  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 211.40350877192984
+19:39:19,617  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:19,787  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:19,795  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:19,861  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 63 ms ...
+19:39:19,862  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:20,988  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1126 ms.
+19:39:20,988  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 229.97577092511014
+19:39:20,989  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:21,136  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:21,143  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:21,199  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 54 ms ...
+19:39:21,199  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:22,178  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 979 ms.
+19:39:22,179  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 225.83166109253065
+19:39:22,179  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:22,180  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:3 numOfHashFunctions:4
+19:39:22,180  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8266100319223119
+19:39:22,180  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 1008.3333333333334
+19:39:22,180  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8283.0
+19:39:22,321  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:22,329  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:22,419  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 87 ms ...
+19:39:22,419  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:23,809  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1390 ms.
+19:39:23,809  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 313.047149122807
+19:39:23,809  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:23,934  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:23,941  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:24,005  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 60 ms ...
+19:39:24,005  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:25,514  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1509 ms.
+19:39:25,514  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 296.8215859030837
+19:39:25,514  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:25,691  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:25,698  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:25,772  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 71 ms ...
+19:39:25,772  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:26,787  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1015 ms.
+19:39:26,787  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 247.90301003344482
+19:39:26,787  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:26,788  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:4 numOfHashFunctions:4
+19:39:26,789  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8240917648358176
+19:39:26,789  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 1304.6666666666667
+19:39:26,789  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8323.0
+19:39:26,939  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:26,950  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:27,047  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 92 ms ...
+19:39:27,047  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:29,062  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2015 ms.
+19:39:29,062  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 341.2083333333333
+19:39:29,062  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:29,180  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:29,187  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:29,262  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 72 ms ...
+19:39:29,262  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:31,852  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2590 ms.
+19:39:31,852  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 382.215859030837
+19:39:31,852  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:31,989  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:32,042  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:32,102  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 56 ms ...
+19:39:32,103  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:33,603  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1500 ms.
+19:39:33,603  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 317.4314381270903
+19:39:33,603  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:33,604  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:5 numOfHashFunctions:4
+19:39:33,604  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8174975506088041
+19:39:33,604  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 2035.0
+19:39:33,605  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8330.0
+19:39:33,724  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:33,731  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:33,824  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 89 ms ...
+19:39:33,825  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:35,834  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2009 ms.
+19:39:35,834  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 350.42763157894734
+19:39:35,835  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:35,987  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:35,993  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:36,094  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 96 ms ...
+19:39:36,094  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:38,173  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2078 ms.
+19:39:38,174  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 374.76762114537445
+19:39:38,174  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:38,295  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:38,303  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:38,396  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 89 ms ...
+19:39:38,396  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:40,189  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1792 ms.
+19:39:40,190  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 374.6309921962096
+19:39:40,190  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:40,191  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:6 numOfHashFunctions:4
+19:39:40,191  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8167595146624551
+19:39:40,191  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 1959.6666666666667
+19:39:40,191  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8338.0
+19:39:40,309  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:40,317  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:40,434  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 112 ms ...
+19:39:40,434  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:43,678  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3244 ms.
+19:39:43,678  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 451.3234649122807
+19:39:43,678  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:43,821  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:43,828  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:43,932  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 100 ms ...
+19:39:43,932  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:47,248  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3316 ms.
+19:39:47,249  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 480.09911894273125
+19:39:47,249  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:47,381  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:47,388  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:47,502  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 86 ms ...
+19:39:47,502  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:49,875  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2373 ms.
+19:39:49,875  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 423.8316610925307
+19:39:49,875  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:49,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:7 numOfHashFunctions:4
+19:39:49,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8139967783934675
+19:39:49,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 2977.6666666666665
+19:39:49,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8343.0
+19:39:49,995  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:39:50,002  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:39:50,129  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 122 ms ...
+19:39:50,130  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:54,829  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4699 ms.
+19:39:54,829  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 514.4418859649123
+19:39:54,829  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:54,966  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:39:54,976  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:39:55,124  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 140 ms ...
+19:39:55,124  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:39:59,237  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4113 ms.
+19:39:59,238  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 504.3337004405286
+19:39:59,238  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:39:59,388  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:39:59,395  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:39:59,500  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 99 ms ...
+19:39:59,501  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:02,379  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2878 ms.
+19:40:02,379  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 458.5161649944259
+19:40:02,379  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:02,381  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:8 numOfHashFunctions:4
+19:40:02,381  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8133850562228652
+19:40:02,381  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 3896.6666666666665
+19:40:02,382  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8347.333333333334
+19:40:02,501  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:40:02,507  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:40:02,654  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 141 ms ...
+19:40:02,654  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:07,636  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4981 ms.
+19:40:07,636  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 566.0679824561404
+19:40:07,637  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:07,759  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:40:07,767  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:40:07,917  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 143 ms ...
+19:40:07,918  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:12,553  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4635 ms.
+19:40:12,553  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 527.9746696035243
+19:40:12,553  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:12,704  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:40:12,711  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:40:12,855  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 139 ms ...
+19:40:12,856  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:18,865  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6009 ms.
+19:40:18,874  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 602.8963210702341
+19:40:18,874  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:18,875  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:9 numOfHashFunctions:4
+19:40:18,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8131450387271375
+19:40:18,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 5208.333333333333
+19:40:18,876  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8353.0
+19:40:19,049  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+19:40:19,057  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+19:40:19,226  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 161 ms ...
+19:40:19,226  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:24,447  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5221 ms.
+19:40:24,448  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 584.3322368421053
+19:40:24,448  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:24,597  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+19:40:24,617  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+19:40:24,846  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 220 ms ...
+19:40:24,846  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:30,981  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6135 ms.
+19:40:30,990  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 608.2940528634361
+19:40:30,990  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:31,114  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+19:40:31,123  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+19:40:31,307  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 178 ms ...
+19:40:31,307  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+19:40:35,300  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3993 ms.
+19:40:35,301  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 536.7413600891862
+19:40:35,301  INFO main DataParser:calculateMAE:18 - Calculating errors...
+19:40:35,302  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:10 numOfHashFunctions:4
+19:40:35,302  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8137106697081572
+19:40:35,302  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 5116.333333333333
+19:40:35,302  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8352.0
+19:40:35,302  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:554 - # ========================================================
+19:40:35,311  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:555 - # test case: LSHHashTables Prediction Performance
+19:40:35,311  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:556 - # ========================================================
+19:40:35,311  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:557 - dataFileBase = data/100k/ml
+19:40:35,311  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:558 - k = 20
+19:40:35,311  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:559 - numOfHashTables = 4
+19:40:35,312  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:560 - numOfHashFunctions = 4
+19:40:35,312  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:561 - LSHHashTablesMaeList =  [0.8715242177339843, 0.8369991942883047, 0.8266100319223119, 0.8240917648358176, 0.8174975506088041, 0.8167595146624551, 0.8139967783934675, 0.8133850562228652, 0.8131450387271375, 0.8137106697081572];
+19:40:35,312  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:562 - LSHHashTablesRuntimeList = [311.0, 767.3333333333334, 1008.3333333333334, 1304.6666666666667, 2035.0, 1959.6666666666667, 2977.6666666666665, 3896.6666666666665, 5208.333333333333, 5116.333333333333];
+19:40:35,313  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:563 - LSHCandidateSetList = [28.214790040876995, 66.83389074693422, 75.27722036417688, 82.63433667781494, 105.81047937569677, 124.87699739873653, 141.27722036417688, 152.83872166480862, 200.9654403567447, 178.9137866963954];
+19:40:35,313  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:564 - PredictedItemsList  = [7868.333333333333, 8238.666666666666, 8283.0, 8323.0, 8330.0, 8338.0, 8343.0, 8347.333333333334, 8353.0, 8352.0];
+08:10:58,798  INFO main LSHRecommRun:main:66 - Selected menu: 63
+08:10:59,382  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:10:59,434  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:10:59,497  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 43 ms ...
+08:10:59,497  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:10:59,937  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 436 ms.
+08:10:59,937  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 100.375
+08:10:59,946  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:00,138  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:00,164  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:00,195  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 28 ms ...
+08:11:00,196  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:00,470  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 274 ms.
+08:11:00,470  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 69.26872246696036
+08:11:00,471  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:00,633  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:00,705  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:00,724  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 18 ms ...
+08:11:00,725  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:00,948  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 223 ms.
+08:11:00,948  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 81.14715719063545
+08:11:00,949  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:00,950  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:1 numOfHashFunctions:4
+08:11:00,950  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8687995450038816
+08:11:00,950  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 311.0
+08:11:00,951  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :7890.0
+08:11:01,101  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:01,108  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:01,133  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 24 ms ...
+08:11:01,133  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:01,540  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 407 ms.
+08:11:01,540  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 145.5438596491228
+08:11:01,540  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:01,676  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:01,688  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:01,734  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 43 ms ...
+08:11:01,734  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:02,585  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 851 ms.
+08:11:02,585  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 195.86013215859032
+08:11:02,585  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:02,728  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:02,736  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:02,785  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 48 ms ...
+08:11:02,786  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:03,515  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 729 ms.
+08:11:03,515  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 158.95429208472686
+08:11:03,515  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:03,516  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:2 numOfHashFunctions:4
+08:11:03,516  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8348177756284825
+08:11:03,517  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 662.3333333333334
+08:11:03,517  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8210.0
+08:11:03,673  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:03,680  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:03,731  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 49 ms ...
+08:11:03,731  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:04,715  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 984 ms.
+08:11:04,716  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 228.92872807017545
+08:11:04,716  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:04,848  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:04,858  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:04,922  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 61 ms ...
+08:11:04,922  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:06,331  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1409 ms.
+08:11:06,332  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 286.40748898678413
+08:11:06,332  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:06,451  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:06,458  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:06,507  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 47 ms ...
+08:11:06,507  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:08,396  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1889 ms.
+08:11:08,397  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 317.4626532887402
+08:11:08,397  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:08,398  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:3 numOfHashFunctions:4
+08:11:08,398  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8240135026783296
+08:11:08,398  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 1427.3333333333333
+08:11:08,398  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8308.333333333334
+08:11:08,516  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:08,768  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:08,808  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 38 ms ...
+08:11:08,809  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:09,655  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 846 ms.
+08:11:09,655  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 268.3453947368421
+08:11:09,655  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:09,790  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:09,797  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:09,864  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 65 ms ...
+08:11:09,864  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:11,227  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1363 ms.
+08:11:11,228  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 276.3259911894273
+08:11:11,228  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:11,379  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:11,386  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:11,443  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 55 ms ...
+08:11:11,444  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:12,888  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1444 ms.
+08:11:12,889  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 278.36566332218507
+08:11:12,889  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:12,890  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:4 numOfHashFunctions:4
+08:11:12,890  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8205657130526611
+08:11:12,890  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 1217.6666666666667
+08:11:12,891  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8314.0
+08:11:13,011  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:13,021  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:13,117  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 92 ms ...
+08:11:13,117  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:14,407  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 1290 ms.
+08:11:14,407  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 309.38486842105266
+08:11:14,408  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:14,526  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:14,533  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:14,607  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 71 ms ...
+08:11:14,607  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:16,941  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2334 ms.
+08:11:16,941  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 386.8546255506608
+08:11:16,942  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:17,095  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:17,102  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:17,166  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 61 ms ...
+08:11:17,166  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:19,618  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2452 ms.
+08:11:19,618  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 388.3612040133779
+08:11:19,618  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:19,619  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:5 numOfHashFunctions:4
+08:11:19,620  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8177702263583031
+08:11:19,620  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 2025.3333333333333
+08:11:19,620  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8329.666666666666
+08:11:19,740  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:19,746  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:19,850  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 100 ms ...
+08:11:19,851  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:22,334  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2483 ms.
+08:11:22,335  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 399.85087719298247
+08:11:22,335  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:22,453  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:22,460  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:22,561  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 97 ms ...
+08:11:22,561  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:25,049  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2488 ms.
+08:11:25,049  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 378.33920704845815
+08:11:25,049  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:25,236  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:25,245  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:25,334  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 85 ms ...
+08:11:25,334  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:27,759  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2425 ms.
+08:11:27,759  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 427.8550724637681
+08:11:27,759  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:27,760  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:6 numOfHashFunctions:4
+08:11:27,760  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8165039948075647
+08:11:27,761  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 2465.3333333333335
+08:11:27,761  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8336.666666666666
+08:11:27,879  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:27,885  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:28,005  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 115 ms ...
+08:11:28,005  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:30,959  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2953 ms.
+08:11:30,959  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 448.2905701754386
+08:11:30,959  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:31,077  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:31,084  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:31,191  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 102 ms ...
+08:11:31,191  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:35,051  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3860 ms.
+08:11:35,051  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 484.6090308370044
+08:11:35,051  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:35,199  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:35,206  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:35,300  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 90 ms ...
+08:11:35,300  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:37,609  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2309 ms.
+08:11:37,610  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 400.52396878483836
+08:11:37,610  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:37,611  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:7 numOfHashFunctions:4
+08:11:37,611  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8144829634003584
+08:11:37,611  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 3040.6666666666665
+08:11:37,611  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8342.333333333334
+08:11:37,734  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:37,741  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:37,871  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 125 ms ...
+08:11:37,871  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:40,719  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2848 ms.
+08:11:40,720  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 450.30043859649123
+08:11:40,720  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:40,839  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:40,845  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:40,970  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 119 ms ...
+08:11:40,970  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:44,767  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3796 ms.
+08:11:44,767  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 487.5462555066079
+08:11:44,768  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:44,917  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:44,924  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:45,045  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 115 ms ...
+08:11:45,045  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:47,690  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 2645 ms.
+08:11:47,690  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 435.1895206243032
+08:11:47,690  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:47,691  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:8 numOfHashFunctions:4
+08:11:47,691  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8131498596679035
+08:11:47,691  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 3096.3333333333335
+08:11:47,692  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8341.0
+08:11:47,809  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:11:47,858  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:11:47,962  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 99 ms ...
+08:11:47,962  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:51,618  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 3656 ms.
+08:11:51,618  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 525.266447368421
+08:11:51,618  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:51,738  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:11:51,745  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:11:51,886  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 135 ms ...
+08:11:51,886  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:11:56,316  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4430 ms.
+08:11:56,316  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 544.1035242290749
+08:11:56,316  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:11:56,435  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:11:56,444  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:11:56,594  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 139 ms ...
+08:11:56,594  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:01,445  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4851 ms.
+08:12:01,445  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 536.7748049052396
+08:12:01,445  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:01,446  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:9 numOfHashFunctions:4
+08:12:01,446  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8130432186461847
+08:12:01,446  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 4312.333333333333
+08:12:01,447  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8349.0
+08:12:01,600  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:12:01,607  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:12:01,752  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 139 ms ...
+08:12:01,752  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:06,829  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5077 ms.
+08:12:06,829  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 570.8464912280701
+08:12:06,829  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:06,953  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:12:07,001  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:12:07,117  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 110 ms ...
+08:12:07,118  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:11,459  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 4341 ms.
+08:12:11,459  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 560.1563876651983
+08:12:11,459  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:11,579  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:12:11,585  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:12:11,745  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 153 ms ...
+08:12:11,745  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:17,211  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5466 ms.
+08:12:17,211  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 594.2853957636567
+08:12:17,212  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:17,212  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:10 numOfHashFunctions:4
+08:12:17,212  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8119407083239537
+08:12:17,213  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 4961.333333333333
+08:12:17,213  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8350.333333333334
+08:12:17,331  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:12:17,338  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:12:17,515  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 170 ms ...
+08:12:17,516  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:24,493  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6977 ms.
+08:12:24,493  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 618.2521929824561
+08:12:24,493  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:24,614  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:12:24,621  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:12:24,818  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 189 ms ...
+08:12:24,818  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:30,619  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5801 ms.
+08:12:30,619  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 590.5330396475771
+08:12:30,619  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:30,769  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:12:30,776  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:12:30,929  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 147 ms ...
+08:12:30,929  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:37,213  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6284 ms.
+08:12:37,213  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 637.3433667781494
+08:12:37,213  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:37,214  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:11 numOfHashFunctions:4
+08:12:37,215  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8132284646313992
+08:12:37,215  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 6354.0
+08:12:37,215  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8354.0
+08:12:37,336  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:12:37,343  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:12:37,549  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 197 ms ...
+08:12:37,549  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:43,119  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5570 ms.
+08:12:43,119  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 619.7291666666666
+08:12:43,119  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:43,250  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:12:43,257  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:12:43,461  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 196 ms ...
+08:12:43,461  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:48,862  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5401 ms.
+08:12:48,862  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 597.8149779735683
+08:12:48,863  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:48,987  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:12:48,994  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:12:49,211  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 210 ms ...
+08:12:49,212  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:12:56,448  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 7236 ms.
+08:12:56,448  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 633.9710144927536
+08:12:56,449  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:12:56,450  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:12 numOfHashFunctions:4
+08:12:56,450  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8103909918762056
+08:12:56,450  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 6069.0
+08:12:56,450  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8351.333333333334
+08:12:56,606  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:12:56,613  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:12:56,836  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 216 ms ...
+08:12:56,836  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:04,607  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 7770 ms.
+08:13:04,607  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 673.2785087719299
+08:13:04,607  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:04,758  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:13:04,764  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:13:04,963  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 191 ms ...
+08:13:04,964  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:11,961  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6997 ms.
+08:13:11,961  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 656.715859030837
+08:13:11,961  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:12,080  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:13:12,086  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:13:12,313  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 218 ms ...
+08:13:12,313  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:18,159  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 5846 ms.
+08:13:18,159  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 639.9710144927536
+08:13:18,159  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:18,160  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:13 numOfHashFunctions:4
+08:13:18,160  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8106017837773024
+08:13:18,160  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 6871.0
+08:13:18,160  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8354.333333333334
+08:13:18,279  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:13:18,286  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:13:18,546  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 251 ms ...
+08:13:18,547  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:25,639  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 7092 ms.
+08:13:25,640  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 659.9758771929825
+08:13:25,640  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:25,760  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:13:25,767  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:13:26,023  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 247 ms ...
+08:13:26,023  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:35,169  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 9145 ms.
+08:13:35,170  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 699.1563876651983
+08:13:35,170  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:35,291  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:13:35,297  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:13:35,552  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 244 ms ...
+08:13:35,552  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:43,852  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8299 ms.
+08:13:43,852  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 669.7123745819398
+08:13:43,852  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:43,853  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:14 numOfHashFunctions:4
+08:13:43,854  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8106713866003549
+08:13:43,854  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 8178.666666666667
+08:13:43,854  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8356.0
+08:13:43,996  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:13:44,003  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:13:44,250  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 238 ms ...
+08:13:44,250  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:13:52,263  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8013 ms.
+08:13:52,263  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 708.5175438596491
+08:13:52,263  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:13:52,383  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:13:52,431  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:13:52,647  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 205 ms ...
+08:13:52,647  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:01,059  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8412 ms.
+08:14:01,060  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 709.8722466960353
+08:14:01,060  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:01,177  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:14:01,184  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:14:01,481  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 288 ms ...
+08:14:01,482  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:08,293  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 6811 ms.
+08:14:08,294  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 671.5128205128206
+08:14:08,294  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:08,295  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:15 numOfHashFunctions:4
+08:14:08,295  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8111947798469462
+08:14:08,295  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 7745.333333333333
+08:14:08,295  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8354.333333333334
+08:14:08,414  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:14:08,421  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:14:08,725  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 294 ms ...
+08:14:08,725  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:17,526  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8801 ms.
+08:14:17,527  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 687.7982456140351
+08:14:17,527  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:17,647  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:14:17,654  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:14:17,986  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 322 ms ...
+08:14:17,986  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:28,626  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 10640 ms.
+08:14:28,626  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 734.8700440528635
+08:14:28,626  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:28,744  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:14:28,751  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:14:29,087  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 325 ms ...
+08:14:29,087  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:39,372  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 10284 ms.
+08:14:39,373  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 726.0958751393534
+08:14:39,373  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:39,374  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:16 numOfHashFunctions:4
+08:14:39,374  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.811022975132467
+08:14:39,374  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 9908.333333333334
+08:14:39,374  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8355.333333333334
+08:14:39,523  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:14:39,530  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:14:39,850  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 311 ms ...
+08:14:39,850  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:49,339  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 9489 ms.
+08:14:49,339  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 730.9857456140351
+08:14:49,339  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:49,497  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:14:49,504  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:14:49,799  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 287 ms ...
+08:14:49,799  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:14:58,675  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8876 ms.
+08:14:58,675  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 731.5759911894273
+08:14:58,676  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:14:58,795  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:14:58,802  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:14:59,143  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 330 ms ...
+08:14:59,143  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:15:07,720  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 8577 ms.
+08:15:07,720  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 730.5284280936455
+08:15:07,720  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:15:07,721  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:17 numOfHashFunctions:4
+08:15:07,721  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8116238705264999
+08:15:07,721  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 8980.666666666666
+08:15:07,722  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8355.666666666666
+08:15:07,844  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:15:07,851  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:15:08,223  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 361 ms ...
+08:15:08,224  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:15:19,296  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11072 ms.
+08:15:19,297  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 768.376096491228
+08:15:19,297  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:15:19,415  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:15:19,422  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:15:19,842  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 408 ms ...
+08:15:19,842  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:15:31,359  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11517 ms.
+08:15:31,360  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 769.3270925110132
+08:15:31,360  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:15:31,481  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:15:31,487  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:15:31,865  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 367 ms ...
+08:15:31,865  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:15:43,278  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11413 ms.
+08:15:43,278  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 758.355629877369
+08:15:43,278  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:15:43,279  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:18 numOfHashFunctions:4
+08:15:43,279  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.810783146558096
+08:15:43,279  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 11334.0
+08:15:43,279  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8356.0
+08:15:43,397  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:15:43,404  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:15:43,836  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 420 ms ...
+08:15:43,836  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:15:56,293  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 12457 ms.
+08:15:56,294  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 778.2763157894736
+08:15:56,294  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:15:56,418  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:15:56,424  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:15:56,844  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 406 ms ...
+08:15:56,844  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:16:09,379  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 12535 ms.
+08:16:09,380  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 770.5143171806168
+08:16:09,380  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:16:09,501  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:16:09,508  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:16:09,933  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 414 ms ...
+08:16:09,933  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:16:21,757  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11824 ms.
+08:16:21,758  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 762.428093645485
+08:16:21,758  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:16:21,758  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:19 numOfHashFunctions:4
+08:16:21,758  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8114661128428233
+08:16:21,758  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 12272.0
+08:16:21,758  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8355.333333333334
+08:16:21,876  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:16:21,883  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:16:22,373  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 478 ms ...
+08:16:22,373  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:16:36,370  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13997 ms.
+08:16:36,370  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 798.813596491228
+08:16:36,370  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:16:36,488  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:16:36,495  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:16:36,969  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 462 ms ...
+08:16:36,969  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:16:50,430  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13460 ms.
+08:16:50,430  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 784.4372246696036
+08:16:50,430  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:16:50,551  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:16:50,558  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:16:51,001  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 431 ms ...
+08:16:51,001  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:17:03,045  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 12044 ms.
+08:17:03,045  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 790.0746934225195
+08:17:03,045  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:17:03,046  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:20 numOfHashFunctions:4
+08:17:03,046  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8093888071890808
+08:17:03,047  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 13167.0
+08:17:03,047  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8355.666666666666
+08:17:03,199  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:17:03,206  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:17:03,634  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 417 ms ...
+08:17:03,634  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:17:16,799  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13165 ms.
+08:17:16,799  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 811.7379385964912
+08:17:16,799  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:17:16,951  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:17:16,958  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:17:17,424  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 455 ms ...
+08:17:17,424  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:17:29,562  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 12138 ms.
+08:17:29,562  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 783.681718061674
+08:17:29,562  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:17:29,695  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:17:29,702  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:17:30,202  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 485 ms ...
+08:17:30,202  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:17:41,415  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11213 ms.
+08:17:41,415  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 776.8829431438127
+08:17:41,415  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:17:41,416  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:21 numOfHashFunctions:4
+08:17:41,417  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8108803581901437
+08:17:41,417  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 12172.0
+08:17:41,417  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8356.333333333334
+08:17:41,547  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:17:41,554  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:17:42,046  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 481 ms ...
+08:17:42,046  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:17:56,234  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 14187 ms.
+08:17:56,234  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 822.5756578947369
+08:17:56,234  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:17:56,390  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:17:56,396  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:17:56,788  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 379 ms ...
+08:17:56,789  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:18:08,865  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 12076 ms.
+08:18:08,865  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 799.9008810572687
+08:18:08,865  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:18:08,985  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:18:08,991  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:18:09,488  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 483 ms ...
+08:18:09,488  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:18:20,750  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 11262 ms.
+08:18:20,750  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 789.8673355629877
+08:18:20,750  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:18:20,750  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:22 numOfHashFunctions:4
+08:18:20,751  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8098100562772044
+08:18:20,751  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 12508.333333333334
+08:18:20,751  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8356.0
+08:18:20,873  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:18:20,880  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:18:21,451  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 556 ms ...
+08:18:21,451  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:18:34,516  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13065 ms.
+08:18:34,516  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 812.9638157894736
+08:18:34,516  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:18:34,636  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:18:34,642  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:18:35,197  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 539 ms ...
+08:18:35,197  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:18:48,566  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13368 ms.
+08:18:48,566  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 824.7775330396476
+08:18:48,566  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:18:48,687  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:18:48,693  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:18:49,247  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 537 ms ...
+08:18:49,247  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:19:02,290  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13043 ms.
+08:19:02,290  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 811.0769230769231
+08:19:02,290  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:19:02,291  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:23 numOfHashFunctions:4
+08:19:02,292  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8093576693671846
+08:19:02,292  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 13158.666666666666
+08:19:02,292  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8358.0
+08:19:02,422  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:19:02,428  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:19:02,964  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 523 ms ...
+08:19:02,965  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:19:16,521  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13556 ms.
+08:19:16,522  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 817.2620614035088
+08:19:16,522  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:19:16,660  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:19:16,666  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:19:17,249  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 570 ms ...
+08:19:17,249  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:19:31,722  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 14473 ms.
+08:19:31,722  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 833.3259911894273
+08:19:31,722  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:19:31,852  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:19:31,858  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:19:32,413  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 542 ms ...
+08:19:32,413  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:19:46,307  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 13894 ms.
+08:19:46,308  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 835.9520624303233
+08:19:46,308  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:19:46,308  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:24 numOfHashFunctions:4
+08:19:46,308  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.80887324442355
+08:19:46,308  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 13974.333333333334
+08:19:46,308  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8357.0
+08:19:46,428  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:19:46,435  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:19:46,972  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 491 ms ...
+08:19:46,972  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:20:02,391  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 15419 ms.
+08:20:02,391  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 835.3322368421053
+08:20:02,391  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:20:02,518  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79983
+08:20:02,560  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8377
+08:20:03,129  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 554 ms ...
+08:20:03,129  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:20:18,730  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 15601 ms.
+08:20:18,730  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 843.0418502202643
+08:20:18,730  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:20:18,862  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 79868
+08:20:18,873  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8376
+08:20:19,382  INFO main LSH:buildIndexTables:69 - LSH Index Tables generated in 468 ms ...
+08:20:19,382  INFO main LSH:buildIndexTables:71 - Avg number of buckets : 16.0
+08:20:36,765  INFO main AbstractPrediction:runLSHPredictionOnTestData:49 - LSH Running time: 17383 ms.
+08:20:36,766  INFO main AbstractPrediction:runLSHPredictionOnTestData:50 - Avg Candidate Set Size: 847.9041248606466
+08:20:36,766  INFO main DataParser:calculateMAE:18 - Calculating errors...
+08:20:36,766  INFO main AbstractTests:runLSHPredictionPerformanceTests:543 - numOfBands:25 numOfHashFunctions:4
+08:20:36,766  INFO main AbstractTests:runLSHPredictionPerformanceTests:545 - Mae: 0.8096480566421688
+08:20:36,767  INFO main AbstractTests:runLSHPredictionPerformanceTests:546 - Runtime: 16134.333333333334
+08:20:36,767  INFO main AbstractTests:runLSHPredictionPerformanceTests:547 - Predicted Items :8357.333333333334
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:554 - # ========================================================
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:555 - # test case: LSHHashTables Prediction Performance
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:556 - # ========================================================
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:557 - dataFileBase = data/100k/ml
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:558 - k = 20
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:559 - numOfHashTables = 4
+08:20:36,767  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:560 - numOfHashFunctions = 4
+08:20:36,768  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:561 - LSHHashTablesMaeList =  [0.8687995450038816, 0.8348177756284825, 0.8240135026783296, 0.8205657130526611, 0.8177702263583031, 0.8165039948075647, 0.8144829634003584, 0.8131498596679035, 0.8130432186461847, 0.8119407083239537, 0.8132284646313992, 0.8103909918762056, 0.8106017837773024, 0.8106713866003549, 0.8111947798469462, 0.811022975132467, 0.8116238705264999, 0.810783146558096, 0.8114661128428233, 0.8093888071890808, 0.8108803581901437, 0.8098100562772044, 0.8093576693671846, 0.80887324442355, 0.8096480566421688];
+08:20:36,768  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:562 - LSHHashTablesRuntimeList = [311.0, 662.3333333333334, 1427.3333333333333, 1217.6666666666667, 2025.3333333333333, 2465.3333333333335, 3040.6666666666665, 3096.3333333333335, 4312.333333333333, 4961.333333333333, 6354.0, 6069.0, 6871.0, 8178.666666666667, 7745.333333333333, 9908.333333333334, 8980.666666666666, 11334.0, 12272.0, 13167.0, 12172.0, 12508.333333333334, 13158.666666666666, 13974.333333333334, 16134.333333333334];
+08:20:36,768  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:563 - LSHCandidateSetList = [27.049052396878484, 52.98476402824229, 105.82088442958008, 92.78855444072836, 129.45373467112597, 142.6183574879227, 133.5079895949461, 145.0631735414344, 178.92493496841323, 198.0951319212189, 212.4477889260498, 211.32367149758454, 213.32367149758454, 223.23745819397993, 223.83760683760684, 242.03195837978447, 243.50947603121517, 252.785209959123, 254.14269788182833, 263.35823114083985, 258.96098104793754, 263.28911185432924, 270.35897435897436, 278.6506874767744, 282.6347082868822];
+08:20:36,769  INFO main RESULTS_LOGGER:runLSHPredictionPerformanceTests:564 - PredictedItemsList  = [7890.0, 8210.0, 8308.333333333334, 8314.0, 8329.666666666666, 8336.666666666666, 8342.333333333334, 8341.0, 8349.0, 8350.333333333334, 8354.0, 8351.333333333334, 8354.333333333334, 8356.0, 8354.333333333334, 8355.333333333334, 8355.666666666666, 8356.0, 8355.333333333334, 8355.666666666666, 8356.333333333334, 8356.0, 8358.0, 8357.0, 8357.333333333334];
+18:26:36,774  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:26:37,367  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:26:37,414  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:26:53,524  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:26:53,686  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:26:53,696  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:30:02,253  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:30:02,820  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:30:02,860  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:35:09,273  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:35:09,852  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:35:09,892  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:41:08,927  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:41:09,491  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:41:09,534  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:47:06,710  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:47:07,282  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:47:07,323  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:47:42,356  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:47:42,902  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:47:42,941  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:49:01,887  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:49:02,450  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:49:02,500  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+18:53:30,458  INFO main LSHRecommRun:main:66 - Selected menu: 11
+18:53:31,058  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+18:53:31,103  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:24:38,692  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:24:39,258  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:24:39,301  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:32:41,117  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:32:41,680  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:32:41,725  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:38:37,418  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:38:37,993  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:38:38,037  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:42:06,430  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:42:07,036  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:42:07,096  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:49:06,789  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:49:07,358  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:49:07,405  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:56:15,013  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:56:15,603  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:56:15,658  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+20:57:14,199  INFO main LSHRecommRun:main:66 - Selected menu: 11
+20:57:14,785  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+20:57:14,842  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:00:24,597  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:00:25,174  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:00:25,217  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:04:05,595  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:04:06,203  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:04:06,253  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:06:26,252  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:06:26,849  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:06:26,904  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:07:53,320  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:07:53,918  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:07:53,977  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:08:58,216  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:08:58,805  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:08:58,864  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:12:01,385  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:12:01,971  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:12:02,020  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:18:27,124  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:18:27,708  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:18:27,754  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:38:31,178  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:38:31,816  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:38:31,866  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:41:06,239  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:41:06,825  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:41:06,881  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:53:26,741  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:53:27,363  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:53:27,412  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:55:18,523  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:55:19,086  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:55:19,128  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:58:47,622  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:58:48,210  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:58:48,260  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+21:59:26,604  INFO main LSHRecommRun:main:66 - Selected menu: 11
+21:59:27,232  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+21:59:27,289  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:07:20,164  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:07:20,793  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:07:20,840  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:27:42,173  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:27:42,803  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:27:42,858  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:28:58,896  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:28:59,529  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:28:59,585  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:29:56,222  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:29:56,834  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:29:56,882  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:31:42,428  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:31:43,017  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:31:43,061  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:33:46,458  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:33:47,029  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:33:47,073  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:34:27,080  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:34:27,665  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:34:27,708  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:36:00,049  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:36:00,630  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:36:00,677  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:37:20,109  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:37:20,685  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:37:20,726  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:38:39,984  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:38:40,577  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:38:40,618  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:40:53,996  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:40:54,622  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:40:54,672  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:43:13,706  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:43:14,310  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:43:14,368  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+22:45:26,395  INFO main LSHRecommRun:main:66 - Selected menu: 11
+22:45:26,984  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+22:45:27,042  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:13:38,397  INFO main LSHRecommRun:main:66 - Selected menu: 11
+08:13:39,029  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:13:39,073  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:16:25,897  INFO main LSHRecommRun:main:66 - Selected menu: 11
+08:16:26,501  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:16:26,547  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:18:07,956  INFO main LSHRecommRun:main:66 - Selected menu: 11
+08:18:08,532  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:18:08,571  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:23:32,405  INFO main LSHRecommRun:main:66 - Selected menu: 11
+08:23:32,992  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:23:33,039  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368
+08:25:41,344  INFO main LSHRecommRun:main:66 - Selected menu: 11
+08:25:41,900  INFO main DataParser:readTrainingDataFile:187 - Total train datasize: 80066
+08:25:41,939  INFO main DataParser:readTestDataFile:229 - Total test datasize: 8368

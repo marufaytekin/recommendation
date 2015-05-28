@@ -1,7 +1,14 @@
 package com.zaana.ml.tests;
 
+import clustering.*;
+import clustering.visualization.DendrogramPanel;
 import com.zaana.ml.DataParser;
 import com.zaana.ml.similarity.Cosine;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by maytekin on 27.05.2015.
@@ -30,6 +37,32 @@ public class ClusterTests extends AbstractTests{
     Cluster cluster = alg.performClustering(pdist, names, new AverageLinkageStrategy());*/
     public static void runClusterTests(String dataFileBase, String seperator, int y) {
         preprocessDataForValidation(dataFileBase, 1, "val", seperator);
-        Cosine.createDistanceMatrix(userRateMap, y);
+        List<String> names = new ArrayList<>(userRateMap.keySet());
+        String [] clusterNames = new String[names.size()];
+        for(int i = 0; i < names.size(); i++) {
+            clusterNames[i] = names.get(i);
+        }
+        double [][] distanceMatrix = Cosine.createDistanceMatrix(userRateMap, y);
+        ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
+        Cluster clusters = alg.performClustering(distanceMatrix, clusterNames, new AverageLinkageStrategy());
+        //ClusterPair user = new ClusterPair();
+        //Cluster userCl= user.agglomerate("765");
+        Cluster cluster = clusters.findClusterByName("565");
+
+        System.out.println(cluster.getName());
+
+
+        DendrogramPanel dp = new DendrogramPanel();
+        dp.setModel(clusters);
+        JFrame.setDefaultLookAndFeelDecorated(true);
+        JFrame frame = new JFrame();
+        frame.setTitle("Clusters");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().add(dp, BorderLayout.CENTER);
+        frame.getContentPane().setPreferredSize(new Dimension(2024, 2024));
+        frame.pack();
+        frame.setVisible(true);
+
+
     }
 }

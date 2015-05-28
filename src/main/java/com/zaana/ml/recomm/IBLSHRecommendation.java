@@ -59,7 +59,7 @@ public final class IBLSHRecommendation extends LSHRecommendation
             LinkedHashMap<String, Double> kNNList = IBNNPrediction
                     .getSimilarItemsListRatedByUser(itemRateMap,
                             itemId, intersectionOfCandidateRatedItemSets, kNN, y);
-            if (kNNList != null && kNNList.size() >= kNN) { //BUG: used to calculate prediction for lt k NN
+            if (kNNList != null && !kNNList.isEmpty()) { //BUG: used to calculate prediction for lt k NN
                 Double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap, kNNList,
                         userId);
                 predictionList.put(itemId, prediction);

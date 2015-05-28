@@ -16,6 +16,8 @@
 
 package clustering;
 
+import com.sun.xml.internal.bind.v2.TODO;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,6 +87,22 @@ public class Cluster {
 
     public boolean contains(Cluster cluster) {
         return getChildren().contains(cluster);
+    }
+
+    public Cluster findClusterByName(String name) {
+        return findClusterByName(this, name);
+    }
+
+    public Cluster findClusterByName(Cluster node, String name) {
+
+        if (node.isLeaf() && node.getName().equals(name)) {
+            return node.parent;
+        }
+        for (Cluster child : node.getChildren()) {
+            return child.findClusterByName(name);
+        }
+        //TODO
+        return null;
     }
 
     @Override
