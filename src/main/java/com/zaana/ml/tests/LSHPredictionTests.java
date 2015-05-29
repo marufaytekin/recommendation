@@ -528,7 +528,7 @@ public class LSHPredictionTests extends AbstractTests
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
-                candidate_set_size = AbstractPrediction
+                candidate_set_size += AbstractPrediction
                         .getAvg_candidate_set_size();
                 mae += MAE.calculateMAE(
                         AbstractPrediction.getOutputList(),

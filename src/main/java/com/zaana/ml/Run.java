@@ -50,7 +50,7 @@ public class Run {
                 //ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
             case "11":
-                ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, y);
+                ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
                 break;
 
             case "50":
@@ -106,11 +106,11 @@ public class Run {
                 LSHPredictionTests.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
                 break;
             case "63":
-                LSHPredictionTests.runLSHHashTablesAndPrediction("LSH", dataFileBase, "val", seperator,
+                LSHPredictionTests.runLSHHashTablesAndPrediction("LSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "64":
-                LSHPredictionTests.runLSHHashFunctionsAndPrediction("LSH", dataFileBase, "val", seperator,
+                LSHPredictionTests.runLSHHashFunctionsAndPrediction("LSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "65":

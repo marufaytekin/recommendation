@@ -35,10 +35,10 @@ public class ClusterTests extends AbstractTests {
     Cluster cluster = alg.performClustering(pdist, names, new AverageLinkageStrategy());*/
 
 
-    public static void runClusterTests1(String dataFileBase, String seperator, int y) {
+    public static void runClusterTests1(String dataFileBase, String seperator, int kNN, int y) {
         preprocessDataForValidation(dataFileBase, 1, "val", seperator);
         Cluster userClusters = buildCluster(userRateMap, y);
-        ClusterPrediction.runClusterPredictionOnTestData(userClusters, userRateMap, itemRateMap, testDataMap, 7);
+        ClusterPrediction.runClusterPredictionOnTestData(userClusters, userRateMap, itemRateMap, testDataMap, 7, kNN, y);
 
 
     }
@@ -49,25 +49,29 @@ public class ClusterTests extends AbstractTests {
      * To determine the best k parameter for pre configured LSH model.
      * Number of hash functions and tables are set.
      */
-    public static void runClusterPredictionTests(String dataFileBase, String seperator, int numOfRun, double smoothRun, int y) {
+    public static void runClusterPredictionTests(
+            String dataFileBase, String seperator,
+            int numOfRun, double smoothRun, int kNN, int y) {
         ArrayList<Double> maeList = new ArrayList<>();
         ArrayList<Double> runTimeList = new ArrayList<>();
         ArrayList<Double> candidateSetList = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
             double totalMae = 0.0;
             double runTimeTotal = 0;
-            double totalCandSize = 0.0;
+            double totalNbrSize = 0.0;
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j + 1), "test", seperator);
                 Cluster userClusters = buildCluster(userRateMap, y);
                 runTimeTotal += ClusterPrediction.runClusterPredictionOnTestData(
-                        userClusters, userRateMap, itemRateMap, testDataMap, (i+1));
+                        userClusters, userRateMap, itemRateMap, testDataMap, (i+1), kNN, y);
                 totalMae += MAE.calculateMAE(
                         ClusterPrediction.getOutputList(),
                         ClusterPrediction.getTargetList());
+                totalNbrSize += ClusterPrediction.getAvg_candidate_set_size();
             }
             maeList.add(totalMae / smoothRun);
             runTimeList.add(runTimeTotal / smoothRun);
+            candidateSetList.add(totalNbrSize / smoothRun);
         }
         LOG2.info("# ========================================================");
         LOG2.info("# Cluster test case  - Prediction");
@@ -75,6 +79,7 @@ public class ClusterTests extends AbstractTests {
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("MaeList = " + maeList.toString());
         LOG2.info("Runtime = " + runTimeList.toString());
+        LOG2.info("AvgdNbrSize = " + candidateSetList.toString());
     }
 
 

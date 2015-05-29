@@ -45,8 +45,8 @@ public class Clusters {
 
     }
 
-    private static Cluster getParentClusterWithDepth(Cluster targetNode, int num) {
-        for (int i=0; i<num; i++) {
+    private static Cluster getParentClusterWithDepth(Cluster targetNode, int depth) {
+        for (int i=0; i<depth; i++) {
             if (targetNode.getParent() == null) return targetNode;
             targetNode = targetNode.getParent();
         }

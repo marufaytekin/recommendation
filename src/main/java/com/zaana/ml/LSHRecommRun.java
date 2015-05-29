@@ -27,8 +27,8 @@ public class LSHRecommRun {
     static int topN = 20;
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
-    static int numOfRun = 15;
-    static final int smoothRun = 1;
+    static int numOfRun = 20;
+    static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
     static int l = 4;
