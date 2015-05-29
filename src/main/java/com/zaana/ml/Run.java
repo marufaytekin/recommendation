@@ -1,6 +1,5 @@
 package com.zaana.ml;
 
-import com.zaana.ml.similarity.Cosine;
 import com.zaana.ml.tests.*;
 import org.apache.log4j.Logger;
 
@@ -51,7 +50,7 @@ public class Run {
                 //ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
             case "11":
-                ClusterTests.runClusterTests(dataFileBase, seperator, y);
+                ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, y);
                 break;
 
             case "50":

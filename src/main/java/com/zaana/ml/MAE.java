@@ -27,7 +27,8 @@ public final class MAE
             totalError += Math.abs((Double) output - (Integer) target);
         }
 
-        return totalError / size;
+        if (size == 0) return size;
+        else return totalError / size;
 
     }
 

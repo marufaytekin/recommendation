@@ -1,18 +1,17 @@
 package com.zaana.ml.tests;
 
-import clustering.*;
-import clustering.visualization.DendrogramPanel;
-import com.zaana.ml.similarity.Cosine;
+import clustering.Cluster;
+import com.zaana.ml.MAE;
+import com.zaana.ml.prediction.ClusterPrediction;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.zaana.ml.Clusters.buildCluster;
 
 /**
  * Created by maytekin on 27.05.2015.
  */
-public class ClusterTests extends AbstractTests{
+public class ClusterTests extends AbstractTests {
 
     /*String[] names = new String[] { "O1", "O2", "O3", "O4", "O5", "O6" };
     double[][] distances = new double[][] {
@@ -34,64 +33,48 @@ public class ClusterTests extends AbstractTests{
     };
     ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
     Cluster cluster = alg.performClustering(pdist, names, new AverageLinkageStrategy());*/
-    public static void runClusterTests(String dataFileBase, String seperator, int y) {
+
+
+    public static void runClusterTests1(String dataFileBase, String seperator, int y) {
         preprocessDataForValidation(dataFileBase, 1, "val", seperator);
-        List<String> names = new ArrayList<>(userRateMap.keySet());
-        String [] clusterNames = new String[names.size()];
-        for(int i = 0; i < names.size(); i++) {
-            clusterNames[i] = names.get(i);
-        }
-        double [][] distanceMatrix = Cosine.createDistanceMatrix(userRateMap, y);
-        ClusteringAlgorithm alg = new PDistClusteringAlgorithm();
-        Cluster clusters = alg.performClustering(
-                distanceMatrix, clusterNames, new AverageLinkageStrategy());
-        //ClusterPair user = new ClusterPair();
-        //Cluster userCl= user.agglomerate("765");
-        //clusters.toConsole(1);
-        //System.out.println(clusters.getDistanceValue());
-        //System.out.println(clusters.getName());
+        Cluster userClusters = buildCluster(userRateMap, y);
+        ClusterPrediction.runClusterPredictionOnTestData(userClusters, userRateMap, itemRateMap, testDataMap, 7);
 
-        List <Cluster> a = clusters.getLeafs();
-
-        Cluster targetNode = getLeafWithName(a, "306");
-
-        Cluster parent = getParentCluster(targetNode, 7);
-
-        System.out.println(parent.countLeafs());
-        List<String> neighbors = parent.getLeafIds();
-        System.out.println (neighbors.toString());
-        DendrogramPanel dp = new DendrogramPanel();
-        dp.setModel(parent);
-        JFrame.setDefaultLookAndFeelDecorated(true);
-        JFrame frame = new JFrame();
-        frame.setTitle("Clusters");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(dp, BorderLayout.CENTER);
-        frame.getContentPane().setPreferredSize(new Dimension(2048, 1024));
-        frame.pack();
-        frame.setVisible(true);
 
     }
 
-    private static Cluster getParentCluster(Cluster targetNode, int num) {
-        for (int i=0;i<num;i++) {
-            if (targetNode.getParent() == null) return targetNode;
-            targetNode = targetNode.getParent();
+
+    /**
+     * Runs LSH prediction tests against k nearest neighbor parameter.
+     * To determine the best k parameter for pre configured LSH model.
+     * Number of hash functions and tables are set.
+     */
+    public static void runClusterPredictionTests(String dataFileBase, String seperator, int numOfRun, double smoothRun, int y) {
+        ArrayList<Double> maeList = new ArrayList<>();
+        ArrayList<Double> runTimeList = new ArrayList<>();
+        ArrayList<Double> candidateSetList = new ArrayList<>();
+        for (int i = 0; i < numOfRun; i++) {
+            double totalMae = 0.0;
+            double runTimeTotal = 0;
+            double totalCandSize = 0.0;
+            for (int j = 0; j < smoothRun; j++) {
+                preprocessDataForValidation(dataFileBase, (j + 1), "test", seperator);
+                Cluster userClusters = buildCluster(userRateMap, y);
+                runTimeTotal += ClusterPrediction.runClusterPredictionOnTestData(
+                        userClusters, userRateMap, itemRateMap, testDataMap, (i+1));
+                totalMae += MAE.calculateMAE(
+                        ClusterPrediction.getOutputList(),
+                        ClusterPrediction.getTargetList());
+            }
+            maeList.add(totalMae / smoothRun);
+            runTimeList.add(runTimeTotal / smoothRun);
         }
-        return targetNode;
-    }
-
-    private static Cluster getLeafWithName(List<Cluster> a, String name) {
-        for (Cluster cluster: a) {
-            if (cluster.getName().equals(name)) return cluster;
-        }
-        return null;
-    }
-
-    private static List<Cluster> getSubClusters(Cluster clusters, int depth) {
-
-        List <Cluster> a = clusters.getChildren();
-        return null;
+        LOG2.info("# ========================================================");
+        LOG2.info("# Cluster test case  - Prediction");
+        LOG2.info("# ========================================================");
+        LOG2.info("dataFileBase = " + dataFileBase);
+        LOG2.info("MaeList = " + maeList.toString());
+        LOG2.info("Runtime = " + runTimeList.toString());
     }
 
 
