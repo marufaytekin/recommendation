@@ -50,7 +50,8 @@ public class Run {
                 //ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
             case "11":
-                ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
+                ClusterTests.runClusterTests1(dataFileBase, seperator, kNN, y);
+                //ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
                 break;
 
             case "50":

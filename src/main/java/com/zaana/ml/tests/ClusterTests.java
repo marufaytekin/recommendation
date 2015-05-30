@@ -1,12 +1,14 @@
 package com.zaana.ml.tests;
 
 import clustering.Cluster;
+import com.zaana.ml.Clusters;
 import com.zaana.ml.MAE;
 import com.zaana.ml.prediction.ClusterPrediction;
 
 import java.util.ArrayList;
 
 import static com.zaana.ml.Clusters.buildCluster;
+import static com.zaana.ml.Clusters.drawCluster;
 
 /**
  * Created by maytekin on 27.05.2015.
@@ -38,7 +40,9 @@ public class ClusterTests extends AbstractTests {
     public static void runClusterTests1(String dataFileBase, String seperator, int kNN, int y) {
         preprocessDataForValidation(dataFileBase, 1, "val", seperator);
         Cluster userClusters = buildCluster(userRateMap, y);
-        ClusterPrediction.runClusterPredictionOnTestData(userClusters, userRateMap, itemRateMap, testDataMap, 7, kNN, y);
+        drawCluster(userClusters);
+        //ClusterPrediction.runClusterPredictionOnTestData(userClusters, userRateMap, itemRateMap, testDataMap, 7, kNN, y);
+        drawCluster(Clusters.getUsersClusterWithDepth(userClusters, "306", 5));
 
 
     }
@@ -68,6 +72,7 @@ public class ClusterTests extends AbstractTests {
                         ClusterPrediction.getOutputList(),
                         ClusterPrediction.getTargetList());
                 totalNbrSize += ClusterPrediction.getAvg_candidate_set_size();
+
             }
             maeList.add(totalMae / smoothRun);
             runTimeList.add(runTimeTotal / smoothRun);

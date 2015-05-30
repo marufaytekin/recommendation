@@ -511,6 +511,41 @@ LSH & $O(|U||L|)$ ￼& $O(|U|)$ &$O(|C||L|)$ \\
 \label{table:complexity-lsh}
 \end{table}
 
+\section{Clustering For Prediction}
+\label{sec:cluster-prediction}
+
+With clustering, similar to LSH approach, we can find the similar users or items 
+without comparing every user or item with each other. We first create the cluster of data set based on the distance matrix of data. We first create the distance matrix of users. We use cosine similarity measure for distance calculation. Then we group the objects into a hierarchical cluster tree. In this step, we link pairs of objects that are in close proximity using a linkage function. As the hierarchical agglomerative clustering method, we used "grouped average linkage" method. With this method all objects in the cluster contribute to inter-cluster similarity. 
+
+The point where to cut the hierarchical tree into clusters decisive on the inter-cluster similarity of the clusters. In other words, if we cut the hierarchical tree close to the leaves, we will have many clusters with high inter-similarity, but, if we cut it close to the root of the hierarchical tree we would have less clusters with low inter-similarity. Once we cut off the hierarchical tree at an arbitrary
+point we assign all the objects below each cut to a single cluster. 
+
+Once we have the clusters, we use these clusters for predictions as follows. For a target user, $u$, first we find the cluster that $u$ belongs to, then we use all the users in this cluster to make a prediction for $u$ on item $i$. For the predictions we can two different approach. First we used user-based k-NN by only considering the neighbors in the cluster and called this method Clustering-kNN. Second we treated each user in the cluster as equally weighted and used for predictions and called this method "Clustering".
+
+[TODO]
+
+\begin{equation}
+\hat{r}_{ui} = \frac{\sum\limits_{t=1}^{L} \sum\limits_{v \in C_i(t)} r_{vi}}{\sum\limits_{t=1}^{L} \mid C_i(t) \mid} ,
+\label{eq:lsh-prediction}
+\end{equation}
+where; $L$ is the number of hash tables (bands) and  $C_i(t)$ is the set of 
+candidate pairs who have rated for item $i$ retrieved from hash table $t$.
+
+\begin{table}
+\centering
+\begin{tabular}{llll}
+\hline
+& & \multicolumn {2}{c}{Time} \\
+\cline{3-4}
+     & Space & Model Build  & Query \\
+\hline
+LSH & $O(|U|)$ ￼& $O(n(n-1))$ &$O(|S|)$ \\
+\hline
+\end{tabular}
+\caption{The space and time complexity of Clustering  method, as a function of U, n, and S}
+\label{table:complexity-lsh}
+\end{table}
+
 \section{Experiments}
 \label{sec:experiements}
 
@@ -527,6 +562,14 @@ We first run cross validation tests to detect optimum parameters $k$ and $Y$ on
 validation data sets. We then set these parameters and run the experiments on 
 the test set to measure the performance of LSH and CF. We finally run tests to 
 find out how the boundaries of LSH parameters effect accuracy and efficiency. 
+
+We also evaluated collaborative filtering and clustering. We used clustering for 
+predictions as follows. We used hierarchical clustering to cluster the users 
+based on the distance matrix. In order to make a prediction for a user, $u$, on
+an item, $i$, we use the cluster neighbors of $u$ to estimate $u$'s prediction 
+on item, $i$. We tried this with different number of clusters starting from 1 
+up to 20 levels (depth). We use depth to describe the level of connections from
+bottom up to the root of the cluster.
 
 
 \subsection{Data Sets}
@@ -550,7 +593,15 @@ MovieLens     & 943	& 1682	  & 100000   & 0.0630   \\
 
 \subsection{Results}
 
-We run parameter detection tests on validation data set first. We run CF user-based prediction tests for $k$ nearest neighbor parameter. In neighborhood based CF, $k$ number of neighbors is used for prediction calculations. We start $k$ from one and increased by five up to fifty and computed MAE as shown in Fig. \ref{fig:mae-k-ub}. We found out that for our data set user-based CF performs best when $k$ is around 30. We set $k$ to 30 and run another experiment to detect the optimum $Y$, significance, parameter. Fig. \ref{fig:mae-y-ub} shows that user-based CF performs best, in terms of accuracy, when $Y$ is around seven.
+We run parameter detection tests on validation data set first. We run user-based
+prediction tests for $k$ nearest neighbor parameter. In neighborhood based CF, 
+$k$ number of neighbors is used for prediction calculations. We start $k$ from 
+one and increased by five up to fifty and computed MAE as shown in 
+Fig \ref{fig:mae-k-ub}. We found out that for our data set user-based CF 
+performs best when $k$ is around 30. We set $k$ to 30 and run another 
+experiment to detect the optimum $Y$, significance, parameter. 
+Fig. \ref{fig:mae-y-ub} shows that user-based CF performs best, in terms of
+accuracy, when $Y$ is around seven.
 \begin{figure}
         %\centering
         \begin{subfigure}[b]{0.225\textwidth}
@@ -668,10 +719,25 @@ is still worse then user-based method, we gain a lot in terms of the performance
 
 Fig. \ref{fig:ub-lsh-functions} shows how the change of 
 hash functions effects MAE and performance. As we said before, increasing number of 
-hash functions decreases the candidate set size (Fig. \ref{fig:lsh-functions-candidate-size}) 
-and this increases false negatives, hence, MAE gets worse (Fig. \ref{fig:ub-lsh-functions-mae}). 
+hash functions decreases the candidate set size 
+(Fig. \ref{fig:lsh-functions-candidate-size}) 
+and this increases false negatives, hence, MAE gets worse 
+(Fig. \ref{fig:ub-lsh-functions-mae}). 
 Even though MAE of LSH gets worse then user-based method, we gain a lot in 
 terms of the performance as we increase the number of hash functions (Fig. \ref{fig:ub-lsh-functions-runtime}). 
+
+With the optimum $k$ and $Y$, we also compared the user-based method with 
+clustering. We started experiments from level(depth) 0 which is the root of the
+cluster and increased the level up to 20. When $n=0$ there is only one cluster
+($2^0 = 1$). If we assume the equal distribution of the cluster, at level $n$,
+approximately $2^n$ clusters are generated where $n$ is the depth of the 
+cluster from bottom up. Since 943 users in the data set and we use pairwise 
+clustering, $943/2 = 421$ clusters generated at the first level of the cluster.
+Cluster of all users are shown in Fig. \ref{fig:cluster}. A sample cluster of 
+user with id:306 up to 5 level is shown in Fig. \ref{fig:sample-user-cluster}.
+
+When we compare the clustering approach with LSH in terms of the performance 
+and accuracy we found following results.
 
 \begin{figure}[!h]
         %\centering
@@ -697,7 +763,27 @@ terms of the performance as we increase the number of hash functions (Fig. \ref{
 \end{figure}
 
 
+\begin{figure}[!h]
+        \centering
+        \begin{subfigure}[b]{0.50\textwidth}
+                \includegraphics[width=\textwidth]{charts/cluster.jpg}
+        \end{subfigure}
+        \caption{Hierarchical cluster of all users in the data set. The top line shows the distance which scales from 1 to 10.}
+        \label{fig:cluster}
+\end{figure}
+
+\begin{figure}[!h]
+        \centering
+        \begin{subfigure}[b]{0.50\textwidth}
+                \includegraphics[width=\textwidth]{charts/cluster-user-306.jpg}
+        \end{subfigure}
+        \caption{Sub cluster of user id: 306 at level 5. The top line shows the distance which scales from 1 to 10.}
+        \label{fig:sample-user-cluster}
+\end{figure}
+
+
 \section{Conclusion}
+\label{sec:conclusion}
 
 In this term paper we have evaluated application of LSH to the prediction 
 problem of recommendation and compared it against user-based neighborhood 

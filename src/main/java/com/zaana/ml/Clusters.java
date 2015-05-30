@@ -60,7 +60,7 @@ public class Clusters {
         return null;
     }
 
-    private static void drawCluster(Cluster cluster) {
+    public static void drawCluster(Cluster cluster) {
         DendrogramPanel dp = new DendrogramPanel();
         dp.setModel(cluster);
         JFrame.setDefaultLookAndFeelDecorated(true);
@@ -71,5 +71,13 @@ public class Clusters {
         frame.getContentPane().setPreferredSize(new Dimension(2048, 1024));
         frame.pack();
         frame.setVisible(true);
+    }
+
+    public static Cluster getUsersClusterWithDepth(Cluster clusters, String name, int depth) {
+
+        List <Cluster> leafList = clusters.getLeafs();
+        Cluster targetNode = getLeafWithName(leafList, name);
+        Cluster parent = getParentClusterWithDepth(targetNode, depth);
+        return parent;
     }
 }
