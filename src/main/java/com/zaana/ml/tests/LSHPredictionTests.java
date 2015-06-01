@@ -519,6 +519,12 @@ public class LSHPredictionTests extends AbstractTests
                             numOfBands);
                     runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                } else if (type == "IBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    runTime += IBLSHPrediction.
+                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
+                                        testDataMap, hashTables, vmap, kNN, y);
                 } else if (type == "LSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,

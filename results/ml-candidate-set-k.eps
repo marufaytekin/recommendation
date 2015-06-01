@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ml-57-ublsh-candidate-hash-functions.eps
-%%Creator: gnuplot 4.4 patchlevel 4
-%%CreationDate: Fri May 22 14:01:48 2015
+%%Title: ml-candidate-set-k.eps
+%%Creator: gnuplot 4.6 patchlevel 6
+%%CreationDate: Sun May 31 22:24:56 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,15 +15,17 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 1 def
+/Dashlength 2 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
+/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -66 def
 /dl1 {
@@ -38,22 +40,6 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
-Level1 {} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (ml-57-ublsh-candidate-hash-functions.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.4 patchlevel 4)
-  /Author (maytekin)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Fri May 22 14:01:48 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -61,7 +47,7 @@ end
   } if
 } def
 %
-% Gnuplot Prolog Version 4.4 (August 2010)
+% Gnuplot Prolog Version 4.6 (September 2012)
 %
 %/SuppressPDFMark true def
 %
@@ -328,7 +314,8 @@ end
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  gsave 1 setgray fill grestore clip
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -461,8 +448,26 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ml-candidate-set-k.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 6)
+  /Author (maruf)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Sun May 31 22:24:56 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 end
 %%EndProlog
+%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -471,6 +476,7 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 200 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -545,6 +551,16 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
+1.000 UL
+LTb
+1.00 1.00 1.00 C 1.000 860 640 4538 3726 BoxColFill
+LCb setrgbcolor
+860 640 M
+0 3726 V
+4538 0 V
+0 -3726 V
+860 640 L
+stroke
 0.500 UL
 LTb
 860 640 M
@@ -553,67 +569,47 @@ LTb
 -88 0 V
 stroke
 0.00 0.00 0.00 C 740 640 M
-[ [({}) 200.0 0.0 true true 0 (0)]
-] -66.7 MRshow
-0.500 UL
-LTb
-860 1172 M
-88 0 V
-4451 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 740 1172 M
-[ [({}) 200.0 0.0 true true 0 (50)]
-] -66.7 MRshow
-0.500 UL
-LTb
-860 1705 M
-88 0 V
-4451 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 740 1705 M
-[ [({}) 200.0 0.0 true true 0 (100)]
-] -66.7 MRshow
-0.500 UL
-LTb
-860 2237 M
-88 0 V
-4451 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 740 2237 M
-[ [({}) 200.0 0.0 true true 0 (150)]
-] -66.7 MRshow
-0.500 UL
-LTb
-860 2770 M
-88 0 V
-4451 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 740 2770 M
-[ [({}) 200.0 0.0 true true 0 (200)]
-] -66.7 MRshow
-0.500 UL
-LTb
-860 3302 M
-88 0 V
-4451 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 740 3302 M
 [ [({}) 200.0 0.0 true true 0 (250)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-860 3835 M
+860 1385 M
 88 0 V
 4451 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 740 3835 M
+0.00 0.00 0.00 C 740 1385 M
 [ [({}) 200.0 0.0 true true 0 (300)]
+] -66.7 MRshow
+0.500 UL
+LTb
+860 2131 M
+88 0 V
+4451 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 740 2131 M
+[ [({}) 200.0 0.0 true true 0 (350)]
+] -66.7 MRshow
+0.500 UL
+LTb
+860 2876 M
+88 0 V
+4451 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 740 2876 M
+[ [({}) 200.0 0.0 true true 0 (400)]
+] -66.7 MRshow
+0.500 UL
+LTb
+860 3622 M
+88 0 V
+4451 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 740 3622 M
+[ [({}) 200.0 0.0 true true 0 (450)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -623,7 +619,7 @@ LTb
 -88 0 V
 stroke
 0.00 0.00 0.00 C 740 4367 M
-[ [({}) 200.0 0.0 true true 0 (350)]
+[ [({}) 200.0 0.0 true true 0 (500)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -637,43 +633,53 @@ stroke
 ] -66.7 MCshow
 0.500 UL
 LTb
-1768 640 M
+1617 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1768 440 M
-[ [({}) 200.0 0.0 true true 0 (2)]
+0.00 0.00 0.00 C 1617 440 M
+[ [({}) 200.0 0.0 true true 0 (5)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-2676 640 M
+2373 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 2676 440 M
-[ [({}) 200.0 0.0 true true 0 (4)]
+0.00 0.00 0.00 C 2373 440 M
+[ [({}) 200.0 0.0 true true 0 (10)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-3583 640 M
+3130 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 3583 440 M
-[ [({}) 200.0 0.0 true true 0 (6)]
+0.00 0.00 0.00 C 3130 440 M
+[ [({}) 200.0 0.0 true true 0 (15)]
 ] -66.7 MCshow
 0.500 UL
 LTb
-4491 640 M
+3886 640 M
 0 88 V
 0 3639 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 4491 440 M
-[ [({}) 200.0 0.0 true true 0 (8)]
+0.00 0.00 0.00 C 3886 440 M
+[ [({}) 200.0 0.0 true true 0 (20)]
+] -66.7 MCshow
+0.500 UL
+LTb
+4643 640 M
+0 88 V
+0 3639 R
+0 -88 V
+stroke
+0.00 0.00 0.00 C 4643 440 M
+[ [({}) 200.0 0.0 true true 0 (25)]
 ] -66.7 MCshow
 0.500 UL
 LTb
@@ -683,7 +689,7 @@ LTb
 0 -88 V
 stroke
 0.00 0.00 0.00 C 5399 440 M
-[ [({}) 200.0 0.0 true true 0 (10)]
+[ [({}) 200.0 0.0 true true 0 (30)]
 ] -66.7 MCshow
 0.500 UL
 LTb
@@ -697,33 +703,91 @@ LTb
 Z stroke
 0.00 0.00 0.00 C 160 2503 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 200.0 0.0 true true 0 (Cadidate Set Size)]
+[ [({}) 200.0 0.0 true true 0 (Avg. Candidate Set Size)]
 ] -66.7 MCshow
 grestore
 LTb
 0.00 0.00 0.00 C 3129 140 M
-[ [({}) 200.0 0.0 true true 0 (Hash Functions)]
+[ [({}) 200.0 0.0 true true 0 (k)]
 ] -66.7 MCshow
 LTb
 1.000 UP
 0.500 UL
 LTb
+1.000 UL
+LTb
+3776 3904 N
+0 400 V
+1503 0 V
+0 -400 V
+-1503 0 V
+Z stroke
 % Begin plot #1
+2.000 UP
 0.500 UL
 LT0
-0.00 0.00 1.00 C 1314 3860 M
-454 -569 V
-454 -960 V
-454 -716 V
-454 -345 V
-3583 941 L
-454 -90 V
-454 -67 V
-454 -86 V
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 4204 M
+[ [({}) 200.0 0.0 true true 0 (UB-LSH)]
+] -66.7 MRshow
+LT0
+0.00 0.00 0.00 C 3896 4204 M
+543 0 V
+1011 1017 M
+454 242 V
+454 292 V
 454 -30 V
+454 -243 V
+454 -94 V
+454 -137 V
+454 19 V
+454 194 V
+453 90 V
+1011 1017 Dia
+1465 1259 Dia
+1919 1551 Dia
+2373 1521 Dia
+2827 1278 Dia
+3281 1184 Dia
+3735 1047 Dia
+4189 1066 Dia
+4643 1260 Dia
+5096 1350 Dia
+4168 4204 Dia
 % End plot #1
+% Begin plot #2
+2.000 UP
+0.500 UL
+LT0
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5279 4004 M
+[ [({}) 200.0 0.0 true true 0 (IB-LSH)]
+] -66.7 MRshow
+LT0
+0.00 0.00 0.00 C 3896 4004 M
+543 0 V
+1011 4111 M
+454 -56 V
+454 -122 V
+454 -97 V
+454 -344 V
+454 285 V
+454 479 V
+454 -211 V
+454 12 V
+453 -136 V
+1011 4111 Star
+1465 4055 Star
+1919 3933 Star
+2373 3836 Star
+2827 3492 Star
+3281 3777 Star
+3735 4256 Star
+4189 4045 Star
+4643 4057 Star
+5096 3921 Star
+4168 4004 Star
+% End plot #2
 1.000 UP
-stroke
+0.500 UL
 LTb
 grestore % colour palette end
 stroke

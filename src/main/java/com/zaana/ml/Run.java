@@ -22,10 +22,8 @@ public class Run {
                 runValTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
-            case "00":
-                DataParser.processDataFile(dataFilePath, seperator, 0, 100);
-                userRateMap = DataParser.getUserRateMap();
-                DataParser.calculateDataSetHistogram(userRateMap);
+            case "5000":
+                runLSHValTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "1":
@@ -80,11 +78,19 @@ public class Run {
                 LSHPredictionTests.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase,"val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "56":
-                LSHPredictionTests.runLSHHashTablesAndPrediction("UBLSH", dataFileBase, "val", seperator,
+                LSHPredictionTests.runLSHHashTablesAndPrediction("UBLSH", dataFileBase, "test", seperator,
+                        numOfRun, l, k, smoothRun, kNN, y);
+                break;
+            case "560":
+                LSHPredictionTests.runLSHHashTablesAndPrediction("IBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "57":
-                LSHPredictionTests.runLSHHashFunctionsAndPrediction("UBLSH", dataFileBase, "val", seperator,
+                LSHPredictionTests.runLSHHashFunctionsAndPrediction("UBLSH", dataFileBase, "test", seperator,
+                        numOfRun, l, k, smoothRun, kNN, y);
+                break;
+            case "570":
+                LSHPredictionTests.runLSHHashFunctionsAndPrediction("IBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "58":
@@ -208,6 +214,17 @@ public class Run {
         runSelection("52", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("500", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("520", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+    }
+
+    static void runLSHValTests(String dataFilePath, String dataFileBase, Scanner scanner, String seperator,
+                            HashMap<String, HashMap<String, Integer>> userRateMap,
+                            int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN) {
+        runSelection("100", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("101", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("56", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("560", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("57", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+        runSelection("570", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
     }
 
    

@@ -19,14 +19,14 @@ public class ExperimentsRun {
         private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
         private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-        static String dataFilePath = "data/ymusic/ymusic.data";
-        static String dataFileBase = "data/ymusic/ymusic";
-        //static String dataFilePath = "data/100k/ml.data";
-        //static String dataFileBase = "data/100k/ml";
+        //static String dataFilePath = "data/ymusic/ymusic.data";
+        //static String dataFileBase = "data/ymusic/ymusic";
+        static String dataFilePath = "data/100k/ml.data";
+        static String dataFileBase = "data/100k/ml";
         static final String seperator = "\\t";
         static int topN = 20;
         static int kNN = 20;
-        static int y = 5; // significance value. Must not be 0!
+        static int y = 4; // significance value. Must not be 0!
         static int numOfRun = 10;
         static final int smoothRun = 3;
         // l: number of bands
@@ -58,6 +58,11 @@ public class ExperimentsRun {
                 System.out.println("");
                 System.out.println("10  - Model Build Time - All");
                 System.out.println("");
+                System.out.println("5000 - Run HashTables & HashFunctions - Prediction - tests");
+                System.out.println("56  - UBLSH - HashTables Prediction - test");
+                System.out.println("560 - IBLSH - HashTables Prediction - test");
+                System.out.println("57  - UBLSH - HashFunctions Prediction - test");
+                System.out.println("570 - IBLSH - HashFunctions Prediction - test");
                 System.out.println("100 - User-based - Prediction - test");
                 System.out.println("101 - Item-based - Prediction - test");
                 System.out.println("59 - UBLSH - Prediction - 2D test");

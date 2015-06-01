@@ -42,7 +42,7 @@ public class CFPredictionTests extends AbstractTests
             LOG.info(type + "MAE = " + mae / smoothRun);
             maeList.add(mae/ smoothRun);
             runTimeList.add(runTime/ smoothRun);
-            kNN += 5;
+            kNN += 3;
             LOG.info("k = " + kNN);
         }
         LOG2.info("# ========================================================");
