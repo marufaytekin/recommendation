@@ -16,14 +16,12 @@ public class Run {
         switch (selection) {
 
             case "02":
-                dataFilePath = "data/ymusic/ymusic.data";
-                dataFileBase = "data/ymusic/ymusic";
-                y = 5;
-                runValTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                DataParser.processDataFile(dataFilePath, seperator,10,100);
+
                 break;
 
             case "5000":
-                runLSHValTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runLSHPredictionTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "1":
@@ -216,9 +214,9 @@ public class Run {
         runSelection("520", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
     }
 
-    static void runLSHValTests(String dataFilePath, String dataFileBase, Scanner scanner, String seperator,
-                            HashMap<String, HashMap<String, Integer>> userRateMap,
-                            int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN) {
+    static void runLSHPredictionTests(String dataFilePath, String dataFileBase, Scanner scanner, String seperator,
+                                      HashMap<String, HashMap<String, Integer>> userRateMap,
+                                      int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN) {
         runSelection("100", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("101", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("56", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);

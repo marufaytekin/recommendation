@@ -266,9 +266,9 @@ public final class DataParser
         BigDecimal sparsity = _totalDataSampleSize.divide(
                 numOfUsers.multiply(numOfItems), 4, RoundingMode.HALF_UP);
 
-        //LOG.info("numOfUsers = " + numOfUsers);
-        //LOG.info("numOfItems = " + numOfItems);
-        //LOG.info("sparsity = " + sparsity.toString());
+        LOG.info("numOfUsers = " + numOfUsers);
+        LOG.info("numOfItems = " + numOfItems);
+        LOG.info("sparsity = " + sparsity.toString());
     
     }
 

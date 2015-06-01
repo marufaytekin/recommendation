@@ -23,7 +23,6 @@ public class IBLSHPrediction extends LSHPrediction
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
-        int cnt = 0;
         Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = testDataMap
                 .entrySet().iterator();
         while (testDataIter.hasNext()) {
@@ -36,13 +35,11 @@ public class IBLSHPrediction extends LSHPrediction
             }
             total_candidate_set_size += predictRatingsForTestEntry(
                     testDataEntry, userRateMap, itemRateMap, hashTables, vmap, outputList, targetList, kNN, y);
-            cnt++;
-
         }
 
         final long endTime = System.currentTimeMillis();
         final long runningTime = (endTime - startTime);
-        avg_candidate_set_size = (double) total_candidate_set_size / cnt;
+        avg_candidate_set_size = (double) total_candidate_set_size / testDataMap.size();
         LOG.info("ItemBasedLSH Running time: " + runningTime);
         LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
 
@@ -85,7 +82,6 @@ public class IBLSHPrediction extends LSHPrediction
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
         Set<String> ratedItemsSet = new HashSet<>(userRateMap.get(testUserId).keySet());
         Integer total_candidate_set_size = 0;
-        int cnt = 0;
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
@@ -93,12 +89,10 @@ public class IBLSHPrediction extends LSHPrediction
                 Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, testMovieId, movieRateList);
                 int candidateSetSize = candidateSet.size();
                 total_candidate_set_size += candidateSetSize;
-                cnt++;
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
-
-                if (!intersectionOfCandidateRatedItemSets.isEmpty()) {
+                if (intersectionOfCandidateRatedItemSets != null && !intersectionOfCandidateRatedItemSets.isEmpty()) {
                     kRatedSimilarItemsList = IBNNPrediction.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
@@ -108,13 +102,15 @@ public class IBLSHPrediction extends LSHPrediction
                         targetList.add(entry.getValue());
                         outputList.add(prediction);
                     }
+                } else {
+                    // do nothing
                 }
             }catch (NullPointerException e) {
                 LOG.error(e.getLocalizedMessage());
-                return 0;
+
             }
         }
-        return total_candidate_set_size / cnt;
+        return total_candidate_set_size / testMovieList.size();
     }
 
 

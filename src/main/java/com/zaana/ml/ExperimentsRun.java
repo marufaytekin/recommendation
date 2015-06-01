@@ -21,8 +21,10 @@ public class ExperimentsRun {
 
         //static String dataFilePath = "data/ymusic/ymusic.data";
         //static String dataFileBase = "data/ymusic/ymusic";
-        static String dataFilePath = "data/100k/ml.data";
-        static String dataFileBase = "data/100k/ml";
+        //static String dataFilePath = "data/100k/ml.data";
+        //static String dataFileBase = "data/100k/ml";
+        static String dataFilePath = "data/300k/xaa";
+        static String dataFileBase = "data/300k/xaa";
         static final String seperator = "\\t";
         static int topN = 20;
         static int kNN = 20;
