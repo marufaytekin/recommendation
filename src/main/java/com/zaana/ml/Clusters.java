@@ -68,7 +68,7 @@ public class Clusters {
         frame.setTitle("Clusters");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(dp, BorderLayout.CENTER);
-        frame.getContentPane().setPreferredSize(new Dimension(2048, 1024));
+        frame.getContentPane().setPreferredSize(new Dimension(768, 576));
         frame.pack();
         frame.setVisible(true);
     }

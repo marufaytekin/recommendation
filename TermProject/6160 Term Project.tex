@@ -539,10 +539,10 @@ candidate pairs who have rated for item $i$ retrieved from hash table $t$.
 \cline{3-4}
      & Space & Model Build  & Query \\
 \hline
-LSH & $O(|U|)$ ￼& $O(n(n-1))$ &$O(|S|)$ \\
+LSH & $O(|U|)$ ￼& $O(|U|^2)$ &$O(|S|)$ \\
 \hline
 \end{tabular}
-\caption{The space and time complexity of Clustering  method, as a function of U, n, and S}
+\caption{The space and time complexity of Clustering  method, as a function of U and S, where S is the clustered data set.}
 \label{table:complexity-lsh}
 \end{table}
 
