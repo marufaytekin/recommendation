@@ -47,7 +47,10 @@ public class Run {
                 break;
             case "11":
                 ClusterTests.runClusterTests1(dataFileBase, seperator, kNN, y);
-                //ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
+
+                break;
+            case "12":
+                ClusterTests.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
                 break;
 
             case "50":

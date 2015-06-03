@@ -28,7 +28,7 @@ public class LSHRecommRun {
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
     static int numOfRun = 20;
-    static final int smoothRun = 3;
+    static final int smoothRun = 1;
     // l: number of bands
     // k: number of hash functions
     static int l = 4;
@@ -56,7 +56,8 @@ public class LSHRecommRun {
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");
-            System.out.println("11 - Create dist matrix");
+            System.out.println("11 - Create cluster");
+            System.out.println("12 - Run Cluster Tests");
             System.out.println("");
             System.out.println("99 - Exit");
             System.out.println("===================================");

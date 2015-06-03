@@ -185,24 +185,18 @@ aaytekin@gmail.com } }
 \begin{abstract}
 %\boldmath
 
-The memory-based Collaborative Filtering (CF) methods are widely used in
-recommendation systems because they are easy-to-implement and highly
-effective. One of the most important challenges of these methods is the
-ability to scale with the increasing numbers of users and items. When
-number of existing users and items grows tremendously, memory-based CF 
-algorithms suffer serious scalability problems. Researchers have been 
-working on number of techniques and algorithms to deal with this issue 
-such as dimensionality reduction techniques. Scalability and prediction 
-performance have reciprocal relationship, hence it is a real challenge to 
-preserve prediction performance while increasing scalability.
+We have been working on the neighborhood-based collaborative filtering (CF) 
+algorithms and using LSH to solve the scalability issue of these algorithms. 
+In addition to using LSH with CF methods we have been also working on 
+evaluation of LSH in recommendation domain.
 
-Researchers have used number of methods including Locality Sensitive 
-Hashing (LSH) to overcome the scalability issue with CF algorithms. 
-We have been working on the evaluation of LSH with CF algorithms. 
-In addition to evaluation of LSH in recommendation domain, we 
-would like to find out if we can simply use LSH for prediction problem of 
-recommendation. In this project we will implement LSH based prediction engine 
-and compare the results with user-based CF algorithm.
+In addition to these works, in this study we would like to evaluate the usage 
+of  LSH and pairwise clustering methods for prediction problem of recommendation. 
+With this method we use LSH without CF to make predictions, hence, with this 
+method there is no similarity computation. For clustering we used two 
+approaches; using clustering with CF and using cluster objects to make 
+predictions. In this project we will implement LSH and clustering based prediction 
+engines and compare the results with user-based CF algorithm.
 
 \end{abstract}
 
@@ -235,15 +229,12 @@ and compare the results with user-based CF algorithm.
 
 A fundamental data-mining problem is to search data for "similar" items. 
 Similarity of sets is very important in recommendation and needs to be
-calculated efficiently. Neighborhood-based collaborative filtering 
-algorithms are widely used techniques in recommendation systems. These 
-algorithms recommend items to the users such that the items are liked by 
-the other users which have similar tests with those users \cite{DBLP:journals/ir/HerlockerKR02}. 
-In these methods, general approach is to investigate every user and item to find 
-the most similar ones. Because of the need to investigate every pair in 
-search space, similarity search space grows quadratically depending on the 
-number of users or items. Hence, neighborhood-based collaborative 
-filtering algorithms do not scale with the size of data \cite {DBLP:reference/rsh/DesrosiersK11}.
+calculated efficiently. In neighborhood-based collaborative filtering methods, 
+general approach is to investigate every user and item to find the most similar 
+ones. Because of the need to investigate every pair in search space, similarity 
+search space grows quadratically depending on the number of users or items. 
+Hence, neighborhood-based collaborative filtering algorithms do not scale well 
+with the size of data \cite {DBLP:reference/rsh/DesrosiersK11}.
 
 As oppose to investigating every item to find the similar pairs in the 
 search space, $R$, and computing the predictions, we need to find a better 
@@ -251,14 +242,14 @@ way to find the similar users and items without investigating every pair in $R$.
 There is a well-known and effective technique for approximate nearest neighbor 
 search in high dimensional spaces, called locality sensitive hashing (LSH). 
 One general approach to LSH is defined by \cite{Rajaraman:2011:MMD:2124405} 
-as follows: "hash items several times, in such a way that similar items are more likely to 
-be hashed to the same bucket than dissimilar items are. We then consider 
-any pair that hashed to the same bucket for any of the hashings to be a 
-candidate pair." We can use the candidate pairs for making the 
-predictions. In LSH, hashing items or users in the buckets operation is 
-performed very efficiently in linear time complexity. We consider all 
-items in the same bucket as near neighbor items for a target item. 
-We can use these items to make a prediction for the target item.
+as follows: "hash items several times, in such a way that similar items are 
+more likely to be hashed to the same bucket than dissimilar items are. We then 
+consider any pair that hashed to the same bucket for any of the hashings to be 
+a candidate pair." We can use the candidate pairs for making the predictions. 
+In LSH, hashing items or users in the buckets operation is performed very 
+efficiently in linear time complexity. We consider all items in the same bucket 
+as near neighbor items for a target item. We can use these items to make a 
+prediction for the target item.
 
 In this project we will implement a prediction engine that will use LSH to 
 query similar items of a target item then predict the rating for the target 
@@ -266,13 +257,6 @@ item. In the following sections we will briefly describe collaborative
 filtering and locality sensitive hashing methods. Then we will give the details 
 of proposed method, using LSH for predictions and experiments. Finally we will 
 discuss our findings from the experiments and conclude. 
-
-% You must have at least 2 lines in the paragraph with the drop letter
-% (should never be an issue)
-
-% \hfill mds
- 
-% \hfill January 11, 2007
 
 
 \section{Collaborative Filtering}

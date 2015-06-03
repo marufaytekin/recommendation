@@ -37,11 +37,11 @@ public class ClusterPrediction extends AbstractPrediction {
             List<String> neighborsList = Clusters.getClusterNeighborsWithName(clusters,userId,depth);
             Set <String> neighborsSet = new HashSet<>(neighborsList);
             //Using clustered results
-            //  predictRatingsForTestUsers(
-            //          testDataEntry, userRateMap, itemRateMap, neighborsSet, outputList, targetList);
+              predictRatingsForTestUsers(
+                      testDataEntry, userRateMap, itemRateMap, neighborsSet, outputList, targetList);
             // Using clustered results with k-NN
-            predictRatingsForTestUsers(
-                   testDataEntry, userRateMap, itemRateMap, neighborsSet, userId, outputList, targetList, kNN, y);
+            //predictRatingsForTestUsers(
+            //       testDataEntry, userRateMap, itemRateMap, neighborsSet, userId, outputList, targetList, kNN, y);
             totalNbrSize += neighborsList.size();
         }
 
