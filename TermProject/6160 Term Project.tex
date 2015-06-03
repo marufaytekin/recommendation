@@ -186,17 +186,20 @@ aaytekin@gmail.com } }
 %\boldmath
 
 We have been working on the neighborhood-based collaborative filtering (CF) 
-algorithms and using LSH to solve the scalability issue of these algorithms. 
-In addition to using LSH with CF methods we have been also working on 
-evaluation of LSH in recommendation domain.
+algorithms and using Locality Sensitive Hashing (LSH) to solve the scalability 
+issue of these algorithms. In addition to using LSH for scalability problem of 
+CF methods, LSH can be used for prediction problem of recommendation. 
+In this study we introduce LSH based prediction method for recommendation and 
+compare it with pairwise clustering. In this method we eliminate similarity 
+computation and use candidate sets coming from LSH hash tables as near 
+neighbors and use these sets directly in prediction computation. For clustering
+based prediction, we used two approaches; using clustering with CF and using 
+cluster objects as near neighbor objects and compute the predictions.
 
-In addition to these works, in this study we would like to evaluate the usage 
-of  LSH and pairwise clustering methods for prediction problem of recommendation. 
-With this method we use LSH without CF to make predictions, hence, with this 
-method there is no similarity computation. For clustering we used two 
-approaches; using clustering with CF and using cluster objects to make 
-predictions. In this project we will implement LSH and clustering based prediction 
-engines and compare the results with user-based CF algorithm.
+In this project we implement a prediction engine that will use LSH to 
+query similar items of a target item then predict the rating for the target 
+item. Then we implement pairwise clustering to build up a hierarchical cluster 
+tree and use for predictions.
 
 \end{abstract}
 
@@ -245,19 +248,29 @@ One general approach to LSH is defined by \cite{Rajaraman:2011:MMD:2124405}
 as follows: "hash items several times, in such a way that similar items are 
 more likely to be hashed to the same bucket than dissimilar items are. We then 
 consider any pair that hashed to the same bucket for any of the hashings to be 
-a candidate pair." We can use the candidate pairs for making the predictions. 
-In LSH, hashing items or users in the buckets operation is performed very 
-efficiently in linear time complexity. We consider all items in the same bucket 
-as near neighbor items for a target item. We can use these items to make a 
-prediction for the target item.
+a candidate pair." 
 
-In this project we will implement a prediction engine that will use LSH to 
-query similar items of a target item then predict the rating for the target 
-item. In the following sections we will briefly describe collaborative 
-filtering and locality sensitive hashing methods. Then we will give the details 
-of proposed method, using LSH for predictions and experiments. Finally we will 
-discuss our findings from the experiments and conclude. 
+Instead of investigating all users/items in a data set to find the most similar
+items, we can use the candidate pairs in the same bucket as the similar 
+users/items then use them to make predictions. This way we eliminate similarity
+computation hassle of CF methods. In LSH, hashing items or users in the buckets
+operation is performed very efficiently in linear time complexity. 
 
+Similar to LSH, we can use clustering to group similar user/items in clusters 
+then search the clusters for a target item. In this case we search only the 
+cluster that target belongs to instead of searching all data set, $R$. As a 
+second method to compare, we use hierarchical agglomerative clustering method. 
+We experiment two versions of using clustering to make the predictions as 
+follows. Once we build up the cluster tree, we run a query for a target 
+user/item and find the cluster neighbors of the target then pass these
+neighbors to user-based CF algorithm to make the predictions. In the second 
+method of using clustering we directly use cluster neighbors of the target to 
+compute the predictions by treating all cluster members equally weighted.
+
+In the following sections we will briefly describe collaborative filtering, 
+locality sensitive hashing, and clustering methods. Then we will give the 
+details of using LSH and clustering for predictions. Finally we will give the
+experimental results and discuss our findings and conclude.
 
 \section{Collaborative Filtering}
 \label{sec:cf}
@@ -339,25 +352,25 @@ complexity,  as a function of number of users or items. Table \ref{table:complex
 shows user-based and item-based complexity where $U$ and $I$ are denoted for 
 the user and item sets respectively \cite{DBLP:reference/rsh/DesrosiersK11}.
 
-We need to eliminate the need for comparing every item with  every other item 
-to find the most similar items in linear time. Locality Sensitive Hashing (LSH) 
-provides an approach to find the candidate items or users that are likely to be similar 
-and referred as approximate nearest neighbor search \cite{Rajaraman:2011:MMD:2124405}.
+LSH provides an approach to find the candidate items or users that are likely 
+to be similar, without comparing every item with every other item, and referred
+as approximate nearest neighbor search \cite{Rajaraman:2011:MMD:2124405}. 
 Instead of using $k$ nearest neighbors to make a prediction, we can use the candidate 
 set lists provided by LSH to compute the prediction of a rating. 
- 
+
+
 \section{Locality Sensitive Hashing}
 \label{sec:lsh}
 
-Locality-Sensitive functions take two items and decide about whether or not
-they should be a candidate pair. The function $h$ will "hash" data points $x$
-and $y$ and this is denoted as $h(x)$ and $h(y)$. Decision will be rendered 
-based on whether the results are equal or not. It is convenient to use the 
-notation $h(x) = h(y)$ means that "$x$ and $y$ are a candidate pair". 
-$h(x) \neq h(y)$ is used to mean that "$x$ and $y$ are not a candidate pair." 
-A group of functions of this type makes locality-sensitive functions or 
-\textit{family of functions} which is denoted as $\mathcal{H}$ 
-\cite[p.~86]{Rajaraman:2011:MMD:2124405}.
+The idea of LSH is as follows. Locality-Sensitive functions, $h$, take two data
+points (users/items) and decide about whether or not they should be a candidate
+pair. Let the function $h$ that will "hash" data points $x$ and $y$ be denoted 
+as $h(x)$ and $h(y)$. Decision will be rendered based on whether the output of
+$h(x)$ and $h(y)$ are equal or not. It is convenient to use the notation 
+$h(x) = h(y)$ means that "$x$ and $y$ are a candidate pair". $h(x) \neq h(y)$ 
+is used to mean that "$x$ and $y$ are not a candidate pair." A group of functions 
+of this type called locality-sensitive functions or \textit{family of functions}
+which is denoted as $\mathcal{H}$ \cite[p.~86]{Rajaraman:2011:MMD:2124405}.
 
 In general, LSH family of functions defined as follows: Let $d1 < d2$ be two
 distances, for data points $x$ and $y$. According to some distance measure $D$,
@@ -372,19 +385,13 @@ for $D$, if for every $h$ in $\mathcal{H}$:
 where p1 and p2 are two probability values and $p_1 > p_2$ for the LSH method
 to be useful.
 
-Previous researchers have proposed locality-sensitive hashing schemes for a
-variety of similarity measures thus far, including jaccard similarity, hamming
-distance, euclidean distance, cosine similarity, and kernelized similarity 
-functions.
-We represent user and item data points as rating vectors, hence
-we use cosine distance/similarity to measure the similarity of two users or
-items. We will describe locality-sensitive hashing scheme on $R^d$, collection 
-of vectors in ratings data set $R$. We use \cite{DBLP:conf/stoc/Charikar02}'s 
-proposal  to define a locality-sensitive hashing scheme 
-as a distribution on a family of hash functions $\mathcal{H}$ operating on a 
-collection of vectors in $R^d$. Let $\vec{u}$ be user $u$'s rating vector and 
-$\vec{v}$ be user $v$'s rating vector. The family of hash functions 
-$\mathcal{H}$ defined as follows:
+We represent data points as rating vectors. We will describe locality-sensitive
+hashing scheme on $R^d$, collection of vectors in ratings data set $R$. We use
+\cite{DBLP:conf/stoc/Charikar02}'s proposal to define a locality-sensitive 
+hashing scheme as a distribution on a family of hash functions $\mathcal{H}$
+operating on a collection of vectors in $R^d$. Let $\vec{u}$ be user $u$'s 
+rating vector and $\vec{v}$ be user $v$'s rating vector. The family of hash 
+functions $\mathcal{H}$ defined as follows:
 
 \begin{equation}
 h_{\vec{r}}(\vec{u}) = \left\{ 
@@ -405,44 +412,38 @@ of declaring users $u$ and $v$ as a candidate pair.
 
 Using this random hyper plane based hash function, we obtain a hash function 
 family $\mathcal{H}$ for cosine similarity. Applying the above scheme gives a 
-locality sensitive hashing scheme where
+locality sensitive hashing scheme where the probability of $u$ and $v$ being declared as a candidate pair calculated as in Eqn. \ref{eq:probabilityID}.
 
 \begin{equation}
- Pr[h(u)=h(v)] = 1 - \frac{\theta}{\pi}
+ Pr[h(u)=h(v)] = 1 - \frac{\theta}{\pi} ,
 \label{eq:probabilityID}
 \end{equation}
-
 where $\theta = \cos^{-1} \frac{u \cdot v}{\parallel u \parallel \parallel v 
 \parallel}$. The dot '$\cdot$' in the equation represents dot product of two 
 vectors. 
 
-Eqn. \ref{eq:probabilityID} shows the probability of $u$ and $v$ being declared 
-as a candidate pair. Each hash function from family of functions, $\mathcal{H}$, 
-produces a hash value for input vectors, $\vec{u}$ or $\vec{v}$, 
-which is a single bit. We concatenate these bits to create a
-hash key for the input vectors. After generation of hash keys, the input 
-vectors that have the same hash keys are mapped to the same bucket, in other 
-words they are hashed to the same bucket (Fig. \ref{fig:lsh-illustra}). We repeat 
-this procedure several times for number of bands (hash tables) as described in 
-banding technique. We slightly modified the bending technique described in 
-\cite{Rajaraman:2011:MMD:2124405} and used different hash
-functions for each bands (hash tables). In this method, similar (nearby) 
-vectors are more likely to hash to the same bucket in at least one of the hash 
-tables than dissimilar vectors. On the other hand dissimilar (distant) vectors 
-are likely to be hashed to different buckets. Any pair that are hashed to the 
-same bucket for at least one of the hash tables are called candidate pairs and 
-they are likely to be similar pairs. It is assumed that most of the dissimilar 
-pairs are not hashed to the same bucket in any of hash tables, and therefore 
-they will not be checked during the similarity calculation. Those dissimilar 
-pairs that are hashed to the same bucket in at least one of the hash functions 
-are \textit{false positives} and these will only be a small amount of all pairs. 
-In this method, most of the actually similar pairs are mapped to the same 
-bucket under at least one of the hash functions. The actually similar pairs that 
-do not map to the same bucket in any of hash functions are \textit{false negatives} 
-which will be only a small amount of the truly similar pairs 
-\cite{Rajaraman:2011:MMD:2124405}.
-
-
+Each hash function from family of functions, $\mathcal{H}$, produces a hash 
+value for input vectors, $\vec{u}$ or $\vec{v}$, which is a single bit. We use
+AND-Construction to concatenate these bits to create a hash key for the input
+vectors. After generation of the hash keys, the input vectors that have the 
+same hash key are mapped to the same bucket, in other words they are hashed to 
+the same bucket (Fig. \ref{fig:lsh-illustra}). We repeat this procedure several
+times for number of bands (hash tables) with different randomly generated hash
+functions as described in banding technique then use OR-Construction to merge 
+the results coming from different hash tables. \cite{Rajaraman:2011:MMD:2124405}. 
+In this method, similar (nearby) vectors are more likely to hash to the same 
+bucket in at least one of the hash tables than dissimilar vectors. On the other
+hand dissimilar (distant) vectors are likely to be hashed to different buckets.
+Any pair that are hashed to the same bucket for at least one of the hash tables 
+(OR-Construction) are called candidate pairs and they are likely to be similar 
+pairs. It is assumed that most of the dissimilar pairs are not hashed to the 
+same bucket in any of hash tables. Those dissimilar pairs that are hashed to 
+the same bucket in at least one of the hash tables are \textit{false positives}
+and these will only be a small amount of all pairs. In this method, most of the
+actually similar pairs are mapped to the same bucket under at least one of the 
+hash tables. The actually similar pairs that do not map to the same bucket in 
+any of hash tables are \textit{false negatives} which will be only a small 
+amount of the truly similar pairs \cite{Rajaraman:2011:MMD:2124405}. 
 \begin{figure}[h]
    \center
    \includegraphics[scale=0.3]{lsh.png}
@@ -451,34 +452,41 @@ which will be only a small amount of the truly similar pairs
    \label{fig:lsh-illustra}
 \end{figure}
 
+In following section we will describe how we use the candidate sets for prediction calculation.
+
 
 \section{LSH For Prediction}
 \label{sec:lsh-prediction}
-As described in Section \ref{sec:cf}, in neighborhood-based methods general 
-approach is to investigate every user and item to find the most similar ones. 
-Then the similar users or items are used to make a prediction. With LSH we can 
-find the similar users or items without comparing every user or item with each other.
-We can retrieve the similar items or users, called candidate pairs, to a target
-item or user then compute the prediction with the retrieved candidate set. 
-We can make a prediction of an items rating for a user with LSH as follows. For 
-each hash table, we compute a hash key for the target user and retrieve the 
-candidate users with the same hash key from the hash tables. if a candidate user
-comes from multiple hash tables, we weight it with the number of hash tables 
-it occurs call it frequency. Other wise all users treated equally weighted. Once we 
-retrieved candidate sets from all hash tables, we take the union of all candidate 
-sets and select the users who rated for the target item. Then we use their 
-ratings, weighted with frequency, to compute the prediction for the target user.
-Computational complexity of this method shown in Table \ref{table:complexity-lsh}.
 
-Let $\hat{r}_{ui}$ is the rating of user $u$ on item $i$ that will be predicted.
-We use following formula (Eq. \ref{eq:lsh-prediction}) to predict the ratings 
-of user $u$ on the item $i$:
+As described in Section \ref{sec:cf}, in neighborhood-based methods, general
+approach is as follows. In order to find the similar objects investigate every 
+object to find the most similar ones, then use these similar objects to make a 
+prediction. With LSH we can find the similar objects without comparing every 
+object with each other in linear time. We run a query to find the similar 
+objects set, called candidate set, for a target object then compute the 
+prediction with the retrieved candidate set. With the word "object", we mean
+a data point in our data set. It can be a user or item for MovieLens data set we 
+use in this study. With LSH prediction, we can make a prediction of a target 
+item's rating for a target user as follows. For each hash table, we compute a 
+hash key for the target user and retrieve the candidate users with the same 
+hash key from the hash tables. We weight the candidate users with the number of
+occurrences in hash tables. If a candidate user comes from two hash tables, 
+it will have a weight of two as oppose to a user comes from only one table 
+which will have a weight of one. We call these weights as "frequency". 
+Once we retrieved candidate sets from all hash tables, we find the users who 
+rated for the target item, then we use their ratings, weighted with frequency, 
+to compute the prediction. Let $\hat{r}_{ui}$ is the rating of user $u$ on 
+item $i$ that will be predicted, we will use following formula to predict the 
+ratings of user $u$ on the item $i$;
+
 \begin{equation}
 \hat{r}_{ui} = \frac{\sum\limits_{t=1}^{L} \sum\limits_{v \in C_i(t)} r_{vi}}{\sum\limits_{t=1}^{L} \mid C_i(t) \mid} ,
 \label{eq:lsh-prediction}
 \end{equation}
 where; $L$ is the number of hash tables (bands) and  $C_i(t)$ is the set of 
 candidate pairs who have rated for item $i$ retrieved from hash table $t$.
+
+Computational complexity of this method is linear and shown in Table \ref{table:complexity-lsh}.
 
 \begin{table}
 \centering
@@ -498,22 +506,44 @@ LSH & $O(|U||L|)$ ￼& $O(|U|)$ &$O(|C||L|)$ \\
 \section{Clustering For Prediction}
 \label{sec:cluster-prediction}
 
-With clustering, similar to LSH approach, we can find the similar users or items 
-without comparing every user or item with each other. We first create the cluster of data set based on the distance matrix of data. We first create the distance matrix of users. We use cosine similarity measure for distance calculation. Then we group the objects into a hierarchical cluster tree. In this step, we link pairs of objects that are in close proximity using a linkage function. As the hierarchical agglomerative clustering method, we used "grouped average linkage" method. With this method all objects in the cluster contribute to inter-cluster similarity. 
+With clustering, similar to LSH, we can find the similar objects without 
+comparing every object with each other. We first create the distance matrix of 
+users with cosine similarity measure, then create the cluster tree of data set 
+based on the distance matrix. As the clustering algorithm we use agglomerative 
+hierarchical clustering algorithm with "grouped average linkage" method. With 
+this method all objects in the cluster contribute to inter-cluster similarity.
 
-The point where to cut the hierarchical tree into clusters decisive on the inter-cluster similarity of the clusters. In other words, if we cut the hierarchical tree close to the leaves, we will have many clusters with high inter-similarity, but, if we cut it close to the root of the hierarchical tree we would have less clusters with low inter-similarity. Once we cut off the hierarchical tree at an arbitrary
-point we assign all the objects below each cut to a single cluster. 
+The point where to cut the hierarchical tree into clusters decisive on the 
+inter-cluster similarity of the clusters. In other words, if we cut the 
+hierarchical tree close to the leaves, we will have many clusters with high 
+inter-similarity, but, if we cut it close to the root of the hierarchical tree 
+we would have less clusters with low inter-similarity. Once we cut off the 
+hierarchical tree at an arbitrary point, we assign all the objects below each 
+cut point to a single cluster (Fig. \ref{fig:cluster-cut-off}). 
+\begin{figure}[!h]
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \includegraphics[width=\textwidth]{charts/cluster-cut-off.jpg}
+        \end{subfigure}
+        \caption{Sample cut-off point and resulted sub clusters.}
+        \label{fig:cluster-cut-off}
+\end{figure}
 
-Once we have the clusters, we use these clusters for predictions as follows. For a target user, $u$, first we find the cluster that $u$ belongs to, then we use all the users in this cluster to make a prediction for $u$ on item $i$. For the predictions we can two different approach. First we used user-based k-NN by only considering the neighbors in the cluster and called this method Clustering-kNN. Second we treated each user in the cluster as equally weighted and used for predictions and called this method "Clustering".
-
-[TODO]
+Once we have sub clusters of data set, we use the clusters for predictions as
+follows. For a target user, $u$, first we find the cluster that $u$ belongs to,
+then we use all the users in this cluster, $c$, (cluster-neighbors) as nearest 
+neighbor list for $u$ to make predictions. For the predictions we tried two 
+different approaches. First we pass cluster-neighbors to user-based CF 
+algorithm to make the predictions and called this method "clustering-kNN". As the
+second approach, we directly use cluster neighbors of the target to compute the
+predictions by treating all cluster members equally weighted and call this 
+method "clustering".
 
 \begin{equation}
-\hat{r}_{ui} = \frac{\sum\limits_{t=1}^{L} \sum\limits_{v \in C_i(t)} r_{vi}}{\sum\limits_{t=1}^{L} \mid C_i(t) \mid} ,
-\label{eq:lsh-prediction}
+\hat{r}_{ui} = \frac{\sum\limits_{v \in S_i(c)} r_{vi}}{\mid S_i(c) \mid} ,
+\label{eq:cluster-prediction}
 \end{equation}
-where; $L$ is the number of hash tables (bands) and  $C_i(t)$ is the set of 
-candidate pairs who have rated for item $i$ retrieved from hash table $t$.
+where; $S_i(c)$ is the set of cluster neighbors who have rated for item $i$ retrieved from cluster $c$.
 
 \begin{table}
 \centering
@@ -523,12 +553,14 @@ candidate pairs who have rated for item $i$ retrieved from hash table $t$.
 \cline{3-4}
      & Space & Model Build  & Query \\
 \hline
-LSH & $O(|U|)$ ￼& $O(|U|^2)$ &$O(|S|)$ \\
+Cluster & $O(|U|)$ ￼& $O(|U|^2)$ &$O(1)$ \\
+Cluster-kNN & $O(|U|)$ ￼& $O(|U|^2)$ &$O(|S|)$ \\
 \hline
 \end{tabular}
 \caption{The space and time complexity of Clustering  method, as a function of U and S, where S is the clustered data set.}
-\label{table:complexity-lsh}
+\label{table:complexity-clustering}
 \end{table}
+
 
 \section{Experiments}
 \label{sec:experiements}
@@ -576,15 +608,19 @@ MovieLens     & 943	& 1682	  & 100000   & 0.0630   \\
 
 
 \subsection{Results}
+\label{subsec:results}
+
+\subsubsection{Parameter Detection Tests}
+\label{subsubsec:parameter_detect}
 
 We run parameter detection tests on validation data set first. We run user-based
 prediction tests for $k$ nearest neighbor parameter. In neighborhood based CF, 
 $k$ number of neighbors is used for prediction calculations. We start $k$ from 
 one and increased by five up to fifty and computed MAE as shown in 
-Fig \ref{fig:mae-k-ub}. We found out that for our data set user-based CF 
-performs best when $k$ is around 30. We set $k$ to 30 and run another 
+Fig \ref{fig:mae-k-ub}. We found out that user-based CF performs best when $k$ 
+is around 30 for the data set we use. We set $k$ to 30 and run another 
 experiment to detect the optimum $Y$, significance, parameter. 
-Fig. \ref{fig:mae-y-ub} shows that user-based CF performs best, in terms of
+Fig. \ref{fig:mae-y-ub} shows that user-based CF performs best, in terms of 
 accuracy, when $Y$ is around seven.
 \begin{figure}
         %\centering
@@ -604,9 +640,16 @@ accuracy, when $Y$ is around seven.
 \end{figure}
 
 
-With the optimum $k$ and $Y$,  we run the prediction tests on the test set for user-based CF. We found average MAE as 0.79527 and average running time as 9.437 seconds. We compare this results with the results of proposed LSH method.
+\subsubsection{LSH Tests}
+\label{subsubsec:lsh_tests}
 
-We run 10x10 experiments to detect the effect of LSH parameters, number of hash tables and functions. Fig. \ref{fig:lsh-2d} shows the heat map figures of these experiments.
+With the optimum $k$ and $Y$ from Sec. \ref{subsubsec:parameter_detect}, 
+we run user-based CF prediction tests on the test set and found average MAE 
+and running time 0.79527 and 9.437 seconds respectively. We compare this 
+results with the results of proposed LSH method. For the proposed LSH method, 
+we run 10x10 experiments to detect the effect of LSH parameters, number of hash
+tables and functions. Fig. \ref{fig:lsh-2d} shows the heat map figures of these
+experiments.
 
 \begin{figure}
         %\centering
@@ -668,15 +711,13 @@ computation with LSH prediction (\ref{eq:lsh-prediction}).
 \end{figure}
 
 We compare LSH method with user-based collaborative filtering in terms of hash 
-functions and hash tables. 
-
-Fig. \ref{fig:ub-lsh-tables} shows how the change of 
-hash tables effect MAE and performance. As we said before, increasing number of 
-hash tables increases the candidate set size (Fig. \ref{fig:lsh-tables-candidate-size}) 
-and this reduces false negatives hence MAE is improved and got closer to the MAE in 
-user-based method (Fig. \ref{fig:ub-lsh-tables-mae}). Even though MAE of LSH 
-is still worse then user-based method, we gain a lot in terms of the performance 
-(Fig. \ref{fig:ub-lsh-tables-runtime}).
+functions and hash tables. Fig. \ref{fig:ub-lsh-tables} shows how the change of
+hash tables effect MAE and performance. Increasing number of hash tables 
+increases the candidate set size (Fig. \ref{fig:lsh-tables-candidate-size}) 
+and this reduces number of false negatives and MAE is improved and got closer 
+to the MAE in user-based method (Fig. \ref{fig:ub-lsh-tables-mae}). Even though
+MAE of LSH is still worse then user-based CF method, we gain a lot in terms of 
+the performance (Fig. \ref{fig:ub-lsh-tables-runtime}).
 
 \begin{figure}[!h]
         %\centering
@@ -701,27 +742,30 @@ is still worse then user-based method, we gain a lot in terms of the performance
         \label{fig:ub-lsh-functions}
 \end{figure}
 
-Fig. \ref{fig:ub-lsh-functions} shows how the change of 
-hash functions effects MAE and performance. As we said before, increasing number of 
-hash functions decreases the candidate set size 
-(Fig. \ref{fig:lsh-functions-candidate-size}) 
-and this increases false negatives, hence, MAE gets worse 
-(Fig. \ref{fig:ub-lsh-functions-mae}). 
-Even though MAE of LSH gets worse then user-based method, we gain a lot in 
-terms of the performance as we increase the number of hash functions (Fig. \ref{fig:ub-lsh-functions-runtime}). 
+Figures in Fig. \ref{fig:ub-lsh-functions} show how the change of hash 
+functions effects MAE and performance. As we said before, increasing number of 
+hash functions decreases the candidate set size (Fig. \ref{fig:lsh-functions-candidate-size}) 
+and this increases false negatives, then MAE gets worse (Fig. \ref{fig:ub-lsh-functions-mae}). 
+Even though MAE of LSH gets worse as we increase number of hash functions, we 
+gain a lot in terms of the performance as oppose to user-based CF method. (Fig. \ref{fig:ub-lsh-functions-runtime}). 
 
-With the optimum $k$ and $Y$, we also compared the user-based method with 
-clustering. We started experiments from level(depth) 0 which is the root of the
-cluster and increased the level up to 20. When $n=0$ there is only one cluster
-($2^0 = 1$). If we assume the equal distribution of the cluster, at level $n$,
-approximately $2^n$ clusters are generated where $n$ is the depth of the 
-cluster from bottom up. Since 943 users in the data set and we use pairwise 
-clustering, $943/2 = 421$ clusters generated at the first level of the cluster.
-Cluster of all users are shown in Fig. \ref{fig:cluster}. A sample cluster of 
-user with id:306 up to 5 level is shown in Fig. \ref{fig:sample-user-cluster}.
+\subsubsection{Cluster Tests}
+\label{subsubsec:cluster_tests}
 
-When we compare the clustering approach with LSH in terms of the performance 
-and accuracy we found following results.
+With the optimum $k$ and $Y$ from Sec. \ref{subsubsec:parameter_detect} we also
+compared the user-based method with clustering. We started experiments from
+level(depth) 0 which is the root of the cluster and increased the level up to 
+20. When $n=0$ there is only one cluster ($2^0 = 1$). If we assume the equal
+distribution of the cluster, at level $n$, approximately $2^n$ clusters are 
+generated where $n$ is the depth of the cluster from bottom up. Since 943 users 
+in the data set and we use pairwise clustering, $943/2 = 421$ clusters generated 
+at the last level of the cluster. Cluster of all users are shown in Fig. \ref{fig:cluster}. 
+A sample cluster of user with id:306 up to 5 level is shown in Fig. \ref{fig:sample-user-cluster}.
+We cut off the cluster at every level between 1-20 and measured the accuracy 
+and performance for both "Clustering" and "Custering-kNN" methods then compare 
+the with LSH in terms of the performance and accuracy.
+
+[TODO]
 
 \begin{figure}[!h]
         %\centering
