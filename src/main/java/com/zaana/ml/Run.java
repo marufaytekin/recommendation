@@ -43,7 +43,7 @@ public class Run {
                 ModelBuildTimeTest.runModelBuildTimeTest("UB", dataFilePath, seperator, k, l);
                 ModelBuildTimeTest.runModelBuildTimeTest("UBLSH", dataFilePath, seperator, k, l);
                 ModelBuildTimeTest.runModelBuildTimeTest("IB", dataFilePath, seperator, k, l);
-                //ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
+                ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
             case "11":
                 ClusterTests.runClusterTests1(dataFileBase, seperator, kNN, y);

@@ -202,7 +202,7 @@ y2 = fliplr(CkNNAvgdNbrSize);
 y3 = LSHCandidateSetList;
 plot (x, y1, '-dk', x, y2, '-*k');
 legend ("Cluster","Cluster-kNN");
-xlabel("Cluster Depth/Hash Functions");
+xlabel("Cluster Depth");
 ylabel("Avg. Cluster Size");
 write(f, 'cl-size');
 
