@@ -155,7 +155,7 @@
 %
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
-\title {6160 Advanced Topics in Artificial Intelligence \\Term Project: Using Locality Sensitive Hashing for Prediction Problem in Recommendation}
+\title {6160 Advanced Topics in Artificial Intelligence \\Term Project: Locality Sensitive Hashing and Clustering Approaches to Prediction Problem of Recommendation}
 
 \author{\IEEEauthorblockN {Ahmet Maruf Aytekin}
 \IEEEauthorblockA{Department of Computer Engineering  \\
@@ -184,22 +184,22 @@ aaytekin@gmail.com } }
 
 \begin{abstract}
 %\boldmath
+Finding the best item  to match a particular user's interests is one of the 
+most important problems in recommender systems. In order to find the best item,
+recommender systems employ prediction algorithms. In this study we introduce 
+Locality Sensitive Hashing (LSH) based prediction algorithm and evaluate it 
+against Pairwise Clustering and user-based Collaborative Filtering (CF).
 
-We have been working on the neighborhood-based collaborative filtering (CF) 
-algorithms and using Locality Sensitive Hashing (LSH) to solve the scalability 
-issue of these algorithms. In addition to using LSH for scalability problem of 
-CF methods, LSH can be used for prediction problem of recommendation. 
-In this study we introduce LSH based prediction method for recommendation and 
-compare it with pairwise clustering. In this method we eliminate similarity 
-computation and use candidate sets coming from LSH hash tables as near 
-neighbors and use these sets directly in prediction computation. For clustering
-based prediction, we used two approaches; using clustering with CF and using 
-cluster objects as near neighbor objects and compute the predictions.
+In proposed LSH algorithm we eliminate similarity computation and find the 
+similar items with LSH and use them directly to make predictions. We use 
+clustering method in similar way to LSH to compute predictions. Another method 
+we tried with clustering is using clustering with user-based CF. We call this 
+method as "cluster-kNN" and use cluster objects (neighbors) as near neighbor 
+objects and compute the predictions with user-based CF algorithm.
 
-In this project we implement a prediction engine that will use LSH to 
-query similar items of a target item then predict the rating for the target 
-item. Then we implement pairwise clustering to build up a hierarchical cluster 
-tree and use for predictions.
+In this project we found out that proposed LSH and clustering methods for 
+prediction problem tremendously improved the the performance as oppose to 
+user-based CF method, as well as maintained the accuracy in acceptable ranges. 
 
 \end{abstract}
 
@@ -235,26 +235,23 @@ Similarity of sets is very important in recommendation and needs to be
 calculated efficiently. In neighborhood-based collaborative filtering methods, 
 general approach is to investigate every user and item to find the most similar 
 ones. Because of the need to investigate every pair in search space, similarity 
-search space grows quadratically depending on the number of users or items. 
-Hence, neighborhood-based collaborative filtering algorithms do not scale well 
-with the size of data \cite {DBLP:reference/rsh/DesrosiersK11}.
+search space grows quadratically, depending on the number of users or items. 
+As a result, neighborhood-based collaborative filtering algorithms do not scale
+well with the size of data \cite {DBLP:reference/rsh/DesrosiersK11}.
 
-As oppose to investigating every item to find the similar pairs in the 
-search space, $R$, and computing the predictions, we need to find a better 
-way to find the similar users and items without investigating every pair in $R$. 
+As oppose to investigate every item to find the similar pairs in the 
+search space, $R$, and compute the predictions, we need a better 
+way to find the similar users and items without investigating every pair in $R$.
 There is a well-known and effective technique for approximate nearest neighbor 
 search in high dimensional spaces, called locality sensitive hashing (LSH). 
 One general approach to LSH is defined by \cite{Rajaraman:2011:MMD:2124405} 
 as follows: "hash items several times, in such a way that similar items are 
 more likely to be hashed to the same bucket than dissimilar items are. We then 
 consider any pair that hashed to the same bucket for any of the hashings to be 
-a candidate pair." 
-
-Instead of investigating all users/items in a data set to find the most similar
-items, we can use the candidate pairs in the same bucket as the similar 
-users/items then use them to make predictions. This way we eliminate similarity
-computation hassle of CF methods. In LSH, hashing items or users in the buckets
-operation is performed very efficiently in linear time complexity. 
+a candidate pair." We consider all candidate pairs in the same bucket as the 
+near neighbors and use them directly in prediction calculations. This way we 
+eliminate similarity computation hassle. In LSH, hashing items or users to the 
+buckets operation is performed very efficiently in linear time complexity.
 
 Similar to LSH, we can use clustering to group similar user/items in clusters 
 then search the clusters for a target item. In this case we search only the 
@@ -510,8 +507,9 @@ With clustering, similar to LSH, we can find the similar objects without
 comparing every object with each other. We first create the distance matrix of 
 users with cosine similarity measure, then create the cluster tree of data set 
 based on the distance matrix. As the clustering algorithm we use agglomerative 
-hierarchical clustering algorithm with "grouped average linkage" method. With 
-this method all objects in the cluster contribute to inter-cluster similarity.
+hierarchical clustering algorithm with "grouped average linkage" method 
+\cite{ward1963hierarchical}. With this method all objects in the cluster 
+contribute to inter-cluster similarity.
 
 The point where to cut the hierarchical tree into clusters decisive on the 
 inter-cluster similarity of the clusters. In other words, if we cut the 
@@ -754,27 +752,22 @@ gain a lot in terms of the performance as oppose to user-based CF method. (Fig. 
 
 With the optimum $k$ and $Y$ from Sec. \ref{subsubsec:parameter_detect} we also
 compared the user-based method with clustering. The root cluster of all users 
-in our data set is shown in Fig. \ref{fig:cluster}. As an example we select a 
-sample cluster from the hierarchical cluster tree for user id: 306 at level 5 
-depth which is shown in Fig. \ref{fig:sample-user-cluster}. We started 
-experiments from level (depth) 0 which is the root of the cluster and increased
-the level up to 20. At each level we increase the depth by one and cut off the 
-cluster tree then we end up with clusters as it shown in Fig. \ref{fig:cluster-cut-off}.
-Since we use pairwise clustering and we have 943 users in the data set at the
-last level there will be $943/2 = 421$ clusters. We cut off the cluster at every 
-level from 1 to 20 and measured the accuracy and performance for both 
-"Clustering" and "Custering-kNN" methods, then, compare the results with LSH 
-and user-based CF.
+in our data set is shown in Fig. \ref{fig:cluster}. We started experiments from
+level (depth) 0 which is the root of the cluster and traverse down to tree one 
+by one. At each level we increase the depth by one and cut off the cluster tree
+then we end up with sub clusters (Fig. \ref{fig:cluster-cut-off}). We used the 
+cluster members as near neighbors and use them for the prediction calculations.
+In our experiments we cut off the cluster at every  level from 1 to 20 and 
+measure the accuracy and performance for both "Clustering" and "Custering-kNN" 
+methods, then, compare the results with LSH and user-based CF. At the lowest 
+level, since we use pairwise clustering and we have 943 users in the data set, 
+there will be $943/2 = 421$ clusters. 
 
 Similar to LSH when we increase the depth of cluster, the performance increases 
-because cluster size gets decreased, however, accuracy gets worse because number
-of false negatives increase as we cut off the cluster tree at deeper levels. 
-Using "Clustering" method increase the performance tremendously as oppose to 
-user-based CF and "Cluster-kNN" Fig. (\ref{fig:cl-runtime}), but, in terms of accuracy; 
-"Cluster-kNN" performs better (Fig. \ref{fig:cl-mae}). As we cut off the cluster tree 
-deeper, size of the clusters gets decreased (Fig. \ref{fig:cl-size}) and this 
-results performance increase. But, the accuracy is decreasing because number 
-of false negatives are also as we cut off the cluster tree at deeper levels. 
+because cluster size gets decreased (Fig. \ref{fig:cl-size}), however, accuracy 
+gets worse because number of false negatives increase. Using "Clustering" method increase the performance tremendously as oppose to user-based CF and "Cluster-kNN" 
+Fig. (\ref{fig:cl-runtime}), but, in terms of accuracy; "Cluster-kNN" performs 
+better (Fig. \ref{fig:cl-mae}). 
 
 \begin{figure}[!h]
         %\centering
@@ -802,34 +795,24 @@ of false negatives are also as we cut off the cluster tree at deeper levels.
 \begin{figure}[!h]
         \centering
         \begin{subfigure}[b]{0.50\textwidth}
-                \includegraphics[width=\textwidth]{charts/cluster.jpg}
+        \includegraphics[width=\textwidth]{charts/cluster.png}
         \end{subfigure}
-        \caption{Hierarchical cluster of all users in the data set. The top line shows the distance which scales from 1 to 10.}
+        \caption{Hierarchical cluster tree of data set. The top line shows the distance which scales from 1 to 10.}
         \label{fig:cluster}
-\end{figure}
-
-\begin{figure}[!h]
-        \centering
-        \begin{subfigure}[b]{0.50\textwidth}
-                \includegraphics[width=\textwidth]{charts/cluster-user-306.jpg}
-        \end{subfigure}
-        \caption{Sub cluster of user id: 306 at level 5. The top line shows the 
-        distance which scales from 1 to 10.}
-        \label{fig:sample-user-cluster}
 \end{figure}
 
 We also draw the accuracy metric against the performance for LSH, Clustering, 
 and Cluster-kNN methods (Fig. \ref{fig:performance-all}). We found out that 
-"Clustering" and LSH give best accuracy results at higher performance 
-(0-5 seconds). But if the accuracy is crucial and we tolerate some performance 
-issues "Cluster-kNN" method gets the better results in terms of accuracy.
+Clustering and LSH give best accuracy results at higher performance (0-5 
+seconds). But, if the accuracy is crucial and we tolerate some performance loss,
+"Cluster-kNN" method gets the better results in terms of accuracy.
 
 \begin{figure}
         \centering
         \begin{subfigure}[b]{0.45\textwidth}
                 \includegraphics[width=\textwidth]{charts/performance-all.eps}
         \end{subfigure}
-        \caption{Performance and MAE for User-based CF, Clustering, Cluster-kNN, and LSH methods}
+        \caption{Performance and MAE for LSH, Clustering, and Cluster-kNN methods}
         \label{fig:performance-all}
 \end{figure}
 
@@ -840,34 +823,21 @@ issues "Cluster-kNN" method gets the better results in terms of accuracy.
 In this term paper we have introduce an LSH based prediction algorithm for 
 the prediction problem of recommendation and compared it against user-based CF
 method and pairwise clustering.
- [TODO]
-We found out that proposed LSH calculation of the predictions tremendously 
-improved the scalability of recommendation as appose to traditional CF methods 
-and maintained the accuracy very well. Proposed LSH method performs 
-worse hen user-based CF method in terms of accuracy but gains a lot in performance.
-This is because we eliminate the similarity calculation in order to make a prediction. 
-We let LSH algorithm to find the similar users or items (candidate set) and compute 
-the predictions by using this candidate set.
 
-With different configuration parameters of LSH, we can get scalable and 
-better results than user-based method. LSH model needs to be
-configured to provide optimum outcome that balances MAE  and running time
-according to the priorities of expectations from the system.
+We found out that proposed LSH and clustering methods for prediction problem
+tremendously improved the the performance as oppose to user-based CF method, as
+well as maintained the accuracy in acceptable levels. With LSH and "Clustering"
+methods we eliminate the similarity calculation and rely on LSH and pairwise 
+clustering methods' capability of finding similar items to make predictions, 
+hence this improves the performance. 
 
-In order to complete the evaluation of this method in recommendation domain, 
-we need to run more experiments to find out how it performs against the $top-N$ 
-recommendation problem, which is one of the main problems in recommendation 
-domains. We also need to study this algorithms in terms of other recommendation 
-metrics such as diversity, novelty, serendipity, and aggregate diversity. 
-Another important issue in recommendation domain is the stability of 
-recommendation system. Stability of proposed method needs to be discussed and 
-evaluated too. 
+LSH and Clustering algorithms need to be configured to provide optimum outcome 
+that balances MAE and running time according to the priorities of expectations
+from the system.
 
-
-According to the expectations 
-from recommendation system, clustering algorithm should be configured to balance 
-between accuracy and performance.
-
+For the future work, these algorithms need to be evaluated for the $top-N$ 
+recommendation problem and other recommendation metrics such as diversity, 
+novelty, serendipity, and aggregate diversity.
 
 \bibliography{scalability}
 \bibliographystyle{plain} 
