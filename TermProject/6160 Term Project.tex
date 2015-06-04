@@ -554,7 +554,7 @@ where; $S_i(c)$ is the set of cluster neighbors who have rated for item $i$ retr
      & Space & Model Build  & Query \\
 \hline
 Cluster & $O(|U|)$ ￼& $O(|U|^2)$ &$O(1)$ \\
-Cluster-kNN & $O(|U|)$ ￼& $O(|U|^2)$ &$O(|S|)$ \\
+Cluster-kNN & $O(|U|)$ ￼& $O(|U|^2)$ &$O(|S|k)$ \\
 \hline
 \end{tabular}
 \caption{The space and time complexity of Clustering  method, as a function of U and S, where S is the clustered data set.}
@@ -753,19 +753,28 @@ gain a lot in terms of the performance as oppose to user-based CF method. (Fig. 
 \label{subsubsec:cluster_tests}
 
 With the optimum $k$ and $Y$ from Sec. \ref{subsubsec:parameter_detect} we also
-compared the user-based method with clustering. We started experiments from
-level(depth) 0 which is the root of the cluster and increased the level up to 
-20. When $n=0$ there is only one cluster ($2^0 = 1$). If we assume the equal
-distribution of the cluster, at level $n$, approximately $2^n$ clusters are 
-generated where $n$ is the depth of the cluster from bottom up. Since 943 users 
-in the data set and we use pairwise clustering, $943/2 = 421$ clusters generated 
-at the last level of the cluster. Cluster of all users are shown in Fig. \ref{fig:cluster}. 
-A sample cluster of user with id:306 up to 5 level is shown in Fig. \ref{fig:sample-user-cluster}.
-We cut off the cluster at every level between 1-20 and measured the accuracy 
-and performance for both "Clustering" and "Custering-kNN" methods then compare 
-the with LSH in terms of the performance and accuracy.
+compared the user-based method with clustering. The root cluster of all users 
+in our data set is shown in Fig. \ref{fig:cluster}. As an example we select a 
+sample cluster from the hierarchical cluster tree for user id: 306 at level 5 
+depth which is shown in Fig. \ref{fig:sample-user-cluster}. We started 
+experiments from level (depth) 0 which is the root of the cluster and increased
+the level up to 20. At each level we increase the depth by one and cut off the 
+cluster tree then we end up with clusters as it shown in Fig. \ref{fig:cluster-cut-off}.
+Since we use pairwise clustering and we have 943 users in the data set at the
+last level there will be $943/2 = 421$ clusters. We cut off the cluster at every 
+level from 1 to 20 and measured the accuracy and performance for both 
+"Clustering" and "Custering-kNN" methods, then, compare the results with LSH 
+and user-based CF.
 
-[TODO]
+Similar to LSH when we increase the depth of cluster, the performance increases 
+because cluster size gets decreased, however, accuracy gets worse because number
+of false negatives increase as we cut off the cluster tree at deeper levels. 
+Using "Clustering" method increase the performance tremendously as oppose to 
+user-based CF and "Cluster-kNN" Fig. (\ref{fig:cl-runtime}), but, in terms of accuracy; 
+"Cluster-kNN" performs better (Fig. \ref{fig:cl-mae}). As we cut off the cluster tree 
+deeper, size of the clusters gets decreased (Fig. \ref{fig:cl-size}) and this 
+results performance increase. But, the accuracy is decreasing because number 
+of false negatives are also as we cut off the cluster tree at deeper levels. 
 
 \begin{figure}[!h]
         %\centering
@@ -784,12 +793,11 @@ the with LSH in terms of the performance and accuracy.
          \begin{subfigure}[b]{0.225\textwidth}
                 \includegraphics[width=\textwidth]{charts/cl-size.eps}
                 \caption{Average Cluster Size}
-                \label{fig:lsh-functions-candidate-size}
+                \label{fig:cl-size}
         \end{subfigure} 
         \caption{User-based, Clustering, and user-based with clustering results in terms of accuracy, performance, and cluster depth.}
         \label{fig:custering}
 \end{figure}
-
 
 \begin{figure}[!h]
         \centering
@@ -805,22 +813,38 @@ the with LSH in terms of the performance and accuracy.
         \begin{subfigure}[b]{0.50\textwidth}
                 \includegraphics[width=\textwidth]{charts/cluster-user-306.jpg}
         \end{subfigure}
-        \caption{Sub cluster of user id: 306 at level 5. The top line shows the distance which scales from 1 to 10.}
+        \caption{Sub cluster of user id: 306 at level 5. The top line shows the 
+        distance which scales from 1 to 10.}
         \label{fig:sample-user-cluster}
+\end{figure}
+
+We also draw the accuracy metric against the performance for LSH, Clustering, 
+and Cluster-kNN methods (Fig. \ref{fig:performance-all}). We found out that 
+"Clustering" and LSH give best accuracy results at higher performance 
+(0-5 seconds). But if the accuracy is crucial and we tolerate some performance 
+issues "Cluster-kNN" method gets the better results in terms of accuracy.
+
+\begin{figure}
+        \centering
+        \begin{subfigure}[b]{0.45\textwidth}
+                \includegraphics[width=\textwidth]{charts/performance-all.eps}
+        \end{subfigure}
+        \caption{Performance and MAE for User-based CF, Clustering, Cluster-kNN, and LSH methods}
+        \label{fig:performance-all}
 \end{figure}
 
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-In this term paper we have evaluated application of LSH to the prediction 
-problem of recommendation and compared it against user-based neighborhood 
-method of CF. 
-
+In this term paper we have introduce an LSH based prediction algorithm for 
+the prediction problem of recommendation and compared it against user-based CF
+method and pairwise clustering.
+ [TODO]
 We found out that proposed LSH calculation of the predictions tremendously 
 improved the scalability of recommendation as appose to traditional CF methods 
-and maintained the accuracy in acceptable ranges. Proposed LSH method performs 
-worse, which is expected, then user-based CF method but gains a lot in performance.
+and maintained the accuracy very well. Proposed LSH method performs 
+worse hen user-based CF method in terms of accuracy but gains a lot in performance.
 This is because we eliminate the similarity calculation in order to make a prediction. 
 We let LSH algorithm to find the similar users or items (candidate set) and compute 
 the predictions by using this candidate set.
@@ -838,6 +862,12 @@ metrics such as diversity, novelty, serendipity, and aggregate diversity.
 Another important issue in recommendation domain is the stability of 
 recommendation system. Stability of proposed method needs to be discussed and 
 evaluated too. 
+
+
+According to the expectations 
+from recommendation system, clustering algorithm should be configured to balance 
+between accuracy and performance.
+
 
 \bibliography{scalability}
 \bibliographystyle{plain} 
