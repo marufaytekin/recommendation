@@ -6,7 +6,7 @@ data/ymusic-test.data
 data/ymusic.data
 data/xaa
 results/latex
-*.pdf
+**/*.pdf
 *.aux
 *.log
 *.gz

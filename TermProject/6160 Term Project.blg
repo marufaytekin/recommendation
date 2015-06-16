@@ -1,50 +1,7 @@
-This is BibTeX, Version 0.99d (TeX Live 2014)
-Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
-The top-level auxiliary file: 6160 Term Project.aux
+This is BibTeX, Version 0.99dThe top-level auxiliary file: 6160 Term Project.aux
 The style file: plain.bst
 Database file #1: scalability.bib
 Warning--empty booktitle in DBLP:conf/stoc/Charikar02
 Warning--empty booktitle in DBLP:reference/rsh/DesrosiersK11
 Warning--empty publisher in DBLP:reference/rsh/DesrosiersK11
-You've used 4 entries,
-            2118 wiz_defined-function locations,
-            526 strings with 4896 characters,
-and the built_in function-call counts, 1336 in all, are:
-= -- 131
-> -- 51
-< -- 1
-+ -- 22
-- -- 16
-* -- 81
-:= -- 217
-add.period$ -- 13
-call.type$ -- 4
-change.case$ -- 19
-chr.to.int$ -- 0
-cite$ -- 7
-duplicate$ -- 59
-empty$ -- 115
-format.name$ -- 16
-if$ -- 286
-int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 5
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 30
-preamble$ -- 1
-purify$ -- 16
-quote$ -- 0
-skip$ -- 40
-stack$ -- 0
-substring$ -- 79
-swap$ -- 12
-text.length$ -- 1
-text.prefix$ -- 0
-top$ -- 0
-type$ -- 14
-warning$ -- 3
-while$ -- 13
-width$ -- 5
-write$ -- 44
 (There were 3 warnings)
