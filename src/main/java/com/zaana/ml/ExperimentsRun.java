@@ -19,12 +19,14 @@ public class ExperimentsRun {
         private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
         private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
+        static String dataFilePath = "data/amazon/ratings70-60";
+        static String dataFileBase = "data/amazon/amazon";
         //static String dataFilePath = "data/ymusic/ymusic.data";
         //static String dataFileBase = "data/ymusic/ymusic";
         //static String dataFilePath = "data/100k/ml.data";
         //static String dataFileBase = "data/100k/ml";
-        static String dataFilePath = "data/300k/xaa";
-        static String dataFileBase = "data/300k/xaa";
+        //static String dataFilePath = "data/amovies-50-20.data";
+        //static String dataFileBase = "data/amovies";
         static final String seperator = "\\t";
         static int topN = 20;
         static int kNN = 20;

@@ -16,8 +16,12 @@ public class Run {
         switch (selection) {
 
             case "02":
-                DataParser.processDataFile(dataFilePath, seperator,10,100);
-
+                DataParser.processDataFile(dataFilePath, seperator,0,100);
+                userRateMap = DataParser.getUserRateMap();
+                System.out.println("User based histogram");
+                DataParser.calculateDataSetHistogram(userRateMap);
+                System.out.println("Item based histogram");
+                DataParser.calculateDataSetHistogram(DataParser.getItemRateMap());
                 break;
 
             case "5000":
