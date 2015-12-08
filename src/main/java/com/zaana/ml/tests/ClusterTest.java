@@ -3,7 +3,7 @@ package com.zaana.ml.tests;
 import clustering.Cluster;
 import com.zaana.ml.Clusters;
 import com.zaana.ml.MAE;
-import com.zaana.ml.prediction.ClusterPrediction;
+import com.zaana.ml.prediction.ClusterPredictionTest;
 
 import java.util.ArrayList;
 
@@ -13,7 +13,7 @@ import static com.zaana.ml.Clusters.drawCluster;
 /**
  * Created by maytekin on 27.05.2015.
  */
-public class ClusterTests extends AbstractTests {
+public class ClusterTest extends AbstractTest {
 
     /*String[] names = new String[] { "O1", "O2", "O3", "O4", "O5", "O6" };
     double[][] distances = new double[][] {
@@ -66,12 +66,12 @@ public class ClusterTests extends AbstractTests {
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j + 1), "test", seperator);
                 Cluster userClusters = buildCluster(userRateMap, y);
-                runTimeTotal += ClusterPrediction.runClusterPredictionOnTestData(
-                        userClusters, userRateMap, itemRateMap, testDataMap, (i+1), kNN, y);
+                runTimeTotal += ClusterPredictionTest.runClusterPredictionOnTestData(
+                        userClusters, userRateMap, itemRateMap, testDataMap, (i + 1), kNN, y);
                 totalMae += MAE.calculateMAE(
-                        ClusterPrediction.getOutputList(),
-                        ClusterPrediction.getTargetList());
-                totalNbrSize += ClusterPrediction.getAvg_candidate_set_size();
+                        ClusterPredictionTest.getOutputList(),
+                        ClusterPredictionTest.getTargetList());
+                totalNbrSize += ClusterPredictionTest.getAvg_candidate_set_size();
 
             }
             maeList.add(totalMae / smoothRun);

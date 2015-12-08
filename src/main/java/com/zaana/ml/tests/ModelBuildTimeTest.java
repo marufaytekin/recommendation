@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by maytekin on 06.05.2015.
  */
-public class ModelBuildTimeTest extends AbstractTests{
+public class ModelBuildTimeTest extends AbstractTest {
 
     public static void runModelBuildTimeTest(
             String type, String dataFilePath, String seperator, int k, int l)

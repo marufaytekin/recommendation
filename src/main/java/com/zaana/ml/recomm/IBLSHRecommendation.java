@@ -2,7 +2,7 @@ package com.zaana.ml.recomm;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.LSH;
-import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.IBNNPredictionTest;
 import com.zaana.ml.prediction.Prediction;
 
 import java.util.*;
@@ -56,7 +56,7 @@ public final class IBLSHRecommendation extends LSHRecommendation
             total_candidate_set_size += candidateSetSize;
             Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
             intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
-            LinkedHashMap<String, Double> kNNList = IBNNPrediction
+            LinkedHashMap<String, Double> kNNList = IBNNPredictionTest
                     .getSimilarItemsListRatedByUser(itemRateMap,
                             itemId, intersectionOfCandidateRatedItemSets, kNN, y);
             if (kNNList != null && !kNNList.isEmpty()) { //BUG: used to calculate prediction for lt k NN

@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by maruf on 28/05/15.
  */
-public class ClusterPrediction extends AbstractPrediction {
+public class ClusterPredictionTest extends AbstractPredictionTest {
 
     /**
      * Runs LSH prediction on test data */

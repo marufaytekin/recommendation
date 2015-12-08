@@ -6,10 +6,10 @@ import com.zaana.ml.similarity.Cosine;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class UBNNPrediction extends AbstractPrediction
+public final class UBNNPredictionTest extends AbstractPredictionTest
 {
 
-    private UBNNPrediction()
+    private UBNNPredictionTest()
     {
     }
 
