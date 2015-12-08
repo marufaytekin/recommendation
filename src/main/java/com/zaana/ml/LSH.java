@@ -172,7 +172,7 @@ public final class LSH {
 
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<Integer, HashMap<String, Set<String>>>();
         for (int tableNum = 0; tableNum < l; tableNum++) {
-            HashMap<String, Set<String>> hashTable = new HashMap<String, Set<String>>();
+            HashMap<String, Set<String>> hashTable = new HashMap<>();
             hashTables.put(tableNum, hashTable);
         }
         return hashTables;

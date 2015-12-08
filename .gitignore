@@ -1,3 +1,8 @@
+/LSH.iml
+/data/amazon
+/.idea
+/data/ymusic.zip
+/data/amovies-8m.data
 # Created by .gitignore support plugin (hsz.mobi)
 .idea/**
 recomm.log
