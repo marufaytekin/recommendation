@@ -145,11 +145,12 @@ y1=UBMaeList;
 y2=IBMaeList;
 y3=UBLSHMaeList;
 y4=IBLSHMaeList;
-x= 1:3:30;
+x= 1:5:50;
 
 f= figure();
-plot (x,y1,'-dk', x,y2, '--ok', x, y3, '--*k', x, y4, '->k');
-legend("UB", "IB", "UB-LSH", "IB-LSH")
+plot (x,y1,'-dk', x,y2, '--*k');
+legend("UB", "IB");
+legend boxon
 xlabel("k")
 ylabel("MAE")
 write(f, strcat(fileName,'-mae-k'));
@@ -261,16 +262,18 @@ f = figure();
 y3 = UBLSHHashFunctionsCandidateSetList;
 y4 = IBLSHHashFunctionsCandidateSetList;
 plot( x, y3, '-dk',x, y4, '-*k');
-legend("UB-LSH", "IB-LSH", "location", "southoutside");
+legend("UB-LSH", "IB-LSH");
 xlabel("Number of Hash Functions");
 ylabel("Avg. Candidate Set Size");
 write(f, strcat(fileName,'-hash-functions-candidate-set'));
 
 f = figure();
+x = 1:10;
 y2 = UBLSHHashFunctionsPredictedItemsList/total_test_data;
 y3 = IBLSHHashFunctionsPredictedItemsList/total_test_data;
 plot(x, y2, '-dk', x, y3, '-*k');
 legend("UB-LSH", "IB-LSH", "location", "southoutside");
+legend boxon;
 xlabel("Number of Hash Functions");
 ylabel("Prediction Ratio");
 write(f, strcat(fileName,'-hash-functions-prediction-ratio'));
@@ -370,14 +373,14 @@ xlabel("Number of Hash Functions");
 ylabel("Avg. Candidate Set Size (K)")
 write(f, strcat(fileName,'-hash-functions-evaluation-candidate-set'));
 
-
-y2 = UBLSHHashFunctionsEvaluatedUsersList0/total_test_data;
-y3 = IBLSHHashFunctionsEvaluatedUsersList0/total_test_data;
+total_test_data = 9939;
+y2 = UBLSHHashFunctionsPredictedItemsList/total_test_data;
+y3 = IBLSHHashFunctionsPredictedItemsList/total_test_data;
 plot(x, y2, '-dk', x, y3, '-*k');
-legend("UB-LSH", "IB-LSH");
+legend("UB-LSH", "IB-LSH", "location", "west");
 xlabel("Number of Hash Functions");
-ylabel("Evaluation Ratio");
-write(f, strcat(fileName,'-hash-functions-evaluation-ratio'));
+ylabel("Prediction Ratio");
+write(f, strcat(fileName,'-hash-functions-prediction-ratio'));
 
 
 # ========================================================
