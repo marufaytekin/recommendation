@@ -131,7 +131,7 @@ write(f, strcat(fileName,'-model-build-time-ub'));
 f= figure();
 plot (x2, y2, '-dk', x2, y4, '--*k' );
 legend("IB", "IB-LSH", "location", "northwest");
-xlabel("items(x1000)");
+xlabel("items(x1000)")
 ylabel("Model Build Time(sec)");
 write(f, strcat(fileName,'-model-build-time-ib'));
 
@@ -145,7 +145,7 @@ y1=UBMaeList;
 y2=IBMaeList;
 y3=UBLSHMaeList;
 y4=IBLSHMaeList;
-x= 1:5:50;
+x= 1:3:30;
 
 f= figure();
 plot (x,y1,'-dk', x,y2, '--*k');
@@ -262,7 +262,7 @@ f = figure();
 y3 = UBLSHHashFunctionsCandidateSetList;
 y4 = IBLSHHashFunctionsCandidateSetList;
 plot( x, y3, '-dk',x, y4, '-*k');
-legend("UB-LSH", "IB-LSH");
+legend("UB-LSH", "IB-LSH", "location", "southoutside");
 xlabel("Number of Hash Functions");
 ylabel("Avg. Candidate Set Size");
 write(f, strcat(fileName,'-hash-functions-candidate-set'));
@@ -367,8 +367,8 @@ y3 = UBLSHHashFunctionsCandidateSetList0/1000;
 y4 = IBLSHHashFunctionsCandidateSetList0/1000;
 f= figure();
 plot(x, y3, '-dk',x, y4, '-*k');
-plot (x,y3,'-dk', x,y4,'-*k');
-legend("UB-LSH", "IB-LSH");
+plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x,y3,'-dk', x,y4,'-*k');
+legend("numofUsers", "numOfItems","UB-LSH", "IB-LSH");
 xlabel("Number of Hash Functions");
 ylabel("Avg. Candidate Set Size (K)")
 write(f, strcat(fileName,'-hash-functions-evaluation-candidate-set'));
@@ -466,8 +466,8 @@ y1 = numOfUsers/1000;
 y2 = numOfItems/1000;
 y3 = UBLSHHashTablesCandidateSetList0/1000;
 y4 = IBLSHHashTablesCandidateSetList0/1000;
-plot (x,y3,'-dk', x,y4,'-*k');
-legend("UB-LSH", "IB-LSH", "location", "northwest");
+plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x,y3,'-dk', x,y4,'-*k');
+legend("numofUsers", "numOfItems","UB-LSH", "IB-LSH", "location", "northwest");
 
 xlabel("Number of Hash Tables");
 ylabel("Avg. Candidate Set Size (K)");

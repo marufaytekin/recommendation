@@ -1,14 +1,13 @@
 package com.zaana.ml.prediction;
 
 import com.zaana.ml.similarity.Cosine;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class IBNNPrediction extends AbstractPrediction{
+public final class IBNNPredictionTest extends AbstractPredictionTest {
 
-    private IBNNPrediction() {
+    private IBNNPredictionTest() {
     }
 
     /**

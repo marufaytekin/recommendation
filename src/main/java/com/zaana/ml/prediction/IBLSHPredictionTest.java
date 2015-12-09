@@ -1,14 +1,13 @@
 package com.zaana.ml.prediction;
 
 import com.zaana.ml.LSH;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
 /**
  * Created by maruf on 06/02/15.
  */
-public class IBLSHPrediction extends LSHPrediction
+public class IBLSHPredictionTest extends LSHPredictionTest
 {
     public static long runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
@@ -93,7 +92,7 @@ public class IBLSHPrediction extends LSHPrediction
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
                 if (intersectionOfCandidateRatedItemSets != null && !intersectionOfCandidateRatedItemSets.isEmpty()) {
-                    kRatedSimilarItemsList = IBNNPrediction.getSimilarItemsListRatedByUser(
+                    kRatedSimilarItemsList = IBNNPredictionTest.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
                     if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {

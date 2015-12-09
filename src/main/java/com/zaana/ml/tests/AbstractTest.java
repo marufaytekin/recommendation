@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by maytekin on 06.05.2015.
  */
-public abstract class AbstractTests {
+public abstract class AbstractTest {
 
     static HashMap<String, HashMap<String, Integer>> userRateMap;
     static HashMap<String, HashMap<String, Integer>> itemRateMap;
@@ -18,7 +18,7 @@ public abstract class AbstractTests {
     static List<HashMap<Integer, HashMap<String, Set<String>>>> hashTables;
     static Set<String> itemSet;
     static Set<String> userSet;
-    static Logger LOG = Logger.getLogger(AbstractTests.class);
+    static Logger LOG = Logger.getLogger(AbstractTest.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
 
     public static void preprocessDataForValidation(

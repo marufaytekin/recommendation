@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * Created by maruf on 07/05/15.
  */
-public class PrecisionTests extends AbstractTests {
+public class PrecisionTest extends AbstractTest {
 
     /**
      * Runs User-based precision against k parameter. */
