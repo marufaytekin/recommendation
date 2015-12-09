@@ -1,8 +1,8 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.MAE;
-import com.zaana.ml.prediction.IBNNPredictionTest;
-import com.zaana.ml.prediction.UBNNPredictionTest;
+import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.UBNNPrediction;
 
 /**
  * Created by maruf on 08/12/15.
@@ -18,15 +18,15 @@ public class CFPredictionTest extends AbstractTest {
         for (int j = 0; j < smoothRun; j++) {
             preprocessDataForValidation(dataFileBase, (j+1), "test", seperator);
             if (type == "UB") {
-                runTime += UBNNPredictionTest.runUserBasedNNPredictionOnTestData(userRateMap,
+                runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                         testDataMap, kNN, y);
-                mae += MAE.calculateMAE(UBNNPredictionTest.getOutputList(),
-                        UBNNPredictionTest.getTargetList());
+                mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
+                        UBNNPrediction.getTargetList());
             } else if (type == "IB") {
-                runTime += IBNNPredictionTest.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
                         testDataMap, kNN, y);
-                mae += MAE.calculateMAE(IBNNPredictionTest.getOutputList(),
-                        IBNNPredictionTest.getTargetList());
+                mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
+                        IBNNPrediction.getTargetList());
             } else {
                 throw new UnsupportedOperationException("Invalid operation for CF type.");
             }

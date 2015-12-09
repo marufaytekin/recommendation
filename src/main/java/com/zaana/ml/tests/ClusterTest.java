@@ -3,7 +3,7 @@ package com.zaana.ml.tests;
 import clustering.Cluster;
 import com.zaana.ml.Clusters;
 import com.zaana.ml.MAE;
-import com.zaana.ml.prediction.ClusterPredictionTest;
+import com.zaana.ml.prediction.ClusterPrediction;
 
 import java.util.ArrayList;
 
@@ -66,12 +66,12 @@ public class ClusterTest extends AbstractTest {
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j + 1), "test", seperator);
                 Cluster userClusters = buildCluster(userRateMap, y);
-                runTimeTotal += ClusterPredictionTest.runClusterPredictionOnTestData(
+                runTimeTotal += ClusterPrediction.runClusterPredictionOnTestData(
                         userClusters, userRateMap, itemRateMap, testDataMap, (i + 1), kNN, y);
                 totalMae += MAE.calculateMAE(
-                        ClusterPredictionTest.getOutputList(),
-                        ClusterPredictionTest.getTargetList());
-                totalNbrSize += ClusterPredictionTest.getAvg_candidate_set_size();
+                        ClusterPrediction.getOutputList(),
+                        ClusterPrediction.getTargetList());
+                totalNbrSize += ClusterPrediction.getAvg_candidate_set_size();
 
             }
             maeList.add(totalMae / smoothRun);

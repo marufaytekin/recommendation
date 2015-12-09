@@ -6,7 +6,7 @@ import java.util.*;
 /**
  * Created by maruf on 19/05/15.
  */
-public class LSHPredictionTest extends AbstractPredictionTest {
+public class LSHPrediction extends AbstractPrediction {
 
     /**
      * Runs LSH prediction on test data */

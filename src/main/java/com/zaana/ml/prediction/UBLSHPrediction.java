@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by ${USER} on ${DATE}.
  */
-public class UBLSHPredictionTest extends AbstractPredictionTest {
+public class UBLSHPrediction extends AbstractPrediction {
 
     /**
      * This method uses LSH algorithm with k-NN to predict user/item rating.

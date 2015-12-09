@@ -5,9 +5,9 @@ import com.zaana.ml.similarity.Cosine;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class IBNNPredictionTest extends AbstractPredictionTest {
+public final class IBNNPrediction extends AbstractPrediction {
 
-    private IBNNPredictionTest() {
+    private IBNNPrediction() {
     }
 
     /**

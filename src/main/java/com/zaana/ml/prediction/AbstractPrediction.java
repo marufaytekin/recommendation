@@ -4,9 +4,9 @@ import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 
-public abstract class AbstractPredictionTest
+public abstract class AbstractPrediction
 {
-    static Logger LOG = Logger.getLogger(AbstractPredictionTest.class);
+    static Logger LOG = Logger.getLogger(AbstractPrediction.class);
 
     static LinkedList<Double> outputList;
     static LinkedList<Integer> targetList;

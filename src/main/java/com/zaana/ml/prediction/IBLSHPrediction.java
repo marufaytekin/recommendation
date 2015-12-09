@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by maruf on 06/02/15.
  */
-public class IBLSHPredictionTest extends LSHPredictionTest
+public class IBLSHPrediction extends LSHPrediction
 {
     public static long runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
@@ -92,7 +92,7 @@ public class IBLSHPredictionTest extends LSHPredictionTest
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
                 if (intersectionOfCandidateRatedItemSets != null && !intersectionOfCandidateRatedItemSets.isEmpty()) {
-                    kRatedSimilarItemsList = IBNNPredictionTest.getSimilarItemsListRatedByUser(
+                    kRatedSimilarItemsList = IBNNPrediction.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
                     if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {
