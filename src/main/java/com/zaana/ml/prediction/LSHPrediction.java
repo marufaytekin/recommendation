@@ -53,6 +53,25 @@ public class LSHPrediction extends AbstractPrediction {
 
     }
 
+    /**
+     * This method runs prediction tests for LSH algorithm.
+     *
+     * For each hash table:
+     *   compute a hash key for the target user
+     *   retrieve the candidate users with the hash key from the hash table
+     *   add candidate set to a running list, C.
+     * Weight the candidate users with the number of occurrences in hash tables.
+     * Find the users who rated for the target item in candidate list
+     * Use the ratings of this users weighted with frequency to compute the prediction
+     *
+     * @param testDataEntry
+     * @param userRateMap
+     * @param itemRateMap
+     * @param candidateSetList
+     * @param candidateSet
+     * @param outputList
+     * @param targetList
+     */
     private static void predictRatingsForTestUsers(
             Map.Entry<String, HashMap<String, Integer>> testDataEntry,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
