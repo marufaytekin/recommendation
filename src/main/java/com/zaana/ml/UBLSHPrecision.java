@@ -1,6 +1,7 @@
 package com.zaana.ml;
 
 
+import com.zaana.ml.recomm.AbstractRecommendation;
 import com.zaana.ml.recomm.UBLSHRecommendation;
 
 import java.util.*;
@@ -35,7 +36,7 @@ public class UBLSHPrecision extends Precision {
                         UBLSHRecommendation.recommendItems(
                                 userRateMap, hashTablesUB, vmapUB, itemSet, userId, topN, kNN, y);
                 //int kNN, int topN, int y)
-                totalCandidateSetSize += UBLSHRecommendation.getCandidateSetSize();
+                totalCandidateSetSize += AbstractRecommendation.getCandidateSetSize();
 
                 if (topNRecom == null) {
                     LOG.info("topNRecom : " + topNRecom);
