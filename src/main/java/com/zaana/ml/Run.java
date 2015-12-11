@@ -189,6 +189,9 @@ public class Run {
             case "105":
                 PrecisionTest.run2DLSHPrecisionTests("IBLSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
+            case "106":
+                PrecisionTest.run2DLSHPrecisionTests("LSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                break;
 
             case "99":
                 LOG.info("bye...\n");

@@ -20,6 +20,7 @@ public abstract class AbstractTest {
     static Set<String> userSet;
     static Logger LOG = Logger.getLogger(AbstractTest.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
+    static HashMap<String, String> itemHashKeyTable;
 
     public static void preprocessDataForValidation(
             String baseUrl, int num, String type, String seperator)
@@ -50,6 +51,7 @@ public abstract class AbstractTest {
     public static void prepareHashTables(String baseUrl, double smoothRun, String seperator, int l, int k) {
         vmaps = new LinkedList<>();
         hashTables = new LinkedList<>();
+        itemHashKeyTable = new HashMap<>();
         for (int j = 0; j < smoothRun; j++) {
             preprocessDataForRecommendation(baseUrl, (j + 1), seperator, smoothRun, l, k);
             Set<String> itemSet = itemRateMap.keySet();

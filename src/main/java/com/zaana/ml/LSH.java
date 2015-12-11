@@ -19,11 +19,15 @@ public final class LSH {
     static Logger LOG = Logger.getLogger(LSH.class);
     
     static double avg_bucket_size;
-
+    static HashMap<String, String> itemKeyTable;
     public double getAvg_bucket_size()
     {
         return avg_bucket_size;
     }
+    public static HashMap<String, String> getItemKeyTable() {
+        return itemKeyTable;
+    }
+
 
     /**
      * This method creates and builds the LSH hash tables and hash functions.
@@ -32,24 +36,20 @@ public final class LSH {
      * vectors and stored in class variable vmap. It hashes the users/items to
      * the hash tables with the computed hash keys. This method is used for both
      * user based and item based LSH implementation.
-     * 
      * @param ratingMap
      *            useritem/itemuser rating map
-     *
      * @param l
-     *            number of bands
-     * @return hashTables
      * 
      */
     public static HashMap<Integer,HashMap<String,Set<String>>> buildIndexTables(
             HashMap<String, HashMap<String, Integer>> ratingMap,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            int l) {
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 
         long startTime = System.currentTimeMillis();
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
-        Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap
-                .entrySet().iterator();
+
+        Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
+        HashMap<String, String> itemHashKeyTable = new HashMap<>();
 
         while (iter.hasNext()) {
             Entry<String, HashMap<String, Integer>> entry = iter.next();
@@ -60,11 +60,13 @@ public final class LSH {
                         .get(hashTableNum);
                 String hashKey = generateHashKeyForVector(vmap, V, hashTableNum);
                 insertItemInHashTable(hashKey, K, hashTable);
+                insertHashKeyInItemTable(hashKey, K, hashTableNum, itemHashKeyTable);
             }
         }
 
         long endTime = System.currentTimeMillis();
         avg_bucket_size = avg_num_of_buckets(hashTables);
+        itemKeyTable = itemHashKeyTable;
 
         LOG.info("LSH Index Tables generated in " + (endTime - startTime)
                 + " ms ...");
@@ -102,6 +104,24 @@ public final class LSH {
             candidateSet.addAll(candidates);
         }
         candidateSet.remove(userId);
+
+        return candidateSet;
+    }
+
+    public static Set<String> getCandidateSetItemTable(
+            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
+            String itemId, HashMap<String, String> itemTable) {
+        Set<String> candidateSet = new HashSet<>();
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
+            //String hashKey = generateHashKeyForVector(vmap, userRates,
+            //        hashTableNum);
+            String hashKey = itemTable.get(itemId+":"+hashTableNum);
+            Set<String> candidates = hashTables.get(
+                    Integer.valueOf(hashTableNum)).get(hashKey);
+            candidateSet.addAll(candidates);
+        }
+        candidateSet.remove(itemId);
 
         return candidateSet;
     }
@@ -170,7 +190,7 @@ public final class LSH {
      */
     private static HashMap<Integer,HashMap<String,Set<String>>> generateHashTables(int l) {
 
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<Integer, HashMap<String, Set<String>>>();
+        HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<>();
         for (int tableNum = 0; tableNum < l; tableNum++) {
             HashMap<String, Set<String>> hashTable = new HashMap<>();
             hashTables.put(tableNum, hashTable);
@@ -206,9 +226,9 @@ public final class LSH {
             HashMap<String, Integer> vector = vectors.get(Integer.valueOf(i));
             int dotProduct = Vector.calculateDotProduct(V, vector);
             if (dotProduct < 0) {
-                key.add(Integer.valueOf(0));
+                key.add(0);
             } else {
-                key.add(Integer.valueOf(1));
+                key.add(1);
             }
         }
         StringBuffer buf = new StringBuffer();
@@ -235,21 +255,30 @@ public final class LSH {
      *         insert the item in hash set,
      *         add the hashset to hash table
      * 
-     * @param id
+     * @param hashKey
      *            hash key
      * @param item
      *            userId,/itemId
      * @param hashTable
      *            contains <hashKey, userId/itemId Set>
      */
-    private static void insertItemInHashTable(String id, String item,
+    private static void insertItemInHashTable(String hashKey, String item,
             HashMap<String, Set<String>> hashTable) {
-        if (hashTable.containsKey(id)) {
-            hashTable.get(id).add(item);
+        if (hashTable.containsKey(hashKey)) {
+            hashTable.get(hashKey).add(item);
         } else {
             Set<String> set = new HashSet<>();
             set.add(item);
-            hashTable.put(id, set);
+            hashTable.put(hashKey, set);
+        }
+    }
+
+    private static void insertHashKeyInItemTable(String hashKey, String item,
+                                                 int hashTableNum, HashMap<String, String> itemHashKeyTable) {
+        if (itemHashKeyTable.containsKey(item+":"+ Integer.toString(hashTableNum))) {
+            throw new DuplicateFormatFlagsException("duplicate item key in a table");
+        } else {
+            itemHashKeyTable.put(item+":"+hashTableNum, hashKey);
         }
     }
     

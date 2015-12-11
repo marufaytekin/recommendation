@@ -19,16 +19,16 @@ public class LSHRecommRun {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ymusic/ymusic.data";
-    static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/300k/xaa.data";
-    //static String dataFileBase = "data/300k/xaa";
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
+    static String dataFilePath = "data/1m-new/ml-new.data";
+    static String dataFileBase = "data/1m-new/ml-new";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
     static int numOfRun = 10;
-    static final int smoothRun = 1;
+    static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
     static int l = 8;
@@ -53,6 +53,7 @@ public class LSHRecommRun {
             System.out.println("63 - LSH - Prediction - HashTables change ( inc. by 1 )");
             System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("65 - LSH - Prediction - 2D test");
+            System.out.println("106 - LSH - top-N Precision - 2D test");
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");

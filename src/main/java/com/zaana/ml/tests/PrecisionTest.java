@@ -93,7 +93,7 @@ public class PrecisionTest extends AbstractTest {
             int numOfRun, double smoothRun, String separator, int topN, int kNN, int y)
     {
         int numOfBands = 1;
-        int numOfHashFunctions = 1;
+        int numOfHashFunctions = 6;
         ArrayList<Object> precisionList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
@@ -119,8 +119,13 @@ public class PrecisionTest extends AbstractTest {
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                         precision = IBLSHPrecision.calculateIBLSHPrecision(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, itemSet, topN, kNN, y);
-                    }
-                        else {
+                    } else if (testType == "LSH") {
+                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        itemHashKeyTable = LSH.getItemKeyTable();
+                        precision = LSHPrecision.calculateLSHPrecision(
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, itemHashKeyTable, topN);
+                    } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
                 }
@@ -128,12 +133,12 @@ public class PrecisionTest extends AbstractTest {
                         + " numOfHashFunctions = " + numOfHashFunctions);
                 LOG.info(testType + "precision = " + precision / smoothRun);
                 precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size /smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
                 numOfHashFunctions += 1;
             }
             precisionList2D.add(precisionList);
             candidate_set_list2D.add(candidate_set_list);
-            numOfHashFunctions = 1;
+            numOfHashFunctions = 6;
             numOfBands += 1;
         }
         LOG2.info("# ========================================================");
@@ -188,7 +193,7 @@ public class PrecisionTest extends AbstractTest {
             LOG.info(type + "Precision = " + totalPrecision / smoothRun);
             precisionList.add(totalPrecision / smoothRun);
 
-            kNN+=3;
+            kNN += 3;
         }
         LOG2.info("# ========================================================");
         LOG2.info("# test case: " + type + " Precision");
