@@ -11,7 +11,6 @@ import java.util.*;
 public class LSHRecommendation extends AbstractRecommendation {
 
     public static Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> itemHashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
             HashMap<String, Integer> ratingsSet, HashMap<String, String> itemHashKeyTable, int topN)
@@ -32,6 +31,40 @@ public class LSHRecommendation extends AbstractRecommendation {
         }
 
         return recSet;
+    }
+
+    public static Set<String> recommendItems2(
+            HashMap<Integer, HashMap<String, Set<String>>> itemHashTables,
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
+            HashMap<String, Integer> ratingsSet, HashMap<String, String> itemHashKeyTable, int topN)
+    {
+        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 5);
+        Iterator<String> iter = topLikedItems.iterator();
+        List<String> candidateList = new ArrayList<>();
+        while (iter.hasNext()) {
+            String testItemId = iter.next();
+            Set<String> candidateSet = LSH.getCandidateSetItemTable(itemHashTables, vmap, testItemId, itemHashKeyTable);
+            candidateList.addAll(candidateSet);
+        }
+        HashMap <String, Integer> freqItemList = new HashMap<>();
+        Iterator<String> iter2 = new HashSet<>(candidateList).iterator();
+
+        Comparator comparator = new Comparator<Map.Entry <String, Integer>>() {
+            public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
+                return Integer.compare(o1.getValue(), o2.getValue());
+            }
+        };
+        Queue q = new PriorityQueue(topN, comparator);
+        while (iter2.hasNext()) {
+            String itemId = iter2.next();
+            Integer frequency = Collections.frequency(candidateList, itemId);
+            q.add(new HashMap.SimpleEntry<String, Integer>(itemId, frequency);
+        }
+
+        //return new HashSet<>(SortHashMap.sortKeysByValues(freqItemList).
+        //        subList(0, Math.min(topN, freqItemList.size())));
+        return
+
     }
 
     private static Set<String> getTopLikedItems(HashMap<String, Integer> ratingsSet, int n) {
