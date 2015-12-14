@@ -19,13 +19,13 @@ public final class LSH {
     static Logger LOG = Logger.getLogger(LSH.class);
     
     static double avg_bucket_size;
-    static HashMap<String, String> itemKeyTable;
+    static HashMap<String, String> hashKeyTable;
     public double getAvg_bucket_size()
     {
         return avg_bucket_size;
     }
-    public static HashMap<String, String> getItemKeyTable() {
-        return itemKeyTable;
+    public static HashMap<String, String> getHashKeyTable() {
+        return hashKeyTable;
     }
 
 
@@ -60,13 +60,13 @@ public final class LSH {
                         .get(hashTableNum);
                 String hashKey = generateHashKeyForVector(vmap, V, hashTableNum);
                 insertItemInHashTable(hashKey, K, hashTable);
-                insertHashKeyInItemTable(hashKey, K, hashTableNum, itemHashKeyTable);
+                insertHashKeyWithObjectIdAndTableNumber(hashKey, K, hashTableNum, itemHashKeyTable);
             }
         }
 
         long endTime = System.currentTimeMillis();
         avg_bucket_size = avg_num_of_buckets(hashTables);
-        itemKeyTable = itemHashKeyTable;
+        hashKeyTable = itemHashKeyTable;
 
         LOG.info("LSH Index Tables generated in " + (endTime - startTime)
                 + " ms ...");
@@ -108,14 +108,25 @@ public final class LSH {
         return candidateSet;
     }
 
-    public static Set<String> getCandidateSetItemTable(
+    /***
+     * Returns candidate set by using hashKeyTable.
+     * Eliminates the recalculation of hash keys.
+     *
+     * @param hashTables
+     * @param ratingsSet
+     * @param itemId
+     * @param hashKeyTable
+     * @return candidateSet
+     */
+    public static Set<String> getCandidateSetFromHashTable(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<String, Integer> ratingsSet, String itemId, HashMap<String, String> itemTable)
+            HashMap<String, Integer> ratingsSet,
+            String itemId, HashMap<String, String> hashKeyTable)
     {
         Set<String> candidateSet = new HashSet<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
-            String hashKey = itemTable.get(itemId+":"+hashTableNum);
+            String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
             Set<String> candidates = hashTables.get(
                     Integer.valueOf(hashTableNum)).get(hashKey);
             candidateSet.addAll(candidates);
@@ -127,18 +138,21 @@ public final class LSH {
     }
 
 
-
     /**
-     * Returns candidate sets with frequency as an ArrayList.*/
+     * Returns candidate sets with frequency as an ArrayList.
+     * @param hashTables
+     * @param vmap
+     * @param ratingsSet
+     * @return
+     */
     public static List<String> getCandidateSetsWithFrequency(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, Integer> userRates)
+            HashMap<String, Integer> ratingsSet)
     {
         List<String> candidateSets = new ArrayList();
-        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
-        {
-            String hashKey = generateHashKeyForVector(vmap, userRates,
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
+            String hashKey = generateHashKeyForVector(vmap, ratingsSet,
                     hashTableNum);
             Set<String> candidates = hashTables.get(
                     Integer.valueOf(hashTableNum)).get(hashKey);
@@ -221,25 +235,16 @@ public final class LSH {
 
         HashMap<Integer, HashMap<String, Integer>> vectors = vmap
                 .get(hashTableNum);
-        ArrayList<Integer> key = new ArrayList<Integer>();
+        ArrayList<Integer> key = new ArrayList<>();
         for (int i = 0; i < vectors.size(); i++) {
             HashMap<String, Integer> vector = vectors.get(Integer.valueOf(i));
             int dotProduct = Vector.calculateDotProduct(V, vector);
-            if (dotProduct < 0) {
-                key.add(0);
-            } else {
-                key.add(1);
-            }
+            if (dotProduct < 0) key.add(0);
+            else key.add(1);
         }
-        StringBuffer buf = new StringBuffer();
-        for (Iterator<Integer> localIterator = key.iterator(); localIterator
-                .hasNext();) {
-            int c = localIterator.next().intValue();
-            buf.append(Integer.toString(c));
-        }
-        String hashKey = buf.toString();
-
-        return hashKey;
+        StringBuilder buf = new StringBuilder();
+        for (Integer c : key) buf.append(Integer.toString(c));
+        return buf.toString();
     }
 
     /**
@@ -264,22 +269,22 @@ public final class LSH {
      */
     private static void insertItemInHashTable(String hashKey, String item,
             HashMap<String, Set<String>> hashTable) {
-        if (hashTable.containsKey(hashKey)) {
-            hashTable.get(hashKey).add(item);
-        } else {
+        if (hashTable.containsKey(hashKey)) hashTable.get(hashKey).add(item);
+        else {
             Set<String> set = new HashSet<>();
             set.add(item);
             hashTable.put(hashKey, set);
         }
     }
 
-    private static void insertHashKeyInItemTable(String hashKey, String item,
-                                                 int hashTableNum, HashMap<String, String> itemHashKeyTable) {
-        if (itemHashKeyTable.containsKey(item+":"+ Integer.toString(hashTableNum))) {
+    private static void insertHashKeyWithObjectIdAndTableNumber(
+            String hashKey,
+            String itemId,
+            int hashTableNum,
+            HashMap<String, String> itemHashKeyTable) {
+        if (itemHashKeyTable.containsKey(itemId+":"+ Integer.toString(hashTableNum)))
             throw new DuplicateFormatFlagsException("duplicate item key in a table");
-        } else {
-            itemHashKeyTable.put(item+":"+hashTableNum, hashKey);
-        }
+        else itemHashKeyTable.put(itemId + ":" + hashTableNum, hashKey);
     }
     
     public static double avg_num_of_buckets (HashMap<Integer, 

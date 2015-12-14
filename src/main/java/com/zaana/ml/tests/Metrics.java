@@ -21,7 +21,7 @@ public class Metrics {
     static Logger LOG = Logger.getLogger(AbstractTest.class);
     private static double diversity;
     private static double novelty;
-    private static double serendipity;
+    //private static double serendipity;
     private static int aggregateDiversity;
     private static double precision;
     private static double recall;
@@ -33,7 +33,6 @@ public class Metrics {
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
-            final HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmapIB,
             HashMap<String, String> itemHashKeyTable, final Set<String> userSet,
             int topN, int y) {
 
@@ -63,7 +62,7 @@ public class Metrics {
             Set<String> topNRecommendedItems =
                     LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
             //Set<String> topNRecommendedItems =
-            // LSHRecommendation.recommendItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
+            //        LSHRecommendation.recommendItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();
@@ -75,16 +74,16 @@ public class Metrics {
                     itemSetCount);
             double LSHDiversity = Diversity.intraListDissimilarity(
                     topNRecommendedItems, itemRateMap, y);
-            Double LSHSerendipity = Serendipity.serendipity(userRateMap,
-                    itemRateMap, topNRecommendedItems,
-                    targetUserId);
+            //Double LSHSerendipity = Serendipity.serendipity(userRateMap,
+            //        itemRateMap, topNRecommendedItems,
+            //        targetUserId);
             totalLSHDiversity += LSHDiversity;
             totalLSHNovelty += LSHNovelty;
 
-            if (LSHSerendipity != null) {
-                totalLSHSerendipity += LSHSerendipity;
-                numOfSerendipityCalc += 1;
-            }
+            //if (LSHSerendipity != null) {
+            //    totalLSHSerendipity += LSHSerendipity;
+            //    numOfSerendipityCalc += 1;
+            //}
             totalPrecision += Precision
                     .getPrecision(topNRecommendedItems, entry, topN);
             totalRecall += Recall
@@ -94,7 +93,7 @@ public class Metrics {
         LOG.info("Avg Top-N Rec Time = " + (double) totalTime/cnt);
         diversity = totalLSHDiversity / cnt;
         novelty = totalLSHNovelty / cnt;
-        serendipity = totalLSHSerendipity / numOfSerendipityCalc;
+        //serendipity = totalLSHSerendipity / numOfSerendipityCalc;
         aggregateDiversity = uniqueItemSetLSH.size();
         precision = totalPrecision / cnt;
         recall = totalRecall / cnt;
@@ -121,9 +120,9 @@ public class Metrics {
         return novelty;
     }
 
-    public static double getSerendipity() {
-        return serendipity;
-    }
+    //public static double getSerendipity() {
+    //    return serendipity;
+    //}
 
     public static int getAggregateDiversity() {
         return aggregateDiversity;

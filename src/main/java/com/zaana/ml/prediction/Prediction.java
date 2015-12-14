@@ -75,20 +75,22 @@ public class Prediction
     }
 
     /**
-     * Calculates LSH prediction */
+     *
+     * Calculates LSH prediction. Uses frequency of users as weight.
+     * Eliminates similarity computation to find k nearest neighbors.
+     * */
     public static double calculateLSHBasedPredicitonRate(HashMap<String, HashMap<String, Integer>> userRateMap,
                                                          Set<String> intersectionOfCandidateRatedUserSets,
-                                                         List<String> candidateSetList, String movieId)
-    {
-        Iterator<String> entry = intersectionOfCandidateRatedUserSets.iterator();
+                                                         List<String> candidateSetList, String movieId) {
         double weightedRatingsTotal = 0;
         double weightsTotal = 0;
-        while (entry.hasNext()) {
-            String candidateUser = entry.next();
-            Integer fraquency = Collections.frequency(candidateSetList, candidateUser);
-            Integer rating = userRateMap.get(candidateUser).get(movieId);
-            weightedRatingsTotal += rating * fraquency;
-            weightsTotal += fraquency;
+        Integer frequency;
+        Integer rating;
+        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+            frequency = Collections.frequency(candidateSetList, candidateUser);
+            rating = userRateMap.get(candidateUser).get(movieId);
+            weightedRatingsTotal += rating * frequency;
+            weightsTotal += frequency;
         }
         if (weightsTotal != 0)
             return weightedRatingsTotal / weightsTotal;

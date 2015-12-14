@@ -27,7 +27,7 @@ public class LSHMetricsTest extends AbstractTest{
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
         HashMap<Integer, HashMap<String, Set<String>>> hashTables;
 
-        int numOfHashFunctions = 1;
+        int numOfHashFunctions = 4;
 
         for (int i = 0; i < numOfRun; i++) {
             double diversity = 0;
@@ -50,16 +50,16 @@ public class LSHMetricsTest extends AbstractTest{
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                itemHashKeyTable = LSH.getItemKeyTable();
+                itemHashKeyTable = LSH.getHashKeyTable();
                 startTime = System.currentTimeMillis();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, vmap, itemHashKeyTable,
+                        userRateMap, itemRateMap,testDataMap, hashTables, itemHashKeyTable,
                         userSet, topN, y);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 diversity += Metrics.getDiversity();
                 novelty += Metrics.getNovelty();
-                serendipity += Metrics.getSerendipity();
+                //serendipity += Metrics.getSerendipity();
                 aggrDiversity += Metrics.getAggregateDiversity();
                 precision += Metrics.getPrecision();
                 recall += Metrics.getRecall();
@@ -71,7 +71,7 @@ public class LSHMetricsTest extends AbstractTest{
             }
             diversityList.add(diversity / smoothRun);
             noveltyList.add(novelty / smoothRun);
-            serendipityList.add(serendipity / smoothRun);
+            //serendipityList.add(serendipity / smoothRun);
             aggrDiversityList.add(aggrDiversity / smoothRun);
             precisionList.add(precision / smoothRun);
             recallList.add(recall / smoothRun);
@@ -158,16 +158,16 @@ public class LSHMetricsTest extends AbstractTest{
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                itemHashKeyTable = LSH.getItemKeyTable();
+                itemHashKeyTable = LSH.getHashKeyTable();
                 startTime = System.currentTimeMillis();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, vmap,itemHashKeyTable,
+                        userRateMap, itemRateMap,testDataMap, hashTables, itemHashKeyTable,
                         userSet, topN, y);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 diversity += Metrics.getDiversity();
                 novelty += Metrics.getNovelty();
-                serendipity += Metrics.getSerendipity();
+                //serendipity += Metrics.getSerendipity();
                 aggrDiversity += Metrics.getAggregateDiversity();
                 precision += Metrics.getPrecision();
                 recall += Metrics.getRecall();
@@ -179,7 +179,7 @@ public class LSHMetricsTest extends AbstractTest{
             }
             diversityList.add(diversity / smoothRun);
             noveltyList.add(novelty / smoothRun);
-            serendipityList.add(serendipity / smoothRun);
+            //serendipityList.add(serendipity / smoothRun);
             aggrDiversityList.add(aggrDiversity / smoothRun);
             precisionList.add(precision / smoothRun);
             recallList.add(recall / smoothRun);

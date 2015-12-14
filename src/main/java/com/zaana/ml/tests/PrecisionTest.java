@@ -125,7 +125,7 @@ public class PrecisionTest extends AbstractTest {
                     } else if (testType == "LSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                        itemHashKeyTable = LSH.getItemKeyTable();
+                        itemHashKeyTable = LSH.getHashKeyTable();
                         precision = LSHPrecision.calculateLSHPrecision(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, itemHashKeyTable, topN);
                     } else {

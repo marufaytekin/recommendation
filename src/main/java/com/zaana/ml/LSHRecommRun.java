@@ -19,10 +19,12 @@ public class LSHRecommRun {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/1m/ml1m.data";
-    static String dataFileBase = "data/1m/ml1m";
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/300k/xaa";
+    //static String dataFileBase = "data/300k/xaa";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
@@ -32,7 +34,7 @@ public class LSHRecommRun {
     // l: number of bands
     // k: number of hash functions
     static int l = 8;
-    static int k = 8;
+    static int k = 4;
 
     public static void main(final String[] args) throws IOException
     {

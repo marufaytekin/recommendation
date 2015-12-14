@@ -1,5 +1,6 @@
 package com.zaana.ml.recomm;
 
+import com.zaana.ml.FreqPriorityQueue;
 import com.zaana.ml.LSH;
 import com.zaana.ml.SortHashMap;
 
@@ -16,12 +17,10 @@ public class LSHRecommendation extends AbstractRecommendation {
             HashMap<String, String> itemHashKeyTable,
             int topN)
     {
-        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 5);
-        Iterator<String> iter = topLikedItems.iterator();
+        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 20);
         List<String> candidateList = new ArrayList<>();
-        while (iter.hasNext()) {
-            String testItemId = iter.next();
-            Set<String> candidateSet = LSH.getCandidateSetItemTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
+        for (String testItemId : topLikedItems) {
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
             candidateList.addAll(candidateSet);
         }
         Set<String> recSet = new HashSet<>();
@@ -40,47 +39,29 @@ public class LSHRecommendation extends AbstractRecommendation {
             HashMap<String, String> itemHashKeyTable,
             int topN)
     {
-        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 5);
-        Iterator<String> iter = topLikedItems.iterator();
+        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 20);
         List<String> candidateList = new ArrayList<>();
-        while (iter.hasNext()) {
-            String testItemId = iter.next();
-            Set<String> candidateSet = LSH.getCandidateSetItemTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
+        for (String testItemId : topLikedItems) {
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
             candidateList.addAll(candidateSet);
         }
-        Iterator<String> iter2 = new HashSet<>(candidateList).iterator();
-
-        Comparator comparator = new Comparator<Map.Entry <String, Integer>>() {
-            public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
-                return Integer.compare(o2.getValue(), o1.getValue());
-            }
-        };
-        Queue q = new PriorityQueue(topN, comparator);
-        while (iter2.hasNext()) {
-            String itemId = iter2.next();
-            Integer frequency = Collections.frequency(candidateList, itemId);
-            q.add(new HashMap.SimpleEntry<>(itemId, frequency));
-        }
-
+        Queue<AbstractMap.SimpleEntry<String, Integer>> q =
+                FreqPriorityQueue.buildFrequencyBasedPriorityQueue(candidateList);
         Set<String> recSet = new HashSet<>();
-        for (int i=0; i < q.size() && recSet.size() < topN; i++) {
+        for (int i=0; i < q.size() && recSet.size() < topN; i++)
             try {
-                HashMap.SimpleEntry<String, Integer> entry = (HashMap.SimpleEntry<String, Integer>) q.remove();
+                HashMap.SimpleEntry<String, Integer> entry = q.remove();
                 recSet.add(entry.getKey());
-            }
-            catch (NoSuchElementException e) { }
-        }
-
+            } catch (NoSuchElementException ignored) {}
         return recSet;
-
     }
 
     private static Set<String> getTopLikedItems(HashMap<String, Integer> ratingsSet, int n)
     {
         LinkedHashMap<String, Integer> sortedRatings = SortHashMap.sortByValues(ratingsSet);
         Set<String>topLikedItems = new HashSet<>();
-        Iterator<Map.Entry<String, Integer>> iter = sortedRatings.entrySet().iterator();
         int i = 0;
+        Iterator<Map.Entry<String, Integer>> iter = sortedRatings.entrySet().iterator();
         while (iter.hasNext() && i < n){
             Map.Entry<String, Integer> entry = iter.next();
             topLikedItems.add(entry.getKey());
