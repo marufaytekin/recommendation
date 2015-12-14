@@ -21,8 +21,8 @@ public class LSHRecommRun {
 
     //static String dataFilePath = "data/ymusic/ymusic.data";
     //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/1m-new/ml-new.data";
-    static String dataFileBase = "data/1m-new/ml-new";
+    static String dataFilePath = "data/1m/ml1m.data";
+    static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
@@ -54,6 +54,8 @@ public class LSHRecommRun {
             System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
             System.out.println("65 - LSH - Prediction - 2D test");
             System.out.println("106 - LSH - top-N Precision - 2D test");
+            System.out.println("107 - LSH - top-N Evaluation - HashFunctions test");
+            System.out.println("108 - LSH - top-N top-N Evaluation - HashTables test");
             System.out.println("");
             System.out.println("Experimental Tests");
             System.out.println("10 - Model Build Time - All");

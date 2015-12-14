@@ -84,7 +84,7 @@ public final class DataParser
         LOG.info(inc);
 
         try {
-            while (in.ready()) {
+            while (in != null && in.ready()) {
                 double x = 100 * Math.random();
                 double y = 100 * Math.random();
                 String line = in.readLine();
@@ -109,23 +109,19 @@ public final class DataParser
                         updateCounter(userID, userSetCount);
                         totalDataSampleSize = totalDataSampleSize.add(inc);
                     }
-                } else {
-                    LOG.debug("Invalid data entry: " + data);
-                }
+                } else LOG.debug(String.format("Invalid data entry: %s", Arrays.toString(data)));
             }
-            LOG.info("Data file: " + filePath);
-            LOG.info("Total Ratings: " + totalDataSampleSize);
-            LOG.info("Selected test data: " + testDataSampleSize + " of "
-                    + totalDataSampleSize + " samples");
+            LOG.info(String.format("Data file: %s", filePath));
+            LOG.info(String.format("Total Ratings: %s", totalDataSampleSize));
+            LOG.info(String.format("Selected test data: %d of %s samples", testDataSampleSize, totalDataSampleSize));
             computeSparsity(userSet, itemSet, totalDataSampleSize);
-        } catch (NumberFormatException e) {
-            LOG.error(e);
-        } catch (IOException e) {
+        } catch (NumberFormatException | IOException e) {
             LOG.error(e);
         } finally {
             try {
+                assert in != null;
                 in.close();
-            } catch (IOException e) {
+            } catch (IOException | NullPointerException e) {
                 // Do nothing
             }
         }
@@ -153,12 +149,10 @@ public final class DataParser
         int totalDataSampleSize = 0;
 
         try {
-            while (in.ready()) {
+            while (in != null && in.ready()) {
                 String line = in.readLine();
                 String[] data = line.split(seperator);
-                if (data.length < 3) {
-                    continue;
-                }
+                if (data.length < 3) continue;
                 String userID = data[0];
                 String itemID = data[1];
                 Integer rating = (int) Math.round(Double.parseDouble(data[2]));
@@ -170,9 +164,7 @@ public final class DataParser
                 updateCounter(userID, userSetCount);
                 totalDataSampleSize++;
             }
-        }  catch (NumberFormatException e) {
-            LOG.error(e.getStackTrace());
-        } catch (IOException e) {
+        }  catch (NumberFormatException | IOException e) {
             LOG.error(e.getStackTrace());
         } finally {
             if (in != null) {
@@ -201,21 +193,17 @@ public final class DataParser
         int totalDataSampleSize = 0;
 
         try {
-            while (in.ready()) {
+            while (in != null && in.ready()) {
                 String line = in.readLine();
                 String[] data = line.split(seperator);
-                if (data.length < 3) {
-                    continue;
-                }
+                if (data.length < 3) continue;
                 String userID = data[0];
                 String itemID = data[1];
                 Integer rating = (int) Math.round(Double.parseDouble(data[2]));
                 insertDataInMap(userID, itemID, rating, testDataMap);
                 totalDataSampleSize++;
             }
-        }  catch (NumberFormatException e) {
-            LOG.error(e.getStackTrace());
-        } catch (IOException e) {
+        }  catch (NumberFormatException | IOException e) {
             LOG.error(e.getStackTrace());
         } finally {
             if (in != null) {
@@ -275,7 +263,7 @@ public final class DataParser
     public static void calculateDataSetHistogram(HashMap<String, HashMap<String, Integer>> userRateMap)
     {
         Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = userRateMap.entrySet().iterator();
-        HashMap <Integer, Integer>histogram = new HashMap();
+        HashMap <Integer, Integer>histogram = new HashMap<>();
         for (int i=0; i <= 10; i++) {
             histogram.put(i,0); //init historgram
         }
@@ -340,12 +328,10 @@ public final class DataParser
         int totalDataSampleSize = 0;
 
         try {
-            while (in.ready()) {
+            while (in != null && in.ready()) {
                 String line = in.readLine();
                 String[] data = line.split(seperator);
-                if (data.length < 3) {
-                    continue;
-                }
+                if (data.length < 3) continue;
                 String userID = data[0];
                 String itemID = data[1];
                 Integer rating = (int) Math.round(Double.parseDouble(data[2]));
@@ -357,9 +343,7 @@ public final class DataParser
                 updateCounter(userID, userSetCount);
                 totalDataSampleSize++;
             }
-        }  catch (NumberFormatException e) {
-            LOG.error(e.getStackTrace());
-        } catch (IOException e) {
+        }  catch (NumberFormatException | IOException e) {
             LOG.error(e.getStackTrace());
         } finally {
             if (in != null) {
@@ -384,10 +368,8 @@ public final class DataParser
         HashMap<String, HashMap<String, Double>> userStatsMap = Stats
                 .calculateUserMeanVarianceMap(_userRateMap);
 
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = _userRateMap
-                .entrySet().iterator();
-        while (iter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
+        for (Map.Entry<String, HashMap<String, Integer>> entry : _userRateMap
+                .entrySet()) {
             String userId = entry.getKey();
             if (entry.getValue().size() < recommTestUserMinItemNumber) {
                 continue;
@@ -445,9 +427,7 @@ public final class DataParser
             HashMap<String, HashMap<String, Integer>> _testDataMap,
             String userId, Set<String> selectedTestItems)
     {
-        Iterator <String>iter = selectedTestItems.iterator();
-        while (iter.hasNext()){
-            String itemId = iter.next();
+        for (String itemId : selectedTestItems) {
             Integer rating = _userRateMap.get(userId).get(itemId);
             _userRateMap.get(userId).remove(itemId);
             _itemRateMap.get(itemId).remove(userId);
@@ -462,11 +442,8 @@ public final class DataParser
             HashMap<String, HashMap<String, Integer>> _itemRateMap,
             HashMap<String, HashMap<String, Integer>> _testDataMap)
     {
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = _testDataMap
-                .entrySet().iterator();
-        while (testDataIter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
-                    .next();
+        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : _testDataMap
+                .entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> movieRatePair = testDataEntry.getValue();
             HashMap<String, Integer> userRateList = _userRateMap.get(userId);
@@ -476,12 +453,12 @@ public final class DataParser
             for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
                 try {
                     String movieId = entry.getKey();
-                    if (_userRateMap.get(userId).get(movieId)!= null) {
+                    if (_userRateMap.get(userId).get(movieId) != null) {
                         LOG.info("removing duplicate entry!");
                         LOG.info(testDataEntry.toString());
                         _userRateMap.get(userId).remove(movieId);
                     }
-                    if (_itemRateMap.get(movieId).get(userId)!= null) {
+                    if (_itemRateMap.get(movieId).get(userId) != null) {
                         LOG.info("removing duplicate entry!");
                         LOG.info(testDataEntry.toString());
                         _itemRateMap.get(movieId).remove(userId);

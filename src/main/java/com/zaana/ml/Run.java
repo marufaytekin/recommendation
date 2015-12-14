@@ -16,10 +16,10 @@ public class Run {
         switch (selection) {
 
             case "01":
-                runSelection("50", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("52", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("58", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("580", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("108", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                //runSelection("58", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                //runSelection("580", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
 
             case "02":
                 DataParser.processDataFile(dataFilePath, seperator,0,100);
@@ -191,6 +191,12 @@ public class Run {
                 break;
             case "106":
                 PrecisionTest.run2DLSHPrecisionTests("LSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                break;
+            case "107"://String dataFileBase, int numOfRun, int smoothRun, String separator, int numOfBands, int topN, int y)
+                LSHMetricsTest.runHashFunctionsLSHEvaluation(dataFileBase, numOfRun, smoothRun, seperator, l, topN, y);
+                break;
+            case "108":
+                LSHMetricsTest.runHashTablesLSHEvaluation(dataFileBase, numOfRun, smoothRun, seperator, k, topN, y);
                 break;
 
             case "99":

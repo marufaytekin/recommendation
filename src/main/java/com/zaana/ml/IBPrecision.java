@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.recomm.IBRecommendation;
 
 import java.util.*;
@@ -7,7 +8,7 @@ import java.util.*;
 /**
  * Created by maruf on 25/04/15.
  */
-public class IBPrecision extends Precision{
+public class IBPrecision extends Precision {
 
     public static double calculateItemBasedPrecision(
             HashMap<String, HashMap<String, Integer>> userRateMap,

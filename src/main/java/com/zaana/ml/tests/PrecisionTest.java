@@ -1,10 +1,9 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
+import com.zaana.ml.Vector;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by maruf on 07/05/15.
@@ -12,43 +11,49 @@ import java.util.Set;
 public class PrecisionTest extends AbstractTest {
 
     /**
-     * Runs User-based precision against k parameter. */
+     * Runs User-based precision against k parameter.
+     */
     public static void runUBPrecisionTests(String dataFileBase, String separator,
                                            int l, int k, double smoothRun, int topN, int kNN, int y) {
         runCFPrecisionTests(dataFileBase, "UB", separator, l, k, smoothRun, topN, kNN, y);
     }
+
     /**
-     * Runs Item-based precision  */
+     * Runs Item-based precision
+     */
     public static void runIBPrecisionTests(String dataFileBase, String separator,
                                            int l, int k, double smoothRun, int topN, int kNN, int y) {
         runCFPrecisionTests(dataFileBase, "IB", separator, l, k, smoothRun, topN, kNN, y);
     }
 
     /**
-     * Runs User-based precision against k parameter. */
+     * Runs User-based precision against k parameter.
+     */
     public static void runUBPrecisionAndKTests(String dataFileBase, String separator,
                                                int l, int k, double smoothRun, int topN, int y) {
         runPrecisionAndKTests(dataFileBase, "UB", separator, l, k, smoothRun, topN, y);
     }
 
 
-
     /**
-     * Runs User-based LSH precision against k parameter. */
+     * Runs User-based LSH precision against k parameter.
+     */
     public static void runUBLSHPrecisionAndKTest(String dataFileBase, String separator,
                                                  int l, int k, double smoothRun, int topN, int y) {
         runPrecisionAndKTests(dataFileBase, "UBLSH", separator, l, k, smoothRun, topN, y);
     }
 
     /**
-     * Runs UBLSH precision 2D test for k and y parameters */
+     * Runs UBLSH precision 2D test for k and y parameters
+     */
     public static void runUBLSHPrecisionKAndYTest(String dataFileBase, String separator,
                                                   int l, int k, int smoothRun, int topN, int numOfRun) {
         runPrecisionKAndYTest(dataFileBase, "UBLSH", separator, l, k, smoothRun, numOfRun, topN);
     }
 
     /**
-     * Runs user-based precision 2D test for k and y parameters */
+     * Runs user-based precision 2D test for k and y parameters
+     */
     public static void runUBPrecisionKAndYTest(String dataFileBase, String seperator,
                                                int l, int k, int smoothRun, int topN, int numOfRun) {
         runPrecisionKAndYTest(dataFileBase, "UB", seperator, l, k, smoothRun, numOfRun, topN);
@@ -57,12 +62,11 @@ public class PrecisionTest extends AbstractTest {
 
     private static void runCFPrecisionTests(
             String dataFileBase, String type, String separator,
-            int l, int k, double smoothRun, int topN, int kNN, int y)
-    {
+            int l, int k, double smoothRun, int topN, int kNN, int y) {
         LOG.info("Running precision simulation...");
         double totalPrecision = 0.0;
         for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForRecommendation(dataFileBase, (j+1), separator, smoothRun, l, k);
+            preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             double precision;
@@ -72,8 +76,7 @@ public class PrecisionTest extends AbstractTest {
             } else if (type == "IB") {
                 precision = IBPrecision.calculateItemBasedPrecision(
                         userRateMap, itemRateMap, testDataMap, itemSet, topN, kNN, y);
-            }
-            else {
+            } else {
                 throw new UnsupportedOperationException("Invalid operation for CF type.");
             }
             totalPrecision += precision;
@@ -87,13 +90,13 @@ public class PrecisionTest extends AbstractTest {
     }
 
     /**
-     * Runs 2D LSH Precision tests.*/
+     * Runs 2D LSH Precision tests.
+     */
     public static void run2DLSHPrecisionTests(
             String testType, String dataFileBase,
-            int numOfRun, double smoothRun, String separator, int topN, int kNN, int y)
-    {
+            int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
         int numOfBands = 1;
-        int numOfHashFunctions = 6;
+        int numOfHashFunctions = 1;
         ArrayList<Object> precisionList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
@@ -103,7 +106,7 @@ public class PrecisionTest extends AbstractTest {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -138,7 +141,7 @@ public class PrecisionTest extends AbstractTest {
             }
             precisionList2D.add(precisionList);
             candidate_set_list2D.add(candidate_set_list);
-            numOfHashFunctions = 6;
+            numOfHashFunctions = 1;
             numOfBands += 1;
         }
         LOG2.info("# ========================================================");
@@ -153,8 +156,7 @@ public class PrecisionTest extends AbstractTest {
 
     private static void runPrecisionAndKTests(
             String dataFileBase, String type, String separator,
-            int l, int k, double smoothRun, int topN, int y)
-    {
+            int l, int k, double smoothRun, int topN, int y) {
         LOG.info("Running precision simulation...");
         double totalPrecision;
         HashMap<Integer, HashMap<String, Set<String>>> tables;
@@ -165,7 +167,7 @@ public class PrecisionTest extends AbstractTest {
         for (int i = 0; i < 10; i++) {
             totalPrecision = 0.0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForRecommendation(dataFileBase, (j+1), separator, smoothRun, l, k);
+                preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 double precision;
@@ -205,11 +207,11 @@ public class PrecisionTest extends AbstractTest {
 
 
     /**
-     * Runs 2D tests for k parameter and number of HashFunctions.*/
+     * Runs 2D tests for k parameter and number of HashFunctions.
+     */
     public static void run2DPrecisionHashFunctionsAndKTests(
             String testType, String dataFileBase,
-            int numOfRun, double smoothRun, String separator, int topN, int y)
-    {
+            int numOfRun, double smoothRun, String separator, int topN, int y) {
         int numOfBands = 4; // set 1 band to measure only hash functions effect
         int numOfHashFunctions = 1;
         int kNN = 1;
@@ -222,7 +224,7 @@ public class PrecisionTest extends AbstractTest {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -241,9 +243,9 @@ public class PrecisionTest extends AbstractTest {
                 LOG.info("numOfBands = " + numOfBands
                         + " numOfHashFunctions = " + numOfHashFunctions);
                 LOG.info("k = " + kNN);
-                LOG.info(testType + "precision = " + precision /smoothRun);
+                LOG.info(testType + "precision = " + precision / smoothRun);
                 precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size /smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
                 numOfHashFunctions += 1;
             }
             precisionList2D.add(precisionList);
@@ -262,11 +264,11 @@ public class PrecisionTest extends AbstractTest {
     }
 
     /**
-     * Runs 2D tests for k parameter and number of HashTables.*/
+     * Runs 2D tests for k parameter and number of HashTables.
+     */
     public static void run2DPrecisionHashTablesAndKTests(
             String testType, String dataFileBase,
-            int numOfRun, int smoothRun, String separator, int topN, int y)
-    {
+            int numOfRun, int smoothRun, String separator, int topN, int y) {
         int numOfBands = 1; // set 1 band to measure only hash functions effect
         int numOfHashFunctions = 4;
         int kNN = 1;
@@ -279,7 +281,7 @@ public class PrecisionTest extends AbstractTest {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -298,9 +300,9 @@ public class PrecisionTest extends AbstractTest {
                 LOG.info("numOfBands = " + numOfBands
                         + " numOfHashFunctions = " + numOfHashFunctions);
                 LOG.info("k = " + kNN);
-                LOG.info(testType + "precision = " + precision /smoothRun);
+                LOG.info(testType + "precision = " + precision / smoothRun);
                 precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size /smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
                 numOfBands += 1;
             }
             precisionList2D.add(precisionList);
@@ -320,10 +322,10 @@ public class PrecisionTest extends AbstractTest {
 
 
     /**
-     * Runs precision test for Y parameter (signficance). */
+     * Runs precision test for Y parameter (signficance).
+     */
     public static void runUBLSHPrecisionAndYTest(String dataFileBase, String type, String separator,
-                                                 int l, int k, int smoothRun, int topN, int kNN)
-    {
+                                                 int l, int k, int smoothRun, int topN, int kNN) {
         LOG.info("Running precision simulation...");
         double totalPrecision;
         HashMap<Integer, HashMap<String, Set<String>>> tables;
@@ -334,7 +336,7 @@ public class PrecisionTest extends AbstractTest {
         for (int i = 0; i < 10; i++) {
             totalPrecision = 0.0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForRecommendation(dataFileBase, (j+1), separator, smoothRun, l, k);
+                preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 double precision;
@@ -354,8 +356,7 @@ public class PrecisionTest extends AbstractTest {
                     hashTables = LSH.buildIndexTables(itemRateMap, vmap, l);
                     precision = IBLSHPrecision.calculateIBLSHPrecision(
                             userRateMap,itemRateMap,testDataMap,hashTables,vmap,itemSet,kNN,topN);
-                }*/
-                else {
+                }*/ else {
                     throw new UnsupportedOperationException("Invalid operation for CF type.");
                 }
                 totalPrecision += precision;
@@ -375,8 +376,7 @@ public class PrecisionTest extends AbstractTest {
     private static void runPrecisionKAndYTest(
             String dataFileBase, String type, String separator,
             int numOfBands, int numOfHashFunctions,
-            int smoothRun, int numOfRun, int topN)
-    {
+            int smoothRun, int numOfRun, int topN) {
         ArrayList<Object> precisionList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
         prepareHashTables(dataFileBase, smoothRun, separator, numOfBands, numOfHashFunctions);
@@ -389,7 +389,7 @@ public class PrecisionTest extends AbstractTest {
                 double precision = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     if (type == "UB") {
@@ -405,9 +405,9 @@ public class PrecisionTest extends AbstractTest {
                     }
                 }
                 LOG.info("k = " + kNN + " y = " + y);
-                LOG.info(type + "precision = " + precision /smoothRun);
+                LOG.info(type + "precision = " + precision / smoothRun);
                 precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size /smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
                 y += 3;
             }
             precisionList2D.add(precisionList);
@@ -424,6 +424,4 @@ public class PrecisionTest extends AbstractTest {
         LOG2.info(type + "YAndKPrecision2D = " + precisionList2D.toString() + ";");
         LOG2.info(type + "YAndKCandidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
     }
-
-
 }

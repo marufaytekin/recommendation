@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.recomm.IBLSHRecommendation;
 
 import java.util.*;

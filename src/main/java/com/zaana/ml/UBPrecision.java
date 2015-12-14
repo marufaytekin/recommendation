@@ -1,6 +1,8 @@
 package com.zaana.ml;
 
+import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.recomm.UBRecommendation;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -9,6 +11,7 @@ import java.util.*;
  */
 public class UBPrecision extends Precision {
 
+    static Logger LOG = Logger.getLogger(UBPrecision.class);
     public UBPrecision() {
     }
 

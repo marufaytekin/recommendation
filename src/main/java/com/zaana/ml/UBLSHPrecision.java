@@ -1,8 +1,10 @@
 package com.zaana.ml;
 
 
+import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.recomm.AbstractRecommendation;
 import com.zaana.ml.recomm.UBLSHRecommendation;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
@@ -11,6 +13,7 @@ import java.util.*;
  */
 public class UBLSHPrecision extends Precision {
 
+    static Logger LOG = Logger.getLogger(UBLSHPrecision.class);
     static double candidate_size;
 
     public static double getCandidate_size () {

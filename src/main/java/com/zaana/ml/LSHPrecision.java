@@ -1,6 +1,7 @@
 package com.zaana.ml;
 
 
+import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.recomm.AbstractRecommendation;
 import com.zaana.ml.recomm.LSHRecommendation;
 
@@ -33,7 +34,7 @@ public class LSHPrecision extends AbstractRecommendation {
                 //Set<String> retrieved =
                 //        LSHRecommendation.recommendItems(hashTablesIB,
                 //                vmapIB, userRateMap.get(userId), itemHashKeyTable, topN);
-                Set<String> retrieved = LSHRecommendation.recommendItems2(hashTablesIB, vmapIB, userRateMap.get(userId), itemHashKeyTable, topN);
+                Set<String> retrieved = LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
                 //if (retrieved == null) {
                 //    LOG.info("topNRecom : " + null);
                 //}
@@ -50,7 +51,7 @@ public class LSHPrecision extends AbstractRecommendation {
         int size = testDataMap.size();
         LOG.info("Total Time = " + totalTime + " ms");
         LOG.info("Size = " + size);
-        LOG.info("Avg top-N Rec Time = " + totalTime / size + " ms");
+        LOG.info("Avg top-N Rec Time = " + (double) totalTime / size + " ms");
         return totalPrecision / size;
     }
 }

@@ -110,18 +110,18 @@ public final class LSH {
 
     public static Set<String> getCandidateSetItemTable(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            String itemId, HashMap<String, String> itemTable) {
+            HashMap<String, Integer> ratingsSet, String itemId, HashMap<String, String> itemTable)
+    {
         Set<String> candidateSet = new HashSet<>();
-        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
-            //String hashKey = generateHashKeyForVector(vmap, userRates,
-            //        hashTableNum);
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+        {
             String hashKey = itemTable.get(itemId+":"+hashTableNum);
             Set<String> candidates = hashTables.get(
                     Integer.valueOf(hashTableNum)).get(hashKey);
             candidateSet.addAll(candidates);
         }
         candidateSet.remove(itemId);
+        candidateSet.removeAll(ratingsSet.keySet());
 
         return candidateSet;
     }
@@ -133,11 +133,11 @@ public final class LSH {
     public static List<String> getCandidateSetsWithFrequency(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, Integer> userRates) {
-
+            HashMap<String, Integer> userRates)
+    {
         List<String> candidateSets = new ArrayList();
-
-        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+        {
             String hashKey = generateHashKeyForVector(vmap, userRates,
                     hashTableNum);
             Set<String> candidates = hashTables.get(
