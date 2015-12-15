@@ -118,7 +118,7 @@ public final class LSH {
      * @param hashKeyTable
      * @return candidateSet
      */
-    public static Set<String> getCandidateSetFromHashTable(
+    public static Set<String> getCandidateItemSetFromHashTable(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<String, Integer> ratingsSet,
             String itemId, HashMap<String, String> hashKeyTable)
@@ -137,6 +137,31 @@ public final class LSH {
         return candidateSet;
     }
 
+    /***
+     * Returns candidate user set by using hashKeyTable.
+     * Eliminates the recalculation of hash keys.
+     *
+     * @param hashTables
+     * @param userId
+     * @param hashKeyTable
+     * @return candidateSet
+     */
+    public static List<String> getCandidateUserSetFromHashTable(
+            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
+            String userId, HashMap<String, String> hashKeyTable)
+    {
+        List<String> candidateSet = new ArrayList<>();
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+        {
+            String hashKey = hashKeyTable.get(userId + ":" + hashTableNum);
+            Set<String> candidates = hashTables.get(
+                    Integer.valueOf(hashTableNum)).get(hashKey);
+            candidateSet.addAll(candidates);
+        }
+        candidateSet.remove(userId);
+
+        return candidateSet;
+    }
 
     /**
      * Returns candidate sets with frequency as an ArrayList.
@@ -161,7 +186,6 @@ public final class LSH {
 
         return candidateSets;
     }
-
 
     /**
      * This method calculates candidate set for a user/item based on its
@@ -289,12 +313,9 @@ public final class LSH {
     
     public static double avg_num_of_buckets (HashMap<Integer, 
             HashMap<String, Set<String>>> hashTables) {
-        Iterator<Entry<Integer, HashMap<String, Set<String>>>> iter = 
-                hashTables.entrySet().iterator();
         int total = 0;
-        while (iter.hasNext()) {
-            Entry<Integer, HashMap<String, Set<String>>> entry = iter.next();
-            HashMap<String, Set<String>> table = entry.getValue() ;
+        for (Entry<Integer, HashMap<String, Set<String>>> entry : hashTables.entrySet()) {
+            HashMap<String, Set<String>> table = entry.getValue();
             total += table.keySet().size();
         }
         

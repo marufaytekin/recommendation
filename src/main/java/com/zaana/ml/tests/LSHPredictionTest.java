@@ -268,7 +268,7 @@ public class LSHPredictionTest extends AbstractTest
                         hashTables = LSH.buildIndexTables(userRateMap, vmap,
                                 numOfBands);
                         runTime += LSHPrediction.runLSHPredictionOnTestData(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap);
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyTable(), kNN);
                         candidate_set_size += LSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
                                 LSHPrediction.getOutputList(),
@@ -313,7 +313,7 @@ public class LSHPredictionTest extends AbstractTest
             int numOfRun, double smoothRun, String separator, int kNN, int y)
     {
         int numOfBands = 4; // set 1 band to measure only hash functions effect
-        int numOfHashFunctions = 1;
+        int numOfHashFunctions = 4;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -377,7 +377,7 @@ public class LSHPredictionTest extends AbstractTest
             } else if(param == "y") {
                y += 3;
             }
-            numOfHashFunctions = 1;
+            numOfHashFunctions = 4;
         }
        LOG2.info("# ========================================================");
        LOG2.info("# test case: " + testType + " 2D - Hash Functions vs. " + param);
@@ -510,7 +510,7 @@ public class LSHPredictionTest extends AbstractTest
             double candidate_set_size = 0;
             double predictedItems = 0;
             for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j + 1), val, separator);
+                preprocessDataForValidation(dataFileBase, (j+1), val, separator);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 if (type == "UBLSH") {
@@ -542,7 +542,7 @@ public class LSHPredictionTest extends AbstractTest
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
                     runTime += LSHPrediction.runLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap);
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyTable(), kNN);
                     candidate_set_size += LSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
@@ -552,7 +552,6 @@ public class LSHPredictionTest extends AbstractTest
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
-
             }
             maeList.add(mae / smoothRun);
             runtimeList.add(runTime / smoothRun);

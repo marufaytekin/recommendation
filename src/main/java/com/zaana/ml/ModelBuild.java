@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.similarity.Cosine;
 
 import java.io.*;
@@ -13,16 +14,17 @@ public class ModelBuild  implements Serializable {
      * Use following methods to create a similarity matrix in
      * HashMap format.
      */
-    static class MyComparator implements Comparator<Map.Entry <String, Double>>, Serializable {
+    static class CustomComparator implements Comparator<Map.Entry <String, Double>>, Serializable {
         public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
             return Double.compare(o2.getValue(), o1.getValue());
         }
     }
 
-    public static HashMap<String, PriorityQueue<Map.Entry<String, Double>>> createSimilarityMatrix(
+    public static HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> createSimilarityMatrix(
             final HashMap<String, HashMap<String, Integer>> userRateMap, int y)
     {
-        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> similarityMatrix = new HashMap<>();
+        HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> similarityMatrix = new HashMap<>();
+        //HashMap<String, BoundedPQueue> similarityMatrix = new HashMap<>();
         HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(userRateMap);
 
         for (Map.Entry<String, HashMap<String, Integer>> userItemRatesPairA : userRateMap
@@ -45,16 +47,17 @@ public class ModelBuild  implements Serializable {
                     similarity = Cosine.calculateCosineSimilarity(intersectionAB,
                             userItemRatesA, userItemRatesB, y);
                     if (similarityMatrix.containsKey(userIdA)) {
-                        similarityMatrix.get(userIdA).add(new HashMap.SimpleEntry<>(userIdB, similarity));
+                        similarityMatrix.get(userIdA).offer(new HashMap.SimpleEntry<>(userIdB, similarity));
                     } else {
-                        PriorityQueue<Map.Entry<String, Double>> q = new PriorityQueue<>(100, new MyComparator());
-                        q.add(new HashMap.SimpleEntry<>(userIdB, similarity));
+                        MinMaxPriorityQueue<Map.Entry<String, Double>> q = MinMaxPriorityQueue
+                                .orderedBy(new CustomComparator())
+                                .maximumSize(100)
+                                .create();
+                        q.offer(new HashMap.SimpleEntry<>(userIdB, similarity));
                         similarityMatrix.put(userIdA, q);
                     }
                 }
             }
-            PriorityQueue<Map.Entry<String, Double>> q = similarityMatrix.get(userIdA);
-            q.removeIf()
         }
         return similarityMatrix;
     }
@@ -62,7 +65,7 @@ public class ModelBuild  implements Serializable {
     public static void createAndWriteModel(
             final HashMap<String, HashMap<String, Integer>> userRateMap, String filePath, int y) {
 
-        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model = createSimilarityMatrix(userRateMap, y);
+        HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> model = createSimilarityMatrix(userRateMap, y);
         try
         {
             FileOutputStream fileOut =

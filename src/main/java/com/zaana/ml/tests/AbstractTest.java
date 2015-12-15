@@ -23,6 +23,7 @@ public abstract class AbstractTest {
     static Logger LOG = Logger.getLogger(AbstractTest.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static HashMap<String, String> itemHashKeyTable;
+    static HashMap<String, String> userHashKeyTable;
 
     public static void preprocessDataForValidation(
             String baseUrl, int num, String type, String seperator)
@@ -34,10 +35,10 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
-        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model =
-                ModelBuild.readModelFromFile(baseUrl+num+".model.ub");
-        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model2 =
-                ModelBuild.readModelFromFile(baseUrl+num+".model.ib");
+        //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model =
+        //        ModelBuild.readModelFromFile(baseUrl+num+".model.ub");
+        //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model2 =
+        //        ModelBuild.readModelFromFile(baseUrl+num+".model.ib");
 
     }
 
@@ -79,7 +80,7 @@ public abstract class AbstractTest {
             userRateMap = DataParser.getUserRateMap();
             itemRateMap = DataParser.getItemRateMap();
             testDataMap = DataParser.getTestDataMap();
-            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ub", y);
+            //ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ub", y);
             ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ib", y);
         }
     }

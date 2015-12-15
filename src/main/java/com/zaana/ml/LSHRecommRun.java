@@ -21,8 +21,8 @@ public class LSHRecommRun {
 
     //static String dataFilePath = "data/ymusic/ymusic.data";
     //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/300k/xaa.data";
+    static String dataFileBase = "data/300k/xaa";
     //static String dataFilePath = "data/1m-new/ml-new";
     //static String dataFileBase = "data/1m-new/ml-new";
     static final String seperator = "\\t";
