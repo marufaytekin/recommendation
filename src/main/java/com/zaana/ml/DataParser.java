@@ -233,7 +233,6 @@ public final class DataParser
     private static void updateCounter(final String id,
             final HashMap<String, Integer> map)
     {
-
         try {
             Integer cnt = map.get(id);
             map.put(id, cnt + 1);

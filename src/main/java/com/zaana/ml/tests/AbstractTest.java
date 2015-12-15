@@ -2,6 +2,8 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.UBNNPrediction;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -32,6 +34,11 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
+        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model =
+                ModelBuild.readModelFromFile(baseUrl+num+".model.ub");
+        HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model2 =
+                ModelBuild.readModelFromFile(baseUrl+num+".model.ib");
+
     }
 
 
@@ -62,9 +69,19 @@ public abstract class AbstractTest {
             hashTables.add(tables);
 
         }
-
         LOG.info("Hash Tables created...");
+    }
 
+    public static void buildAndWriteModel(String baseUrl, double smoothRun, String seperator, int y) {
+        for (int j = 0; j < smoothRun; j++) {
+            String trainDataFilePath = baseUrl + (j+1);
+            preprocessDataForValidation(baseUrl, (j+1), "test", seperator);
+            userRateMap = DataParser.getUserRateMap();
+            itemRateMap = DataParser.getItemRateMap();
+            testDataMap = DataParser.getTestDataMap();
+            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ub", y);
+            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ib", y);
+        }
     }
 
 }

@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.DataParser;
 import com.zaana.ml.LSH;
-import com.zaana.ml.similarity.Cosine;
+import com.zaana.ml.ModelBuild;
 import com.zaana.ml.Vector;
 
 import java.util.*;
@@ -29,10 +29,10 @@ public class ModelBuildTimeTest extends AbstractTest {
             int numOfBands = l;
             if (type == "UB") {
                 startTime = System.currentTimeMillis();
-                Cosine.createSimilarityMatrix(userRateMap);
+                ModelBuild.createSimilarityMatrix(userRateMap, 5);
             } else if (type == "IB") {
                 startTime = System.currentTimeMillis();
-                Cosine.createSimilarityMatrix(itemRateMap);
+                ModelBuild.createSimilarityMatrix(itemRateMap, 5);
             } else if (type == "UBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                 startTime = System.currentTimeMillis();

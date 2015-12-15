@@ -30,6 +30,13 @@ public class Run {
                 DataParser.calculateDataSetHistogram(DataParser.getItemRateMap());
                 break;
 
+            case "03":
+                AbstractTest.buildAndWriteModel(dataFileBase, smoothRun, seperator, y);
+                break;
+            case "04":
+                AbstractTest.preprocessDataForValidation(dataFileBase, smoothRun, "test", seperator);
+                break;
+
             case "5000":
                 runLSHPredictionTests(dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
@@ -246,6 +253,7 @@ public class Run {
         runSelection("57", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
         runSelection("570", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
     }
+
 
    
 }
