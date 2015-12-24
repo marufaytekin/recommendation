@@ -1,7 +1,5 @@
 package com.zaana.ml.prediction;
 
-import com.google.common.collect.MinMaxPriorityQueue;
-
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -81,9 +79,10 @@ public class Prediction
      * Calculates LSH prediction. Uses frequency of users as weight.
      * Eliminates similarity computation to find k nearest neighbors.
      * */
-    /*public static double calculateLSHBasedPredicitonRate(HashMap<String, HashMap<String, Integer>> userRateMap,
-                                                         Set<String> intersectionOfCandidateRatedUserSets,
-                                                         List<String> candidateSetList, String movieId) {
+    public static double calculateLSHFreqBasedPredictionRate(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            Set<String> intersectionOfCandidateRatedUserSets,
+            List<String> candidateSetList, String movieId) {
         double weightedRatingsTotal = 0;
         double weightsTotal = 0;
         Integer frequency;
@@ -98,9 +97,9 @@ public class Prediction
             return weightedRatingsTotal / weightsTotal;
         else
             return 0;
-    }*/
+    }
 
-    public static double calculateLSHBasedPredicitonRate(
+    public static double calculateLSHBasedPredictionRate(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             Set<String> frequentUserList,
             String movieId)

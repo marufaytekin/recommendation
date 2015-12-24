@@ -1,9 +1,6 @@
 package com.zaana.ml.prediction;
 
-import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.LSH;
-
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -27,13 +24,8 @@ public class LSHPrediction extends AbstractPrediction {
         targetList = new LinkedList<>();
 
         Integer total_candidate_set_size = 0;
-
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = testDataMap
-                .entrySet().iterator();
         int cnt = 0;
-        while (testDataIter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
-                    .next();
+        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
@@ -42,7 +34,7 @@ public class LSHPrediction extends AbstractPrediction {
             cnt++;
             //List<String> candidateSetList = LSH.getCandidateSetsWithFrequency(hashTables, vmap, userRateList);
             List<String> candidateSetList = LSH.getCandidateUserSetFromHashTable(hashTables, userId, hashKeyTable);
-            Set <String> candidateSet = new HashSet<>(candidateSetList);
+            Set<String> candidateSet = new HashSet<>(candidateSetList);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
                     testDataEntry, userRateMap, itemRateMap, candidateSetList, candidateSet, outputList, targetList, kNN);
@@ -95,13 +87,13 @@ public class LSHPrediction extends AbstractPrediction {
                 Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-                Set<String> frequentCandidateUsers = getFrequentCandidateList(
-                        intersectionOfCandidateRatedUserSets, candidateSetList, kNN);
+                //Set<String> frequentCandidateUsers = getFrequentCandidateList(
+                //        intersectionOfCandidateRatedUserSets, candidateSetList, kNN);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                    //prediction = Prediction.calculateLSHBasedPredicitonRate(
-                    //            userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
-                    prediction = Prediction.calculateLSHBasedPredicitonRate(
-                            userRateMap, frequentCandidateUsers, movieId);
+                    prediction = Prediction.calculateLSHFreqBasedPredictionRate(
+                            userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
+                    //prediction = Prediction.calculateLSHBasedPredictionRate(
+                    //        userRateMap, frequentCandidateUsers, movieId);
                     if (prediction != 0) {
                         outputList.add(prediction);
                         targetList.add(givenRating);
@@ -113,26 +105,7 @@ public class LSHPrediction extends AbstractPrediction {
         }
     }
 
-    /*
-    static class CustomComparator implements Comparator<Map.Entry <String, Integer>>, Serializable {
-        public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
-            return Integer.compare(o2.getValue(), o1.getValue());
-        }
-    }
 
-    private static MinMaxPriorityQueue<Map.Entry<String, Integer>> getFrequentCandidateList(
-            Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList, int kNN) {
-        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
-                .orderedBy(new CustomComparator())
-                .maximumSize(kNN)
-                .create();
-        for (String userId : intersectionOfCandidateRatedUserSets) {
-            Integer frequency = Collections.frequency(candidateSetList, userId);
-            q.offer(new HashMap.SimpleEntry<>(userId, frequency));
-        }
-        return q;
-    }
-    */
     private static Set<String> getFrequentCandidateList(
             Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList, int kNN) {
         Set<String> userSet = new HashSet<>();

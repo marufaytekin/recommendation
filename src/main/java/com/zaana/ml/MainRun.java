@@ -27,12 +27,12 @@ public final class MainRun
     static int topN = 20;
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
-    static int numOfRun = 10;
+    static int numOfRun = 20;
     static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
-    static int l = 4;
-    static int k = 4;
+    static int l = 5;
+    static int k = 6;
 
     public static void main(final String[] args) throws IOException
     {

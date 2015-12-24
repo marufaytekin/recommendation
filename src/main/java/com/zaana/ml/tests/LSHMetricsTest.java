@@ -27,7 +27,7 @@ public class LSHMetricsTest extends AbstractTest{
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
         HashMap<Integer, HashMap<String, Set<String>>> hashTables;
 
-        int numOfHashFunctions = 4;
+        int numOfHashFunctions = 1;
 
         for (int i = 0; i < numOfRun; i++) {
             double diversity = 0;

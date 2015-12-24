@@ -154,8 +154,7 @@ public final class LSH {
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyTable.get(userId + ":" + hashTableNum);
-            Set<String> candidates = hashTables.get(
-                    Integer.valueOf(hashTableNum)).get(hashKey);
+            Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             candidateSet.addAll(candidates);
         }
         candidateSet.remove(userId);
@@ -166,21 +165,19 @@ public final class LSH {
     /**
      * Returns candidate sets with frequency as an ArrayList.
      * @param hashTables
-     * @param vmap
-     * @param ratingsSet
+     * @param userId
+     * @param hashKeyTable
      * @return
      */
     public static List<String> getCandidateSetsWithFrequency(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, Integer> ratingsSet)
+            String userId,
+            HashMap<String, String> hashKeyTable)
     {
         List<String> candidateSets = new ArrayList();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
-            String hashKey = generateHashKeyForVector(vmap, ratingsSet,
-                    hashTableNum);
-            Set<String> candidates = hashTables.get(
-                    Integer.valueOf(hashTableNum)).get(hashKey);
+            String hashKey = hashKeyTable.get(userId + ":" + hashTableNum);
+            Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             candidateSets.addAll(candidates);
         }
 
@@ -208,8 +205,7 @@ public final class LSH {
         for (int hashTableNum = 1; hashTableNum < hashTables.size(); hashTableNum++) {
             hashKey = generateHashKeyForVector(vmap, userRates,
                     hashTableNum);
-            Set<String> candidates = hashTables.get(
-                    Integer.valueOf(hashTableNum)).get(hashKey);
+            Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             candidateSet.retainAll(candidates);
         }
         candidateSet.remove(userId);

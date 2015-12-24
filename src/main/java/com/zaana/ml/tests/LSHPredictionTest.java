@@ -224,7 +224,7 @@ public class LSHPredictionTest extends AbstractTest
     public static void runLSH2DHashFunctionsTablesTest(
             String testType, int numOfRun, double smoothRun, String dataFileBase, String separator, int kNN, int y) {
         int numOfBands = 1;
-        int numOfHashFunctions = 4;
+        int numOfHashFunctions = 1;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -291,7 +291,7 @@ public class LSHPredictionTest extends AbstractTest
             candidate_set_list2D.add(candidate_set_list);
 
             numOfBands += 1;
-            numOfHashFunctions = 4;
+            numOfHashFunctions = 1;
         }
         LOG2.info("# ========================================================");
         LOG2.info("# test case: " + testType + " 2D ");

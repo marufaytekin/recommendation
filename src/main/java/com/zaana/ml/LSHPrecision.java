@@ -31,10 +31,9 @@ public class LSHPrecision extends AbstractRecommendation {
             String userId = entry.getKey();
             startTime = System.currentTimeMillis();
             try {
-                //Set<String> retrieved =
-                //        LSHRecommendation.recommendItems(hashTablesIB,
-                //                vmapIB, userRateMap.get(userId), itemHashKeyTable, topN);
-                Set<String> retrieved = LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
+                Set<String> retrieved =
+                        LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
+                //Set<String> retrieved = LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
                 //if (retrieved == null) {
                 //    LOG.info("topNRecom : " + null);
                 //}
