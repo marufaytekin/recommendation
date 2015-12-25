@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: ml-hash-functions-aggr-diversity.eps
-%%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Wed Jun 17 23:32:00 2015
+%%Creator: gnuplot 4.4 patchlevel 4
+%%CreationDate: Mon Dec 21 13:13:11 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,17 +15,15 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 2 def
+/Dashlength 1 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
-/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
-/BackgroundColor {-1.000 -1.000 -1.000} def
 %
 /vshift -66 def
 /dl1 {
@@ -40,6 +38,22 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
+Level1 {} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ml-hash-functions-aggr-diversity.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.4 patchlevel 4)
+  /Author (maytekin)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Mon Dec 21 13:13:11 2015)
+  /DOCINFO pdfmark
+end
+} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -47,7 +61,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 4.6 (September 2012)
+% Gnuplot Prolog Version 4.4 (August 2010)
 %
 %/SuppressPDFMark true def
 %
@@ -314,8 +328,7 @@ gnudict begin
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
-  clip
+  gsave 1 setgray fill grestore clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -448,26 +461,8 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
-Level1 SuppressPDFMark or 
-{} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (ml-hash-functions-aggr-diversity.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.6 patchlevel 6)
-  /Author (maruf)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Wed Jun 17 23:32:00 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 end
 %%EndProlog
-%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -476,7 +471,6 @@ doclip
 0 setgray
 newpath
 (Helvetica) findfont 200 scalefont setfont
-BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -551,16 +545,6 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
-1.000 UL
-LTb
-1.00 1.00 1.00 C 1.000 980 640 4418 3726 BoxColFill
-LCb setrgbcolor
-980 640 M
-0 3726 V
-4418 0 V
-0 -3726 V
-980 640 L
-stroke
 0.500 UL
 LTb
 980 640 M
@@ -573,63 +557,53 @@ stroke
 ] -66.7 MRshow
 0.500 UL
 LTb
-980 1172 M
+980 1261 M
 88 0 V
 4331 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 860 1172 M
-[ [({}) 200.0 0.0 true true 0 (500)]
+0.00 0.00 0.00 C 860 1261 M
+[ [({}) 200.0 0.0 true true 0 (200)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-980 1705 M
+980 1882 M
 88 0 V
 4331 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 860 1705 M
+0.00 0.00 0.00 C 860 1882 M
+[ [({}) 200.0 0.0 true true 0 (400)]
+] -66.7 MRshow
+0.500 UL
+LTb
+980 2504 M
+88 0 V
+4331 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 860 2504 M
+[ [({}) 200.0 0.0 true true 0 (600)]
+] -66.7 MRshow
+0.500 UL
+LTb
+980 3125 M
+88 0 V
+4331 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 860 3125 M
+[ [({}) 200.0 0.0 true true 0 (800)]
+] -66.7 MRshow
+0.500 UL
+LTb
+980 3746 M
+88 0 V
+4331 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 860 3746 M
 [ [({}) 200.0 0.0 true true 0 (1000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 2237 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 2237 M
-[ [({}) 200.0 0.0 true true 0 (1500)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 2770 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 2770 M
-[ [({}) 200.0 0.0 true true 0 (2000)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 3302 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 3302 M
-[ [({}) 200.0 0.0 true true 0 (2500)]
-] -66.7 MRshow
-0.500 UL
-LTb
-980 3835 M
-88 0 V
-4331 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 860 3835 M
-[ [({}) 200.0 0.0 true true 0 (3000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -639,7 +613,7 @@ LTb
 -88 0 V
 stroke
 0.00 0.00 0.00 C 860 4367 M
-[ [({}) 200.0 0.0 true true 0 (3500)]
+[ [({}) 200.0 0.0 true true 0 (1200)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -724,102 +698,131 @@ LTb
 1.000 UP
 0.500 UL
 LTb
-1.000 UL
-LTb
-1100 2103 N
-0 800 V
-1503 0 V
-0 -800 V
--1503 0 V
-Z stroke
 % Begin plot #1
 0.500 UL
 LT5
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2603 2803 M
+0.00 0.00 0.00 C LCb setrgbcolor
+1820 4204 M
 [ [({}) 200.0 0.0 true true 0 (UB)]
 ] -66.7 MRshow
 LT5
-0.00 0.00 0.00 C 1220 2803 M
+0.00 0.00 0.00 C 1940 4204 M
 543 0 V
-1422 1016 M
+1422 969 M
 3977 0 V
 % End plot #1
 % Begin plot #2
 stroke
 LT1
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2603 2603 M
+0.00 0.00 0.00 C LCb setrgbcolor
+1820 4004 M
 [ [({}) 200.0 0.0 true true 0 (IB)]
 ] -66.7 MRshow
 LT1
-0.00 0.00 0.00 C 1220 2603 M
+0.00 0.00 0.00 C 1940 4004 M
 543 0 V
-1422 4291 M
+1422 2708 M
 3977 0 V
 % End plot #2
 % Begin plot #3
 2.000 UP
 stroke
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2603 2403 M
+0.00 0.00 0.00 C LCb setrgbcolor
+1820 3804 M
 [ [({}) 200.0 0.0 true true 0 (UB-LSH)]
 ] -66.7 MRshow
 LT0
-0.00 0.00 0.00 C 1220 2403 M
+0.00 0.00 0.00 C 1940 3804 M
 543 0 V
-1422 1038 M
-442 69 V
-442 134 V
-442 213 V
-442 252 V
-441 322 V
-442 463 V
-442 506 V
-442 287 V
-442 279 V
-1422 1038 Dia
-1864 1107 Dia
-2306 1241 Dia
-2748 1454 Dia
-3190 1706 Dia
-3631 2028 Dia
-4073 2491 Dia
-4515 2997 Dia
-4957 3284 Dia
-5399 3563 Dia
-1492 2403 Dia
+1422 1035 M
+442 128 V
+442 168 V
+442 236 V
+442 298 V
+441 691 V
+442 244 V
+442 630 V
+442 623 V
+442 183 V
+1422 1035 Dia
+1864 1163 Dia
+2306 1331 Dia
+2748 1567 Dia
+3190 1865 Dia
+3631 2556 Dia
+4073 2800 Dia
+4515 3430 Dia
+4957 4053 Dia
+5399 4236 Dia
+2211 3804 Dia
 % End plot #3
 % Begin plot #4
 2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2603 2203 M
+0.00 0.00 0.00 C LCb setrgbcolor
+1820 3604 M
 [ [({}) 200.0 0.0 true true 0 (IB-LSH)]
 ] -66.7 MRshow
 LT0
-0.00 0.00 0.00 C 1220 2203 M
+0.00 0.00 0.00 C 1940 3604 M
 543 0 V
-1422 4312 M
-442 10 V
-442 8 V
-442 -158 V
-442 -153 V
-441 248 V
-442 56 V
-442 25 V
-442 -54 V
-442 -185 V
-1422 4312 Star
-1864 4322 Star
-2306 4330 Star
-2748 4172 Star
-3190 4019 Star
-3631 4267 Star
-4073 4323 Star
-4515 4348 Star
-4957 4294 Star
-5399 4109 Star
-1492 2203 Star
+1422 2707 M
+442 -142 V
+442 -99 V
+442 -423 V
+442 33 V
+441 -147 V
+442 291 V
+442 508 V
+442 745 V
+442 385 V
+1422 2707 Star
+1864 2565 Star
+2306 2466 Star
+2748 2043 Star
+3190 2076 Star
+3631 1929 Star
+4073 2220 Star
+4515 2728 Star
+4957 3473 Star
+5399 3858 Star
+2211 3604 Star
 % End plot #4
+% Begin plot #5
+2.000 UP
+0.500 UL
+LT0
+0.00 0.00 0.00 C LCb setrgbcolor
+1820 3404 M
+[ [({}) 200.0 0.0 true true 0 (LSH)]
+] -66.7 MRshow
+LT0
+0.00 0.00 0.00 C 1940 3404 M
+543 0 V
+1422 1469 M
+442 1893 V
+442 220 V
+442 -271 V
+442 154 V
+441 5 V
+442 -47 V
+442 60 V
+442 102 V
+442 -73 V
+1422 1469 Circle
+1864 3362 Circle
+2306 3582 Circle
+2748 3311 Circle
+3190 3465 Circle
+3631 3470 Circle
+4073 3423 Circle
+4515 3483 Circle
+4957 3585 Circle
+5399 3512 Circle
+2211 3404 Circle
+% End plot #5
 1.000 UP
 0.500 UL
 LTb

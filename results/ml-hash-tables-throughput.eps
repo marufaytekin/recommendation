@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ml-hash-functions-recall.eps
+%%Title: ml-hash-tables-throughput.eps
 %%Creator: gnuplot 4.4 patchlevel 4
-%%CreationDate: Mon Dec 21 13:14:07 2015
+%%CreationDate: Fri Dec 25 16:11:36 2015
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -44,13 +44,13 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (ml-hash-functions-recall.eps)
+  /Title (ml-hash-tables-throughput.eps)
   /Subject (gnuplot plot)
   /Creator (gnuplot 4.4 patchlevel 4)
   /Author (maytekin)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Mon Dec 21 13:14:07 2015)
+  /CreationDate (Fri Dec 25 16:11:36 2015)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -557,63 +557,43 @@ stroke
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 1172 M
+1100 1385 M
 88 0 V
 4211 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 1172 M
-[ [({}) 200.0 0.0 true true 0 (0.002)]
+0.00 0.00 0.00 C 980 1385 M
+[ [({}) 200.0 0.0 true true 0 (10000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 1705 M
+1100 2131 M
 88 0 V
 4211 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 1705 M
-[ [({}) 200.0 0.0 true true 0 (0.004)]
+0.00 0.00 0.00 C 980 2131 M
+[ [({}) 200.0 0.0 true true 0 (20000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 2237 M
+1100 2876 M
 88 0 V
 4211 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 2237 M
-[ [({}) 200.0 0.0 true true 0 (0.006)]
+0.00 0.00 0.00 C 980 2876 M
+[ [({}) 200.0 0.0 true true 0 (30000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
-1100 2770 M
+1100 3622 M
 88 0 V
 4211 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 980 2770 M
-[ [({}) 200.0 0.0 true true 0 (0.008)]
-] -66.7 MRshow
-0.500 UL
-LTb
-1100 3302 M
-88 0 V
-4211 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 980 3302 M
-[ [({}) 200.0 0.0 true true 0 (0.01)]
-] -66.7 MRshow
-0.500 UL
-LTb
-1100 3835 M
-88 0 V
-4211 0 R
--88 0 V
-stroke
-0.00 0.00 0.00 C 980 3835 M
-[ [({}) 200.0 0.0 true true 0 (0.012)]
+0.00 0.00 0.00 C 980 3622 M
+[ [({}) 200.0 0.0 true true 0 (40000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -623,7 +603,7 @@ LTb
 -88 0 V
 stroke
 0.00 0.00 0.00 C 980 4367 M
-[ [({}) 200.0 0.0 true true 0 (0.014)]
+[ [({}) 200.0 0.0 true true 0 (50000)]
 ] -66.7 MRshow
 0.500 UL
 LTb
@@ -697,142 +677,127 @@ LTb
 Z stroke
 0.00 0.00 0.00 C 160 2503 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 200.0 0.0 true true 0 (Recall)]
+[ [({}) 200.0 0.0 true true 0 (Throughput \(predictions/sec.\))]
 ] -66.7 MCshow
 grestore
 LTb
 0.00 0.00 0.00 C 3249 140 M
-[ [({}) 200.0 0.0 true true 0 (Number of Hash Functions)]
+[ [({}) 200.0 0.0 true true 0 (Number of Hash Tables)]
 ] -66.7 MCshow
 LTb
 1.000 UP
 0.500 UL
 LTb
+1.000 UL
+LTb
+1220 2203 N
+0 600 V
+1503 0 V
+0 -600 V
+-1503 0 V
+Z stroke
+1220 2803 M
+1503 0 V
 % Begin plot #1
-0.500 UL
-LT5
-0.00 0.00 0.00 C LCb setrgbcolor
-4496 4204 M
-[ [({}) 200.0 0.0 true true 0 (UB)]
-] -66.7 MRshow
-LT5
-0.00 0.00 0.00 C 4616 4204 M
-543 0 V
-1530 4088 M
-3869 0 V
-% End plot #1
-% Begin plot #2
-stroke
-LT1
-0.00 0.00 0.00 C LCb setrgbcolor
-4496 4004 M
-[ [({}) 200.0 0.0 true true 0 (IB)]
-] -66.7 MRshow
-LT1
-0.00 0.00 0.00 C 4616 4004 M
-543 0 V
-1530 2163 M
-3869 0 V
-% End plot #2
-% Begin plot #3
 2.000 UP
 stroke
+0.500 UL
 LT0
 0.00 0.00 0.00 C LCb setrgbcolor
-4496 3804 M
+1940 2703 M
 [ [({}) 200.0 0.0 true true 0 (UB-LSH)]
 ] -66.7 MRshow
 LT0
-0.00 0.00 0.00 C 4616 3804 M
+0.00 0.00 0.00 C 2060 2703 M
 543 0 V
-1530 4003 M
-430 46 V
-2390 2253 L
-2820 1096 L
-3250 983 L
-3679 774 L
-430 112 V
-430 365 V
-430 371 V
-430 35 V
-1530 4003 Dia
-1960 4049 Dia
-2390 2253 Dia
-2820 1096 Dia
-3250 983 Dia
-3679 774 Dia
-4109 886 Dia
-4539 1251 Dia
-4969 1622 Dia
-5399 1657 Dia
-4887 3804 Dia
-% End plot #3
-% Begin plot #4
+1530 1755 M
+430 -70 V
+430 -231 V
+430 -123 V
+430 -109 V
+429 13 V
+430 -57 V
+430 -52 V
+430 -87 V
+430 -18 V
+1530 1755 Dia
+1960 1685 Dia
+2390 1454 Dia
+2820 1331 Dia
+3250 1222 Dia
+3679 1235 Dia
+4109 1178 Dia
+4539 1126 Dia
+4969 1039 Dia
+5399 1021 Dia
+2331 2703 Dia
+% End plot #1
+% Begin plot #2
 2.000 UP
 0.500 UL
 LT0
 0.00 0.00 0.00 C LCb setrgbcolor
-4496 3604 M
+1940 2503 M
 [ [({}) 200.0 0.0 true true 0 (IB-LSH)]
 ] -66.7 MRshow
 LT0
-0.00 0.00 0.00 C 4616 3604 M
+0.00 0.00 0.00 C 2060 2503 M
 543 0 V
-1530 2512 M
-430 -558 V
-430 -481 V
-430 262 V
-430 3 V
-429 -399 V
-4109 842 L
-430 39 V
-430 44 V
-430 221 V
-1530 2512 Star
-1960 1954 Star
-2390 1473 Star
-2820 1735 Star
-3250 1738 Star
-3679 1339 Star
-4109 842 Star
-4539 881 Star
-4969 925 Star
-5399 1146 Star
-4887 3604 Star
-% End plot #4
-% Begin plot #5
+1530 1574 M
+430 -345 V
+430 -175 V
+430 -59 V
+430 -71 V
+429 -51 V
+430 -34 V
+430 -21 V
+430 -31 V
+430 -14 V
+1530 1574 Star
+1960 1229 Star
+2390 1054 Star
+2820 995 Star
+3250 924 Star
+3679 873 Star
+4109 839 Star
+4539 818 Star
+4969 787 Star
+5399 773 Star
+2331 2503 Star
+% End plot #2
+% Begin plot #3
 2.000 UP
 0.500 UL
 LT0
 0.00 0.00 0.00 C LCb setrgbcolor
-4496 3404 M
+1940 2303 M
 [ [({}) 200.0 0.0 true true 0 (LSH)]
 ] -66.7 MRshow
 LT0
-0.00 0.00 0.00 C 4616 3404 M
+0.00 0.00 0.00 C 2060 2303 M
 543 0 V
-1530 1946 M
-430 952 V
-430 1102 V
-430 -394 V
-430 -114 V
-429 152 V
-430 -666 V
-430 631 V
-4969 2593 L
-430 191 V
-1530 1946 Circle
-1960 2898 Circle
-2390 4000 Circle
-2820 3606 Circle
-3250 3492 Circle
-3679 3644 Circle
-4109 2978 Circle
-4539 3609 Circle
-4969 2593 Circle
-5399 2784 Circle
-4887 3404 Circle
-% End plot #5
+1530 4319 M
+430 -238 V
+430 -660 V
+430 245 V
+430 -582 V
+429 -355 V
+430 -307 V
+430 -167 V
+430 -216 V
+430 29 V
+1530 4319 Circle
+1960 4081 Circle
+2390 3421 Circle
+2820 3666 Circle
+3250 3084 Circle
+3679 2729 Circle
+4109 2422 Circle
+4539 2255 Circle
+4969 2039 Circle
+5399 2068 Circle
+2331 2303 Circle
+% End plot #3
 1.000 UP
 0.500 UL
 LTb
