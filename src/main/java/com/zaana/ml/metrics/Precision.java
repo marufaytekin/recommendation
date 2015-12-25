@@ -15,27 +15,26 @@ public abstract class Precision {
 
     public static Double calculatePrecision(
             final Set<String> relevant,
-            final Set<String> retreived, int topN)
+            final Set<String> topNRecommendation)
     {
         try {
-            Set<String> intersec = new HashSet<>(relevant);
-            intersec.retainAll(retreived);
-            double precision = (double) intersec.size() / topN;
+            Set<String> intersec = new HashSet<>(topNRecommendation);
+            intersec.retainAll(relevant);
+            double precision = (double) intersec.size() / (double) topNRecommendation.size();
             return precision;
         } catch (NullPointerException e) {
             LOG.debug(e.getStackTrace());
-            return 0.0;
+            return null;
         }
     }
 
     public static Double getPrecision(
             Set<String> topNRecommendation,
-            Map.Entry<String, HashMap<String, Integer>> entry, int topN)
+            Map.Entry<String, HashMap<String, Integer>> entry)
     {
         if (topNRecommendation.size() == 0) return 0.0;
         Set<String> relevant = entry.getValue().keySet();
-        return calculatePrecision(relevant,
-                topNRecommendation, topN);
+        return calculatePrecision(relevant, topNRecommendation);
 
     }
 
@@ -44,8 +43,7 @@ public abstract class Precision {
             HashMap<String, Set<String>> retreivedList)
     {
         double totalPrecision = 0.0D;
-        Iterator<Map.Entry<String, Set<String>>> iter = relevantList.entrySet()
-                .iterator();
+        Iterator<Map.Entry<String, Set<String>>> iter = relevantList.entrySet().iterator();
         int size = 0;
         Double precision;
         while (iter.hasNext()) {
@@ -56,7 +54,7 @@ public abstract class Precision {
             LOG.debug(entry.toString());
             LOG.debug(retreived);
             LOG.debug(relevant);
-            precision = calculatePrecision(relevant, retreived, size);
+            precision = calculatePrecision(relevant, retreived);
             if (precision != null) {
                 totalPrecision += precision;
                 size++;

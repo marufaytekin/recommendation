@@ -25,13 +25,13 @@ public class LSHRecommRun {
     //static String dataFileBase = "data/300k/xaa";
     //static String dataFilePath = "data/1m-new/ml-new";
     //static String dataFileBase = "data/1m-new/ml-new";
-    static String dataFilePath = "data/1m/ml-1m.sata";
+    static String dataFilePath = "data/1m/ml-1m.data";
     static String dataFileBase = "data/1m/ml-1m";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
-    static int numOfRun = 20;
+    static int numOfRun = 10;
     static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions

@@ -98,10 +98,10 @@ public class Run {
                 break;
 
             case "54":
-                LSHPredictionTest.runLSHHashFunctionsAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashFunctionsAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "55":
-                LSHPredictionTest.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "56":
                 LSHPredictionTest.runLSHHashTablesAndPrediction("UBLSH", dataFileBase, "test", seperator,
@@ -120,23 +120,23 @@ public class Run {
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "58":
-                LSHPredictionTest.runLSHAndKTest("UBLSH", dataFileBase, l, k, smoothRun, seperator, y);
+                LSHParameterTest.runLSHAndKTest("UBLSH", dataFileBase, l, k, smoothRun, seperator, y);
                 break;
             case "580":
-                LSHPredictionTest.runLSHAndKTest("IBLSH", dataFileBase, l, k, smoothRun, seperator, y);
+                LSHParameterTest.runLSHAndKTest("IBLSH", dataFileBase, l, k, smoothRun, seperator, y);
                 break;
             case "59":
                 LSHPredictionTest.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
                 break;
 
             case "60":
-                LSHPredictionTest.runLSHHashTablesAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashTablesAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "61":
-                LSHPredictionTest.runLSHHashTablesAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashTablesAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "62":
-                LSHPredictionTest.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
+                LSHParameterTest.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
                 break;
             case "63":
                 LSHPredictionTest.runLSHHashTablesAndPrediction("LSH", dataFileBase, "test", seperator,
@@ -173,13 +173,13 @@ public class Run {
                 break;
 
             case "80":
-                LSHPredictionTest.runLSHYAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
+                LSHParameterTest.runLSHYAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
                 break;
             case "81":
-                LSHPredictionTest.runLSHHashFunctionsAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashFunctionsAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "82":
-                LSHPredictionTest.runLSHHashTablesAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
+                LSHParameterTest.runLSHHashTablesAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
                 break;
             case "83":
                 LSHPredictionTest.runLSH2DHashFunctionsTablesTest("IBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);

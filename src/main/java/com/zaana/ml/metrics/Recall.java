@@ -14,28 +14,26 @@ public final class Recall {
     private Recall() {}
 
     private static Double calculateRecall(final Set<String> relevant,
-                                         final Set<String> retreived)
+                                         final Set<String> topNRecommendation)
     {
         try {
-            Set<String> intersec = new HashSet<>(relevant);
-            intersec.retainAll(retreived);
-            double recall = (double) intersec.size() / relevant.size();
+            Set<String> intersec = new HashSet<>(topNRecommendation);
+            intersec.retainAll(relevant);
+            double recall = (double) intersec.size() / (double) relevant.size();
             LOG.debug("recall: " + recall);
             return recall;
         } catch (NullPointerException e) {
             LOG.debug(e.getStackTrace());
-            return null;
+            return 0.0;
         }
     }
     public static Double getRecall(
             Set<String> topNRecommendation,
             Map.Entry<String, HashMap<String, Integer>> entry)
     {
-
-        Set<String> retreived = new HashSet<>(topNRecommendation);
+        //Set<String> retreived = new HashSet<>(topNRecommendation);
         Set<String> relevant = entry.getValue().keySet();
-
-        return calculateRecall(relevant, retreived);
+        return calculateRecall(relevant, topNRecommendation);
 
     }
 

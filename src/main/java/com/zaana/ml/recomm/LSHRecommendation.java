@@ -41,8 +41,8 @@ public class LSHRecommendation extends AbstractRecommendation {
     {
         Set<String>topLikedItems = getTopLikedItems(ratingsSet, 20);
         List<String> candidateList = new ArrayList<>();
-        for (String testItemId : topLikedItems) {
-            Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
+        for (String ratedItemId : topLikedItems) {
+            Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable(itemHashTables, ratingsSet, ratedItemId, itemHashKeyTable);
             candidateList.addAll(candidateSet);
         }
         Queue<AbstractMap.SimpleEntry<String, Integer>> q =

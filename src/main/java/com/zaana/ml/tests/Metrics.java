@@ -4,7 +4,6 @@ import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Diversity;
 import com.zaana.ml.metrics.Novelty;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.metrics.Serendipity;
 import com.zaana.ml.recomm.LSHRecommendation;
 import org.apache.log4j.Logger;
 
@@ -66,7 +65,6 @@ public class Metrics {
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();
-            cnt++;
             //compute unique items recommended to test users
             uniqueItemSetLSH.addAll(topNRecommendedItems);
             // compute the diversity, novelty, and serendipity
@@ -85,10 +83,11 @@ public class Metrics {
             //    numOfSerendipityCalc += 1;
             //}
             totalPrecision += Precision
-                    .getPrecision(topNRecommendedItems, entry, topN);
+                    .getPrecision(topNRecommendedItems, entry);
             totalRecall += Recall
                     .getRecall(topNRecommendedItems, entry);
             totalTopN += topNRecommendedItems.size();
+            cnt++;
         }
         LOG.info("Avg Top-N Rec Time = " + (double) totalTime/cnt);
         diversity = totalLSHDiversity / cnt;

@@ -33,7 +33,7 @@ public class LSHPrecision extends AbstractRecommendation {
             try {
                 Set<String> retrieved =
                         LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
-                //Set<String> retrieved = LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
+                //Set<String> retrieved = LSHRecommendation.recommendMostFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
                 //if (retrieved == null) {
                 //    LOG.info("topNRecom : " + null);
                 //}
@@ -41,7 +41,7 @@ public class LSHPrecision extends AbstractRecommendation {
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 Set<String> relevant = entry.getValue().keySet();
-                totalPrecision += Precision.calculatePrecision(relevant, retrieved, topN);
+                totalPrecision += Precision.calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
                 LOG.error(e.getMessage());
             }

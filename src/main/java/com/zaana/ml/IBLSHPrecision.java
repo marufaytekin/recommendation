@@ -28,7 +28,7 @@ public class IBLSHPrecision extends Precision {
                         userRateMap, itemRateMap, hashTablesIB, vmapIB, itemSet, userId, topN, kNN, y);
                 Set<String> retrieved = new HashSet<>(userBasedTopNRecom);
                 Set<String> relevant = entry.getValue().keySet();
-                totalPrecision += calculatePrecision(relevant, retrieved, topN);
+                totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
                 continue;
             }

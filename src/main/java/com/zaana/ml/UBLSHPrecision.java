@@ -46,7 +46,7 @@ public class UBLSHPrecision extends Precision {
                 }
                 Set<String> retrieved = new HashSet<>(topNRecom);
                 Set<String> relevant = entry.getValue().keySet();
-                totalPrecision += calculatePrecision(relevant, retrieved, topN);
+                totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
                 LOG.error(e.getMessage());
             }

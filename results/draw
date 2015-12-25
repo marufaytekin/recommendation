@@ -278,7 +278,7 @@ x = 1:10;
 total_test_data = 9939;
 y2 = UBLSHHashFunctionsPredictedItemsList/total_test_data;
 y3 = IBLSHHashFunctionsPredictedItemsList/total_test_data;
-y5 = PredictedItemsList(1:10)/total_test_data;
+y5 = LSHHashFunctionsPredictedItemsList(1:10)/total_test_data;
 plot(x, y2, '-dk', x, y3, '-*k', x,y5,'-ok');
 legend("UB-LSH", "IB-LSH", "LSH", "location", "southoutside");
 legend boxon;
@@ -286,7 +286,30 @@ xlabel("Number of Hash Functions");
 ylabel("Prediction Ratio");
 write(f, strcat(fileName,'-hash-functions-prediction-ratio'));
 
+# Throughput
 
+f = figure();
+y2 = 1000 * UBLSHHashFunctionsPredictedItemsList ./ UBLSHHashFunctionsRuntimeList;
+y3 = 1000 * IBLSHHashFunctionsPredictedItemsList ./ IBLSHHashFunctionsRuntimeList;
+y5 = 1000 * LSHHashFunctionsPredictedItemsList ./ LSHHashFunctionsRuntimeList;
+plot(x, y2(1:10), '-dk', x, y3(1:10), '-*k', x,y5(1:10),'-ok');
+legend("UB-LSH", "IB-LSH", "LSH", "location", "northwest");
+legend boxon;
+xlabel("Number of Hash Functions");
+ylabel("Throughput (predictions/sec.)");
+write(f, strcat(fileName,'-hash-functions-throughput'));
+
+
+f = figure();
+y2 = 1000 * UBLSHHashTablesPredictedItemsList ./ UBLSHHashTablesRuntimeList;
+y3 = 1000 * IBLSHHashTablesPredictedItemsList ./ IBLSHHashTablesRuntimeList;
+y5 = 1000 * LSHHashTablesPredictedItemsList ./ LSHHashTablesRuntimeList;
+plot(x, y2(1:10), '-dk', x, y3(1:10), '-*k', x,y5(1:10),'-ok');
+legend("UB-LSH", "IB-LSH", "LSH", "location", "west");
+legend boxon;
+xlabel("Number of Hash Tables");
+ylabel("Throughput (predictions/sec.)");
+write(f, strcat(fileName,'-hash-tables-throughput'));
 
 # ========================================================
 # Number of Hash Functions on the metrics

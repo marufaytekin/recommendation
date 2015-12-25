@@ -27,7 +27,7 @@ public class IBPrecision extends Precision {
                         itemRateMap, itemSet, userId, kNN, topN, y);
                 Set<String> retrieved = new HashSet<>(itemBasedTopNRecommendationList);
                 Set<String> relevant = entry.getValue().keySet();
-                totalPrecision += calculatePrecision(relevant, retrieved, topN);
+                totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
                 continue;
             }
