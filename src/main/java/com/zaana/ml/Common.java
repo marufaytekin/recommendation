@@ -62,13 +62,13 @@ public final class Common
         return kNNList;
     }
 
-    public static List<String> getTopN(
+    public static Set<String> getTopN(
             LinkedHashMap<String, Double> list, int topN)
     {
     
         LinkedHashMap<String, Double> sorted = SortHashMap.sortByValues(list);
         Iterator<Entry<String, Double>> iter = sorted.entrySet().iterator();
-        List<String> recommList = new ArrayList<String>();
+        Set<String> recommList = new HashSet<>();
         int i = 0;
         while (iter.hasNext() && i < topN) {
             Entry<String, Double> entry = iter.next();

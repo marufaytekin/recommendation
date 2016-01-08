@@ -33,7 +33,7 @@ public class LSHPrediction extends AbstractPrediction {
             }
             cnt++;
             //List<String> candidateSetList = LSH.getCandidateSetsWithFrequency(hashTables, vmap, userRateList);
-            List<String> candidateSetList = LSH.getCandidateUserSetFromHashTable(hashTables, userId, hashKeyTable);
+            List<String> candidateSetList = LSH.getCandidateListFromHashTables(hashTables, userId, hashKeyTable);
             Set<String> candidateSet = new HashSet<>(candidateSetList);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(

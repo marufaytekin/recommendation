@@ -23,13 +23,12 @@ public class IBPrecision extends Precision {
                 .entrySet()) {
             String userId = entry.getKey();
             try {
-                List<String> itemBasedTopNRecommendationList = IBRecommendation.recommendItems(userRateMap,
+                Set<String> retrieved = IBRecommendation.recommendItems(userRateMap,
                         itemRateMap, itemSet, userId, kNN, topN, y);
-                Set<String> retrieved = new HashSet<>(itemBasedTopNRecommendationList);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
-                continue;
+                //LOG.debug(e.getLocalizedMessage());
             }
         }
 

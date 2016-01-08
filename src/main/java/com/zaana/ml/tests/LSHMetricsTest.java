@@ -50,10 +50,10 @@ public class LSHMetricsTest extends AbstractTest{
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                itemHashKeyTable = LSH.getHashKeyTable();
+                hashKeyLookupTable = LSH.getHashKeyLookupTable();
                 startTime = System.currentTimeMillis();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, itemHashKeyTable,
+                        userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
                         userSet, topN, y);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
@@ -158,10 +158,10 @@ public class LSHMetricsTest extends AbstractTest{
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                itemHashKeyTable = LSH.getHashKeyTable();
+                hashKeyLookupTable = LSH.getHashKeyLookupTable();
                 startTime = System.currentTimeMillis();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, itemHashKeyTable,
+                        userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
                         userSet, topN, y);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);

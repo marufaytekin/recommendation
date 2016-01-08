@@ -2,6 +2,7 @@ package com.zaana.ml;
 
 
 import com.zaana.ml.metrics.Precision;
+import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.AbstractRecommendation;
 import com.zaana.ml.recomm.LSHRecommendation;
 
@@ -10,17 +11,18 @@ import java.util.*;
 /**
  * Created by maruf on 25/04/15.
  */
-public class LSHPrecision extends AbstractRecommendation {
+public class LSHPrecisionRecall extends PrecisionRecall {
 
-    public static double calculateLSHPrecision(
+    public static void calculateLSHPrecision(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
             final HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmapIB,
-            HashMap<String, String> itemHashKeyTable, int topN)
+            HashMap<String, String> hashKeyLookupTable, int topN)
     {
         double totalPrecision = 0;
+        double totalRecall = 0;
 
         long startTime ;
         long endTime;
@@ -32,8 +34,10 @@ public class LSHPrecision extends AbstractRecommendation {
             startTime = System.currentTimeMillis();
             try {
                 Set<String> retrieved =
-                        LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
-                //Set<String> retrieved = LSHRecommendation.recommendMostFrequentItems(hashTablesIB, userRateMap.get(userId), itemHashKeyTable, topN);
+                        LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
+                //Set<String> retrieved =
+                // LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
+                //Set<String> retrieved = LSHRecommendation.recommendMostFrequentItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
                 //if (retrieved == null) {
                 //    LOG.info("topNRecom : " + null);
                 //}
@@ -42,15 +46,18 @@ public class LSHPrecision extends AbstractRecommendation {
                 totalTime += (endTime - startTime);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
+                totalRecall += Recall.calculateRecall(relevant, retrieved);
             } catch (NullPointerException e) {
                 LOG.error(e.getMessage());
             }
 
         }
         int size = testDataMap.size();
+        precision = totalPrecision/size;
+        recall = totalRecall/size;
         LOG.info("Total Time = " + totalTime + " ms");
         LOG.info("Size = " + size);
         LOG.info("Avg top-N Rec Time = " + (double) totalTime / size + " ms");
-        return totalPrecision / size;
+
     }
 }

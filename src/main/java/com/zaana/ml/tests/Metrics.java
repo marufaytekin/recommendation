@@ -61,22 +61,22 @@ public class Metrics {
             Set<String> topNRecommendedItems =
                     LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
             //Set<String> topNRecommendedItems =
-            //        LSHRecommendation.recommendItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
+            //        LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();
             //compute unique items recommended to test users
-            uniqueItemSetLSH.addAll(topNRecommendedItems);
+            //uniqueItemSetLSH.addAll(topNRecommendedItems);
             // compute the diversity, novelty, and serendipity
-            double LSHNovelty = Novelty.novelty(topNRecommendedItems, userSet,
-                    itemSetCount);
-            double LSHDiversity = Diversity.intraListDissimilarity(
-                    topNRecommendedItems, itemRateMap, y);
+            //double LSHNovelty = Novelty.novelty(topNRecommendedItems, userSet,
+            //        itemSetCount);
+            //double LSHDiversity = Diversity.intraListDissimilarity(
+            //        topNRecommendedItems, itemRateMap, y);
             //Double LSHSerendipity = Serendipity.serendipity(userRateMap,
             //        itemRateMap, topNRecommendedItems,
             //        targetUserId);
-            totalLSHDiversity += LSHDiversity;
-            totalLSHNovelty += LSHNovelty;
+            //totalLSHDiversity += LSHDiversity;
+            //totalLSHNovelty += LSHNovelty;
 
             //if (LSHSerendipity != null) {
             //    totalLSHSerendipity += LSHSerendipity;
@@ -90,10 +90,10 @@ public class Metrics {
             cnt++;
         }
         LOG.info("Avg Top-N Rec Time = " + (double) totalTime/cnt);
-        diversity = totalLSHDiversity / cnt;
-        novelty = totalLSHNovelty / cnt;
+        //diversity = totalLSHDiversity / cnt;
+        //novelty = totalLSHNovelty / cnt;
         //serendipity = totalLSHSerendipity / numOfSerendipityCalc;
-        aggregateDiversity = uniqueItemSetLSH.size();
+        //aggregateDiversity = uniqueItemSetLSH.size();
         precision = totalPrecision / cnt;
         recall = totalRecall / cnt;
         candidateSetSize = totalCandidateSetSize / cnt;

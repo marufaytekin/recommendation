@@ -105,7 +105,7 @@ public class IBLSHPrediction extends LSHPrediction
                     // do nothing
                 }
             }catch (NullPointerException e) {
-                LOG.error(e.getLocalizedMessage());
+                //LOG.error(e.getLocalizedMessage());
 
             }
         }

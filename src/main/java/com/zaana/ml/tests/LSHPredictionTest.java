@@ -94,7 +94,7 @@ public class LSHPredictionTest extends AbstractTest
                         hashTables = LSH.buildIndexTables(userRateMap, vmap,
                                 numOfBands);
                         runTime += LSHPrediction.runLSHPredictionOnTestData(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyTable(), kNN);
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyLookupTable(), kNN);
                         candidate_set_size += LSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
                                 LSHPrediction.getOutputList(),
@@ -193,7 +193,7 @@ public class LSHPredictionTest extends AbstractTest
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
                     runTime += LSHPrediction.runLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyTable(), kNN);
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyLookupTable(), kNN);
                     candidate_set_size += LSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(

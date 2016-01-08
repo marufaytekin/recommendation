@@ -24,7 +24,7 @@ public final class IBRecommendation extends AbstractRecommendation
      * @param y
      * @return topNRecommendationForUser
      */
-    public static List<String> recommendItems(
+    public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             Set<String> itemSet, String userId, int kNN, int topN, int y) {
@@ -50,7 +50,7 @@ public final class IBRecommendation extends AbstractRecommendation
                 predictionList.put(itemId, prediction);
             }
         }
-        List<String> topNRecommendationForUser = Common.getTopN(
+        Set<String> topNRecommendationForUser = Common.getTopN(
                 predictionList, topN);
 
         return topNRecommendationForUser;

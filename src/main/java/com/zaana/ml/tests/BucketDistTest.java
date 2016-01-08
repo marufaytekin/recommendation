@@ -32,7 +32,7 @@ public class BucketDistTest extends AbstractTest {
                 size = bucket.getValue().size();
                 if (size > maxSize)
                     maxSize = size;
-                Integer rate = (int)(((double) size / 200)*10);
+                Integer rate = (int)(((double) size / 533)*10);
                 Integer key = Math.min(rate, 10);
                 histogram.put(key, histogram.get(key) + 1);
             }

@@ -11,20 +11,21 @@ import java.util.Set;
  */
 public final class UBLSHRecommendation extends LSHRecommendation{
 
-    public static List<String> recommendItems(
+    public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            Set<String> itemSet, String targetUserId, int topN, int kNN, int y)
+            HashMap<String, String> hashKeyLookupTable, Set<String> itemSet, String targetUserId, int topN, int kNN, int y)
     {
-        HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
-        Set<String> candidateUserSet = LSH.getCandidateSet(hashTables, vmap, targetUserId,
-                userRateList);
+        //HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
+        //Set<String> candidateUserSet = LSH.getCandidateSet(hashTables, vmap, targetUserId, userRateList);
+        Set<String> candidateUserSet =
+                LSH.getCandidateSetFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
         candidateSetSize = candidateUserSet.size();
-        List<String> userBasedTopNRecom = null;
+        Set<String> userBasedTopNRecom = null;
         if (!candidateUserSet.isEmpty()) {
-            userBasedTopNRecom = UBRecommendation.recommendItems(
-                    userRateMap, itemSet, targetUserId, candidateUserSet, topN, kNN, y);
+            userBasedTopNRecom =
+                    UBRecommendation.recommendItems(userRateMap, itemSet, targetUserId, candidateUserSet, topN, kNN, y);
         }
 
         return userBasedTopNRecom;

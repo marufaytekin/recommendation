@@ -24,7 +24,7 @@ public abstract class Precision {
             return precision;
         } catch (NullPointerException e) {
             LOG.debug(e.getStackTrace());
-            return null;
+            return 0.0;
         }
     }
 

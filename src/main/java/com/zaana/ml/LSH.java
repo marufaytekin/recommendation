@@ -19,13 +19,13 @@ public final class LSH {
     static Logger LOG = Logger.getLogger(LSH.class);
     
     static double avg_bucket_size;
-    static HashMap<String, String> hashKeyTable;
+    static HashMap<String, String> hashKeyLookupTable;
     public double getAvg_bucket_size()
     {
         return avg_bucket_size;
     }
-    public static HashMap<String, String> getHashKeyTable() {
-        return hashKeyTable;
+    public static HashMap<String, String> getHashKeyLookupTable() {
+        return hashKeyLookupTable;
     }
 
 
@@ -49,7 +49,7 @@ public final class LSH {
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
 
         Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
-        HashMap<String, String> itemHashKeyTable = new HashMap<>();
+        hashKeyLookupTable = new HashMap<>();
 
         while (iter.hasNext()) {
             Entry<String, HashMap<String, Integer>> entry = iter.next();
@@ -60,16 +60,13 @@ public final class LSH {
                         .get(hashTableNum);
                 String hashKey = generateHashKeyForVector(vmap, V, hashTableNum);
                 insertItemInHashTable(hashKey, K, hashTable);
-                insertHashKeyWithObjectIdAndTableNumber(hashKey, K, hashTableNum, itemHashKeyTable);
+                insertHashKeyWithObjectIdAndTableNumber(hashKey, K, hashTableNum, hashKeyLookupTable);
             }
         }
 
         long endTime = System.currentTimeMillis();
         avg_bucket_size = avg_num_of_buckets(hashTables);
-        hashKeyTable = itemHashKeyTable;
-
-        LOG.info("LSH Index Tables generated in " + (endTime - startTime)
-                + " ms ...");
+        LOG.info("LSH Index Tables generated in " + (endTime - startTime) + " ms ...");
         LOG.info("Avg number of buckets : " + avg_bucket_size);
 
         return hashTables;
@@ -109,7 +106,7 @@ public final class LSH {
     }
 
     /***
-     * Returns candidate set by using hashKeyTable.
+     * Returns candidate set by using hashKeyLookupTable.
      * Eliminates the recalculation of hash keys.
      *
      * @param hashTables
@@ -127,8 +124,7 @@ public final class LSH {
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
-            Set<String> candidates = hashTables.get(
-                    Integer.valueOf(hashTableNum)).get(hashKey);
+            Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             candidateSet.addAll(candidates);
         }
         candidateSet.remove(itemId);
@@ -138,24 +134,41 @@ public final class LSH {
     }
 
     /***
-     * Returns candidate user set by using hashKeyTable.
+     * Returns candidate user set by using hashKeyLookupTable.
      * Eliminates the recalculation of hash keys.
      *
      * @param hashTables
      * @param userId
-     * @param hashKeyTable
+     * @param hashKeyLookupTable
      * @return candidateSet
      */
-    public static List<String> getCandidateUserSetFromHashTable(
+    public static List<String> getCandidateListFromHashTables(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            String userId, HashMap<String, String> hashKeyTable)
+            String userId,
+            HashMap<String, String> hashKeyLookupTable)
     {
         List<String> candidateSet = new ArrayList<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
-            String hashKey = hashKeyTable.get(userId + ":" + hashTableNum);
+            String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
             Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             candidateSet.addAll(candidates);
+        }
+        candidateSet.remove(userId);
+
+        return candidateSet;
+    }
+
+    public static Set<String> getCandidateSetFromHashTables(
+            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
+            String userId,
+            HashMap<String, String> hashKeyLookupTable)
+    {
+        Set<String> candidateSet = new HashSet<>();
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+        {
+            String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
+            candidateSet.addAll(hashTables.get(hashTableNum).get(hashKey));
         }
         candidateSet.remove(userId);
 

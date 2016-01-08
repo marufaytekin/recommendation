@@ -23,19 +23,19 @@ public final class IBLSHRecommendation extends LSHRecommendation
      * @param itemRateMap
      * @param hashTables
      * @param vmap
+     * @param hashKeyLookupTable
      * @param itemSet
      * @param userId
      * @param topN
      * @param kNN
-     * @param y
-     * @return topNRecommendationForUser
-     */
-    public static List<String> IBLSHRecommendItems(
+     * @param y      @return topNRecommendationForUser
+     * */
+    public static Set<String> IBLSHRecommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            Set<String> itemSet, String userId, int topN, int kNN, int y)
+            HashMap<String, String> hashKeyLookupTable, Set<String> itemSet, String userId, int topN, int kNN, int y)
     {
 
         Set<String> nonRatedItemSet = Common.getUserNonRatedItemList(
@@ -50,23 +50,20 @@ public final class IBLSHRecommendation extends LSHRecommendation
             String itemId = iter.next();
             HashMap<String, Integer> itemRateList = itemRateMap.get(itemId);
             if (itemRateList == null) continue;
-            Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, itemId, itemRateList);
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, itemId, hashKeyLookupTable);
             int candidateSetSize = candidateSet.size();
             cnt++;
             total_candidate_set_size += candidateSetSize;
-            Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
-            intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
-            LinkedHashMap<String, Double> kNNList = IBNNPrediction
-                    .getSimilarItemsListRatedByUser(itemRateMap,
-                            itemId, intersectionOfCandidateRatedItemSets, kNN, y);
+            candidateSet.retainAll(ratedItemsSet); //intersection
+            LinkedHashMap<String, Double> kNNList =
+                    IBNNPrediction.getSimilarItemsListRatedByUser(itemRateMap, itemId, candidateSet, kNN, y);
             if (kNNList != null && !kNNList.isEmpty()) { //BUG: used to calculate prediction for lt k NN
                 Double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap, kNNList,
                         userId);
                 predictionList.put(itemId, prediction);
             }
         }
-        List<String> topNRecommendationForUser = Common.getTopN(
-                predictionList, topN);
+        Set<String> topNRecommendationForUser = Common.getTopN(predictionList, topN);
 
         candidateSetSize = total_candidate_set_size / cnt;
         return topNRecommendationForUser;

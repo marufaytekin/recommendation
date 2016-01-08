@@ -21,17 +21,14 @@ public class UBPrecision extends Precision {
             Set<String> itemSet,
             int topN, int kNN, int y)
     {
-
         double totalPrecision = 0;
-
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
             Set<String> candidateUserSet = userRateMap.keySet();
             try {
-                List<String> userBasedTopNRecom = UBRecommendation.recommendItems(
+                Set<String> retrieved = UBRecommendation.recommendItems(
                         userRateMap, itemSet, userId, candidateUserSet, topN, kNN, y);
-                Set<String> retrieved = new HashSet<>(userBasedTopNRecom);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {

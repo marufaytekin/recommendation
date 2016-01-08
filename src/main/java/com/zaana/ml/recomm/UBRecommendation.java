@@ -9,7 +9,7 @@ import java.util.*;
 public final class UBRecommendation extends AbstractRecommendation
 {
 
-    public static List<String> recommendItems(
+    public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             Set<String> itemSet, String targetUserId, Set<String> candidateUserSet,
             int topN, int kNN, int y)
@@ -31,7 +31,7 @@ public final class UBRecommendation extends AbstractRecommendation
                     itemPredictionList.put(movieId, prediction);
                 }
             }
-            List<String> topNRecList = Common.getTopN(itemPredictionList, topN);
+            Set<String> topNRecList = Common.getTopN(itemPredictionList, topN);
             return topNRecList;
         } catch (NullPointerException e) {
             throw e;

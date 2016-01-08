@@ -26,40 +26,6 @@ public class PrecisionTest extends AbstractTest {
         runCFPrecisionTests(dataFileBase, "IB", separator, l, k, smoothRun, topN, kNN, y);
     }
 
-    /**
-     * Runs User-based precision against k parameter.
-     */
-    public static void runUBPrecisionAndKTests(String dataFileBase, String separator,
-                                               int l, int k, double smoothRun, int topN, int y) {
-        runPrecisionAndKTests(dataFileBase, "UB", separator, l, k, smoothRun, topN, y);
-    }
-
-
-    /**
-     * Runs User-based LSH precision against k parameter.
-     */
-    public static void runUBLSHPrecisionAndKTest(String dataFileBase, String separator,
-                                                 int l, int k, double smoothRun, int topN, int y) {
-        runPrecisionAndKTests(dataFileBase, "UBLSH", separator, l, k, smoothRun, topN, y);
-    }
-
-    /**
-     * Runs UBLSH precision 2D test for k and y parameters
-     */
-    public static void runUBLSHPrecisionKAndYTest(String dataFileBase, String separator,
-                                                  int l, int k, int smoothRun, int topN, int numOfRun) {
-        runPrecisionKAndYTest(dataFileBase, "UBLSH", separator, l, k, smoothRun, numOfRun, topN);
-    }
-
-    /**
-     * Runs user-based precision 2D test for k and y parameters
-     */
-    public static void runUBPrecisionKAndYTest(String dataFileBase, String seperator,
-                                               int l, int k, int smoothRun, int topN, int numOfRun) {
-        runPrecisionKAndYTest(dataFileBase, "UB", seperator, l, k, smoothRun, numOfRun, topN);
-    }
-
-
     private static void runCFPrecisionTests(
             String dataFileBase, String type, String separator,
             int l, int k, double smoothRun, int topN, int kNN, int y) {
@@ -98,12 +64,15 @@ public class PrecisionTest extends AbstractTest {
         int numOfBands = 1;
         int numOfHashFunctions = 1;
         ArrayList<Object> precisionList2D = new ArrayList<>();
+        ArrayList<Object> recallList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
             ArrayList<Double> precisionList = new ArrayList<>();
+            ArrayList<Double> recallList = new ArrayList<>();
             ArrayList<Double> candidate_set_list = new ArrayList<>();
             for (int j = 0; j < numOfRun; j++) {
                 double precision = 0;
+                double recall = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
@@ -114,32 +83,42 @@ public class PrecisionTest extends AbstractTest {
                     if (testType == "UBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildIndexTables(userRateMap, vmap, numOfBands);
-                        precision += UBLSHPrecision.calculateUBLSHPrecision(
-                                userRateMap, testDataMap, hashTables, vmap, itemSet, topN, kNN, y);
-                        candidate_set_size += UBLSHPrecision.getCandidate_size();
+                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                        UBLSHPrecisionRecall.calculateUBLSHPrecisionRecall(
+                                userRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                        precision += UBLSHPrecisionRecall.getPrecision();
+                        recall += UBLSHPrecisionRecall.getRecall();
+                        candidate_set_size += UBLSHPrecisionRecall.getCandidate_size();
                     } else if (testType == "IBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                        precision = IBLSHPrecision.calculateIBLSHPrecision(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, itemSet, topN, kNN, y);
+                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                        IBLSHPrecisionRecall.calculateIBLSHPrecisionRecall(
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                        precision += IBLSHPrecisionRecall.getPrecision();
+                        recall += IBLSHPrecisionRecall.getRecall();
                     } else if (testType == "LSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
-                        itemHashKeyTable = LSH.getHashKeyTable();
-                        precision = LSHPrecision.calculateLSHPrecision(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, itemHashKeyTable, topN);
+                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                        LSHPrecisionRecall.calculateLSHPrecision(
+                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                        precision = LSHPrecisionRecall.getPrecision();
+                        recall = LSHPrecisionRecall.getRecall();
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
                 }
-                LOG.info("numOfBands = " + numOfBands
-                        + " numOfHashFunctions = " + numOfHashFunctions);
-                LOG.info(testType + "precision = " + precision / smoothRun);
-                precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
+                LOG.info("numOfBands = " + numOfBands + " numOfHashFunctions = " + numOfHashFunctions);
+                LOG.info(testType + "Precision = " + precision/smoothRun);
+                LOG.info(testType + "Recall = " + recall/smoothRun);
+                precisionList.add(precision/smoothRun);
+                recallList.add(recall/smoothRun);
+                candidate_set_list.add(candidate_set_size/smoothRun);
                 numOfHashFunctions += 1;
             }
             precisionList2D.add(precisionList);
+            recallList2D.add(recallList);
             candidate_set_list2D.add(candidate_set_list);
             numOfHashFunctions = 1;
             numOfBands += 1;
@@ -151,277 +130,172 @@ public class PrecisionTest extends AbstractTest {
         LOG2.info("k = " + kNN);
         LOG2.info("y = " + y);
         LOG2.info(testType + "Precision2D = " + precisionList2D.toString() + ";");
+        LOG2.info(testType + "Recall2D = " + recallList2D.toString() + ";");
         LOG2.info(testType + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
     }
 
-    private static void runPrecisionAndKTests(
-            String dataFileBase, String type, String separator,
-            int l, int k, double smoothRun, int topN, int y) {
-        LOG.info("Running precision simulation...");
-        double totalPrecision;
-        HashMap<Integer, HashMap<String, Set<String>>> tables;
-        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
+    /**
+     * Precision Hash Function Test
+     * @param testType
+     * @param dataFileBase
+     * @param numOfBands
+     * @param numOfHashFunctions
+     * @param numOfRun
+     * @param smoothRun
+     * @param separator
+     * @param topN
+     * @param kNN
+     * @param y
+     */
+    public static void runLSHPrecisionHashFunctionsTests(
+            String testType, String dataFileBase,
+            int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
+            String separator, int topN, int kNN, int y)
+    {
+        numOfHashFunctions = 1;
         ArrayList<Double> precisionList = new ArrayList<>();
-        //prepareHashTables(dataFileBase, smoothRun, separator, l, k);
-        int kNN = 1;
-        for (int i = 0; i < 10; i++) {
-            totalPrecision = 0.0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
+        ArrayList<Double> recallList = new ArrayList<>();
+        ArrayList<Double> candidate_set_list = new ArrayList<>();
+        for (int j = 0; j < numOfRun; j++) {
+            double precision = 0;
+            double recall = 0;
+            double candidate_set_size = 0;
+            for (int s = 0; s < smoothRun; s++) {
+                preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
-                double precision;
-                if (type == "UB") {
-                    precision = UBPrecision.calculateUBPrecision(
-                            userRateMap, testDataMap, itemSet, topN, kNN, y);
-                } else if (type == "IB") {
-                    precision = IBPrecision.calculateItemBasedPrecision(
-                            userRateMap, itemRateMap, testDataMap, itemSet, topN, kNN, y);
-                } else if (type == "UBLSH") {
-                    vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-                    tables = LSH.buildIndexTables(userRateMap, vmap, l);
-                    precision = UBLSHPrecision.calculateUBLSHPrecision(
-                            userRateMap, testDataMap, tables, vmap, itemSet, topN, kNN, y);
-                } else if (type == "IBLSH") {
-                    vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
-                    tables = LSH.buildIndexTables(itemRateMap, vmap, l);
-                    precision = IBLSHPrecision.calculateIBLSHPrecision(
-                            userRateMap, itemRateMap, testDataMap, tables, vmap, itemSet, topN, kNN, y);
+                HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
+                HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+                if (testType == "UBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                    hashTables = LSH.buildIndexTables(userRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    UBLSHPrecisionRecall.calculateUBLSHPrecisionRecall(
+                            userRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                    precision += UBLSHPrecisionRecall.getPrecision();
+                    recall += UBLSHPrecisionRecall.getRecall();
+                    candidate_set_size += UBLSHPrecisionRecall.getCandidate_size();
+                } else if (testType == "IBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    IBLSHPrecisionRecall.calculateIBLSHPrecisionRecall(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                    precision += IBLSHPrecisionRecall.getPrecision();
+                    recall += IBLSHPrecisionRecall.getRecall();
+                } else if (testType == "LSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    LSHPrecisionRecall.calculateLSHPrecision(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                    precision += LSHPrecisionRecall.getPrecision();
+                    recall += LSHPrecisionRecall.getRecall();
                 } else {
-                    throw new UnsupportedOperationException("Invalid operation for CF type.");
+                    throw new UnsupportedOperationException("Invalid type.");
                 }
-                totalPrecision += precision;
             }
-            LOG.info(type + "Precision = " + totalPrecision / smoothRun);
-            precisionList.add(totalPrecision / smoothRun);
-
-            kNN += 3;
-        }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + type + " Precision");
-        LOG2.info("# ========================================================");
-        LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info(type + "PrecisionAndKList = " + precisionList.toString());
-
-    }
-
-
-    /**
-     * Runs 2D tests for k parameter and number of HashFunctions.
-     */
-    public static void run2DPrecisionHashFunctionsAndKTests(
-            String testType, String dataFileBase,
-            int numOfRun, double smoothRun, String separator, int topN, int y) {
-        int numOfBands = 4; // set 1 band to measure only hash functions effect
-        int numOfHashFunctions = 1;
-        int kNN = 1;
-        ArrayList<Object> precisionList2D = new ArrayList<>();
-        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
-        for (int i = 0; i < numOfRun; i++) {
-            ArrayList<Double> precisionList = new ArrayList<>();
-            ArrayList<Double> candidate_set_list = new ArrayList<>();
-            for (int j = 0; j < numOfRun; j++) {
-                double precision = 0;
-                double candidate_set_size = 0;
-                for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
-                    Set<String> itemSet = itemRateMap.keySet();
-                    Set<String> userSet = userRateMap.keySet();
-                    HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
-                    HashMap<Integer, HashMap<String, Set<String>>> hashTables;
-                    if (testType == "UBLSH") {
-                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap, numOfBands);
-                        precision += UBLSHPrecision.calculateUBLSHPrecision(
-                                userRateMap, testDataMap, hashTables, vmap, itemSet, topN, kNN, y);
-                        //int kNN, int topN, int y
-                        candidate_set_size += UBLSHPrecision.getCandidate_size();
-                    } else {
-                        throw new UnsupportedOperationException("Invalid type.");
-                    }
-                }
-                LOG.info("numOfBands = " + numOfBands
-                        + " numOfHashFunctions = " + numOfHashFunctions);
-                LOG.info("k = " + kNN);
-                LOG.info(testType + "precision = " + precision / smoothRun);
-                precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
-                numOfHashFunctions += 1;
+            LOG.info("numOfBands = " + numOfBands + " numOfHashFunctions = " + numOfHashFunctions);
+            LOG.info(testType + "Precision = " + precision/smoothRun);
+            LOG.info(testType + "Recall = " + recall / smoothRun);
+            precisionList.add(precision/smoothRun);
+            recallList.add(recall/smoothRun);
+            candidate_set_list.add(candidate_set_size/smoothRun);
+            numOfHashFunctions += 1;
             }
-            precisionList2D.add(precisionList);
-            candidate_set_list2D.add(candidate_set_list);
 
-            kNN += 3;
-            numOfHashFunctions = 1;
-        }
         LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + testType + " 2D - Hash Functions vs. k");
+        LOG2.info("# test case: " + testType + " - test");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("k = " + kNN);
-        LOG2.info(testType + "AndKPrecision2D = " + precisionList2D.toString() + ";");
-        LOG2.info(testType + "AndKCandidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
+        LOG2.info("y = " + y);
+        LOG2.info(testType + "Precision = " + precisionList.toString() + ";");
+        LOG2.info(testType + "Recall = " + recallList.toString() + ";");
+        LOG2.info(testType + "CandidateSetList = " + candidate_set_list.toString() + ";");
     }
 
+
     /**
-     * Runs 2D tests for k parameter and number of HashTables.
+     * Precision Hash Tables Test
+     * @param testType
+     * @param dataFileBase
+     * @param numOfBands
+     * @param numOfRun
+     * @param numOfHashFunctions
+     * @param smoothRun
+     * @param separator
+     * @param topN
+     * @param kNN
+     * @param y
      */
-    public static void run2DPrecisionHashTablesAndKTests(
+    public static void runLSHPrecisionHashTablesTests(
             String testType, String dataFileBase,
-            int numOfRun, int smoothRun, String separator, int topN, int y) {
-        int numOfBands = 1; // set 1 band to measure only hash functions effect
-        int numOfHashFunctions = 4;
-        int kNN = 1;
-        ArrayList<Object> precisionList2D = new ArrayList<>();
-        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
-        for (int i = 0; i < numOfRun; i++) {
-            ArrayList<Double> precisionList = new ArrayList<>();
-            ArrayList<Double> candidate_set_list = new ArrayList<>();
-            for (int j = 0; j < numOfRun; j++) {
-                double precision = 0;
-                double candidate_set_size = 0;
-                for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
-                    Set<String> itemSet = itemRateMap.keySet();
-                    Set<String> userSet = userRateMap.keySet();
-                    HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
-                    HashMap<Integer, HashMap<String, Set<String>>> hashTables;
-                    if (testType == "UBLSH") {
-                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap, numOfBands);
-                        precision += UBLSHPrecision.calculateUBLSHPrecision(
-                                userRateMap, testDataMap, hashTables, vmap, itemSet, topN, kNN, y);
-                        candidate_set_size += UBLSHPrecision.getCandidate_size();
+            int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
+            String separator, int topN, int kNN, int y)
+    {
 
-                    } else {
-                        throw new UnsupportedOperationException("Invalid type.");
-                    }
-                }
-                LOG.info("numOfBands = " + numOfBands
-                        + " numOfHashFunctions = " + numOfHashFunctions);
-                LOG.info("k = " + kNN);
-                LOG.info(testType + "precision = " + precision / smoothRun);
-                precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
-                numOfBands += 1;
-            }
-            precisionList2D.add(precisionList);
-            candidate_set_list2D.add(candidate_set_list);
-
-            kNN += 3;
-            numOfBands = 1;
-        }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + testType + " 2D - Hash Tables vs. k");
-        LOG2.info("# ========================================================");
-        LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info("k = " + kNN);
-        LOG2.info(testType + "AndKPrecision2D = " + precisionList2D.toString() + ";");
-        LOG2.info(testType + "AndKCandidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
-    }
-
-
-    /**
-     * Runs precision test for Y parameter (signficance).
-     */
-    public static void runUBLSHPrecisionAndYTest(String dataFileBase, String type, String separator,
-                                                 int l, int k, int smoothRun, int topN, int kNN) {
-        LOG.info("Running precision simulation...");
-        double totalPrecision;
-        HashMap<Integer, HashMap<String, Set<String>>> tables;
-        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
         ArrayList<Double> precisionList = new ArrayList<>();
-        prepareHashTables(dataFileBase, smoothRun, separator, l, k);
-        int y = 1;
-        for (int i = 0; i < 10; i++) {
-            totalPrecision = 0.0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
+        ArrayList<Double> recallList = new ArrayList<>();
+        ArrayList<Double> candidate_set_list = new ArrayList<>();
+        numOfBands = 1;
+        for (int j = 0; j < numOfRun; j++) {
+            double precision = 0;
+            double recall = 0;
+            double candidate_set_size = 0;
+            for (int s = 0; s < smoothRun; s++) {
+                preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
-                double precision;
-                if (type == "UB") {
-                    precision = UBPrecision.calculateUBPrecision(
-                            userRateMap, testDataMap, itemSet, topN, kNN, y);
-                } /*else if (type == "IB") {
-                    precision = IBPrecision.calculateItemBasedPrecision(
-                            userRateMap, itemRateMap, testDataMap, itemSet, kNN, topN);
-                }*/ else if (type == "UBLSH") {
-                    vmap = vmaps.get(j);
-                    tables = hashTables.get(j);
-                    precision = UBLSHPrecision.calculateUBLSHPrecision(
-                            userRateMap, testDataMap, tables, vmap, itemSet, topN, kNN, y);
-                }/*else if (type == "IBLSH") {
-                    vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
-                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, l);
-                    precision = IBLSHPrecision.calculateIBLSHPrecision(
-                            userRateMap,itemRateMap,testDataMap,hashTables,vmap,itemSet,kNN,topN);
-                }*/ else {
-                    throw new UnsupportedOperationException("Invalid operation for CF type.");
+                HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
+                HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+                if (testType == "UBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                    hashTables = LSH.buildIndexTables(userRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    UBLSHPrecisionRecall.calculateUBLSHPrecisionRecall(
+                            userRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                    precision += UBLSHPrecisionRecall.getPrecision();
+                    recall += UBLSHPrecisionRecall.getRecall();
+                    candidate_set_size += UBLSHPrecisionRecall.getCandidate_size();
+                } else if (testType == "IBLSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    IBLSHPrecisionRecall.calculateIBLSHPrecisionRecall(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, itemSet, topN, kNN, y);
+                    precision += IBLSHPrecisionRecall.getPrecision();
+                    recall += IBLSHPrecisionRecall.getRecall();
+                } else if (testType == "LSH") {
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
+                    LSHPrecisionRecall.calculateLSHPrecision(
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                    precision = LSHPrecisionRecall.getPrecision();
+                    recall = LSHPrecisionRecall.getRecall();
+                } else {
+                    throw new UnsupportedOperationException("Invalid type.");
                 }
-                totalPrecision += precision;
             }
-            LOG.info(type + "Precision = " + totalPrecision / smoothRun);
-            precisionList.add(totalPrecision / smoothRun);
-            y += 3;
+            LOG.info("numOfBands = " + numOfBands + " numOfHashFunctions = " + numOfHashFunctions);
+            LOG.info(testType + "Precision = " + precision/smoothRun);
+            LOG.info(testType + "Recall = " + recall/smoothRun);
+            precisionList.add(precision/smoothRun);
+            recallList.add(recall/smoothRun);
+            candidate_set_list.add(candidate_set_size/smoothRun);
+            numOfBands += 1;
         }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + type + " Precision");
-        LOG2.info("# ========================================================");
-        LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info(type + "PrecisionAndYList = " + precisionList.toString());
-    }
 
-
-    private static void runPrecisionKAndYTest(
-            String dataFileBase, String type, String separator,
-            int numOfBands, int numOfHashFunctions,
-            int smoothRun, int numOfRun, int topN) {
-        ArrayList<Object> precisionList2D = new ArrayList<>();
-        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
-        prepareHashTables(dataFileBase, smoothRun, separator, numOfBands, numOfHashFunctions);
-        int kNN = 1;
-        int y = 1;
-        for (int i = 0; i < numOfRun; i++) {
-            ArrayList<Double> precisionList = new ArrayList<>();
-            ArrayList<Double> candidate_set_list = new ArrayList<>();
-            for (int j = 0; j < numOfRun; j++) {
-                double precision = 0;
-                double candidate_set_size = 0;
-                for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
-                    Set<String> itemSet = itemRateMap.keySet();
-                    Set<String> userSet = userRateMap.keySet();
-                    if (type == "UB") {
-                        precision += UBPrecision.calculateUBPrecision(
-                                userRateMap, testDataMap, itemSet, topN, kNN, y);
-                    } else if (type == "UBLSH") {
-                        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap = vmaps.get(s);
-                        HashMap<Integer, HashMap<String, Set<String>>> tables = hashTables.get(s);
-                        precision += UBLSHPrecision.calculateUBLSHPrecision(
-                                userRateMap, testDataMap, tables, vmap, itemSet, topN, kNN, y);
-                    } else {
-                        throw new UnsupportedOperationException("Invalid type.");
-                    }
-                }
-                LOG.info("k = " + kNN + " y = " + y);
-                LOG.info(type + "precision = " + precision / smoothRun);
-                precisionList.add(precision / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
-                y += 3;
-            }
-            precisionList2D.add(precisionList);
-            candidate_set_list2D.add(candidate_set_list);
-
-            kNN += 3;
-            y = 1;
-        }
         LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + type + " 2D - Precision (y & k) test");
+        LOG2.info("# test case: " + testType + " - test");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("k = " + kNN);
-        LOG2.info(type + "YAndKPrecision2D = " + precisionList2D.toString() + ";");
-        LOG2.info(type + "YAndKCandidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
+        LOG2.info("y = " + y);
+        LOG2.info(testType + "Precision = " + precisionList.toString() + ";");
+        LOG2.info(testType + "Recall = " + recallList.toString() + ";");
+        LOG2.info(testType + "CandidateSetList = " + candidate_set_list.toString() + ";");
     }
+
 }

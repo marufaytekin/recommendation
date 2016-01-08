@@ -13,7 +13,7 @@ public final class Recall {
 
     private Recall() {}
 
-    private static Double calculateRecall(final Set<String> relevant,
+    public static Double calculateRecall(final Set<String> relevant,
                                          final Set<String> topNRecommendation)
     {
         try {
