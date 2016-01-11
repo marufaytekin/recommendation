@@ -3,6 +3,8 @@ package com.zaana.ml.recomm;
 import com.zaana.ml.FreqPriorityQueue;
 import com.zaana.ml.LSH;
 import com.zaana.ml.SortHashMap;
+import org.apache.commons.collections.*;
+import org.apache.commons.collections.PriorityQueue;
 
 import java.util.*;
 
@@ -17,7 +19,7 @@ public class LSHRecommendation extends AbstractRecommendation {
             HashMap<String, String> itemHashKeyTable,
             int topN)
     {
-        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 20);
+        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 10);
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : topLikedItems) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable(itemHashTables, ratingsSet, testItemId, itemHashKeyTable);
@@ -39,7 +41,7 @@ public class LSHRecommendation extends AbstractRecommendation {
             HashMap<String, String> itemHashKeyTable,
             int topN)
     {
-        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 20);
+        Set<String>topLikedItems = getTopLikedItems(ratingsSet, 10);
         List<String> candidateList = new ArrayList<>();
         for (String ratedItemId : topLikedItems) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable(itemHashTables, ratingsSet, ratedItemId, itemHashKeyTable);
