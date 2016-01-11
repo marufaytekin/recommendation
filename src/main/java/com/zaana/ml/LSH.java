@@ -136,6 +136,7 @@ public final class LSH {
     /***
      * Returns candidate user set by using hashKeyLookupTable.
      * Eliminates the recalculation of hash keys.
+     * Preserves frequency of users in the ArrayList.
      *
      * @param hashTables
      * @param userId
@@ -147,16 +148,16 @@ public final class LSH {
             String userId,
             HashMap<String, String> hashKeyLookupTable)
     {
-        List<String> candidateSet = new ArrayList<>();
+        List<String> candidateList = new ArrayList<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
             Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
-            candidateSet.addAll(candidates);
+            candidateList.addAll(candidates);
         }
-        candidateSet.remove(userId);
+        candidateList.remove(userId);
 
-        return candidateSet;
+        return candidateList;
     }
 
     public static Set<String> getCandidateSetFromHashTables(
@@ -182,7 +183,7 @@ public final class LSH {
      * @param hashKeyTable
      * @return
      */
-    public static List<String> getCandidateSetsWithFrequency(
+    /*public static List<String> getCandidateSetsWithFrequency(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             String userId,
             HashMap<String, String> hashKeyTable)
@@ -195,7 +196,7 @@ public final class LSH {
         }
 
         return candidateSets;
-    }
+    }*/
 
     /**
      * This method calculates candidate set for a user/item based on its

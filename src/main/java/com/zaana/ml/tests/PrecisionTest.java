@@ -205,14 +205,14 @@ public class PrecisionTest extends AbstractTest {
             }
 
         LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + testType + " - test");
+        LOG2.info("# test case: " + testType + "HashFunctions - test");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("k = " + kNN);
         LOG2.info("y = " + y);
-        LOG2.info(testType + "Precision = " + precisionList.toString() + ";");
-        LOG2.info(testType + "Recall = " + recallList.toString() + ";");
-        LOG2.info(testType + "CandidateSetList = " + candidate_set_list.toString() + ";");
+        LOG2.info(testType + "HashFunctionsPrecision = " + precisionList.toString() + ";");
+        LOG2.info(testType + "HashFunctionsRecall = " + recallList.toString() + ";");
+        LOG2.info(testType + "HashFunctionsCandidateSetList = " + candidate_set_list.toString() + ";");
     }
 
 
@@ -288,14 +288,14 @@ public class PrecisionTest extends AbstractTest {
         }
 
         LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + testType + " - test");
+        LOG2.info("# test case: " + testType + "HashTables - test");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info("k = " + kNN);
         LOG2.info("y = " + y);
-        LOG2.info(testType + "Precision = " + precisionList.toString() + ";");
-        LOG2.info(testType + "Recall = " + recallList.toString() + ";");
-        LOG2.info(testType + "CandidateSetList = " + candidate_set_list.toString() + ";");
+        LOG2.info(testType + "HashTablesPrecision = " + precisionList.toString() + ";");
+        LOG2.info(testType + "HashTablesRecall = " + recallList.toString() + ";");
+        LOG2.info(testType + "HashTablesCandidateSetList = " + candidate_set_list.toString() + ";");
     }
 
 }

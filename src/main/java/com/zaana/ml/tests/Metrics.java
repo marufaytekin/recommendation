@@ -47,8 +47,8 @@ public class Metrics {
         long startTime ;
         long endTime;
         long totalTime = 0;
-        Set<String> uniqueItemSetLSH = new HashSet<>();
-        HashMap<String, Integer> itemSetCount = getCounter(itemRateMap);
+        //Set<String> uniqueItemSetLSH = new HashSet<>();
+        //HashMap<String, Integer> itemSetCount = getCounter(itemRateMap);
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             if (entry.getValue().size() < 5) continue;

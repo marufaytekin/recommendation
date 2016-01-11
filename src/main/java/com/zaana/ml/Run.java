@@ -35,11 +35,8 @@ public class Run {
                 */
                 runSelection("90", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("91", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("92", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("93", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("94", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("95", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-
                 break;
 
             case "02":
@@ -153,6 +150,7 @@ public class Run {
             case "62":
                 LSHParameterTest.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
                 break;
+
             case "63":
                 LSHPredictionTest.runLSHHashTablesAndPrediction("LSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
@@ -184,18 +182,13 @@ public class Run {
             case "91":
                 PrecisionTest.runLSHPrecisionHashFunctionsTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
-            case "92":
-                PrecisionTest.runLSHPrecisionHashTablesTests("LSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
-                break;
             case "93":
                 PrecisionTest.runLSHPrecisionHashTablesTests("UBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "94":
                 PrecisionTest.runLSHPrecisionHashTablesTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
-            case "95":
-                PrecisionTest.runLSHPrecisionHashTablesTests("LSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
-                break;
+
 
             case "100":
                 CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN, y);

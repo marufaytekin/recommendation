@@ -99,21 +99,24 @@ public class Prediction
             return 0;
     }
 
+    /**
+     *
+     * Calculates LSH prediction. Equally weights neighbor users.
+     * Eliminates similarity computation to find k nearest neighbors.
+     * */
     public static double calculateLSHBasedPredictionRate(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            Set<String> frequentUserList,
+            Set<String> intersectionOfCandidateRatedUserSets,
             String movieId)
     {
-        double weightedRatingsTotal = 0;
+        if (intersectionOfCandidateRatedUserSets.size() == 0) return 0.0;
+        double weightedRatingsTotal = 0.0;
         Integer rating;
-        for (String userId : frequentUserList) {
-            rating = userRateMap.get(userId).get(movieId);
+        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+            rating = userRateMap.get(candidateUser).get(movieId);
             weightedRatingsTotal += rating;
         }
-        if (frequentUserList.size() != 0)
-            return weightedRatingsTotal / frequentUserList.size();
-        else
-            return 0;
+        return weightedRatingsTotal / intersectionOfCandidateRatedUserSets.size();
     }
 
 

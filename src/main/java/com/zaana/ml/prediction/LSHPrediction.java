@@ -16,7 +16,7 @@ public class LSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, String> hashKeyTable, int kNN)
+            HashMap<String, String> hashKeyLookupTable, int kNN)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -32,8 +32,7 @@ public class LSHPrediction extends AbstractPrediction {
                 continue;
             }
             cnt++;
-            //List<String> candidateSetList = LSH.getCandidateSetsWithFrequency(hashTables, vmap, userRateList);
-            List<String> candidateSetList = LSH.getCandidateListFromHashTables(hashTables, userId, hashKeyTable);
+            List<String> candidateSetList = LSH.getCandidateListFromHashTables(hashTables, userId, hashKeyLookupTable);
             Set<String> candidateSet = new HashSet<>(candidateSetList);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
@@ -87,13 +86,11 @@ public class LSHPrediction extends AbstractPrediction {
                 Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-                //Set<String> frequentCandidateUsers = getFrequentCandidateList(
-                //        intersectionOfCandidateRatedUserSets, candidateSetList, kNN);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
                     prediction = Prediction.calculateLSHFreqBasedPredictionRate(
                             userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
                     //prediction = Prediction.calculateLSHBasedPredictionRate(
-                    //        userRateMap, frequentCandidateUsers, movieId);
+                    //        userRateMap, intersectionOfCandidateRatedUserSets, movieId);
                     if (prediction != 0) {
                         outputList.add(prediction);
                         targetList.add(givenRating);
@@ -105,12 +102,13 @@ public class LSHPrediction extends AbstractPrediction {
         }
     }
 
-
-    private static Set<String> getFrequentCandidateList(
+/*
+    private static List<String> getFrequentCandidateList(
             Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList, int kNN) {
-        Set<String> userSet = new HashSet<>();
+        List<String> userSet = new ArrayList<>();
         String userId;
         int size = candidateSetList.size();
+        if (size == 0) return userSet;
         for (int i = candidateSetList.size(); i >= 0 && userSet.size() < kNN; i--) {
             int idx = (int) Math.floor(Math.random()*size);
             //System.out.println("idx:" + idx);
@@ -119,7 +117,7 @@ public class LSHPrediction extends AbstractPrediction {
                 userSet.add(userId);
         }
         return userSet;
-    }
+    }*/
 
 
 }
