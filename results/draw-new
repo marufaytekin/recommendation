@@ -288,3 +288,42 @@ xlabel('Number of Hash Tables');
 ylabel('Avg. Candidate Set Size (K)');
 write(f, strcat(fileName,'-hash-tables-evaluation-candidate-set'));
 
+# ========================================================
+# test case: LSH 2D
+# test case:
+# ========================================================
+dataFileBase = data/1m/ml-1m
+x = 1:10;
+y = 1:10;
+
+f= figure();
+
+# Heatmaps
+data = LSHMae2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("MAE");
+write(f, strcat(fileName,'-lsh-heat-map-mae'));
+
+f= figure();
+data = LSHRuntime2D / 50000;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Running Time (ms/prediction)");
+write(f, strcat(fileName,'-lsh-heat-map-runtime'));
+
+f= figure();
+data = LSHCandidate_Set_List2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Candidate Set Size");
+write(f, strcat(fileName,'-lsh-heat-map-candidate'));

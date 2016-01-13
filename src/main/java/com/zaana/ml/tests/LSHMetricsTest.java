@@ -32,7 +32,7 @@ public class LSHMetricsTest extends AbstractTest{
         for (int i = 0; i < numOfRun; i++) {
             double diversity = 0;
             double novelty = 0;
-            double serendipity = 0;
+            //double serendipity = 0;
             double aggrDiversity = 0;
             double precision = 0;
             double recall = 0;
@@ -46,7 +46,7 @@ public class LSHMetricsTest extends AbstractTest{
             long totalTime = 0;
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s+1), separator, smoothRun, numOfBands, numOfHashFunctions);
-                Set<String> itemSet = itemRateMap.keySet();
+                //Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
