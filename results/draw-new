@@ -15,8 +15,8 @@ function write (f, file_name)
   set (h,'paperposition', [0,0,[W H]])
   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
   set (0,'defaultaxesfontsize', 10)
-  out_file_name = strcat (file_name,'.eps');
-  print('-deps',  out_file_name);
+  out_file_name = strcat (file_name,'.pdf');
+  print('-dpdf',  out_file_name);
 endfunction
 
 write (f, "ml-mae-k");
@@ -64,7 +64,7 @@ y2 = IBMaeList;
 y3 = UBLSHHashTablesMaeList(1:10);
 y4 = IBLSHHashTablesMaeList(1:10);
 y5 = LSHHashTablesMaeList(1:10);
-plot ([1,n], [y1, y1], '-.k', [1,n], [y2, y2],'--k', x, y3 , '-dk', x, y4, '-*k', x, y5, '-ok');
+plot ([1,n], [y1, y1], '-.k', [1,n], [y2, y2],'--k', x, y3 , '-dk', x, y4, '-xk', x, y5, '-ok');
 xlabel("Number of Hash Tables");
 ylabel("MAE");
 legend("UB", "IB","UB-LSH", "IB-LSH", "LSH", "location", "northeast");
@@ -201,8 +201,7 @@ y6 = LSHHashFunctionsPrecisionList;
 
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x,y3,'-dk', x,y4,'-*k', x,y5,'-ok', x,y6,'->k');
-h = legend("UB", "IB", "UB-LSH", "IB-LSH", "LSH1", "LSH2", "location", "southoutside");
-set (h, 'textcolor', [1 0 1]);
+h = legend("UB", "IB", "UB-LSH", "IB-LSH", "LSH1", "LSH2", "location", "northeast");
 legend boxon;
 xlabel("Number of Hash Functions");
 ylabel("Precision");
@@ -285,3 +284,42 @@ xlabel("Number of Hash Tables");
 ylabel("Avg. Candidate Set Size (K)");
 write(f, strcat(fileName,'-hash-tables-evaluation-candidate-set'));
 
+# ========================================================
+# test case: LSH 2D
+# test case:
+# ========================================================
+dataFileBase = data/1m/ml-1m
+x = 1:10;
+y = 1:10;
+
+f= figure();
+
+# Heatmaps
+data = LSHMae2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("MAE");
+write(f, strcat(fileName,'-lsh-heat-map-mae'));
+
+f= figure();
+data = LSHRuntime2D / 50000;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Running Time (ms/prediction)");
+write(f, strcat(fileName,'-lsh-heat-map-runtime'));
+
+f= figure();
+data = LSHCandidate_Set_List2D;
+contourf(x, y, data);
+axis square;
+colorbar;
+xlabel("Hash Functions");
+ylabel("Hash Tables");
+title("Candidate Set Size");
+write(f, strcat(fileName,'-lsh-heat-map-candidate'));

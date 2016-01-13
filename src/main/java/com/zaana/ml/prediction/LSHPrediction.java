@@ -87,10 +87,10 @@ public class LSHPrediction extends AbstractPrediction {
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                    prediction = Prediction.calculateLSHFreqBasedPredictionRate(
-                            userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
-                    //prediction = Prediction.calculateLSHBasedPredictionRate(
-                    //        userRateMap, intersectionOfCandidateRatedUserSets, movieId);
+                    //prediction = Prediction.calculateLSHFreqBasedPredictionRate(
+                    //        userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
+                    prediction = Prediction.calculateLSHBasedPredictionRate(
+                            userRateMap, intersectionOfCandidateRatedUserSets, movieId);
                     if (prediction != 0) {
                         outputList.add(prediction);
                         targetList.add(givenRating);

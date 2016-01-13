@@ -32,16 +32,16 @@ public class Metrics {
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
-            HashMap<String, String> itemHashKeyTable, final Set<String> userSet,
+            HashMap<String, String> hashKeyLookupTable, final Set<String> userSet,
             int topN, int y) {
 
-        double totalLSHDiversity = 0;
+        /*double totalLSHDiversity = 0;
         double totalLSHNovelty = 0;
         double totalLSHSerendipity = 0;
+        int numOfSerendipityCalc = 0;*/
         double totalPrecision = 0;
         double totalRecall = 0;
         double totalCandidateSetSize = 0;
-        int numOfSerendipityCalc = 0;
         int totalTopN = 0;
         int cnt = 0;
         long startTime ;
@@ -58,10 +58,10 @@ public class Metrics {
                 continue;
             }
             startTime = System.currentTimeMillis();
-            Set<String> topNRecommendedItems =
-                    LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, itemHashKeyTable, topN);
             //Set<String> topNRecommendedItems =
-            //        LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+            //        LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+            Set<String> topNRecommendedItems =
+                    LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();
