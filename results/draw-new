@@ -155,7 +155,7 @@ y4 = IBLSHHashFunctionsPredictedItemsList(4:10)/total_test_data;
 y5 = LSHFreqHashFunctionsPredictedItemsList/total_test_data;
 y6 = LSHHashFunctionsPredictedItemsList(4:10)/total_test_data;
 plot (x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-h = legend( 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'southoutside');
+h = legend( 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'west');
 legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('Prediction Ratio');
