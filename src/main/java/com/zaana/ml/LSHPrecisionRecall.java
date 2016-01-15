@@ -33,10 +33,10 @@ public class LSHPrecisionRecall extends PrecisionRecall {
             String userId = entry.getKey();
             startTime = System.currentTimeMillis();
             try {
-                Set<String> retrieved =
-                        LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
                 //Set<String> retrieved =
-                // LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
+                //        LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
+                Set<String> retrieved =
+                 LSHRecommendation.recommendItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
                 //Set<String> retrieved = LSHRecommendation.recommendMostFrequentItems(hashTablesIB, userRateMap.get(userId), hashKeyLookupTable, topN);
                 //if (retrieved == null) {
                 //    LOG.info("topNRecom : " + null);
