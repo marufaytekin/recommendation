@@ -33,6 +33,7 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
+        DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
         //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model =
         //        ModelBuild.readModelFromFile(baseUrl+num+".model.ub");
         //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model2 =
@@ -51,6 +52,7 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
+        DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
 
     }
 

@@ -58,10 +58,10 @@ public class Metrics {
                 continue;
             }
             startTime = System.currentTimeMillis();
-            //Set<String> topNRecommendedItems =
-            //        LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             Set<String> topNRecommendedItems =
-                    LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+                    LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+            //Set<String> topNRecommendedItems =
+            //        LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();

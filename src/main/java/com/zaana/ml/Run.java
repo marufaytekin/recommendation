@@ -44,11 +44,13 @@ public class Run {
                 break;
 
             case "02":
-                DataParser.processDataFile(dataFilePath, seperator,0,100);
+                DataParser.processDataFile(dataFilePath, seperator,5,95);
                 userRateMap = DataParser.getUserRateMap();
+
                 System.out.println("User based histogram");
                 DataParser.calculateDataSetHistogram(userRateMap);
                 System.out.println("Item based histogram");
+                DataParser.removeDuplicateData(userRateMap, DataParser.getItemRateMap(), DataParser.getTestDataMap());
                 DataParser.calculateDataSetHistogram(DataParser.getItemRateMap());
                 break;
 

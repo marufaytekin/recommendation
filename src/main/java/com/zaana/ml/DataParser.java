@@ -436,11 +436,13 @@ public final class DataParser
     }
 
 
-    private static void removeDuplicateData (
+    public static void removeDuplicateData(
             HashMap<String, HashMap<String, Integer>> _userRateMap,
             HashMap<String, HashMap<String, Integer>> _itemRateMap,
             HashMap<String, HashMap<String, Integer>> _testDataMap)
     {
+        int cnt1 = 0;
+        int cnt2 = 0;
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : _testDataMap
                 .entrySet()) {
             String userId = testDataEntry.getKey();
@@ -453,14 +455,16 @@ public final class DataParser
                 try {
                     String movieId = entry.getKey();
                     if (_userRateMap.get(userId).get(movieId) != null) {
-                        LOG.info("removing duplicate entry!");
-                        LOG.info(testDataEntry.toString());
+                        //LOG.info("removing duplicate entry!");
+                        //LOG.info(testDataEntry.toString());
                         _userRateMap.get(userId).remove(movieId);
+                        cnt1 ++;
                     }
                     if (_itemRateMap.get(movieId).get(userId) != null) {
-                        LOG.info("removing duplicate entry!");
-                        LOG.info(testDataEntry.toString());
+                        //LOG.info("removing duplicate entry!");
+                        //LOG.info(testDataEntry.toString());
                         _itemRateMap.get(movieId).remove(userId);
+                        cnt2 ++;
                     }
 
                 } catch (NullPointerException e) {
@@ -468,6 +472,8 @@ public final class DataParser
                 }
             }
         }
+        LOG.info("Duplicate Users Removed : " + cnt1);
+        LOG.info("Duplicate Items Removed : " + cnt2);
     }
 
 

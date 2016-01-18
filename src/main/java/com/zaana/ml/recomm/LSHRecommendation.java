@@ -3,8 +3,6 @@ package com.zaana.ml.recomm;
 import com.zaana.ml.FreqPriorityQueue;
 import com.zaana.ml.LSH;
 import com.zaana.ml.SortHashMap;
-import org.apache.commons.collections.*;
-import org.apache.commons.collections.PriorityQueue;
 
 import java.util.*;
 
