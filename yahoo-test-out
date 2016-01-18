@@ -385,12 +385,12 @@ LSHCandidate_Set_List2D = [[7759.022149619431, 4177.775602690716, 2255.753841991
 # test case: UB Precision
 # ========================================================
 dataFileBase = data/ymusic/ymusic
-UBPrecision = 0.06174097164535167
+UBPrecisionList = 0.06174097164535167
 # ========================================================
 # test case: IB Precision
 # ========================================================
 dataFileBase = data/ymusic/ymusic
-IBPrecision = 0.040347211239289374
+IBPrecisionList = 0.040347211239289374
 
 # ========================================================
 # test case: UBLSHHashFunctions - test
