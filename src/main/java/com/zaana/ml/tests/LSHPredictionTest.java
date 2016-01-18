@@ -72,9 +72,10 @@ public class LSHPredictionTest extends AbstractTest
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildIndexTables(userRateMap, vmap,
                                 numOfBands);
+                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
                         runTime += UBLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                        itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                                        itemRateMap, testDataMap, hashTables, vmap, kNN, y, hashKeyLookupTable);
                         candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
                                 UBLSHPrediction.getOutputList(),
@@ -82,9 +83,10 @@ public class LSHPredictionTest extends AbstractTest
                     } else if (testType == "IBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
                         runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
-                                        testDataMap, hashTables, vmap, kNN, y);
+                                        testDataMap, hashTables, hashKeyLookupTable, kNN, y);
                         candidate_set_size += IBLSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
                                 IBLSHPrediction.getOutputList(),
@@ -168,8 +170,9 @@ public class LSHPredictionTest extends AbstractTest
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildIndexTables(userRateMap, vmap,
                             numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
                     runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
+                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y, hashKeyLookupTable);
                     candidate_set_size += UBLSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
@@ -179,9 +182,10 @@ public class LSHPredictionTest extends AbstractTest
                 } else if (type == "IBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                     hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashKeyLookupTable = LSH.getHashKeyLookupTable();
                     runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
-                                        testDataMap, hashTables, vmap, kNN, y);
+                                        testDataMap, hashTables, hashKeyLookupTable, kNN, y);
                     candidate_set_size += IBLSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(

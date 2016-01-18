@@ -14,7 +14,7 @@ public class IBLSHPrediction extends LSHPrediction
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            final HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
+            HashMap<String, String> hashKeyLookupTable,
             int kNN, int y) {
 
         LOG.info("Running runItemBasedLSHPredictionOnTestData...");
@@ -33,7 +33,7 @@ public class IBLSHPrediction extends LSHPrediction
                 continue;
             }
             total_candidate_set_size += predictRatingsForTestEntry(
-                    testDataEntry, userRateMap, itemRateMap, hashTables, vmap, outputList, targetList, kNN, y);
+                    testDataEntry, userRateMap, itemRateMap, hashTables, hashKeyLookupTable, outputList, targetList, kNN, y);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -61,7 +61,7 @@ public class IBLSHPrediction extends LSHPrediction
      * @param userRateMap
      * @param itemRateMap
      * @param hashTables
-     * @param vmap
+     * @param hashKeyLookupTable
      * @param outputList
      * @param targetList
      * @param kNN
@@ -72,7 +72,7 @@ public class IBLSHPrediction extends LSHPrediction
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
+            HashMap<String, String> hashKeyLookupTable,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
             final int kNN, int y)
@@ -84,8 +84,8 @@ public class IBLSHPrediction extends LSHPrediction
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
-                HashMap<String, Integer> movieRateList = itemRateMap.get(testMovieId);
-                Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, testMovieId, movieRateList);
+                //Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, testMovieId, movieRateList);
+                Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
                 int candidateSetSize = candidateSet.size();
                 total_candidate_set_size += candidateSetSize;
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);

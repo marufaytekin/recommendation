@@ -21,10 +21,12 @@ public class LSHRecommRun {
 
     //static String dataFilePath = "data/ymusic/ymusic.data";
     //static String dataFileBase = "data/ymusic/ymusic";
-    static String dataFilePath = "data/music/music.dat";
-    static String dataFileBase = "data/music/music";
-    //static String dataFilePath = "data/100k/ml.data";
-    //static String dataFileBase = "data/100k/ml";
+//    static String dataFilePath = "data/music/music.dat";
+//    static String dataFileBase = "data/music/music";
+    //static String dataFilePath = "data/movies_tv/movies_tv.data";
+    //static String dataFileBase = "data/movies_tv/movies_tv";
+    static String dataFilePath = "data/100k/ml.data";
+    static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/1m/ml-1m.data";
     //static String dataFileBase = "data/1m/ml-1m";
     static final String seperator = "\\t";
@@ -36,7 +38,7 @@ public class LSHRecommRun {
     // l: number of bands
     // k: number of hash functions
     static int l = 5;
-    static int k = 8;
+    static int k = 6;
 
     public static void main(final String[] args) throws IOException
     {

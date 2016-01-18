@@ -22,6 +22,7 @@ public abstract class AbstractTest {
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static HashMap<String, String> hashKeyLookupTable;
     static HashMap<String, String> userHashKeyTable;
+    static HashMap<String, String> itemHashKeyTable;
 
     public static void preprocessDataForValidation(
             String baseUrl, int num, String type, String seperator)

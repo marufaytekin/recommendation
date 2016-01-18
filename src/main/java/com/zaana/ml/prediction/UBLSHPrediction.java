@@ -41,6 +41,7 @@ public class UBLSHPrediction extends AbstractPrediction {
      * @param testDataMap
      * @param kNN
      * @param y
+     * @param hashKeyLookupTable
      * @return
      * */
     public static long runUserBasedLSHPredictionOnTestData(
@@ -49,7 +50,7 @@ public class UBLSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            int kNN, int y)
+            int kNN, int y, HashMap<String, String> hashKeyLookupTable)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -70,7 +71,8 @@ public class UBLSHPrediction extends AbstractPrediction {
                 continue;
             }
             cnt++;
-            Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, userId, userRateList);
+            //Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, userId, userRateList);
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables,userId,hashKeyLookupTable);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
                     testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);

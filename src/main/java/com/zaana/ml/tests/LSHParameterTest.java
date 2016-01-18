@@ -16,7 +16,7 @@ import java.util.Set;
  * Created by maytekin on 25.12.2015.
  */
 public class LSHParameterTest extends AbstractTest{
-
+/*
     static void runLSH2DYAndKTests(String type, String dataFileBase, String val,
                                    int numOfRun, double smoothRun, String separator, int l, int k) {
         ArrayList<Object> runTimeList2D = new ArrayList<>();
@@ -74,10 +74,10 @@ public class LSHParameterTest extends AbstractTest{
         LOG2.info(type + "RunTimeKAndYList2D = " + runTimeList2D.toString() + ";");
     }
 
-    /**
+    *//**
      *  Runs LSH prediction tests against k nearest neighbor parameter.
      *  To determine the best k parameter for pre configured LSH model.
-     *  Number of hash functions and tables are set. */
+     *  Number of hash functions and tables are set. *//*
     public static void runLSHAndKTest(
             String type, String dataFileBase,
             int numberOfHashTables, int numOfHashFunctions, double smoothRun, String separator, int y)
@@ -135,11 +135,11 @@ public class LSHParameterTest extends AbstractTest{
         LOG2.info(type + "Runtime = " + runTimeList.toString());
         LOG2.info(type + "CandidateSetList = " + candidateSetList.toString());
 
-    }
-
-    /**
+    }*/
+/*
+    *//**
      * Runs 2D tests for k and y parameters and number of HashFunctions.
-     * Callled from runLSHHashFunctionsAndKTest and runLSHHashFunctionsAndYTest methods.*/
+     * Callled from runLSHHashFunctionsAndKTest and runLSHHashFunctionsAndYTest methods.*//*
     static void runLSH2DHashFunctionsAndParamTests(
             String testType, String dataFileBase, String param, String val,
             int numOfRun, double smoothRun, String separator, int kNN, int y)
@@ -221,17 +221,20 @@ public class LSHParameterTest extends AbstractTest{
        LOG2.info(testType + param + "Runtime2D = " + runTimeList2D.toString() + ";");
        LOG2.info(testType + param + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
 
-    }
+    }*/
+/*
 
-    /**
+    */
+/**
      * Runs 2D tests for k and y parameters and number of HashTables.
-     * Callled from runLSHHashTablesAndKTest and runLSHHashTablesAndYTest methods.*/
+     * Callled from runLSHHashTablesAndKTest and runLSHHashTablesAndYTest methods.*//*
+
     static void runLSH2DHashTablesAndParamTests(
             String testType, String dataFileBase, String param, String val,
             int numOfRun, double smoothRun, String separator, int kNN, int y)
     {
         int numOfBands = 1;
-        int numOfHashFunctions = 4;
+        int numOfHashFunctions = 1;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -308,10 +311,11 @@ public class LSHParameterTest extends AbstractTest{
         LOG2.info(testType + param + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
 
     }
-
-    /**
+*/
+/*
+    *//**
      * Runs the Number of Hash Tables and k near neighbor parameter tests.
-     * To determine if k and Hash Functions correlate. */
+     * To determine if k and Hash Functions correlate. *//*
     public static void runLSHHashTablesAndKTest(
             String type, String dataFileBase, String val,
             int numOfRun, double smoothRun,
@@ -319,9 +323,9 @@ public class LSHParameterTest extends AbstractTest{
         runLSH2DHashTablesAndParamTests(type, dataFileBase, "k", val, numOfRun, smoothRun, separator, kNN, y);
     }
 
-    /**
+    *//**
      * Runs the Number of Hash Functions and k near neighbor parameter tests.
-     * To determine if k and Hash Functions correlate. */
+     * To determine if k and Hash Functions correlate. *//*
     public static void runLSHHashFunctionsAndKTest(
             String type, String dataFileBase, String val,
             int numOfRun, double smoothRun,
@@ -329,9 +333,9 @@ public class LSHParameterTest extends AbstractTest{
         runLSH2DHashFunctionsAndParamTests(type, dataFileBase, "k", val, numOfRun, smoothRun, separator, kNN, y);
     }
 
-    /**
+    *//**
      * Runs the Number of Hash Functions and significance (y) parameter tests.
-     * To determine if y and Hash Functions correlate */
+     * To determine if y and Hash Functions correlate *//*
     public static void runLSHHashFunctionsAndYTest(
             String type, String dataFileBase, String val,
             int numOfRun, int smoothRun,
@@ -339,9 +343,9 @@ public class LSHParameterTest extends AbstractTest{
         runLSH2DHashFunctionsAndParamTests(type, dataFileBase, "y", val, numOfRun, smoothRun, separator, kNN, y);
     }
 
-    /**
+    *//**
      * Runs the Number of Hash Tables and significance (y) parameter tests.
-     * To determine if y and Hash Functions correlate */
+     * To determine if y and Hash Functions correlate *//*
     public static void runLSHHashTablesAndYTest(
             String type, String dataFileBase, String val,
             int numOfRun, int smoothRun,
@@ -349,12 +353,12 @@ public class LSHParameterTest extends AbstractTest{
         runLSH2DHashTablesAndParamTests(type, dataFileBase, "y", val, numOfRun, smoothRun, separator, kNN, y);
     }
 
-    /**
-     * Runs the k and y parameters 2D test for LSH.*/
+    *//**
+     * Runs the k and y parameters 2D test for LSH.*//*
     public static void runLSHYAndKTest(
             String type, String dataFileBase, String val,
             int numOfRun, double smoothRun,
             String separator, int l, int k) {
         runLSH2DYAndKTests(type, dataFileBase, val, numOfRun, smoothRun, separator, l, k);
-    }
+    }*/
 }

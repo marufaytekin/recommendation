@@ -107,7 +107,7 @@ public final class LSH {
 
     /***
      * Returns candidate set by using hashKeyLookupTable.
-     * Eliminates the recalculation of hash keys.
+     * Eliminates the recalculation of hash keys. for use with LSH1 and LSH2
      *
      * @param hashTables
      * @param ratingsSet
