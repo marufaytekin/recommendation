@@ -1,6 +1,7 @@
-package com.zaana.ml;
+package com.zaana.ml.tests;
 
 
+import com.zaana.ml.PrecisionRecall;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.AbstractRecommendation;
@@ -12,7 +13,7 @@ import java.util.*;
  * Created by maruf on 25/04/15.
  */
 public class LSHPrecisionRecall extends PrecisionRecall {
-
+/*
     public static void calculateLSHPrecision(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
@@ -59,5 +60,5 @@ public class LSHPrecisionRecall extends PrecisionRecall {
         LOG.info("Size = " + size);
         LOG.info("Avg top-N Rec Time = " + (double) totalTime / size + " ms");
 
-    }
+    }*/
 }

@@ -19,34 +19,36 @@ public class Run {
                 BucketDistTest.runBucketDistTest("test", dataFileBase, seperator, smoothRun, k, 1, 50);
                 break;
 
-            case "01":
+            case "01": // prediction tests
 
-                //runSelection("63", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                //runSelection("64", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("54", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("55", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("56", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("560", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("57", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("570", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("58", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("59", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("64", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("65", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("66", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
 
-                /*runSelection("104", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-
+                //precision tests
                 runSelection("90", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("91", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("92", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("93", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("94", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
-                */
+
+                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("108", dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "02":
                 DataParser.processDataFile(dataFilePath, seperator,5,95);
                 userRateMap = DataParser.getUserRateMap();
-
                 System.out.println("User based histogram");
                 DataParser.calculateDataSetHistogram(userRateMap);
                 System.out.println("Item based histogram");
@@ -121,19 +123,26 @@ public class Run {
 //            case "55":
 //                LSHParameterTest.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
 //                break;
+
+            case "54":
+                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN, y);
+                break;
+            case "55":
+                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN, y);
+                break;
             case "56":
                 LSHPredictionTest.runLSHHashTablesAndPrediction("UBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
-            case "560":
+            case "57":
                 LSHPredictionTest.runLSHHashTablesAndPrediction("IBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
-            case "57":
+            case "58":
                 LSHPredictionTest.runLSHHashFunctionsAndPrediction("UBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
-            case "570":
+            case "59":
                 LSHPredictionTest.runLSHHashFunctionsAndPrediction("IBLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
@@ -142,9 +151,6 @@ public class Run {
 //                break;
 //            case "580":
 //                LSHParameterTest.runLSHAndKTest("IBLSH", dataFileBase, l, k, smoothRun, seperator, y);
-//                break;
-//            case "59":
-//                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
 //                break;
 
 //            case "60":
@@ -168,7 +174,12 @@ public class Run {
             case "65":
                 LSHPredictionTest.runLSH2DHashFunctionsTablesTest("LSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
                 break;
-
+            case "66":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+                break;
+            case "67":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("IBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+                break;
 //            case "80":
 //                LSHParameterTest.runLSHYAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
 //                break;
@@ -178,9 +189,6 @@ public class Run {
 //            case "82":
 //                LSHParameterTest.runLSHHashTablesAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
 //                break;
-//            case "83":
-//                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("IBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
-//                break;
 
             case "90":
                 PrecisionTest.runLSHPrecisionHashFunctionsTests("UBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
@@ -188,19 +196,11 @@ public class Run {
             case "91":
                 PrecisionTest.runLSHPrecisionHashFunctionsTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
-            case "93":
+            case "92":
                 PrecisionTest.runLSHPrecisionHashTablesTests("UBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
-            case "94":
+            case "93":
                 PrecisionTest.runLSHPrecisionHashTablesTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
-                break;
-
-
-            case "100":
-                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN, y);
-                break;
-            case "101":
-                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN, y);
                 break;
 
             case "102":

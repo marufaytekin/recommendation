@@ -58,8 +58,7 @@ public class PrecisionTest extends AbstractTest {
     /**
      * Runs 2D LSH Precision tests.
      */
-    public static void run2DLSHPrecisionTests(
-            String testType, String dataFileBase,
+    public static void run2DLSHPrecisionTests(String testType, String dataFileBase,
             int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
         int numOfBands = 1;
         int numOfHashFunctions = 1;
@@ -101,10 +100,14 @@ public class PrecisionTest extends AbstractTest {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                         hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                        LSHPrecisionRecall.calculateLSHPrecision(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
-                        precision = LSHPrecisionRecall.getPrecision();
-                        recall = LSHPrecisionRecall.getRecall();
+                        //LSHPrecisionRecall.calculateLSHPrecision(
+                        //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                        Metrics.calculateLSHMetrics(
+                                userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable, userSet, topN, y);
+                        //precision = LSHPrecisionRecall.getPrecision();
+                        //recall = LSHPrecisionRecall.getRecall();
+                        precision = Metrics.getPrecision();
+                        recall = Metrics.getRecall();
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -187,10 +190,15 @@ public class PrecisionTest extends AbstractTest {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                     hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                    LSHPrecisionRecall.calculateLSHPrecision(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
-                    precision += LSHPrecisionRecall.getPrecision();
-                    recall += LSHPrecisionRecall.getRecall();
+                    //LSHPrecisionRecall.calculateLSHPrecision(
+                    //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                    Metrics.calculateLSHMetrics(
+                            userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
+                            userSet, topN, y);
+                    //precision = LSHPrecisionRecall.getPrecision();
+                    //recall = LSHPrecisionRecall.getRecall();
+                    precision = Metrics.getPrecision();
+                    recall = Metrics.getRecall();
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
@@ -270,10 +278,15 @@ public class PrecisionTest extends AbstractTest {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                     hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                    LSHPrecisionRecall.calculateLSHPrecision(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
-                    precision = LSHPrecisionRecall.getPrecision();
-                    recall = LSHPrecisionRecall.getRecall();
+                    //LSHPrecisionRecall.calculateLSHPrecision(
+                    //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
+                    Metrics.calculateLSHMetrics(
+                            userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
+                            userSet, topN, y);
+                    //precision = LSHPrecisionRecall.getPrecision();
+                    //recall = LSHPrecisionRecall.getRecall();
+                    precision = Metrics.getPrecision();
+                    recall = Metrics.getRecall();
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }
