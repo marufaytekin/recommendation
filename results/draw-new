@@ -69,6 +69,7 @@ h = legend('UB', 'IB', 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northeas
 xlabel('Number of Hash Tables');
 ylabel('MAE');
 legend boxon;
+ylim([0.5 1.8])
 write(f, strcat(fileName,'-hash-tables-mae'));
 
 f= figure();
@@ -79,9 +80,9 @@ y4 = IBLSHHashTablesRuntimeList/testdatasize;
 y5 = LSHFreqHashTablesRuntimeList/testdatasize;
 y6 = LSHHashTablesRuntimeList/testdatasize;
 plot ( x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-plot (x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
 legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northwest');
-h = text(0.5, 0.5, 'UB:', y1)
+text(6, 1.35, strcat("UB: ", num2str(y1, "%5.4f ms/prediction")))
+text(6, 1.30, strcat("IB: ", num2str(y2, "%5.4f ms/prediction")))
 xlabel('Number of Hash Tables');
 ylabel('Run Time(ms/prediction)');
 legend boxon;
@@ -134,6 +135,8 @@ y5 = LSHFreqHashFunctionsRuntimeList(1:7)/testdatasize;
 y6 = LSHHashFunctionsRuntimeList(4:10)/testdatasize;
 plot ( x, y3,'-dk', x, y4,'-xk', x, y5,'-ok', x, y6,'-^k');
 legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northeast');
+text(6, 1.35, strcat("UB: ", num2str(y1, "%5.4f ms/prediction")))
+text(6, 1.30, strcat("IB: ", num2str(y2, "%5.4f ms/prediction")))
 xlabel('Number of Hash Functions');
 ylabel('Run Time(ms/prediction)');
 legend boxon;
