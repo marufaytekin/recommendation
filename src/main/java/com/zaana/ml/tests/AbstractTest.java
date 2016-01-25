@@ -21,8 +21,6 @@ public abstract class AbstractTest {
     static Logger LOG = Logger.getLogger(AbstractTest.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static HashMap<String, String> hashKeyLookupTable;
-    static HashMap<String, String> userHashKeyTable;
-    static HashMap<String, String> itemHashKeyTable;
 
     public static void preprocessDataForValidation(
             String baseUrl, int num, String type, String seperator)
@@ -44,7 +42,7 @@ public abstract class AbstractTest {
 
 
     public static void preprocessDataForRecommendation(
-            String baseUrl, int num, String seperator, double smoothRun, int l, int k)
+            String baseUrl, int num, String seperator)
     {
         String trainDataFilePath = baseUrl + num + ".recomm.base";
         String testDataFilePath = baseUrl + num + ".recomm.test";
@@ -53,7 +51,7 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
-        DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
+        //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
 
     }
 
@@ -62,7 +60,7 @@ public abstract class AbstractTest {
         hashTables = new LinkedList<>();
         hashKeyLookupTable = new HashMap<>();
         for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForRecommendation(baseUrl, (j + 1), seperator, smoothRun, l, k);
+            preprocessDataForRecommendation(baseUrl, (j + 1), seperator);
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
@@ -82,7 +80,7 @@ public abstract class AbstractTest {
             itemRateMap = DataParser.getItemRateMap();
             testDataMap = DataParser.getTestDataMap();
             //ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ub", y);
-            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ib", y);
+            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ib", y, 30);
         }
     }
 

@@ -203,6 +203,10 @@ public class Run {
                 PrecisionTest.runLSHPrecisionHashTablesTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
 
+            case "101":
+                PrecisionTest.runtopNRecommendation(dataFileBase, seperator, smoothRun, topN, y);
+                break;
+
             case "102":
                 PrecisionTest.runUBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, kNN, y);
                 break;

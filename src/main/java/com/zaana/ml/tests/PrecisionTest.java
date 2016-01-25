@@ -1,5 +1,6 @@
 package com.zaana.ml.tests;
 
+import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 
@@ -26,13 +27,21 @@ public class PrecisionTest extends AbstractTest {
         runCFPrecisionTests(dataFileBase, "IB", separator, l, k, smoothRun, topN, kNN, y);
     }
 
+
+    /**
+     * Runs item-based top-N karypis method.
+     */
+    public static void runtopNRecommendation(String dataFileBase, String separator, double smoothRun, int topN, int y) {
+        runItemBasedTopNRecommendation(dataFileBase, "IB", separator, smoothRun, topN, y);
+    }
+
     private static void runCFPrecisionTests(
             String dataFileBase, String type, String separator,
             int l, int k, double smoothRun, int topN, int kNN, int y) {
         LOG.info("Running precision simulation...");
         double totalPrecision = 0.0;
         for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForRecommendation(dataFileBase, (j + 1), separator, smoothRun, l, k);
+            preprocessDataForRecommendation(dataFileBase, (j + 1), separator);
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             double precision;
@@ -55,6 +64,49 @@ public class PrecisionTest extends AbstractTest {
 
     }
 
+
+    private static void runItemBasedTopNRecommendation(
+            String dataFileBase, String type, String separator,
+            double smoothRun, int topN, int y) {
+        LOG.info("Running runItemBasedTopNRecommendation...");
+        double totalPrecision = 0.0;
+        double totalRecall = 0.0;
+        long totalTime = 0;
+        long startTime;
+        long endTime;
+        for (int j = 0; j < smoothRun; j++) {
+            preprocessDataForRecommendation(dataFileBase, (j + 1), separator);
+            LOG.info("Model build started...");
+            HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix =
+                    ModelBuild.createSimilarityMatrix(itemRateMap, y, 30);
+            LOG.info("Model build completed...");
+            double recall;
+            double precision;
+            startTime = System.currentTimeMillis();
+            if (type == "IB") {
+                IBPrecisionRecall.calculateItemBasedPrecisionRecall(userRateMap, testDataMap, itemSimilarityMatrix, topN);
+                precision = IBPrecisionRecall.getPrecision();
+                recall = IBPrecisionRecall.getRecall();
+            } else {
+                throw new UnsupportedOperationException("Invalid operation for CF type.");
+            }
+            endTime = System.currentTimeMillis();
+            LOG.info("precision: " + precision);
+            LOG.info("recall: " + recall);
+            totalPrecision += precision;
+            totalRecall += recall;
+            totalTime += (endTime - startTime);
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + type + " Precision");
+        LOG2.info("# ========================================================");
+        LOG2.info("dataFileBase = " + dataFileBase);
+        LOG2.info(type + "Precision = " + totalPrecision / smoothRun);
+        LOG2.info(type + "Recall = " + totalRecall / smoothRun);
+        LOG2.info("avgRecommTime = " + (double) totalTime / smoothRun + ";");
+
+    }
+
     /**
      * Runs 2D LSH Precision tests.
      */
@@ -74,7 +126,7 @@ public class PrecisionTest extends AbstractTest {
                 double recall = 0;
                 double candidate_set_size = 0;
                 for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                    preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                     Set<String> itemSet = itemRateMap.keySet();
                     Set<String> userSet = userRateMap.keySet();
                     HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -164,7 +216,7 @@ public class PrecisionTest extends AbstractTest {
             double recall = 0;
             double candidate_set_size = 0;
             for (int s = 0; s < smoothRun; s++) {
-                preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
@@ -252,7 +304,7 @@ public class PrecisionTest extends AbstractTest {
             double recall = 0;
             double candidate_set_size = 0;
             for (int s = 0; s < smoothRun; s++) {
-                preprocessDataForRecommendation(dataFileBase, (s + 1), separator, smoothRun, numOfBands, numOfHashFunctions);
+                preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;

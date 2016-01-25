@@ -21,40 +21,37 @@ public class ModelBuild  implements Serializable {
     }
 
     public static HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> createSimilarityMatrix(
-            final HashMap<String, HashMap<String, Integer>> userRateMap, int y)
+            final HashMap<String, HashMap<String, Integer>> ratingMap, int y, int k)
     {
         HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> similarityMatrix = new HashMap<>();
-        //HashMap<String, BoundedPQueue> similarityMatrix = new HashMap<>();
-        HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(userRateMap);
-
-        for (Map.Entry<String, HashMap<String, Integer>> userItemRatesPairA : userRateMap
+        HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(ratingMap);
+        for (Map.Entry<String, HashMap<String, Integer>> userItemRatesPairA : ratingMap
                 .entrySet()) {
-            String userIdA = userItemRatesPairA.getKey();
-            HashMap<String, Integer> userItemRatesA = userItemRatesPairA
+            String objectIdA = userItemRatesPairA.getKey();
+            HashMap<String, Integer> objectRatingsA = userItemRatesPairA
                     .getValue();
-            Set<String> ratedItemIDSetA = userItemRatesA.keySet();
-            //userRateMapCopy.remove(userIdA);
+            Set<String> ratedItemIDSetA = objectRatingsA.keySet();
             for (Map.Entry<String, HashMap<String, Integer>> entryB : userRateMapCopy
                     .entrySet()) {
-                String userIdB = entryB.getKey();
-                if (userIdA == userIdB) continue;
-                HashMap<String, Integer> userItemRatesB = entryB.getValue();
-                Set<String> ratedItemIDSetB = userItemRatesB.keySet();
+                String objectIdB = entryB.getKey();
+                if (objectIdA == objectIdB) continue;
+                HashMap<String, Integer> objectRatingsB = entryB.getValue();
+                Set<String> ratedItemIDSetB = objectRatingsB.keySet();
                 Set<String> intersectionAB = new HashSet<>(ratedItemIDSetA);
                 intersectionAB.retainAll(ratedItemIDSetB);
                 Double similarity;
                 if (!intersectionAB.isEmpty()) {
                     similarity = Cosine.calculateCosineSimilarity(intersectionAB,
-                            userItemRatesA, userItemRatesB, y);
-                    if (similarityMatrix.containsKey(userIdA)) {
-                        similarityMatrix.get(userIdA).offer(new HashMap.SimpleEntry<>(userIdB, similarity));
+                            objectRatingsA, objectRatingsB, y);
+                    if (similarityMatrix.containsKey(objectIdA)) {
+                        similarityMatrix.get(objectIdA).offer(new HashMap.SimpleEntry<>(objectIdB, similarity));
                     } else {
                         MinMaxPriorityQueue<Map.Entry<String, Double>> q = MinMaxPriorityQueue
                                 .orderedBy(new CustomComparator())
-                                .maximumSize(100)
+                                .maximumSize(k)
                                 .create();
-                        q.offer(new HashMap.SimpleEntry<>(userIdB, similarity));
-                        similarityMatrix.put(userIdA, q);
+                        q.offer(new HashMap.SimpleEntry<>(objectIdB, similarity));
+                        similarityMatrix.put(objectIdA, q);
                     }
                 }
             }
@@ -63,9 +60,9 @@ public class ModelBuild  implements Serializable {
     }
 
     public static void createAndWriteModel(
-            final HashMap<String, HashMap<String, Integer>> userRateMap, String filePath, int y) {
+            final HashMap<String, HashMap<String, Integer>> userRateMap, String filePath, int y, int k) {
 
-        HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> model = createSimilarityMatrix(userRateMap, y);
+        HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> model = createSimilarityMatrix(userRateMap, y, k);
         try
         {
             FileOutputStream fileOut =

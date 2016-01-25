@@ -29,10 +29,10 @@ public class ModelBuildTimeTest extends AbstractTest {
             int numOfBands = l;
             if (type == "UB") {
                 startTime = System.currentTimeMillis();
-                ModelBuild.createSimilarityMatrix(userRateMap, 5);
+                ModelBuild.createSimilarityMatrix(userRateMap, 5, 30);
             } else if (type == "IB") {
                 startTime = System.currentTimeMillis();
-                ModelBuild.createSimilarityMatrix(itemRateMap, 5);
+                ModelBuild.createSimilarityMatrix(itemRateMap, 5, 30);
             } else if (type == "UBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                 startTime = System.currentTimeMillis();
