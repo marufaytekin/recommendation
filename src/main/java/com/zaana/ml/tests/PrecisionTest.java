@@ -3,6 +3,7 @@ package com.zaana.ml.tests;
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import com.zaana.ml.recomm.AbstractRecommender;
 
 import java.util.*;
 
@@ -101,9 +102,9 @@ public class PrecisionTest extends AbstractTest {
         LOG2.info("# test case: " + type + " Precision");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info(type + "Precision = " + totalPrecision / smoothRun);
-        LOG2.info(type + "Recall = " + totalRecall / smoothRun);
-        LOG2.info("avgRecommTime = " + (double) totalTime / smoothRun + ";");
+        LOG2.info(type + "TopNPrecision = " + totalPrecision / smoothRun);
+        LOG2.info(type + "TopNRecall = " + totalRecall / smoothRun);
+        LOG2.info(type + "TopNAvgRecommTime = " + (double) totalTime / smoothRun + ";");
 
     }
 
@@ -111,7 +112,7 @@ public class PrecisionTest extends AbstractTest {
      * Runs 2D LSH Precision tests.
      */
     public static void run2DLSHPrecisionTests(String testType, String dataFileBase,
-            int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
+                                              AbstractRecommender recommender, int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
         int numOfBands = 1;
         int numOfHashFunctions = 1;
         ArrayList<Object> precisionList2D = new ArrayList<>();
@@ -155,7 +156,7 @@ public class PrecisionTest extends AbstractTest {
                         //LSHPrecisionRecall.calculateLSHPrecision(
                         //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
                         Metrics.calculateLSHMetrics(
-                                userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable, userSet, topN, y);
+                                userRateMap, testDataMap, hashTables, hashKeyLookupTable, topN, recommender);
                         //precision = LSHPrecisionRecall.getPrecision();
                         //recall = LSHPrecisionRecall.getRecall();
                         precision = Metrics.getPrecision();
@@ -192,6 +193,7 @@ public class PrecisionTest extends AbstractTest {
     /**
      * Precision Hash Function Test
      * @param testType
+     * @param recommender
      * @param dataFileBase
      * @param numOfBands
      * @param numOfHashFunctions
@@ -203,7 +205,7 @@ public class PrecisionTest extends AbstractTest {
      * @param y
      */
     public static void runLSHPrecisionHashFunctionsTests(
-            String testType, String dataFileBase,
+            String testType, AbstractRecommender recommender, String dataFileBase,
             int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
             String separator, int topN, int kNN, int y)
     {
@@ -245,8 +247,8 @@ public class PrecisionTest extends AbstractTest {
                     //LSHPrecisionRecall.calculateLSHPrecision(
                     //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
                     Metrics.calculateLSHMetrics(
-                            userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
-                            userSet, topN, y);
+                            userRateMap, testDataMap, hashTables, hashKeyLookupTable,
+                            topN, recommender);
                     //precision = LSHPrecisionRecall.getPrecision();
                     //recall = LSHPrecisionRecall.getRecall();
                     precision = Metrics.getPrecision();
@@ -280,9 +282,10 @@ public class PrecisionTest extends AbstractTest {
      * Precision Hash Tables Test
      * @param testType
      * @param dataFileBase
+     * @param recommender
      * @param numOfBands
-     * @param numOfRun
      * @param numOfHashFunctions
+     * @param numOfRun
      * @param smoothRun
      * @param separator
      * @param topN
@@ -291,7 +294,7 @@ public class PrecisionTest extends AbstractTest {
      */
     public static void runLSHPrecisionHashTablesTests(
             String testType, String dataFileBase,
-            int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
+            AbstractRecommender recommender, int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
             String separator, int topN, int kNN, int y)
     {
 
@@ -333,8 +336,8 @@ public class PrecisionTest extends AbstractTest {
                     //LSHPrecisionRecall.calculateLSHPrecision(
                     //        userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, topN);
                     Metrics.calculateLSHMetrics(
-                            userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
-                            userSet, topN, y);
+                            userRateMap, testDataMap, hashTables, hashKeyLookupTable,
+                            topN, recommender);
                     //precision = LSHPrecisionRecall.getPrecision();
                     //recall = LSHPrecisionRecall.getRecall();
                     precision = Metrics.getPrecision();

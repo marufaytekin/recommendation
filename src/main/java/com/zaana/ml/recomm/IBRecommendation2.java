@@ -12,17 +12,7 @@ import java.util.*;
 /**
  * Created by maytekin on 25.01.2016.
  */
-public class IBRecommendation2 extends AbstractRecommendation {
-
-    /**
-     * Use following methods to create a similarity matrix in
-     * HashMap format.
-     */
-    static class CustomComparator implements Comparator<Map.Entry <String, Double>>, Serializable {
-        public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
-            return Double.compare(o2.getValue(), o1.getValue());
-        }
-    }
+public class IBRecommendation2 {
 
     public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
@@ -30,7 +20,6 @@ public class IBRecommendation2 extends AbstractRecommendation {
             String userId, int topN) {
 
         Set<String> ratedItemSet = userRateMap.get(userId).keySet();
-        if (ratedItemSet == null) return null;
         // add candidate set to rated item list
         HashMap<String, Double> simList = new HashMap<>();
         for (String itemId : ratedItemSet) { //U
@@ -48,23 +37,7 @@ public class IBRecommendation2 extends AbstractRecommendation {
             }
         }
 
-        MinMaxPriorityQueue<Map.Entry<String, Double>> topNReccQueue =
-                MinMaxPriorityQueue.orderedBy(new CustomComparator()).maximumSize(topN).create();
-        for (Map.Entry<String, Double> entry : simList.entrySet()) {
-            topNReccQueue.offer(entry);
-        }
-
-        Set <String> topNSet = new HashSet<>();
-
-        while (!topNReccQueue.isEmpty()){
-            try {
-                topNSet.add(topNReccQueue.poll().getKey());
-            } catch (NoSuchElementException e) {
-                //none
-            }
-        }
-
-        return topNSet;
+        return Common.getTopNSet(simList, topN);
     }
 
 

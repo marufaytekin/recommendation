@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.LSHRecommendation;
+import com.zaana.ml.recomm.AbstractRecommender;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -23,11 +23,10 @@ public class Metrics {
 
     public static void calculateLSHMetrics(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
-            final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
-            HashMap<String, String> hashKeyLookupTable, final Set<String> userSet,
-            int topN, int y) {
+            HashMap<String, String> hashKeyLookupTable,
+            int topN, AbstractRecommender recommender) {
 
         double totalPrecision = 0;
         double totalRecall = 0;
@@ -46,13 +45,10 @@ public class Metrics {
                 continue;
             }
             startTime = System.currentTimeMillis();
-            //Set<String> topNRecommendedItems =
-             //       LSHRecommendation.recommendFrequentItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             Set<String> topNRecommendedItems =
-                    LSHRecommendation.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+                    recommender.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
-            totalCandidateSetSize += LSHRecommendation.getCandidateSetSize();
             totalPrecision += Precision
                     .getPrecision(topNRecommendedItems, entry);
             totalRecall += Recall

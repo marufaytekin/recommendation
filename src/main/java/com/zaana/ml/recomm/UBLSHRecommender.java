@@ -3,19 +3,25 @@ package com.zaana.ml.recomm;
 import com.zaana.ml.LSH;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Set;
 
 /**
  * Created by maruf on 20/02/15.
  */
-public final class UBLSHRecommendation extends LSHRecommendation{
+public final class UBLSHRecommender {
 
+    private static int candidateSetSize;
+    public static int getCandidateSetSize() {
+        return candidateSetSize;
+    }
+    @Deprecated
     public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, String> hashKeyLookupTable, Set<String> itemSet, String targetUserId, int topN, int kNN, int y)
+            HashMap<String, String> hashKeyLookupTable,
+            Set<String> itemSet,
+            String targetUserId, int topN, int kNN, int y)
     {
         //HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
         //Set<String> candidateUserSet = LSH.getCandidateSet(hashTables, vmap, targetUserId, userRateList);

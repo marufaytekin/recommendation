@@ -1,5 +1,7 @@
 package com.zaana.ml;
 
+import com.zaana.ml.recomm.LSHFreqRecommender;
+import com.zaana.ml.recomm.LSHRecommender;
 import com.zaana.ml.tests.*;
 import org.apache.log4j.Logger;
 
@@ -13,6 +15,8 @@ public class Run {
     static Logger LOG = Logger.getLogger(Run.class);
     static void runSelection(final String selection, String dataFilePath, String dataFileBase, Scanner scanner, String seperator, HashMap<String, HashMap<String, Integer>> userRateMap, int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN)
     {
+        LSHFreqRecommender freqRecommender = new LSHFreqRecommender();
+        LSHRecommender lshRecommender = new LSHRecommender();
         switch (selection) {
 
             case "00":
@@ -191,16 +195,16 @@ public class Run {
 //                break;
 
             case "90":
-                PrecisionTest.runLSHPrecisionHashFunctionsTests("UBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.runLSHPrecisionHashFunctionsTests("UBLSH", lshRecommender, dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "91":
-                PrecisionTest.runLSHPrecisionHashFunctionsTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.runLSHPrecisionHashFunctionsTests("IBLSH", lshRecommender, dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "92":
-                PrecisionTest.runLSHPrecisionHashTablesTests("UBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.runLSHPrecisionHashTablesTests("UBLSH", dataFileBase, lshRecommender, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "93":
-                PrecisionTest.runLSHPrecisionHashTablesTests("IBLSH", dataFileBase, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.runLSHPrecisionHashTablesTests("IBLSH", dataFileBase, lshRecommender, l, k, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
 
             case "101":
@@ -214,19 +218,25 @@ public class Run {
                 PrecisionTest.runIBPrecisionTests(dataFileBase, seperator, l, k, smoothRun, topN, kNN, y);
                 break;
             case "104":
-                PrecisionTest.run2DLSHPrecisionTests("UBLSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.run2DLSHPrecisionTests("UBLSH", dataFileBase, lshRecommender, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "105":
-                PrecisionTest.run2DLSHPrecisionTests("IBLSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.run2DLSHPrecisionTests("IBLSH", dataFileBase, lshRecommender, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "106":
-                PrecisionTest.run2DLSHPrecisionTests("LSH", dataFileBase, numOfRun, smoothRun, seperator, topN, kNN, y);
+                PrecisionTest.run2DLSHPrecisionTests("LSH", dataFileBase, lshRecommender, numOfRun, smoothRun, seperator, topN, kNN, y);
                 break;
             case "107":
-                LSHMetricsTest.runHashFunctionsLSHEvaluation(dataFileBase, numOfRun, smoothRun, seperator, l, topN, y);
+                LSHMetricsTest.runHashFunctionsLSHEvaluation(dataFileBase, freqRecommender, numOfRun, smoothRun, seperator, l, topN, y);
                 break;
             case "108":
-                LSHMetricsTest.runHashTablesLSHEvaluation(dataFileBase, numOfRun, smoothRun, seperator, k, topN, y);
+                LSHMetricsTest.runHashTablesLSHEvaluation(dataFileBase, freqRecommender, numOfRun, smoothRun, seperator, k, topN, y);
+                break;
+            case "109":
+                LSHMetricsTest.runHashFunctionsLSHEvaluation(dataFileBase, lshRecommender, numOfRun, smoothRun, seperator, l, topN, y);
+                break;
+            case "110":
+                LSHMetricsTest.runHashTablesLSHEvaluation(dataFileBase, lshRecommender, numOfRun, smoothRun, seperator, k, topN, y);
                 break;
 
             case "99":

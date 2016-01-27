@@ -6,9 +6,10 @@ import com.zaana.ml.similarity.Cosine;
 
 import java.util.*;
 
-public final class UBRecommendation extends AbstractRecommendation
+public final class UBRecommendation
 {
 
+    @Deprecated
     public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             Set<String> itemSet, String targetUserId, Set<String> candidateUserSet,

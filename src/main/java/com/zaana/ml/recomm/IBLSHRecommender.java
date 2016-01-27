@@ -10,8 +10,12 @@ import java.util.*;
 /**
  * Created by maruf on 20/02/15.
  */
-public final class IBLSHRecommendation extends LSHRecommendation
-{
+public final class IBLSHRecommender {
+
+    private static int candidateSetSize;
+    public  int getCandidateSetSize() {
+        return candidateSetSize;
+    }
 
     /**
      * for each item i that user u has not rated yet
@@ -30,12 +34,15 @@ public final class IBLSHRecommendation extends LSHRecommendation
      * @param kNN
      * @param y      @return topNRecommendationForUser
      * */
+    @Deprecated
     public static Set<String> IBLSHRecommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, String> hashKeyLookupTable, Set<String> itemSet, String userId, int topN, int kNN, int y)
+            HashMap<String, String> hashKeyLookupTable,
+            Set<String> itemSet,
+            String userId, int topN, int kNN, int y)
     {
 
         Set<String> nonRatedItemSet = Common.getUserNonRatedItemList(
@@ -66,6 +73,7 @@ public final class IBLSHRecommendation extends LSHRecommendation
         Set<String> topNRecommendationForUser = Common.getTopN(predictionList, topN);
 
         candidateSetSize = total_candidate_set_size / cnt;
+
         return topNRecommendationForUser;
     }
 
