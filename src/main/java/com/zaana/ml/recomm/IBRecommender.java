@@ -12,9 +12,19 @@ import java.util.*;
 /**
  * Created by maytekin on 25.01.2016.
  */
-public class IBRecommendation2 {
+public class IBRecommender implements CFRecommender{
 
-    public static Set<String> recommendItems(
+    /**
+     * This recommender implements Karypis' item-based top-N recommendation
+     * algorithm: http://glaros.dtc.umn.edu/gkhome/node/127
+     *
+     * @param userRateMap
+     * @param itemSimilarityMatrix
+     * @param userId
+     * @param topN
+     * @return
+     */
+    public Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix,
             String userId, int topN) {

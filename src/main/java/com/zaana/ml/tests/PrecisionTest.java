@@ -4,6 +4,7 @@ import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 import com.zaana.ml.recomm.AbstractRecommender;
+import com.zaana.ml.recomm.CFRecommender;
 
 import java.util.*;
 
@@ -32,8 +33,8 @@ public class PrecisionTest extends AbstractTest {
     /**
      * Runs item-based top-N karypis method.
      */
-    public static void runtopNRecommendation(String dataFileBase, String separator, double smoothRun, int topN, int y) {
-        runItemBasedTopNRecommendation(dataFileBase, "IB", separator, smoothRun, topN, y);
+    public static void runtopNRecommendation(CFRecommender recommender, String dataFileBase, String separator, double smoothRun, int topN, int y) {
+        runItemBasedTopNRecommendation(recommender, dataFileBase, "IB", separator, smoothRun, topN, y);
     }
 
     private static void runCFPrecisionTests(
@@ -67,7 +68,7 @@ public class PrecisionTest extends AbstractTest {
 
 
     private static void runItemBasedTopNRecommendation(
-            String dataFileBase, String type, String separator,
+            CFRecommender recommender, String dataFileBase, String type, String separator,
             double smoothRun, int topN, int y) {
         LOG.info("Running runItemBasedTopNRecommendation...");
         double totalPrecision = 0.0;
@@ -85,9 +86,10 @@ public class PrecisionTest extends AbstractTest {
             double precision;
             startTime = System.currentTimeMillis();
             if (type == "IB") {
-                IBPrecisionRecall.calculateItemBasedPrecisionRecall(userRateMap, testDataMap, itemSimilarityMatrix, topN);
-                precision = IBPrecisionRecall.getPrecision();
-                recall = IBPrecisionRecall.getRecall();
+                //IBRecommender ibRecommender = new IBRecommender();
+                CFPrecisionRecall.calculateCFPrecisionRecall(userRateMap, testDataMap, itemSimilarityMatrix, recommender, topN);
+                precision = CFPrecisionRecall.getPrecision();
+                recall = CFPrecisionRecall.getRecall();
             } else {
                 throw new UnsupportedOperationException("Invalid operation for CF type.");
             }

@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import com.zaana.ml.recomm.IBRecommender;
 import com.zaana.ml.recomm.LSHFreqRecommender;
 import com.zaana.ml.recomm.LSHRecommender;
 import com.zaana.ml.tests.*;
@@ -208,7 +209,8 @@ public class Run {
                 break;
 
             case "101":
-                PrecisionTest.runtopNRecommendation(dataFileBase, seperator, smoothRun, topN, y);
+                IBRecommender ibRecommender = new IBRecommender();
+                PrecisionTest.runtopNRecommendation(ibRecommender, dataFileBase, seperator, smoothRun, topN, y);
                 break;
 
             case "102":

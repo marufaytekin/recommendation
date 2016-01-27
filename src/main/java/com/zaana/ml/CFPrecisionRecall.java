@@ -3,8 +3,8 @@ package com.zaana.ml;
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.IBRecommendation;
-import com.zaana.ml.recomm.IBRecommendation2;
+import com.zaana.ml.recomm.AbstractRecommender;
+import com.zaana.ml.recomm.CFRecommender;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Set;
 /**
  * Created by maruf on 25/04/15.
  */
-public class IBPrecisionRecall extends Precision {
+public class CFPrecisionRecall extends Precision {
 
     public static double getPrecision() {
         return precision;
@@ -26,10 +26,11 @@ public class IBPrecisionRecall extends Precision {
     static double precision;
     static double recall;
 
-    public static void calculateItemBasedPrecisionRecall(
+    public static void calculateCFPrecisionRecall(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
-            HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix, int topN) {
+            HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix,
+            CFRecommender recommender, int topN) {
 
         double totalPrecision = 0;
         double totalRecall = 0;
@@ -38,8 +39,7 @@ public class IBPrecisionRecall extends Precision {
                 .entrySet()) {
             String userId = entry.getKey();
             try {
-                Set<String> retrieved =
-                        IBRecommendation2.recommendItems(userRateMap, itemSimilarityMatrix, userId, topN);
+                Set<String> retrieved = recommender.recommendItems(userRateMap, itemSimilarityMatrix, userId, topN);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);
