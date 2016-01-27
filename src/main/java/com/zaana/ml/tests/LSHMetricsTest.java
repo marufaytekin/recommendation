@@ -2,6 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.LSH;
 import com.zaana.ml.Vector;
+import com.zaana.ml.recomm.AbstractRecommender;
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ import java.util.*;
 public class LSHMetricsTest extends AbstractTest{
 
     public static void runHashFunctionsLSHEvaluation(
-            String dataFileBase, int numOfRun, int smoothRun, String separator, int numOfBands, int topN, int y)
+            String dataFileBase, AbstractRecommender recommender, int numOfRun, int smoothRun, String separator, int numOfBands, int topN, int y)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
@@ -42,9 +43,9 @@ public class LSHMetricsTest extends AbstractTest{
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                 hashKeyLookupTable = LSH.getHashKeyLookupTable();
                 startTime = System.currentTimeMillis();
+                //LSHFreqRecommender recommender = new LSHFreqRecommender();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
-                        userSet, topN, y);
+                        userRateMap, testDataMap, hashTables, hashKeyLookupTable, topN, recommender);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 precision += Metrics.getPrecision();
@@ -70,19 +71,19 @@ public class LSHMetricsTest extends AbstractTest{
         LOG2.info("# ========================================================");
         LOG2.info("fileName = " + dataFileBase);
         LOG2.info("numOfHashTables = " + numOfBands);
-        LOG2.info("PrecisionList = "
+        LOG2.info("LSHHashFunctionsPrecisionList = "
                 + precisionList.toString() + ";");
-        LOG2.info("RecallList = "
+        LOG2.info("LSHHashFunctionsPecallList = "
                 + recallList.toString() + ";");
-        LOG2.info("CandidateSetList = "
+        LOG2.info("LSHHashFunctionsCandidateSetList = "
                 + candidateSetList.toString() + ";");
-        LOG2.info("TopNList = "
+        LOG2.info("LSHHashFunctionsTopNList = "
                 + topNList.toString() + ";");
-        LOG2.info("EvaluatedUsersList = "
+        LOG2.info("LSHHashFunctionsEvaluatedUsersList = "
                 + evaluatedUsersList.toString() + ";");
-        LOG2.info("HitRatioList = "
+        LOG2.info("LSHHashFunctionsHitRatioList = "
                 + hitRatioList.toString() + ";");
-        LOG2.info("avgRecommTime = "
+        LOG2.info("LSHHashFunctionsAvgRecommTime = "
                 + avgRecommTime.toString() + ";");
 
 
@@ -91,7 +92,7 @@ public class LSHMetricsTest extends AbstractTest{
 
 
     public static void runHashTablesLSHEvaluation(
-            String dataFileBase, int numOfRun, int smoothRun, String separator, int numOfHashFunctions, int topN, int y)
+            String dataFileBase, AbstractRecommender recommender, int numOfRun, int smoothRun, String separator, int numOfHashFunctions, int topN, int y)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
@@ -117,15 +118,14 @@ public class LSHMetricsTest extends AbstractTest{
             long totalTime = 0;
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s+1), separator);
-                Set<String> itemSet = itemRateMap.keySet();
                 Set<String> userSet = userRateMap.keySet();
                 vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                 hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
                 hashKeyLookupTable = LSH.getHashKeyLookupTable();
                 startTime = System.currentTimeMillis();
                 Metrics.calculateLSHMetrics(
-                        userRateMap, itemRateMap,testDataMap, hashTables, hashKeyLookupTable,
-                        userSet, topN, y);
+                        userRateMap, testDataMap, hashTables, hashKeyLookupTable,
+                        topN, recommender);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 precision += Metrics.getPrecision();
@@ -152,19 +152,19 @@ public class LSHMetricsTest extends AbstractTest{
         LOG2.info("# ========================================================");
         LOG2.info("fileName = " + dataFileBase);
         LOG2.info("numOfHashFunctions = " + numOfHashFunctions);
-        LOG2.info("PrecisionList = "
+        LOG2.info("LSHHashTablesPrecisionList = "
                 + precisionList.toString() + ";");
-        LOG2.info("RecallList = "
+        LOG2.info("LSHHashTablesRecallList = "
                 + recallList.toString() + ";");
-        LOG2.info("CandidateSetList = "
+        LOG2.info("LSHHashTablesCandidateSetList = "
                 + candidateSetList.toString() + ";");
-        LOG2.info("TopNList = "
+        LOG2.info("LSHHashTablesTopNList = "
                 + topNList.toString() + ";");
-        LOG2.info("EvaluatedUsersList = "
+        LOG2.info("LSHHashTablesEvaluatedUsersList = "
                 + evaluatedUsersList.toString() + ";");
-        LOG2.info("HitRatioList = "
+        LOG2.info("LSHHashTablesHitRatioList = "
                 + hitRatioList.toString() + ";");
-        LOG2.info("avgRecommTime = "
+        LOG2.info("LSHHashTablesAvgRecommTime = "
                 + avgRecommTime.toString() + ";");
 
     }

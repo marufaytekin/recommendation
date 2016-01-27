@@ -6,8 +6,7 @@ import com.zaana.ml.prediction.Prediction;
 
 import java.util.*;
 
-public final class IBRecommendation extends AbstractRecommendation
-{
+public final class IBRecommendation {
     /**
      * for each item i that user u has not rated yet 
      *     retrieve similar items list l to item i 
@@ -24,6 +23,7 @@ public final class IBRecommendation extends AbstractRecommendation
      * @param y
      * @return topNRecommendationForUser
      */
+    @Deprecated
     public static Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,

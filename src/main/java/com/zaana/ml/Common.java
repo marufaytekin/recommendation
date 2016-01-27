@@ -1,7 +1,9 @@
 package com.zaana.ml;
 
+import com.google.common.collect.MinMaxPriorityQueue;
 import org.apache.log4j.Logger;
 
+import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -78,6 +80,56 @@ public final class Common
     
         return recommList;
     
+    }
+
+    static class CustomComparatorInt implements Comparator<Map.Entry <String, Integer>>, Serializable {
+        public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
+            return Double.compare(o2.getValue(), o1.getValue());
+        }
+    }
+    public static Set<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n) {
+        MinMaxPriorityQueue<Entry<String, Integer>> topNReccQueue =
+                MinMaxPriorityQueue.orderedBy(new CustomComparatorInt()).maximumSize(n).create();
+        for (Map.Entry<String, Integer> entry : ratingsSet.entrySet()) {
+            topNReccQueue.offer(entry);
+        }
+
+        Set<String> topNSet = new HashSet<>();
+
+        while (!topNReccQueue.isEmpty()) {
+            try {
+                topNSet.add(topNReccQueue.poll().getKey());
+            } catch (NoSuchElementException e) {
+                //none
+            }
+        }
+        return topNSet;
+    }
+
+
+    static class CustomComparatorDouble implements Comparator<Map.Entry <String, Double>>, Serializable {
+        public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
+            return Double.compare(o2.getValue(), o1.getValue());
+        }
+    }
+
+    public static Set<String> getTopNSet(HashMap<String, Double> simList, int topN) {
+        MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue =
+                MinMaxPriorityQueue.orderedBy(new CustomComparatorDouble()).maximumSize(topN).create();
+        for (Map.Entry<String, Double> entry : simList.entrySet()) {
+            topNReccQueue.offer(entry);
+        }
+
+        Set<String> topNSet = new HashSet<>();
+
+        while (!topNReccQueue.isEmpty()) {
+            try {
+                topNSet.add(topNReccQueue.poll().getKey());
+            } catch (NoSuchElementException e) {
+                //none
+            }
+        }
+        return topNSet;
     }
 
 }

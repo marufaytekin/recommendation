@@ -2,7 +2,7 @@ package com.zaana.ml;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.IBLSHRecommendation;
+import com.zaana.ml.recomm.IBLSHRecommender;
 
 import java.util.*;
 
@@ -28,7 +28,7 @@ public class IBLSHPrecisionRecall extends PrecisionRecall{
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap.entrySet()) {
             String userId = entry.getKey();
             try {
-                Set<String> retrieved = IBLSHRecommendation.IBLSHRecommendItems(
+                Set<String> retrieved = IBLSHRecommender.IBLSHRecommendItems(
                         userRateMap, itemRateMap, hashTablesIB, vmapIB, hashKeyLookupTable, itemSet, userId, topN, kNN, y);
                 //Set<String> retrieved = new HashSet<>(userBasedTopNRecom);
                 Set<String> relevant = entry.getValue().keySet();

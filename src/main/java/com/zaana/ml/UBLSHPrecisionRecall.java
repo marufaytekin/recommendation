@@ -3,9 +3,7 @@ package com.zaana.ml;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.AbstractRecommendation;
-import com.zaana.ml.recomm.UBLSHRecommendation;
-import org.apache.log4j.Logger;
+import com.zaana.ml.recomm.UBLSHRecommender;
 
 import java.util.*;
 
@@ -31,10 +29,10 @@ public class UBLSHPrecisionRecall extends PrecisionRecall {
             String userId = entry.getKey();
             try {
                 Set<String> retrieved =
-                        UBLSHRecommendation.recommendItems(
+                        UBLSHRecommender.recommendItems(
                                 userRateMap, hashTablesUB, vmapUB, hashKeyLookupTable, itemSet, userId, topN, kNN, y);
                 //int kNN, int topN, int y)
-                totalCandidateSetSize += UBLSHRecommendation.getCandidateSetSize();
+                totalCandidateSetSize += UBLSHRecommender.getCandidateSetSize();
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);
