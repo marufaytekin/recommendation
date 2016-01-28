@@ -113,7 +113,7 @@ public final class Common
         }
     }
 
-    public static Set<String> getTopNSet(HashMap<String, Double> simList, int topN) {
+    public static Set<String> sortByValueAndGetTopN(HashMap<String, Double> simList, int topN) {
         MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue =
                 MinMaxPriorityQueue.orderedBy(new CustomComparatorDouble()).maximumSize(topN).create();
         for (Map.Entry<String, Double> entry : simList.entrySet()) {

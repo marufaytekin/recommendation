@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by maruf on 26/01/16.
  */
-public class LSHFreqRecommender implements AbstractRecommender {
+public class LSHFreqRecommender implements LSHReccommenderInterface {
 
     public LSHFreqRecommender() {
         super();
@@ -22,7 +22,6 @@ public class LSHFreqRecommender implements AbstractRecommender {
             int topN)
     {
         Set<String>topLikedItems = Common.sortByValueAndGetTopNItems(ratingsSet, 10);
-        //Set<String>topLikedItems = Common.getTopN(ratingsSet, 10);
         List<String> candidateList = new ArrayList<>();
         for (String ratedItemId : topLikedItems) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable

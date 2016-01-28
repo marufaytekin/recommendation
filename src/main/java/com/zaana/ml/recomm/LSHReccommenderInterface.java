@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * Created by maruf on 07/05/15.
  */
-public interface AbstractRecommender {
+public interface LSHReccommenderInterface {
 
     Set<String> recommendItems(
             HashMap<Integer, HashMap<String,Set<String>>> hashTables,

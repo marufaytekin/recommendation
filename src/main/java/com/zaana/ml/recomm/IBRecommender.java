@@ -2,11 +2,7 @@ package com.zaana.ml.recomm;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.Common;
-import com.zaana.ml.prediction.IBNNPrediction;
-import com.zaana.ml.prediction.Prediction;
-import com.zaana.ml.similarity.Cosine;
 
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -47,7 +43,7 @@ public class IBRecommender implements CFRecommender{
             }
         }
 
-        return Common.getTopNSet(simList, topN);
+        return Common.sortByValueAndGetTopN(simList, topN);
     }
 
 

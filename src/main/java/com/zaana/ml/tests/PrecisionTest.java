@@ -3,7 +3,7 @@ package com.zaana.ml.tests;
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
-import com.zaana.ml.recomm.AbstractRecommender;
+import com.zaana.ml.recomm.LSHReccommenderInterface;
 import com.zaana.ml.recomm.CFRecommender;
 
 import java.util.*;
@@ -114,7 +114,7 @@ public class PrecisionTest extends AbstractTest {
      * Runs 2D LSH Precision tests.
      */
     public static void run2DLSHPrecisionTests(String testType, String dataFileBase,
-                                              AbstractRecommender recommender, int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
+                                              LSHReccommenderInterface recommender, int numOfRun, double smoothRun, String separator, int topN, int kNN, int y) {
         int numOfBands = 1;
         int numOfHashFunctions = 1;
         ArrayList<Object> precisionList2D = new ArrayList<>();
@@ -207,7 +207,7 @@ public class PrecisionTest extends AbstractTest {
      * @param y
      */
     public static void runLSHPrecisionHashFunctionsTests(
-            String testType, AbstractRecommender recommender, String dataFileBase,
+            String testType, LSHReccommenderInterface recommender, String dataFileBase,
             int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
             String separator, int topN, int kNN, int y)
     {
@@ -296,7 +296,7 @@ public class PrecisionTest extends AbstractTest {
      */
     public static void runLSHPrecisionHashTablesTests(
             String testType, String dataFileBase,
-            AbstractRecommender recommender, int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
+            LSHReccommenderInterface recommender, int numOfBands, int numOfHashFunctions, int numOfRun, double smoothRun,
             String separator, int topN, int kNN, int y)
     {
 

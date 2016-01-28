@@ -3,7 +3,6 @@ package com.zaana.ml;
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.AbstractRecommender;
 import com.zaana.ml.recomm.CFRecommender;
 
 import java.util.HashMap;

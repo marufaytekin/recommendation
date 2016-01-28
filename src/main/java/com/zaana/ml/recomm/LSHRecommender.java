@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by maruf on 09/05/15.
  */
-public class LSHRecommender implements AbstractRecommender {
+public class LSHRecommender implements LSHReccommenderInterface {
 
     public LSHRecommender() {
         super();

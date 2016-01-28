@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.AbstractRecommender;
+import com.zaana.ml.recomm.LSHReccommenderInterface;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -26,7 +26,7 @@ public class Metrics {
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
             HashMap<String, String> hashKeyLookupTable,
-            int topN, AbstractRecommender recommender) {
+            int topN, LSHReccommenderInterface recommender) {
 
         double totalPrecision = 0;
         double totalRecall = 0;

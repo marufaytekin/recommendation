@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.LSH;
 import com.zaana.ml.Vector;
-import com.zaana.ml.recomm.AbstractRecommender;
+import com.zaana.ml.recomm.LSHReccommenderInterface;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import java.util.*;
 public class LSHMetricsTest extends AbstractTest{
 
     public static void runHashFunctionsLSHEvaluation(
-            String dataFileBase, AbstractRecommender recommender, int numOfRun, int smoothRun, String separator, int numOfBands, int topN, int y)
+            String dataFileBase, LSHReccommenderInterface recommender, int numOfRun, int smoothRun, String separator, int numOfBands, int topN, int y)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
@@ -92,7 +92,7 @@ public class LSHMetricsTest extends AbstractTest{
 
 
     public static void runHashTablesLSHEvaluation(
-            String dataFileBase, AbstractRecommender recommender, int numOfRun, int smoothRun, String separator, int numOfHashFunctions, int topN, int y)
+            String dataFileBase, LSHReccommenderInterface recommender, int numOfRun, int smoothRun, String separator, int numOfHashFunctions, int topN, int y)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
