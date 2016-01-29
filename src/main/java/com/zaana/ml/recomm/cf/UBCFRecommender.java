@@ -1,16 +1,14 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.cf;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.Common;
-import com.zaana.ml.FreqPriorityQueue;
-import com.zaana.ml.LSH;
 
 import java.util.*;
 
 /**
  * Created by maytekin on 27.01.2016.
  */
-public class UBRecommender implements CFRecommender{
+public class UBCFRecommender implements CFRecommender{
     /**
      * This recommender implements Karypis' user-based top-N recommendation described
      * in Evaluation of Item-Based Top-N Recommendation Algorithms paper:
@@ -40,7 +38,7 @@ public class UBRecommender implements CFRecommender{
             ratedItemList.addAll(neighborsRatingList);
         }
         Queue<AbstractMap.SimpleEntry<String, Integer>> q =
-                FreqPriorityQueue.buildFrequencyBasedPriorityQueue(ratedItemList);
+                Common.buildFrequencyBasedPriorityQueue(ratedItemList);
         Set<String> recSet = new HashSet<>();
         HashMap.SimpleEntry<String, Integer> entry;
         for (int i=0; i < q.size() && recSet.size() < topN; i++)

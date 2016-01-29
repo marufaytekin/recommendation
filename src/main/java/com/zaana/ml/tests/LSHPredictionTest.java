@@ -70,7 +70,7 @@ public class LSHPredictionTest extends AbstractTest
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (testType == "UBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                        hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         hashKeyLookupTable = LSH.getHashKeyLookupTable();
                         runTime += UBLSHPrediction
@@ -82,7 +82,7 @@ public class LSHPredictionTest extends AbstractTest
                                 UBLSHPrediction.getTargetList());
                     } else if (testType == "IBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                         hashKeyLookupTable = LSH.getHashKeyLookupTable();
                         runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
@@ -93,7 +93,7 @@ public class LSHPredictionTest extends AbstractTest
                                 IBLSHPrediction.getTargetList());
                     } else if (testType == "LSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                        hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         hashKeyLookupTable =  LSH.getHashKeyLookupTable();
                         runTime += LSHPrediction.runLSHPredictionOnTestData(
@@ -169,7 +169,7 @@ public class LSHPredictionTest extends AbstractTest
                 Set<String> userSet = userRateMap.keySet();
                 if (type == "UBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                    hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                    hashTables = LSH.buildModel(userRateMap, vmap,
                             numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
                     runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
@@ -182,7 +182,7 @@ public class LSHPredictionTest extends AbstractTest
                     predictedItems += UBLSHPrediction.getOutputList().size();
                 } else if (type == "IBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                    hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
                     runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
@@ -195,7 +195,7 @@ public class LSHPredictionTest extends AbstractTest
                     predictedItems += IBLSHPrediction.getOutputList().size();
                 } else if (type == "LSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                    hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                    hashTables = LSH.buildModel(userRateMap, vmap,
                             numOfBands);
                     runTime += LSHPrediction.runLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyLookupTable(), kNN);

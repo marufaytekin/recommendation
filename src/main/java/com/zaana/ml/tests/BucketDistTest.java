@@ -2,9 +2,6 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
-import com.zaana.ml.prediction.IBLSHPrediction;
-import com.zaana.ml.prediction.LSHPrediction;
-import com.zaana.ml.prediction.UBLSHPrediction;
 
 import java.util.*;
 
@@ -25,7 +22,7 @@ public class BucketDistTest extends AbstractTest {
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.buildIndexTables(userRateMap, vmap, l);
+            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.buildModel(userRateMap, vmap, l);
             int size;
             int maxSize = 0;
             for (Map.Entry<String, Set<String>> bucket : hashTable.get(0).entrySet()) {

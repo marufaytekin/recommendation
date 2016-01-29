@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.LSHReccommenderInterface;
+import com.zaana.ml.recomm.lsh.AbstractLSHReccommender;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -19,18 +19,18 @@ public class Metrics {
     private static double precision;
     private static double recall;
     private static int topNSize;
-    private static double candidateSetSize;
+    private static double candidateItemListSize;
+    private static double uniqueItemListSize;
 
     public static void calculateLSHMetrics(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            final HashMap<Integer, HashMap<String, Set<String>>> hashTablesIB,
-            HashMap<String, String> hashKeyLookupTable,
-            int topN, LSHReccommenderInterface recommender) {
-
+            AbstractLSHReccommender recommender, int topN)
+    {
+        double totalCandidateItemList = 0;
+        double totalUniqueItemList = 0;
         double totalPrecision = 0;
         double totalRecall = 0;
-        double totalCandidateSetSize = 0;
         int totalTopN = 0;
         int cnt = 0;
         long startTime ;
@@ -46,7 +46,7 @@ public class Metrics {
             }
             startTime = System.currentTimeMillis();
             Set<String> topNRecommendedItems =
-                    recommender.recommendItems(hashTablesIB, userRateList, hashKeyLookupTable, topN);
+                    recommender.recommendItems(userRateMap, targetUserId, topN);
             endTime = System.currentTimeMillis();
             totalTime += (endTime - startTime);
             totalPrecision += Precision
@@ -54,26 +54,18 @@ public class Metrics {
             totalRecall += Recall
                     .getRecall(topNRecommendedItems, entry);
             totalTopN += topNRecommendedItems.size();
+            totalCandidateItemList += recommender.getCandidateItemListSize();
+            totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
             cnt++;
         }
         LOG.info("Avg Top-N Rec Time to one user = " + (double) totalTime/cnt);
 
         precision = totalPrecision / cnt;
-        recall = totalRecall / cnt;
-        candidateSetSize = totalCandidateSetSize / cnt;
-        topNSize = totalTopN / cnt;
-        avgRecommTime = (double) totalTime / cnt;
-    }
-
-
-    private static HashMap<String, Integer> getCounter(HashMap<String, HashMap<String, Integer>> rateMap)
-    {
-        HashMap<String, Integer> map = new HashMap<>();
-
-        for (Map.Entry<String, HashMap<String, Integer>> entry  : rateMap.entrySet()) {
-            map.put(entry.getKey(), entry.getValue().size());
-        }
-        return map;
+        recall = totalRecall/cnt;
+        topNSize = totalTopN/cnt;
+        avgRecommTime = (double) totalTime/cnt;
+        candidateItemListSize = totalCandidateItemList/cnt;
+        uniqueItemListSize = totalUniqueItemList/cnt;
     }
 
     public static double getAvgRecommTime() {
@@ -92,9 +84,12 @@ public class Metrics {
         return topNSize;
     }
 
-    public static double getCandidateSetSize() {
-        return candidateSetSize;
+    public static double getUniqueItemListSize() {
+        return uniqueItemListSize;
     }
 
+    public static double getCandidateItemListSize() {
+        return candidateItemListSize;
+    }
 
 }

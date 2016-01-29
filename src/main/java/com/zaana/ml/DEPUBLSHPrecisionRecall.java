@@ -3,15 +3,16 @@ package com.zaana.ml;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.UBLSHRecommender;
+import com.zaana.ml.recomm.lsh.DEPUBLSHRecommender;
 
 import java.util.*;
 
 /**
  * Created by maruf on 25/04/15.
  */
-public class UBLSHPrecisionRecall extends PrecisionRecall {
+public class DEPUBLSHPrecisionRecall extends DEPPrecisionRecall {
 
+    @Deprecated
     public static void calculateUBLSHPrecisionRecall(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
@@ -29,10 +30,10 @@ public class UBLSHPrecisionRecall extends PrecisionRecall {
             String userId = entry.getKey();
             try {
                 Set<String> retrieved =
-                        UBLSHRecommender.recommendItems(
+                        DEPUBLSHRecommender.recommendItems(
                                 userRateMap, hashTablesUB, vmapUB, hashKeyLookupTable, itemSet, userId, topN, kNN, y);
                 //int kNN, int topN, int y)
-                totalCandidateSetSize += UBLSHRecommender.getCandidateSetSize();
+                totalCandidateSetSize += DEPUBLSHRecommender.getCandidateSetSize();
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);

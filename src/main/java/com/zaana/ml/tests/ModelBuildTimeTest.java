@@ -36,11 +36,11 @@ public class ModelBuildTimeTest extends AbstractTest {
             } else if (type == "UBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                 startTime = System.currentTimeMillis();
-                LSH.buildIndexTables(userRateMap, vmap, numOfBands);
+                LSH.buildModel(userRateMap, vmap, numOfBands);
             } else if (type == "IBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
                 startTime = System.currentTimeMillis();
-                LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                LSH.buildModel(itemRateMap, vmap, numOfBands);
             } else {
                 throw new UnsupportedOperationException("Invalid type for Model build.");
             }

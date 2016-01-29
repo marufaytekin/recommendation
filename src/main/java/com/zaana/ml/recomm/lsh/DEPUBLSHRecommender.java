@@ -1,6 +1,7 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.LSH;
+import com.zaana.ml.recomm.cf.DEPUBRecommender;
 
 import java.util.HashMap;
 import java.util.Set;
@@ -8,7 +9,7 @@ import java.util.Set;
 /**
  * Created by maruf on 20/02/15.
  */
-public final class UBLSHRecommender {
+public final class DEPUBLSHRecommender {
 
     private static int candidateSetSize;
     public static int getCandidateSetSize() {
@@ -31,7 +32,7 @@ public final class UBLSHRecommender {
         Set<String> userBasedTopNRecom = null;
         if (!candidateUserSet.isEmpty()) {
             userBasedTopNRecom =
-                    UBRecommendation.recommendItems(userRateMap, itemSet, targetUserId, candidateUserSet, topN, kNN, y);
+                    DEPUBRecommender.recommendItems(userRateMap, itemSet, targetUserId, candidateUserSet, topN, kNN, y);
         }
 
         return userBasedTopNRecom;

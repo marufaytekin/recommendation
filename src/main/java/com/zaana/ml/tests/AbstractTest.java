@@ -64,7 +64,7 @@ public abstract class AbstractTest {
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-            HashMap<Integer, HashMap<String, Set<String>>> tables = LSH.buildIndexTables(userRateMap, vmap, l);
+            HashMap<Integer, HashMap<String, Set<String>>> tables = LSH.buildModel(userRateMap, vmap, l);
             vmaps.add(vmap);
             hashTables.add(tables);
 

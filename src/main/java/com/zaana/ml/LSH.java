@@ -41,7 +41,7 @@ public final class LSH {
      * @param l
      * 
      */
-    public static HashMap<Integer,HashMap<String,Set<String>>> buildIndexTables(
+    public static HashMap<Integer,HashMap<String,Set<String>>> buildModel(
             HashMap<String, HashMap<String, Integer>> ratingMap,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 

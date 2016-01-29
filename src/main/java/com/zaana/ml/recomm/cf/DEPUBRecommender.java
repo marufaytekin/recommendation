@@ -1,4 +1,4 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.cf;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.prediction.Prediction;
@@ -6,7 +6,7 @@ import com.zaana.ml.similarity.Cosine;
 
 import java.util.*;
 
-public final class UBRecommendation
+public final class DEPUBRecommender
 {
 
     @Deprecated

@@ -1,4 +1,4 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.cf;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.prediction.IBNNPrediction;
@@ -6,7 +6,7 @@ import com.zaana.ml.prediction.Prediction;
 
 import java.util.*;
 
-public final class IBRecommendation {
+public final class DEPIBRecommender {
     /**
      * for each item i that user u has not rated yet 
      *     retrieve similar items list l to item i 

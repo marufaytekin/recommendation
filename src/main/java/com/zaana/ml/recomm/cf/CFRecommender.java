@@ -1,4 +1,4 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.cf;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 

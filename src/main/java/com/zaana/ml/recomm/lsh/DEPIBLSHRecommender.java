@@ -1,4 +1,4 @@
-package com.zaana.ml.recomm;
+package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.LSH;
@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by maruf on 20/02/15.
  */
-public final class IBLSHRecommender {
+public final class DEPIBLSHRecommender {
 
     private static int candidateSetSize;
     public  int getCandidateSetSize() {

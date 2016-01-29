@@ -37,12 +37,12 @@ public class LSHParameterTest extends AbstractTest{
                     Set<String> userSet = userRateMap.keySet();
                     if (Objects.equals(type, "UBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap, l);
+                        hashTables = LSH.buildModel(userRateMap, vmap, l);
                         runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else if (Objects.equals(type, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
-                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, l);
+                        hashTables = LSH.buildModel(itemRateMap, vmap, l);
                         runTimeTotal += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);
@@ -99,7 +99,7 @@ public class LSHParameterTest extends AbstractTest{
                 Set<String> userSet = userRateMap.keySet();
                 if (Objects.equals(type, "UBLSH")) {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
-                    hashTables = LSH.buildIndexTables(userRateMap, vmap, numberOfHashTables);
+                    hashTables = LSH.buildModel(userRateMap, vmap, numberOfHashTables);
                     runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     totalMae += MAE.calculateMAE(
@@ -108,7 +108,7 @@ public class LSHParameterTest extends AbstractTest{
                     totalCandSize += UBLSHPrediction.getAvg_candidate_set_size();
                 } else if (Objects.equals(type, "IBLSH")) {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, userSet);
-                    hashTables = LSH.buildIndexTables(itemRateMap, vmap, numberOfHashTables);
+                    hashTables = LSH.buildModel(itemRateMap, vmap, numberOfHashTables);
                     runTimeTotal += IBLSHPrediction.
                             runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                     testDataMap, hashTables, vmap, kNN, y);
@@ -172,13 +172,13 @@ public class LSHParameterTest extends AbstractTest{
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (Objects.equals(testType, "UBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                        hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     }  else if (Objects.equals(testType, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                         runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);
@@ -261,13 +261,13 @@ public class LSHParameterTest extends AbstractTest{
                     HashMap<Integer, HashMap<String, Set<String>>> hashTables;
                     if (Objects.equals(testType, "UBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildIndexTables(userRateMap, vmap,
+                        hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else if (Objects.equals(testType, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-                        hashTables = LSH.buildIndexTables(itemRateMap, vmap, numOfBands);
+                        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                         runTime += IBLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);

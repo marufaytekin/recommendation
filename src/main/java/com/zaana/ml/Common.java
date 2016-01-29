@@ -2,6 +2,7 @@ package com.zaana.ml;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import org.apache.log4j.Logger;
+import org.apache.log4j.pattern.IntegerPatternConverter;
 
 import java.io.Serializable;
 import java.util.*;
@@ -82,12 +83,44 @@ public final class Common
     
     }
 
+    /**
+     * Returns most frequent items at the front of the queue.
+     *
+     * @param candidateList
+     * @return
+     */
+    public static Queue<AbstractMap.SimpleEntry<String, Integer>> buildFrequencyBasedPriorityQueue(
+            List<String> candidateList) {
+
+        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
+            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
+                return Integer.compare(o2.getValue(), o1.getValue());
+            }
+        };
+        HashMap <String,Integer> frequencyMap = new HashMap<>();
+        for (String a: candidateList) {
+            if(frequencyMap.containsKey(a)) {
+                frequencyMap.put(a, frequencyMap.get(a)+1);
+            }
+            else{ frequencyMap.put(a, 1); }
+        }
+        Queue<AbstractMap.SimpleEntry<String, Integer>> q = new PriorityQueue<>(comparator);
+        //Set<String> candidateSet = new HashSet<>(candidateList);
+        //for (String itemId : candidateSet) {
+        //Integer frequency = Collections.frequency(candidateList, itemId);
+//q.add(new HashMap.SimpleEntry<>(itemId, frequency));
+        for ( Map.Entry<String, Integer> itemId : frequencyMap) q.add((HashMap.SimpleEntry) itemId);
+        return q;
+
+    }
+
     static class CustomComparatorInt implements Comparator<Map.Entry <String, Integer>>, Serializable {
         public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
             return Double.compare(o2.getValue(), o1.getValue());
         }
     }
-    public static Set<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n) {
+    public static Set<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n)
+    {
         MinMaxPriorityQueue<Entry<String, Integer>> topNReccQueue =
                 MinMaxPriorityQueue.orderedBy(new CustomComparatorInt()).maximumSize(n).create();
         for (Map.Entry<String, Integer> entry : ratingsSet.entrySet()) {
@@ -107,21 +140,21 @@ public final class Common
     }
 
 
-    static class CustomComparatorDouble implements Comparator<Map.Entry <String, Double>>, Serializable {
+    static class CustomComparatorDouble implements Comparator<Map.Entry <String, Double>>, Serializable
+    {
         public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
             return Double.compare(o2.getValue(), o1.getValue());
         }
     }
 
-    public static Set<String> sortByValueAndGetTopN(HashMap<String, Double> simList, int topN) {
+    public static Set<String> sortByValueAndGetTopN(HashMap<String, Double> simList, int topN)
+    {
         MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue =
                 MinMaxPriorityQueue.orderedBy(new CustomComparatorDouble()).maximumSize(topN).create();
         for (Map.Entry<String, Double> entry : simList.entrySet()) {
             topNReccQueue.offer(entry);
         }
-
         Set<String> topNSet = new HashSet<>();
-
         while (!topNReccQueue.isEmpty()) {
             try {
                 topNSet.add(topNReccQueue.poll().getKey());
