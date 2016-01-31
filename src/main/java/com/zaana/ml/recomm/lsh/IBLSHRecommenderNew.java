@@ -46,7 +46,7 @@ public class IBLSHRecommenderNew extends AbstractLSHReccommender {
         uniqueCandidateItemListSize = uniqueueItemsSet.size();
         Set<String> recSet = new HashSet<>();
         int size = candidateList.size();
-        for (int i = candidateList.size(); i >= 0 && recSet.size() < topN; i--) {
+        for (int i = candidateList.size(); i > 0 && recSet.size() < topN; i--) {
             int idx = (int) Math.floor(Math.random()*size);
             recSet.add(candidateList.get(idx));
         }

@@ -84,13 +84,14 @@ public final class Common
     }
 
     /**
-     * Returns most frequent items at the front of the queue.
+     * Returns most frequent n elements at the front of the queue.
      *
      * @param candidateList
+     * @param n
      * @return
      */
-    public static Queue<AbstractMap.SimpleEntry<String, Integer>> buildFrequencyBasedPriorityQueue(
-            List<String> candidateList) {
+    public static Set<String> getMostFrequentTopNElements(
+            List<String> candidateList, int n) {
 
         Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
             public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
@@ -98,19 +99,27 @@ public final class Common
             }
         };
         HashMap <String,Integer> frequencyMap = new HashMap<>();
-        for (String a: candidateList) {
-            if(frequencyMap.containsKey(a)) {
-                frequencyMap.put(a, frequencyMap.get(a)+1);
+        for (String element: candidateList) {
+            if(frequencyMap.containsKey(element)) {
+                frequencyMap.put(element, frequencyMap.get(element)+1);
             }
-            else{ frequencyMap.put(a, 1); }
+            else{ frequencyMap.put(element, 1); }
         }
-        Queue<AbstractMap.SimpleEntry<String, Integer>> q = new PriorityQueue<>(comparator);
-        //Set<String> candidateSet = new HashSet<>(candidateList);
-        //for (String itemId : candidateSet) {
-        //Integer frequency = Collections.frequency(candidateList, itemId);
-//q.add(new HashMap.SimpleEntry<>(itemId, frequency));
-        for ( Map.Entry<String, Integer> itemId : frequencyMap) q.add((HashMap.SimpleEntry) itemId);
-        return q;
+
+        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(n)
+                .create();
+        for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) q.offer(elementId);
+
+        Set<String> recSet = new HashSet<>();
+        for (;0 < q.size() && recSet.size() < n;)
+            try {
+                HashMap.Entry<String, Integer> entry = q.remove();
+                recSet.add(entry.getKey());
+            } catch (NoSuchElementException ignored) {}
+
+        return recSet;
 
     }
 

@@ -1,5 +1,6 @@
 package com.zaana.ml.recomm.lsh;
 
+import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 
@@ -44,17 +45,9 @@ public class UBLSHRecommender extends AbstractLSHReccommender {
         }
         candidateItemListSize = ratedItemList.size();
         uniqueCandidateItemListSize = uniqueueItemsSet.size();
-        Queue<AbstractMap.SimpleEntry<String, Integer>> q =
-                Common.buildFrequencyBasedPriorityQueue(ratedItemList);
-        Set<String> recSet = new HashSet<>();
-        HashMap.SimpleEntry<String, Integer> entry;
-        for (int i = 0; i < q.size() && recSet.size() < topN; i++)
-            try {
-                entry = q.remove();
-                recSet.add(entry.getKey());
-            } catch (NoSuchElementException ignored) {
-            }
-        return recSet;
+
+        return Common.getMostFrequentTopNElements(ratedItemList, topN);
+
     }
 
 }

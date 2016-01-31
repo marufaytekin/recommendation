@@ -72,16 +72,16 @@ public abstract class AbstractTest {
         LOG.info("Hash Tables created...");
     }
 
-    public static void buildAndWriteModel(String baseUrl, double smoothRun, String seperator, int y) {
+    /*public static void buildAndWriteModel(String baseUrl, double smoothRun, String seperator, int y) {
         for (int j = 0; j < smoothRun; j++) {
             String trainDataFilePath = baseUrl + (j+1);
             preprocessDataForValidation(baseUrl, (j+1), "test", seperator);
             userRateMap = DataParser.getUserRateMap();
             itemRateMap = DataParser.getItemRateMap();
             testDataMap = DataParser.getTestDataMap();
-            //ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ub", y);
-            ModelBuild.createAndWriteModel(userRateMap, trainDataFilePath + ".model.ib", y, 30);
+            //ModelBuild.writeModel(userRateMap, trainDataFilePath + ".model.ub", y);
+            CFRecommender.writeModel(trainDataFilePath);
         }
-    }
+    }*/
 
 }

@@ -2,8 +2,9 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.DataParser;
 import com.zaana.ml.LSH;
-import com.zaana.ml.ModelBuild;
 import com.zaana.ml.Vector;
+import com.zaana.ml.recomm.cf.IBCFRecommender;
+import com.zaana.ml.recomm.cf.UBCFRecommender;
 
 import java.util.*;
 
@@ -28,11 +29,13 @@ public class ModelBuildTimeTest extends AbstractTest {
             numOfItemsList.add(itemRateMap.keySet().size());
             int numOfBands = l;
             if (type == "UB") {
+                UBCFRecommender ubRecommender = new UBCFRecommender();
                 startTime = System.currentTimeMillis();
-                ModelBuild.createSimilarityMatrix(userRateMap, 5, 30);
+                ubRecommender.buildModel(userRateMap, userRateMap, 5, 30);
             } else if (type == "IB") {
+                IBCFRecommender ibRecommender = new IBCFRecommender();
                 startTime = System.currentTimeMillis();
-                ModelBuild.createSimilarityMatrix(itemRateMap, 5, 30);
+                ibRecommender.buildModel(userRateMap, itemRateMap, 5, 30);
             } else if (type == "UBLSH") {
                 vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                 startTime = System.currentTimeMillis();

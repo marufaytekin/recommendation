@@ -38,10 +38,10 @@ public class Metrics {
         long totalTime = 0;
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
-            if (entry.getValue().size() < 5) continue;
+            //if (entry.getValue().size() < 5) continue;
             String targetUserId = entry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
-            if (userRateList == null || userRateList.size() < 5) {
+            if (userRateList == null) { //|| userRateList.size() < 5) {
                 continue;
             }
             startTime = System.currentTimeMillis();

@@ -1,10 +1,8 @@
 package com.zaana.ml.tests;
 
-import com.google.common.collect.MinMaxPriorityQueue;
-import com.zaana.ml.*;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.cf.CFRecommender;
+import com.zaana.ml.recomm.cf.AbstractCFRecommender;
 
 import java.util.*;
 
@@ -15,14 +13,14 @@ public class CFPrecisionRecallTest extends AbstractTest {
 
     static double totalPrecision;
     static double totalRecall;
-    static long totalTime;
+    static double totalTime;
 
 
     /**
      * Runs item-based top-N karypis method.
      */
     public static void runCFRecommendation(
-            CFRecommender recommender, String dataFileBase, String separator,
+            AbstractCFRecommender recommender, String dataFileBase, String separator,
             double smoothRun, int topN, int y)
     {
         LOG.info("Running runItemBasedTopNRecommendation...");
@@ -33,13 +31,12 @@ public class CFPrecisionRecallTest extends AbstractTest {
             preprocessDataForRecommendation(dataFileBase, (j + 1), separator);
             int size = testDataMap.size();
             LOG.info("Model build started...");
-            HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix =
-                    ModelBuild.createSimilarityMatrix(itemRateMap, y, 30);
+            recommender.buildModel(userRateMap, itemRateMap, y, 30);
             LOG.info("Model build completed...");
-            calculateCFPrecisionRecall(userRateMap, testDataMap, itemSimilarityMatrix, recommender, topN);
+            calculateCFPrecisionRecall(userRateMap, testDataMap, recommender, topN);
             overAllPrecision += totalPrecision/size;
             overAllRecall += totalRecall/size;
-            overAllTotalTime += (double) totalTime/size;
+            overAllTotalTime += totalTime/size;
         }
         String reccClassName = recommender.getClass().getSimpleName();
         LOG2.info("# ========================================================");
@@ -55,8 +52,7 @@ public class CFPrecisionRecallTest extends AbstractTest {
     public static void calculateCFPrecisionRecall(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
-            HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> itemSimilarityMatrix,
-            CFRecommender recommender, int topN)
+            AbstractCFRecommender recommender, int topN)
     {
         totalPrecision = 0;
         totalRecall = 0;
@@ -66,9 +62,13 @@ public class CFPrecisionRecallTest extends AbstractTest {
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
+            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            if (userRateList == null) {
+                continue;
+            }
             try {
                 startTime = System.currentTimeMillis();
-                Set<String> retrieved = recommender.recommendItems(userRateMap, itemSimilarityMatrix, userId, topN);
+                Set<String> retrieved = recommender.recommendItems(userRateMap, userId, topN);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
                 Set<String> relevant = entry.getValue().keySet();
