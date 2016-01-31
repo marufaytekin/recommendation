@@ -22,6 +22,7 @@ public abstract class AbstractTest {
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static HashMap<String, String> hashKeyLookupTable;
 
+
     public static void preprocessDataForValidation(
             String baseUrl, int num, String type, String seperator)
     {
@@ -32,12 +33,7 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
-        DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
-        //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model =
-        //        ModelBuild.readModelFromFile(baseUrl+num+".model.ub");
-        //HashMap<String, PriorityQueue<Map.Entry<String, Double>>> model2 =
-        //        ModelBuild.readModelFromFile(baseUrl+num+".model.ib");
-
+        //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
     }
 
 
@@ -72,16 +68,5 @@ public abstract class AbstractTest {
         LOG.info("Hash Tables created...");
     }
 
-    /*public static void buildAndWriteModel(String baseUrl, double smoothRun, String seperator, int y) {
-        for (int j = 0; j < smoothRun; j++) {
-            String trainDataFilePath = baseUrl + (j+1);
-            preprocessDataForValidation(baseUrl, (j+1), "test", seperator);
-            userRateMap = DataParser.getUserRateMap();
-            itemRateMap = DataParser.getItemRateMap();
-            testDataMap = DataParser.getTestDataMap();
-            //ModelBuild.writeModel(userRateMap, trainDataFilePath + ".model.ub", y);
-            CFRecommender.writeModel(trainDataFilePath);
-        }
-    }*/
 
 }

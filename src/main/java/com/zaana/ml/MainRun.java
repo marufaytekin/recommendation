@@ -19,12 +19,12 @@ public class MainRun {
     private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
     private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    static String dataFilePath = "data/ymusic/ymusic.data";
-    static String dataFileBase = "data/ymusic/ymusic";
+    //static String dataFilePath = "data/ymusic/ymusic.data";
+    //static String dataFileBase = "data/ymusic/ymusic";
     //static String dataFilePath = "data/music/music.dat";
     //static String dataFileBase = "data/music/music";
-    //static String dataFilePath = "data/100k/ml.data";
-    //static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/100k/ml.data";
+    static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/movies_tv/movies_tv.data";
     //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/300k/xaa.data";

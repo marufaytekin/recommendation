@@ -1,5 +1,7 @@
 package com.zaana.ml.tests;
 
+import com.zaana.ml.metrics.Precision;
+import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.lsh.AbstractLSHReccommender;
 
 import java.util.*;
@@ -7,9 +9,9 @@ import java.util.*;
 /**
  * Created by maruf on 13/12/15.
  */
-public class LSHPrecisionRecallTest extends AbstractTest{
+public class LSHPrecisionRecallTests extends AbstractTest{
 
-    private static long totalTime;
+    private static double totalTime;
     private static double precision;
     private static double recall;
     private static double topNSize;
@@ -38,17 +40,18 @@ public class LSHPrecisionRecallTest extends AbstractTest{
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                calculateLSHMetrics(recommender, topN);
+                //calculateLSHMetrics(recommender, topN);
+                calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision/smoothRun);
             recallList.add(recall/smoothRun);
             topNList.add(topNSize/smoothRun);
-            avgRecommTime.add((double) totalTime/smoothRun);
+            avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
             avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
-            LOG.info("Avg Recommendation Time = " + (double) totalTime/smoothRun);
+            LOG.info("Avg Recommendation Time = " + totalTime/smoothRun);
             numOfHashFunctions++;
         }
         String reccClassName = recommender.getClass().getSimpleName();
@@ -94,17 +97,18 @@ public class LSHPrecisionRecallTest extends AbstractTest{
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                calculateLSHMetrics(recommender, topN);
+                //calculateLSHMetrics(recommender, topN);
+                calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision / smoothRun);
             recallList.add(recall / smoothRun);
             topNList.add(topNSize / smoothRun);
-            avgRecommTime.add((double) totalTime/smoothRun);
+            avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
             avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
-            LOG.info("Avg Evaluation Time = " + (double) totalTime/smoothRun);
+            LOG.info("Avg Evaluation Time = " + totalTime/smoothRun);
             numOfBands++;
         }
         String reccClassName = recommender.getClass().getSimpleName();
@@ -128,15 +132,50 @@ public class LSHPrecisionRecallTest extends AbstractTest{
 
     }
 
-    private static void calculateLSHMetrics(AbstractLSHReccommender recommender, int topN) {
-        Metrics.calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
-        precision += Metrics.getPrecision();
-        recall += Metrics.getRecall();
-        topNSize += Metrics.getTopNSize();
-        totalTime += Metrics.getAvgRecommTime();
-        candidateItemListSize += Metrics.getCandidateItemListSize();
-        uniqueItemListSize += Metrics.getUniqueItemListSize();
-    }
 
+    private static void calculateLSHMetrics(
+            final HashMap<String, HashMap<String, Integer>> userRateMap,
+            final HashMap<String, HashMap<String, Integer>> testDataMap,
+            AbstractLSHReccommender recommender, int topN)
+    {
+        double totalCandidateItemList = 0;
+        double totalUniqueItemList = 0;
+        double totalPrecision = 0;
+        double totalRecall = 0;
+        int totalTopN = 0;
+        int cnt = 0;
+        long startTime ;
+        long endTime;
+        long totalReccTime = 0;
+        for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
+                .entrySet()) {
+            String targetUserId = entry.getKey();
+            HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
+            if (userRateList == null) {
+                continue;
+            }
+            startTime = System.currentTimeMillis();
+            Set<String> topNRecommendedItems =
+                    recommender.recommendItems(userRateMap, targetUserId, topN);
+            endTime = System.currentTimeMillis();
+            totalReccTime += (endTime - startTime);
+            totalPrecision += Precision
+                    .getPrecision(topNRecommendedItems, entry);
+            totalRecall += Recall
+                    .getRecall(topNRecommendedItems, entry);
+            totalTopN += topNRecommendedItems.size();
+            totalCandidateItemList += recommender.getCandidateItemListSize();
+            totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
+            cnt++;
+        }
+        LOG.info(String.format("Avg Top-N Rec Time for one user = %s", (double) totalReccTime / cnt));
+        precision += totalPrecision / cnt;
+        recall += totalRecall/cnt;
+        topNSize += totalTopN/cnt;
+        totalTime += (double) totalReccTime/cnt;
+        candidateItemListSize += totalCandidateItemList/cnt;
+        uniqueItemListSize += totalUniqueItemList/cnt;
+
+    }
 
 }

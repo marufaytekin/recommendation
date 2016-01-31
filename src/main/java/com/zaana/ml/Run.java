@@ -199,37 +199,37 @@ public class Run {
 //                LSHParameterTest.runLSHHashTablesAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
 //                break;
             case "100":
-                LSHPrecisionRecallTest.runHashFunctionsLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "101":
-                LSHPrecisionRecallTest.runHashTablesLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "102":
-                LSHPrecisionRecallTest.runHashFunctionsLSHEvaluation(iblshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(iblshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "103":
-                LSHPrecisionRecallTest.runHashTablesLSHEvaluation(iblshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(iblshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "104":
-                LSHPrecisionRecallTest.runHashFunctionsLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "105":
-                LSHPrecisionRecallTest.runHashTablesLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "106":
-                LSHPrecisionRecallTest.runHashFunctionsLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "107":
-                LSHPrecisionRecallTest.runHashTablesLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
 
             case "110":
                 IBCFRecommender ibRecommender = new IBCFRecommender();
-                CFPrecisionRecallTest.runCFRecommendation(ibRecommender, dataFileBase, seperator, smoothRun, topN, y);
+                CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, smoothRun, topN, y);
                 break;
             case "111":
                 UBCFRecommender ubRecommender = new UBCFRecommender();
-                CFPrecisionRecallTest.runCFRecommendation(ubRecommender, dataFileBase, seperator, smoothRun, topN, y);
+                CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, smoothRun, topN, y);
                 break;
 
             case "99":

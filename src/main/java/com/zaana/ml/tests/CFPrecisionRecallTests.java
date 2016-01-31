@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by maruf on 07/05/15.
  */
-public class CFPrecisionRecallTest extends AbstractTest {
+public class CFPrecisionRecallTests extends AbstractTest {
 
     static double totalPrecision;
     static double totalRecall;
