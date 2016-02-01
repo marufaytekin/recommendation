@@ -49,8 +49,9 @@ public final class Cosine implements Similarity {
 
     }
 
-    public static double getCosineSimilarity(String userId1, String userId2,
-                                             final HashMap<String, HashMap<String, Integer>> ratingMap, int y)
+    public static double getCosineSimilarity(
+            String userId1, String userId2,
+            final HashMap<String, HashMap<String, Integer>> ratingMap, int y)
     {
         HashMap<String, Integer> ratings1 = ratingMap.get(userId1);
         HashMap<String, Integer> ratings2 = ratingMap.get(userId2);
@@ -73,16 +74,13 @@ public final class Cosine implements Similarity {
             final HashMap<String, Integer> map1,
             final HashMap<String, Integer> map2, int y)
     {
-        if (intersection.isEmpty()) return 0;
-        Iterator<String> iter = intersection.iterator();
         int intersec_size = intersection.size();
         int num = 0;
         int denum1 = 0;
         int denum2 = 0;
         int a;
         int b;
-        while (iter.hasNext()) {
-            String key = iter.next();
+        for (String key : intersection) {
             a = map1.get(key);
             b = map2.get(key);
             num += a * b;
@@ -91,12 +89,9 @@ public final class Cosine implements Similarity {
         }
         double sim = (double) num / (Math.sqrt(denum1) * Math.sqrt(denum2));
 
-        int numerator = Math.min(y, intersec_size);
+        double signif_weight = (double) Math.min(y, intersec_size) / y;
 
-        double signif_sim = ((double)numerator / y) * sim;
-
-
-        return signif_sim;// account for significance
+        return signif_weight * sim; // account for significance
 
     }
 

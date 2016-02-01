@@ -29,7 +29,7 @@ public class Prediction
             String rUserId = userSimPair.getKey();
             Double wuv = userSimPair.getValue();
             Integer rvi = userRateMap.get(rUserId).get(movieId);
-            wuvRviTotal += wuv.doubleValue() * rvi.intValue();
+            wuvRviTotal += wuv * rvi;
             wuvTotal += Math.abs(wuv.doubleValue());
         }
         if (wuvTotal != 0.0D) {
@@ -101,7 +101,7 @@ public class Prediction
 
     /**
      *
-     * Calculates LSH prediction. Equally weights neighbor users.
+     * Calculates LSH prediction. Compute the average ratings of neighbors.
      * Eliminates similarity computation to find k nearest neighbors.
      * */
     public static double calculateLSHBasedPredictionRate(

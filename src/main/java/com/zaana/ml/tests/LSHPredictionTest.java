@@ -1,9 +1,7 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
-import com.zaana.ml.prediction.IBLSHPrediction;
-import com.zaana.ml.prediction.LSHPrediction;
-import com.zaana.ml.prediction.UBLSHPrediction;
+import com.zaana.ml.prediction.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -73,35 +71,36 @@ public class LSHPredictionTest extends AbstractTest
                         hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                        runTime += UBLSHPrediction
+                        runTime += UBKNNLSHPrediction
                                 .runUserBasedLSHPredictionOnTestData(userRateMap,
                                         itemRateMap, testDataMap, hashTables, vmap, kNN, y, hashKeyLookupTable);
-                        candidate_set_size += UBLSHPrediction.getAvg_candidate_set_size();
+                        candidate_set_size += UBKNNLSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
-                                UBLSHPrediction.getOutputList(),
-                                UBLSHPrediction.getTargetList());
+                                UBKNNLSHPrediction.getOutputList(),
+                                UBKNNLSHPrediction.getTargetList());
                     } else if (testType == "IBLSH") {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                         hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                        runTime += IBLSHPrediction.
+                        runTime += IBKNNLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, hashKeyLookupTable, kNN, y);
-                        candidate_set_size += IBLSHPrediction.getAvg_candidate_set_size();
+                        candidate_set_size += IBKNNLSHPrediction.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
-                                IBLSHPrediction.getOutputList(),
-                                IBLSHPrediction.getTargetList());
-                    } else if (testType == "LSH") {
+                                IBKNNLSHPrediction.getOutputList(),
+                                IBKNNLSHPrediction.getTargetList());
+                    } else if (testType == "LSH1") {
+                        UBLSHPrediction lshEstimator = new UBLSHPrediction();
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         hashKeyLookupTable =  LSH.getHashKeyLookupTable();
-                        runTime += LSHPrediction.runLSHPredictionOnTestData(
-                                userRateMap, itemRateMap, testDataMap, hashTables, vmap, hashKeyLookupTable, kNN);
-                        candidate_set_size += LSHPrediction.getAvg_candidate_set_size();
+                        runTime += LSHPredictionTests.runLSHPredictionOnTestData(
+                                userRateMap, itemRateMap, testDataMap, hashTables, hashKeyLookupTable, lshEstimator);
+                        candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
-                                LSHPrediction.getOutputList(),
-                                LSHPrediction.getTargetList());
+                                LSHPredictionTests.getOutputList(),
+                                LSHPredictionTests.getTargetList());
                     } else {
                         throw new UnsupportedOperationException("Invalid type.");
                     }
@@ -172,39 +171,53 @@ public class LSHPredictionTest extends AbstractTest
                     hashTables = LSH.buildModel(userRateMap, vmap,
                             numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                    runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                    runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y, hashKeyLookupTable);
-                    candidate_set_size += UBLSHPrediction
+                    candidate_set_size += UBKNNLSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
-                            UBLSHPrediction.getOutputList(),
-                            UBLSHPrediction.getTargetList());
-                    predictedItems += UBLSHPrediction.getOutputList().size();
+                            UBKNNLSHPrediction.getOutputList(),
+                            UBKNNLSHPrediction.getTargetList());
+                    predictedItems += UBKNNLSHPrediction.getOutputList().size();
                 } else if (type == "IBLSH") {
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                     hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
                     hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                    runTime += IBLSHPrediction.
+                    runTime += IBKNNLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, hashKeyLookupTable, kNN, y);
-                    candidate_set_size += IBLSHPrediction
+                    candidate_set_size += IBKNNLSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
-                            IBLSHPrediction.getOutputList(),
-                            IBLSHPrediction.getTargetList());
-                    predictedItems += IBLSHPrediction.getOutputList().size();
-                } else if (type == "LSH") {
+                            IBKNNLSHPrediction.getOutputList(),
+                            IBKNNLSHPrediction.getTargetList());
+                    predictedItems += IBKNNLSHPrediction.getOutputList().size();
+                } else if (type == "UBLSH1") {
+                    UBLSHPrediction lshEstimator = new UBLSHPrediction();
                     vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildModel(userRateMap, vmap,
                             numOfBands);
-                    runTime += LSHPrediction.runLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, vmap, LSH.getHashKeyLookupTable(), kNN);
-                    candidate_set_size += LSHPrediction
+                    runTime += LSHPredictionTests.runLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, hashTables, LSH.getHashKeyLookupTable(), lshEstimator);
+                    candidate_set_size += LSHPredictionTests
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
-                            LSHPrediction.getOutputList(),
-                            LSHPrediction.getTargetList());
-                    predictedItems += LSHPrediction.getOutputList().size();
+                            LSHPredictionTests.getOutputList(),
+                            LSHPredictionTests.getTargetList());
+                    predictedItems += LSHPredictionTests.getOutputList().size();
+                } else if (type == "UBLSH-NEW") {
+                    UBLSHPredictionNew lshEstimator = new UBLSHPredictionNew();
+                    vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+                    hashTables = LSH.buildModel(userRateMap, vmap,
+                            numOfBands);
+                    runTime += LSHPredictionTests.runLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, hashTables, LSH.getHashKeyLookupTable(), lshEstimator);
+                    candidate_set_size += LSHPredictionTests
+                            .getAvg_candidate_set_size();
+                    mae += MAE.calculateMAE(
+                            LSHPredictionTests.getOutputList(),
+                            LSHPredictionTests.getTargetList());
+                    predictedItems += LSHPredictionTests.getOutputList().size();
                 } else {
                     throw new UnsupportedOperationException("Invalid type.");
                 }

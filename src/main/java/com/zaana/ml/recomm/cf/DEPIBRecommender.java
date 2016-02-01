@@ -1,7 +1,7 @@
 package com.zaana.ml.recomm.cf;
 
 import com.zaana.ml.Common;
-import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.IBKNNPrediction;
 import com.zaana.ml.prediction.Prediction;
 
 import java.util.*;
@@ -41,7 +41,7 @@ public final class DEPIBRecommender {
         while (iter.hasNext()) {
             String itemId = iter.next();
             if (itemRateMap.get(itemId) == null) continue;
-            LinkedHashMap<String, Double> kNNList = IBNNPrediction
+            LinkedHashMap<String, Double> kNNList = IBKNNPrediction
                     .getSimilarItemsListRatedByUser(itemRateMap,
                             itemId, ratedItemsSet, kNN, y);
             if (kNNList != null && !kNNList.isEmpty()) { //BUG:

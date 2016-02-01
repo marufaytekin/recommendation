@@ -27,4 +27,5 @@ public abstract class AbstractLSHReccommender {
     public abstract Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             String userId, int topN);
+
 }

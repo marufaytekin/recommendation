@@ -13,7 +13,6 @@ import java.util.*;
  */
 public class UBLSHRecommender extends AbstractLSHReccommender {
 
-
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
                            HashMap<String, HashMap<String, Integer>> itemRateMap,

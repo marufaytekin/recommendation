@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by maruf on 06/02/15.
  */
-public class IBLSHPrediction extends LSHPrediction
+public class IBKNNLSHPrediction extends AbstractPrediction
 {
     public static long runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
@@ -22,11 +22,8 @@ public class IBLSHPrediction extends LSHPrediction
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = testDataMap
-                .entrySet().iterator();
-        while (testDataIter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
-                    .next();
+        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
+                .entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null) {
@@ -91,8 +88,8 @@ public class IBLSHPrediction extends LSHPrediction
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
-                if (intersectionOfCandidateRatedItemSets != null && !intersectionOfCandidateRatedItemSets.isEmpty()) {
-                    kRatedSimilarItemsList = IBNNPrediction.getSimilarItemsListRatedByUser(
+                if (!intersectionOfCandidateRatedItemSets.isEmpty()) {
+                    kRatedSimilarItemsList = IBKNNPrediction.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
                     if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {

@@ -1,17 +1,5 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.LSH;
-import com.zaana.ml.MAE;
-import com.zaana.ml.Vector;
-import com.zaana.ml.prediction.AbstractPrediction;
-import com.zaana.ml.prediction.IBLSHPrediction;
-import com.zaana.ml.prediction.UBLSHPrediction;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Set;
-
 /**
  * Created by maytekin on 25.12.2015.
  */
@@ -38,12 +26,12 @@ public class LSHParameterTest extends AbstractTest{
                     if (Objects.equals(type, "UBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
                         hashTables = LSH.buildModel(userRateMap, vmap, l);
-                        runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                        runTimeTotal += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else if (Objects.equals(type, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, l, k, userSet);
                         hashTables = LSH.buildModel(itemRateMap, vmap, l);
-                        runTimeTotal += IBLSHPrediction.
+                        runTimeTotal += IBKNNLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);
                     } else {
@@ -100,22 +88,22 @@ public class LSHParameterTest extends AbstractTest{
                 if (Objects.equals(type, "UBLSH")) {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, itemSet);
                     hashTables = LSH.buildModel(userRateMap, vmap, numberOfHashTables);
-                    runTimeTotal += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                    runTimeTotal += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     totalMae += MAE.calculateMAE(
-                            UBLSHPrediction.getOutputList(),
-                            UBLSHPrediction.getTargetList());
-                    totalCandSize += UBLSHPrediction.getAvg_candidate_set_size();
+                            UBKNNLSHPrediction.getOutputList(),
+                            UBKNNLSHPrediction.getTargetList());
+                    totalCandSize += UBKNNLSHPrediction.getAvg_candidate_set_size();
                 } else if (Objects.equals(type, "IBLSH")) {
                     vmap = Vector.generateHashFunctions(-5, 5, numberOfHashTables, numOfHashFunctions, userSet);
                     hashTables = LSH.buildModel(itemRateMap, vmap, numberOfHashTables);
-                    runTimeTotal += IBLSHPrediction.
+                    runTimeTotal += IBKNNLSHPrediction.
                             runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                     testDataMap, hashTables, vmap, kNN, y);
                     totalMae += MAE.calculateMAE(
-                            IBLSHPrediction.getOutputList(),
-                            IBLSHPrediction.getTargetList());
-                    totalCandSize += IBLSHPrediction.getAvg_candidate_set_size();
+                            IBKNNLSHPrediction.getOutputList(),
+                            IBKNNLSHPrediction.getTargetList());
+                    totalCandSize += IBKNNLSHPrediction.getAvg_candidate_set_size();
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for LSH type.");
                 }
@@ -174,12 +162,12 @@ public class LSHParameterTest extends AbstractTest{
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
-                        runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                        runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     }  else if (Objects.equals(testType, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
-                        runTime += IBLSHPrediction.
+                        runTime += IBKNNLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);
                     } else {
@@ -263,12 +251,12 @@ public class LSHParameterTest extends AbstractTest{
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
                         hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
-                        runTime += UBLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                        runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, vmap, kNN, y);
                     } else if (Objects.equals(testType, "IBLSH")) {
                         vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
                         hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
-                        runTime += IBLSHPrediction.
+                        runTime += IBKNNLSHPrediction.
                                 runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
                                         testDataMap, hashTables, vmap, kNN, y);
                     } else {

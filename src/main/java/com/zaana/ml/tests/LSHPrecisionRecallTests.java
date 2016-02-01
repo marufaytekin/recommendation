@@ -31,16 +31,10 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfHashFunctions = 6;
         for (int i = 0; i < numOfRun; i++) {
-            precision = 0;
-            recall = 0;
-            topNSize = 0;
-            totalTime = 0;
-            candidateItemListSize = 0;
-            uniqueItemListSize = 0;
+            initMetrics();
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                //calculateLSHMetrics(recommender, topN);
                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision/smoothRun);
@@ -76,6 +70,16 @@ public class LSHPrecisionRecallTests extends AbstractTest{
     }
 
 
+    private static void initMetrics() {
+        precision = 0;
+        recall = 0;
+        topNSize = 0;
+        totalTime = 0;
+        candidateItemListSize = 0;
+        uniqueItemListSize = 0;
+    }
+
+
     public static void runHashTablesLSHEvaluation(
             AbstractLSHReccommender recommender, String dataFileBase, String separator,
             int numOfRun, int smoothRun, int numOfHashFunctions, int topN)
@@ -88,16 +92,10 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfBands = 1;
         for (int i = 0; i < numOfRun; i++) {
-            precision = 0;
-            recall = 0;
-            topNSize = 0;
-            totalTime = 0;
-            candidateItemListSize = 0;
-            uniqueItemListSize = 0;
+            initMetrics();
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                //calculateLSHMetrics(recommender, topN);
                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision / smoothRun);

@@ -173,22 +173,22 @@ public class Run {
 //                LSHParameterTest.runLSHYAndKTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
 //                break;
             case "63":
-                LSHPredictionTest.runLSHHashTablesAndPrediction("LSH", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction("UBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "64":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction("LSH", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction("UBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
-            case "65":
-                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("LSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
-                break;
-            case "66":
-                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
-                break;
-            case "67":
-                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("IBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
-                break;
+//            case "65":
+//                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("LSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+//                break;
+//            case "66":
+//                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("UBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+//                break;
+//            case "67":
+//                LSHPredictionTest.runLSH2DHashFunctionsTablesTest("IBLSH", numOfRun, smoothRun, dataFileBase, seperator, kNN, y);
+//                break;
 //            case "80":
 //                LSHParameterTest.runLSHYAndKTest("IBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, l, k);
 //                break;

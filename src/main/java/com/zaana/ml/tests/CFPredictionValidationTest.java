@@ -1,8 +1,8 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.IBKNNPrediction;
 import com.zaana.ml.MAE;
-import com.zaana.ml.prediction.UBNNPrediction;
+import com.zaana.ml.prediction.UBKNNPrediction;
 
 import java.util.ArrayList;
 
@@ -29,15 +29,15 @@ public class CFPredictionValidationTest extends AbstractTest
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j+1), "val", seperator);
                 if (type == "UB") {
-                    runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
+                    runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                             testDataMap, kNN, y);
-                    mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
-                            UBNNPrediction.getTargetList());
+                    mae += MAE.calculateMAE(UBKNNPrediction.getOutputList(),
+                            UBKNNPrediction.getTargetList());
                 } else if (type == "IB") {
-                    runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                    runTime += IBKNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
                             testDataMap, kNN, y);
-                    mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
-                            IBNNPrediction.getTargetList());
+                    mae += MAE.calculateMAE(IBKNNPrediction.getOutputList(),
+                            IBKNNPrediction.getTargetList());
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for CF type.");
                 }
@@ -70,15 +70,15 @@ public class CFPredictionValidationTest extends AbstractTest
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j+1), "val", seperator);
                 if (type == "UB") {
-                    runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
+                    runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                             testDataMap, kNN, y);
-                    mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
-                            UBNNPrediction.getTargetList());
+                    mae += MAE.calculateMAE(UBKNNPrediction.getOutputList(),
+                            UBKNNPrediction.getTargetList());
                 } else if (type == "IB") {
-                    runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                    runTime += IBKNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
                             testDataMap, kNN, y);
-                    mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
-                            IBNNPrediction.getTargetList());
+                    mae += MAE.calculateMAE(IBKNNPrediction.getOutputList(),
+                            IBKNNPrediction.getTargetList());
                 } else {
                     throw new UnsupportedOperationException("Invalid operation for CF type.");
                 }
@@ -113,15 +113,15 @@ public class CFPredictionValidationTest extends AbstractTest
                 for (int s = 0; s < smoothRun; s++) {
                     preprocessDataForValidation(dataFileBase, (s + 1), "val", seperator);
                     if (type == "UB") {
-                        runTime += UBNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
+                        runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                                 testDataMap, kNN, y);
-                        mae += MAE.calculateMAE(UBNNPrediction.getOutputList(),
-                                UBNNPrediction.getTargetList());
+                        mae += MAE.calculateMAE(UBKNNPrediction.getOutputList(),
+                                UBKNNPrediction.getTargetList());
                     } else if (type == "IB") {
-                        runTime += IBNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
+                        runTime += IBKNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
                                 testDataMap, kNN, y);
-                        mae += MAE.calculateMAE(IBNNPrediction.getOutputList(),
-                                IBNNPrediction.getTargetList());
+                        mae += MAE.calculateMAE(IBKNNPrediction.getOutputList(),
+                                IBKNNPrediction.getTargetList());
                     } else {
                         throw new UnsupportedOperationException("Invalid operation for CF type.");
                     }

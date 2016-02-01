@@ -2,7 +2,7 @@ package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.LSH;
-import com.zaana.ml.prediction.IBNNPrediction;
+import com.zaana.ml.prediction.IBKNNPrediction;
 import com.zaana.ml.prediction.Prediction;
 
 import java.util.*;
@@ -63,7 +63,7 @@ public final class DEPIBLSHRecommender {
             total_candidate_set_size += candidateSetSize;
             candidateSet.retainAll(ratedItemsSet); //intersection
             LinkedHashMap<String, Double> kNNList =
-                    IBNNPrediction.getSimilarItemsListRatedByUser(itemRateMap, itemId, candidateSet, kNN, y);
+                    IBKNNPrediction.getSimilarItemsListRatedByUser(itemRateMap, itemId, candidateSet, kNN, y);
             if (kNNList != null && !kNNList.isEmpty()) { //BUG: used to calculate prediction for lt k NN
                 Double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap, kNNList,
                         userId);
