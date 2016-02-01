@@ -10,7 +10,7 @@ import java.util.*;
 /**
  * Created by maruf on 28/05/15.
  */
-public class ClusterPrediction extends AbstractPrediction {
+public class ClusterPrediction extends AbstractPredictionTests {
 
     /**
      * Runs LSH prediction on test data */
@@ -53,46 +53,6 @@ public class ClusterPrediction extends AbstractPrediction {
 
     }
 
-    private static void predictRatingsForTestUsers(
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            Set<String> candidateSet, String userId,
-            LinkedList<Double> outputList,
-            LinkedList<Integer> targetList,
-            final int kNN, int y)
-    {
-        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
-        double prediction;
-
-        for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
-            try {
-                String movieId = entry.getKey();
-                Integer givenRating = entry.getValue();
-                LinkedHashMap<String, Double> similarityListMap;
-                Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
-                Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
-                intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-                if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                    similarityListMap =
-                            Cosine.getSimilarityListWithCandidateSet(userId,
-                                    intersectionOfCandidateRatedUserSets, userRateMap, y);
-                    LinkedHashMap<String, Double> kNNList = Common.getkNNList(
-                            similarityListMap, userRateMap, movieId, kNN);
-                    if (!kNNList.isEmpty()) { // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
-                        prediction = Prediction.calculateUserBasedPredicitonRate(
-                                userRateMap, kNNList, movieId);
-                    } else {
-                        prediction = 0;
-                    }
-                    outputList.add(prediction);
-                    targetList.add(givenRating);
-                }
-            } catch (NullPointerException e) {
-                // do nothing
-            }
-        }
-    }
 
     private static void predictRatingsForTestUsers(
             Map.Entry<String, HashMap<String, Integer>> testDataEntry,

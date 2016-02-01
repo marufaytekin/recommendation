@@ -1,6 +1,6 @@
 package com.zaana.ml.recomm.lsh;
 
-import com.google.common.collect.MinMaxPriorityQueue;
+import com.sun.media.jfxmedia.logging.Logger;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 
@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by maruf on 26/01/16.
  */
-public class IBLSHRecommender extends AbstractLSHReccommender {
+public class IBLSHRecommender extends AbstractLSHRecommender {
 
     public IBLSHRecommender() {
         super();
@@ -55,5 +55,35 @@ public class IBLSHRecommender extends AbstractLSHReccommender {
 
     }
 
+    @Override
+    public double calculatePrediction(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            String targetUserId,
+            String itemId) {
+
+        int frequency;
+        double rating;
+        double weightedRatingsTotal = 0;
+        int weightsTotal = 0;
+        Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
+        List <String> candidateSetList =
+                LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
+        Set<String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
+        ratedItemsSet.retainAll(uniqueueCandidateSet); //intersection with candidate set
+        HashMap <String, Integer> frequencyMap = Common.getFrequencyMap(candidateSetList);
+        for (String item : ratedItemsSet) {
+            frequency = frequencyMap.get(item);
+            rating = userRateMap.get(targetUserId).get(item);
+            weightedRatingsTotal += rating * frequency;
+            weightsTotal += frequency;
+        }
+        candidateItemListSize = candidateSetList.size();
+        uniqueCandidateItemListSize = uniqueueCandidateSet.size();
+        if (weightsTotal != 0)
+            return weightedRatingsTotal / weightsTotal;
+        else
+            return 0;
+    }
 
 }

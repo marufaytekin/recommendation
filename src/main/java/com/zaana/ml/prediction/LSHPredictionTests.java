@@ -1,12 +1,13 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.LSH;
+import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
+
 import java.util.*;
 
 /**
  * Created by maruf on 19/05/15.
  */
-public class LSHPredictionTests extends AbstractPrediction {
+public class LSHPredictionTests extends AbstractPredictionTests {
 
     /**
      * Runs LSH prediction on test data */
@@ -14,9 +15,7 @@ public class LSHPredictionTests extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
-            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<String, String> hashKeyLookupTable,
-            LSHPrediction lshEstimator)
+            AbstractLSHRecommender lshRecommender)
     {
 
         final long startTime = System.currentTimeMillis();
@@ -31,12 +30,25 @@ public class LSHPredictionTests extends AbstractPrediction {
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
-            cnt++;
-            List<String> candidateSetList = LSH.getCandidateListFromHashTables(hashTables, userId, hashKeyLookupTable);
-            Set<String> candidateSet = new HashSet<>(candidateSetList);
-            total_candidate_set_size += candidateSet.size();
-            predictRatingsForTestUsers(
-                    testDataEntry, userRateMap, itemRateMap, lshEstimator, candidateSetList, candidateSet, outputList, targetList);
+            double prediction;
+            HashMap <String, Integer> userRatings = testDataEntry.getValue();
+            String targetUserId = testDataEntry.getKey();
+            for (Map.Entry<String, Integer> entry : userRatings.entrySet()) {
+                try {
+                    String movieId = entry.getKey();
+                    Integer givenRating = entry.getValue();
+                    prediction = lshRecommender.calculatePrediction(
+                            userRateMap, itemRateMap, targetUserId, movieId);
+                    total_candidate_set_size += lshRecommender.getUniqueCandidateItemListSize();
+                    cnt++;
+                    if (prediction != 0) {
+                        outputList.add(prediction);
+                        targetList.add(givenRating);
+                    }
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
         final long endTime = System.currentTimeMillis();
@@ -49,7 +61,8 @@ public class LSHPredictionTests extends AbstractPrediction {
 
     }
 
-    /**
+    /*
+    *//**
      * This method runs prediction tests for LSH algorithm.
      *
      * For each hash table:
@@ -62,24 +75,25 @@ public class LSHPredictionTests extends AbstractPrediction {
      * @param testDataEntry
      * @param userRateMap
      * @param itemRateMap
+     * @param lshRecommender
      * @param candidateSetList
      * @param candidateSet
      * @param outputList
      * @param targetList
-     */
+     *//*
     private static void predictRatingsForTestUsers(
             Map.Entry<String, HashMap<String, Integer>> testDataEntry,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            LSHPrediction estimator,
+            AbstractLSHRecommender lshRecommender,
             List<String> candidateSetList,
             Set<String> candidateSet,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList)
     {
-        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
-
+        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
+        String targetUserId = testDataEntry.getKey();
         for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
             try {
                 String movieId = entry.getKey();
@@ -88,13 +102,8 @@ public class LSHPredictionTests extends AbstractPrediction {
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                    prediction = estimator.calculatePrediction(
-                            userRateMap,candidateSetList,intersectionOfCandidateRatedUserSets,movieId);
-                    //prediction = Prediction.calculateLSHFreqBasedPredictionRate(
-                    //        userRateMap, intersectionOfCandidateRatedUserSets, candidateSetList, movieId);
-                    // new method
-                    // prediction = Prediction.calculateLSHBasedPredictionRate(
-                    //        userRateMap, intersectionOfCandidateRatedUserSets, movieId);
+                    prediction = lshRecommender.calculatePrediction(
+                            userRateMap, targetUserId, movieId, candidateSetList, intersectionOfCandidateRatedUserSets);
                     if (prediction != 0) {
                         outputList.add(prediction);
                         targetList.add(givenRating);
@@ -106,7 +115,8 @@ public class LSHPredictionTests extends AbstractPrediction {
         }
     }
 
-/*
+*/
+    /*
     private static List<String> getFrequentCandidateList(
             Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList, int kNN) {
         List<String> userSet = new ArrayList<>();

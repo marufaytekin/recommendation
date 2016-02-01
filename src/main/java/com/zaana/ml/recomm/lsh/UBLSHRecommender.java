@@ -1,6 +1,5 @@
 package com.zaana.ml.recomm.lsh;
 
-import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 
@@ -11,7 +10,7 @@ import java.util.*;
  * Evaluation of Item-Based Top-N Recommendation Algorithms paper:
  * http://www.dtic.mil/dtic/tr/fulltext/u2/a439546.pdf
  */
-public class UBLSHRecommender extends AbstractLSHReccommender {
+public class UBLSHRecommender extends AbstractLSHRecommender {
 
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
@@ -48,5 +47,41 @@ public class UBLSHRecommender extends AbstractLSHReccommender {
         return Common.getMostFrequentTopNElements(ratedItemList, topN);
 
     }
+
+    @Override
+    public double calculatePrediction(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            String targetUserId,
+            String movieId) {
+
+        HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
+        if (itemRatings == null) return 0;
+        List<String> candidateSetList =
+                LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
+        Set<String> candidateSet = new HashSet<>(candidateSetList);
+        Set<String> ratedUserSet = itemRatings.keySet();
+        Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
+        intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
+        if (intersectionOfCandidateRatedUserSets.isEmpty()) return 0;
+        double weightedRatingsTotal = 0;
+        double weightsTotal = 0;
+        Integer frequency;
+        Integer rating;
+        HashMap <String, Integer> frequencyMap = Common.getFrequencyMap(candidateSetList);
+        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+            frequency = frequencyMap.get(candidateUser);
+            rating = userRateMap.get(candidateUser).get(movieId);
+            weightedRatingsTotal += rating * frequency;
+            weightsTotal += frequency;
+        }
+        candidateItemListSize = candidateSetList.size();
+        uniqueCandidateItemListSize = candidateSet.size();
+        if (weightsTotal != 0)
+            return weightedRatingsTotal / weightsTotal;
+        else
+            return 0;
+    }
+
 
 }

@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by maruf on 09/05/15.
  */
-public class IBLSHRecommenderNew extends AbstractLSHReccommender {
+public class IBLSHRecommenderNew extends AbstractLSHRecommender {
 
     public IBLSHRecommenderNew() {
         super();
@@ -32,7 +32,6 @@ public class IBLSHRecommenderNew extends AbstractLSHReccommender {
             String userId, int topN)
     {
         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
-        //Set<String>topLikedItems = Common.sortByValueAndGetTopNItems(ratingsSet, 20);
         Set<String> userRatingSet = ratingsSet.keySet();
         Set<String> uniqueueItemsSet = new HashSet<>();
         List<String> candidateList = new ArrayList<>();
@@ -54,5 +53,26 @@ public class IBLSHRecommenderNew extends AbstractLSHReccommender {
         return recSet;
     }
 
+    @Override
+    public double calculatePrediction(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            String targetUserId, String itemId) {
 
+        double rating;
+        double weightedRatingsTotal = 0;
+        Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
+        List <String> candidateSetList =
+                LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
+        Set <String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
+        ratedItemsSet.retainAll(uniqueueCandidateSet); //take intersection with candidate set
+        if (ratedItemsSet.isEmpty()) return 0;
+        for (String item : ratedItemsSet) {
+            rating = userRateMap.get(targetUserId).get(item);
+            weightedRatingsTotal += rating;
+        }
+        candidateItemListSize = candidateSetList.size();
+        uniqueCandidateItemListSize = uniqueueCandidateSet.size();
+        return weightedRatingsTotal / ratedItemsSet.size();
+    }
 }

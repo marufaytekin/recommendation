@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by maytekin on 28.01.2016.
  */
-public class UBLSHRecommenderNew extends AbstractLSHReccommender {
+public class UBLSHRecommenderNew extends AbstractLSHRecommender {
 
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
@@ -50,5 +50,31 @@ public class UBLSHRecommenderNew extends AbstractLSHReccommender {
         return recSet;
     }
 
+    @Override
+    public double calculatePrediction(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            String targetUserId,
+            String movieId)
+    {
+        HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
+        if (itemRatings == null) return 0.0;
+        List<String> candidateSetList =
+                LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
+        Set<String> candidateSet = new HashSet<>(candidateSetList);
+        Set<String> ratedUserSet = itemRatings.keySet();
+        Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
+        intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
+        if (intersectionOfCandidateRatedUserSets.isEmpty()) return 0.0;
+        double weightedRatingsTotal = 0.0;
+        Integer rating;
+        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+            rating = userRateMap.get(candidateUser).get(movieId);
+            weightedRatingsTotal += rating;
+        }
+        candidateItemListSize = candidateSetList.size();
+        uniqueCandidateItemListSize = candidateSet.size();
+        return weightedRatingsTotal/intersectionOfCandidateRatedUserSets.size();
+    }
 
 }

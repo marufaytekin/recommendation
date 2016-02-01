@@ -76,7 +76,7 @@ public class MainRun {
 
             selection = scanner.nextLine();
             LOG.info("Selected menu: " + selection);
-            Run.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
 
         } while (!selection.equals("99"));
 

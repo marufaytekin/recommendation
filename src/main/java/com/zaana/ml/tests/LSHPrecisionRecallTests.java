@@ -2,7 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.lsh.AbstractLSHReccommender;
+import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
 
 import java.util.*;
 
@@ -20,7 +20,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     public static void runHashFunctionsLSHEvaluation(
-            AbstractLSHReccommender recommender, String dataFileBase, String separator,
+            AbstractLSHRecommender recommender, String dataFileBase, String separator,
             int numOfRun, int smoothRun, int numOfBands, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
@@ -81,7 +81,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     public static void runHashTablesLSHEvaluation(
-            AbstractLSHReccommender recommender, String dataFileBase, String separator,
+            AbstractLSHRecommender recommender, String dataFileBase, String separator,
             int numOfRun, int smoothRun, int numOfHashFunctions, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
@@ -134,7 +134,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
     private static void calculateLSHMetrics(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            AbstractLSHReccommender recommender, int topN)
+            AbstractLSHRecommender recommender, int topN)
     {
         double totalCandidateItemList = 0;
         double totalUniqueItemList = 0;

@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by maruf on 06/02/15.
  */
-public class IBKNNLSHPrediction extends AbstractPrediction
+public class IBKNNLSHPrediction extends AbstractPredictionTests
 {
     public static long runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
@@ -81,7 +81,6 @@ public class IBKNNLSHPrediction extends AbstractPrediction
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
-                //Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, testMovieId, movieRateList);
                 Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
                 int candidateSetSize = candidateSet.size();
                 total_candidate_set_size += candidateSetSize;

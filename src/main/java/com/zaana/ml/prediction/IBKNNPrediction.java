@@ -5,7 +5,7 @@ import com.zaana.ml.similarity.Cosine;
 import java.util.*;
 import java.util.Map.Entry;
 
-public final class IBKNNPrediction extends AbstractPrediction {
+public final class IBKNNPrediction extends AbstractPredictionTests {
 
     private IBKNNPrediction() {
     }

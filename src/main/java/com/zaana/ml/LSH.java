@@ -118,7 +118,8 @@ public final class LSH {
     public static Set<String> getCandidateItemSetFromHashTable(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<String, Integer> ratingsSet,
-            String itemId, HashMap<String, String> hashKeyTable)
+            String itemId,
+            HashMap<String, String> hashKeyTable)
     {
         Set<String> candidateSet = new HashSet<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
@@ -153,7 +154,8 @@ public final class LSH {
         {
             String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
             Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
-            candidateList.addAll(candidates);
+            if (candidates != null)
+                candidateList.addAll(candidates);
         }
         candidateList.remove(userId);
 
@@ -198,7 +200,8 @@ public final class LSH {
         return candidateSets;
     }*/
 
-    /**
+    /*
+    *//**
      * This method calculates candidate set for a user/item based on its
      * ratings. Generates hashkey for each hash table(band) and queries the
      * candidates based on generated hashkey and selects the shared candidates
@@ -208,7 +211,7 @@ public final class LSH {
      * @param userRates
      *            rate vector of the userId
      * @return candidate set for userId
-     */
+     *//*
     public static Set<String> getCommonCandidatesInAllHashTables(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
@@ -227,7 +230,7 @@ public final class LSH {
         return candidateSet;
     }
 
-
+*/
     /**
      * This method generates empty hash tables for LSH to be used as bands. It
      * assigns generated hash tables to class variable hashTables.

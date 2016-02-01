@@ -9,7 +9,7 @@ import java.util.*;
 /**
  * Created by ${USER} on ${DATE}.
  */
-public class UBKNNLSHPrediction extends AbstractPrediction {
+public class UBKNNLSHPrediction extends AbstractPredictionTests {
 
     /**
      * This method uses LSH algorithm with k-NN to predict user/item rating.
@@ -24,9 +24,8 @@ public class UBKNNLSHPrediction extends AbstractPrediction {
      * LSH - k-NN algorithm of predicting some user u's rating r for item i:
      *
      * for each band(hashtable) in hash tables get candidate set as follows: (b)
-     *     generate hashkey for userId (h)
-     *     retreive hashkey and value set (c)
-     *     append value set to candidate set (c)
+     *     get hashkey from hashKeyLookupTable (1)
+     *     retreive candidate set from hash table based on hashKey(1)
      * for each user w in candidate set (p)
      *    compute similarity s between u and w (m)
      *    add similarity s to similarity list l in <w,s> format (c)
@@ -49,37 +48,28 @@ public class UBKNNLSHPrediction extends AbstractPrediction {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
             int kNN, int y, HashMap<String, String> hashKeyLookupTable)
     {
 
         final long startTime = System.currentTimeMillis();
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
-
         Integer total_candidate_set_size = 0;
-
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> testDataIter = testDataMap
-                .entrySet().iterator();
         int cnt = 0;
-        while (testDataIter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
-                    .next();
+        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
+                .entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             cnt++;
-            //Set<String> candidateSet = LSH.getCandidateSet(hashTables, vmap, userId, userRateList);
-            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables,userId,hashKeyLookupTable);
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
                     testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);
         }
-
         final long endTime = System.currentTimeMillis();
-
         avg_candidate_set_size = (double) total_candidate_set_size / cnt;
         LOG.info("UB-LSH Running time: " + (endTime - startTime) + " ms.");
         LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
@@ -100,7 +90,6 @@ public class UBKNNLSHPrediction extends AbstractPrediction {
     {
         HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
-
         for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
             try {
                 String movieId = entry.getKey();

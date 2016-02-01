@@ -2,7 +2,6 @@ package com.zaana.ml;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import org.apache.log4j.Logger;
-import org.apache.log4j.pattern.IntegerPatternConverter;
 
 import java.io.Serializable;
 import java.util.*;
@@ -82,6 +81,24 @@ public final class Common
         return recommList;
     
     }
+
+    /**
+     * Calculates frequency of uniqueue items in a list.
+     * @param candidateList
+     * @return HashMap of <item, frequency>
+     */
+    public static HashMap<String, Integer> getFrequencyMap(
+            List<String> candidateList) {
+        HashMap <String,Integer> frequencyMap = new HashMap<>();
+        for (String element: candidateList) {
+            if(frequencyMap.containsKey(element)) {
+                frequencyMap.put(element, frequencyMap.get(element)+1);
+            }
+            else{ frequencyMap.put(element, 1); }
+        }
+        return frequencyMap;
+    }
+
 
     /**
      * Returns most frequent n elements at the front of the queue.
