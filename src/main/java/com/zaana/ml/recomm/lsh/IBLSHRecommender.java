@@ -1,6 +1,5 @@
 package com.zaana.ml.recomm.lsh;
 
-import com.sun.media.jfxmedia.logging.Logger;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 
@@ -56,7 +55,7 @@ public class IBLSHRecommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public double calculatePrediction(
+    public Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             String targetUserId,
@@ -64,13 +63,14 @@ public class IBLSHRecommender extends AbstractLSHRecommender {
 
         int frequency;
         double rating;
-        double weightedRatingsTotal = 0;
+        double weightedRatingsTotal = 0.0;
         int weightsTotal = 0;
         Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
         List <String> candidateSetList =
                 LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
         Set<String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
         ratedItemsSet.retainAll(uniqueueCandidateSet); //intersection with candidate set
+        if (ratedItemsSet.isEmpty()) return null;
         HashMap <String, Integer> frequencyMap = Common.getFrequencyMap(candidateSetList);
         for (String item : ratedItemsSet) {
             frequency = frequencyMap.get(item);
@@ -83,7 +83,7 @@ public class IBLSHRecommender extends AbstractLSHRecommender {
         if (weightsTotal != 0)
             return weightedRatingsTotal / weightsTotal;
         else
-            return 0;
+            return 0.0;
     }
 
 }

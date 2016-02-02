@@ -83,17 +83,17 @@ public class TestDriver {
 
             case "1":
                 System.out.println("Enter k-NN: ");
-                MainRun.kNN = Integer.parseInt(scanner.nextLine());
+                Main.kNN = Integer.parseInt(scanner.nextLine());
                 break;
             case "2":
                 System.out.println("Enter number of bands ( l ) :");
-                MainRun.l = Integer.parseInt(scanner.nextLine());
+                Main.l = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter of hash functions ( k ) :");
-                MainRun.k = Integer.parseInt(scanner.nextLine());
+                Main.k = Integer.parseInt(scanner.nextLine());
                 break;
             case "3":
                 System.out.println("Enter data file path: ");
-                MainRun.dataFilePath = scanner.nextLine();
+                Main.dataFilePath = scanner.nextLine();
                 break;
 
             case "10": //old 8

@@ -51,21 +51,21 @@ public class UBLSHRecommenderNew extends AbstractLSHRecommender {
     }
 
     @Override
-    public double calculatePrediction(
+    public Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             String targetUserId,
             String movieId)
     {
         HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
-        if (itemRatings == null) return 0.0;
+        if (itemRatings == null) return null;
         List<String> candidateSetList =
                 LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
         Set<String> candidateSet = new HashSet<>(candidateSetList);
         Set<String> ratedUserSet = itemRatings.keySet();
         Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
         intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-        if (intersectionOfCandidateRatedUserSets.isEmpty()) return 0.0;
+        if (intersectionOfCandidateRatedUserSets.isEmpty()) return null;
         double weightedRatingsTotal = 0.0;
         Integer rating;
         for (String candidateUser : intersectionOfCandidateRatedUserSets) {

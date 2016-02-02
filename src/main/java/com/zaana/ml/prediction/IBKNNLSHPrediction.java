@@ -78,12 +78,12 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
         Set<String> ratedItemsSet = new HashSet<>(userRateMap.get(testUserId).keySet());
         Integer total_candidate_set_size = 0;
+        double prediction;
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
                 Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
-                int candidateSetSize = candidateSet.size();
-                total_candidate_set_size += candidateSetSize;
+                total_candidate_set_size += candidateSet.size();
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
@@ -92,7 +92,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
                     if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {
-                        double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap,
+                        prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap,
                                 kRatedSimilarItemsList, testUserId);
                         targetList.add(entry.getValue());
                         outputList.add(prediction);
@@ -102,7 +102,6 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
                 }
             }catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());
-
             }
         }
         return total_candidate_set_size / testMovieList.size();

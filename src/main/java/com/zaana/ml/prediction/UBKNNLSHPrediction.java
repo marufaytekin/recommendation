@@ -107,11 +107,9 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                     if (!kNNList.isEmpty()) { // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
                         prediction = Prediction.calculateUserBasedPredicitonRate(
                                 userRateMap, kNNList, movieId);
-                    } else {
-                        prediction = 0;
+                        outputList.add(prediction);
+                        targetList.add(givenRating);
                     }
-                    outputList.add(prediction);
-                    targetList.add(givenRating);
                 }
             } catch (NullPointerException e) {
                 // do nothing

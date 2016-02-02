@@ -37,7 +37,7 @@ public abstract class AbstractLSHRecommender {
             HashMap<String, HashMap<String, Integer>> userRateMap,
             String userId, int topN);
 
-    public abstract double calculatePrediction(
+    public abstract Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap, String targetUserId,
             String movieId);

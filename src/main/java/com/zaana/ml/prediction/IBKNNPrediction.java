@@ -81,14 +81,15 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
     {
 
         HashMap<String, Integer> testMovieList = testDataEntry.getValue();
+        double prediction;
         for (Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
                 LinkedHashMap<String, Double> kNNList = getSimilarItemsListRatedByUser(
                         itemRateMap, testMovieId, ratedItemsSet, kNN, y);
                 if (kNNList != null && !kNNList.isEmpty()) { //BUG: computing prediction with lt k NN
-                    double prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap,
-                            kNNList, testUserId);
+                    prediction = Prediction.calculateItemBasedPredicitonRate(
+                            itemRateMap, kNNList, testUserId);
                     targetList.add(entry.getValue()); // add rating to targetList
                     outputList.add(prediction);
                 }

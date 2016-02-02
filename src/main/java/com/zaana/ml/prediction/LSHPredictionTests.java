@@ -30,7 +30,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
-            double prediction;
+            Double prediction;
             HashMap <String, Integer> userRatings = testDataEntry.getValue();
             String targetUserId = testDataEntry.getKey();
             for (Map.Entry<String, Integer> entry : userRatings.entrySet()) {
@@ -41,7 +41,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                             userRateMap, itemRateMap, targetUserId, movieId);
                     total_candidate_set_size += lshRecommender.getUniqueCandidateItemListSize();
                     cnt++;
-                    if (prediction != 0) {
+                    if (prediction != null) {
                         outputList.add(prediction);
                         targetList.add(givenRating);
                     }
