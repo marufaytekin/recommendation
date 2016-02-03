@@ -29,7 +29,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfHashFunctions = 6;
+        int numOfHashFunctions = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < smoothRun; s++) {
