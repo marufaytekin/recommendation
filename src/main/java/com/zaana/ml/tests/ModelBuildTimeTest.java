@@ -3,8 +3,8 @@ package com.zaana.ml.tests;
 import com.zaana.ml.DataParser;
 import com.zaana.ml.LSH;
 import com.zaana.ml.Vector;
-import com.zaana.ml.recomm.cf.IBCFRecommender;
-import com.zaana.ml.recomm.cf.UBCFRecommender;
+import com.zaana.ml.recomm.cf.IBKNNRecommender;
+import com.zaana.ml.recomm.cf.UBKNNRecommender;
 
 import java.util.*;
 
@@ -29,11 +29,11 @@ public class ModelBuildTimeTest extends AbstractTest {
             numOfItemsList.add(itemRateMap.keySet().size());
             int numOfBands = l;
             if (type == "UB") {
-                UBCFRecommender ubRecommender = new UBCFRecommender();
+                UBKNNRecommender ubRecommender = new UBKNNRecommender();
                 startTime = System.currentTimeMillis();
                 ubRecommender.buildModel(userRateMap, userRateMap, 5, 30);
             } else if (type == "IB") {
-                IBCFRecommender ibRecommender = new IBCFRecommender();
+                IBKNNRecommender ibRecommender = new IBKNNRecommender();
                 startTime = System.currentTimeMillis();
                 ibRecommender.buildModel(userRateMap, itemRateMap, 5, 30);
             } else if (type == "UBLSH") {

@@ -169,7 +169,7 @@ public class LSHPredictionTest extends AbstractTest
             for (int j = 0; j < smoothRun; j++) {
                 preprocessDataForValidation(dataFileBase, (j+1), val, separator);
                 lshRecommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                if (type == "UBLSH-KNN") {
+                if (type == "UBKNNLSH") {
                     hashTables = lshRecommender.getHashTables();
                     hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
                     runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
@@ -180,7 +180,7 @@ public class LSHPredictionTest extends AbstractTest
                             UBKNNLSHPrediction.getOutputList(),
                             UBKNNLSHPrediction.getTargetList());
                     predictedItems += UBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "IBLSH-KNN") {
+                } else if (type == "IBKNNLSH") {
                     hashTables = lshRecommender.getHashTables();
                     hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
                     runTime += IBKNNLSHPrediction.
@@ -192,7 +192,7 @@ public class LSHPredictionTest extends AbstractTest
                             IBKNNLSHPrediction.getOutputList(),
                             IBKNNLSHPrediction.getTargetList());
                     predictedItems += IBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "LSH1-UB" || type == "LSH2-UB" || type == "LSH1-IB" || type == "LSH2-IB" ) {
+                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "IBLSH1" || type == "IBLSH2" ) {
                     runTime += LSHPredictionTests.runLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, lshRecommender);
                     candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();

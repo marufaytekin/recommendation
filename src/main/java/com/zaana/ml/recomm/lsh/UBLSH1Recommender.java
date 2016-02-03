@@ -10,7 +10,7 @@ import java.util.*;
  * Evaluation of Item-Based Top-N Recommendation Algorithms paper:
  * http://www.dtic.mil/dtic/tr/fulltext/u2/a439546.pdf
  */
-public class UBLSHRecommender extends AbstractLSHRecommender {
+public class UBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,

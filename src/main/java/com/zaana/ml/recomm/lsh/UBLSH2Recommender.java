@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by maytekin on 28.01.2016.
  */
-public class UBLSHRecommenderNew extends AbstractLSHRecommender {
+public class UBLSH2Recommender extends AbstractLSHRecommender {
 
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,

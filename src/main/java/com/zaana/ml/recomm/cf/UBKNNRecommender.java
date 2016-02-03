@@ -8,7 +8,7 @@ import java.util.*;
 /**
  * Created by maytekin on 27.01.2016.
  */
-public class UBCFRecommender extends AbstractCFRecommender {
+public class UBKNNRecommender extends AbstractCFRecommender {
 
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,

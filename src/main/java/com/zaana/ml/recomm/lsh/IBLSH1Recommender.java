@@ -6,11 +6,11 @@ import com.zaana.ml.Vector;
 import java.util.*;
 
 /**
- * Created by maruf on 09/05/15.
+ * Created by maruf on 26/01/16.
  */
-public class IBLSHRecommenderNew extends AbstractLSHRecommender {
+public class IBLSH1Recommender extends AbstractLSHRecommender {
 
-    public IBLSHRecommenderNew() {
+    public IBLSH1Recommender() {
         super();
     }
 
@@ -26,53 +26,64 @@ public class IBLSHRecommenderNew extends AbstractLSHRecommender {
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
+    /**
+     * IBRecommender with LSH based on frequency of items in the buckets.
+     * Instead of merged similarity value we use frequency of items in candidate list.
+     * @param userRateMap
+     * @param userId
+     * @param topN    @return    */
     @Override
     public Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             String userId, int topN)
     {
         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
-        Set<String> userRatingSet = ratingsSet.keySet();
-        Set<String> uniqueueItemsSet = new HashSet<>();
+        Set<String> ratedItemSet = userRateMap.get(userId).keySet();
         List<String> candidateList = new ArrayList<>();
-        for (String testItemId : userRatingSet) {
+        Set<String> uniqueueItemsSet = new HashSet<>();
+        for (String ratedItemId : ratedItemSet) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
-                    (hashTables, ratingsSet, testItemId, hashKeyLookupTable);
+                    (hashTables, ratingsSet, ratedItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
             uniqueueItemsSet.addAll(candidateSet);
         }
         candidateItemListSize = candidateList.size();
         uniqueCandidateItemListSize = uniqueueItemsSet.size();
-        Set<String> recSet = new HashSet<>();
-        int size = candidateList.size();
-        for (int i = candidateList.size(); i > 0 && recSet.size() < topN; i--) {
-            int idx = (int) Math.floor(Math.random()*size);
-            recSet.add(candidateList.get(idx));
-        }
 
-        return recSet;
+        return Common.getMostFrequentTopNElements(candidateList, topN);
+
     }
 
     @Override
     public Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            String targetUserId, String itemId) {
+            String targetUserId,
+            String itemId) {
 
+        int frequency;
         double rating;
-        double weightedRatingsTotal = 0;
+        double weightedRatingsTotal = 0.0;
+        int weightsTotal = 0;
         Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
         List <String> candidateSetList =
                 LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
-        Set <String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
-        ratedItemsSet.retainAll(uniqueueCandidateSet); //take intersection with candidate set
+        Set<String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
+        ratedItemsSet.retainAll(uniqueueCandidateSet); //intersection with candidate set
         if (ratedItemsSet.isEmpty()) return null;
+        HashMap <String, Integer> frequencyMap = Common.getFrequencyMap(candidateSetList);
         for (String item : ratedItemsSet) {
+            frequency = frequencyMap.get(item);
             rating = userRateMap.get(targetUserId).get(item);
-            weightedRatingsTotal += rating;
+            weightedRatingsTotal += rating * frequency;
+            weightsTotal += frequency;
         }
         candidateItemListSize = candidateSetList.size();
         uniqueCandidateItemListSize = uniqueueCandidateSet.size();
-        return weightedRatingsTotal / ratedItemsSet.size();
+        if (weightsTotal != 0)
+            return weightedRatingsTotal / weightsTotal;
+        else
+            return 0.0;
     }
+
 }

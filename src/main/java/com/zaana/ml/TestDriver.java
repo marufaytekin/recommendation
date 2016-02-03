@@ -1,7 +1,7 @@
 package com.zaana.ml;
 
-import com.zaana.ml.recomm.cf.IBCFRecommender;
-import com.zaana.ml.recomm.cf.UBCFRecommender;
+import com.zaana.ml.recomm.cf.IBKNNRecommender;
+import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import com.zaana.ml.recomm.lsh.*;
 import com.zaana.ml.tests.*;
 import org.apache.log4j.Logger;
@@ -16,10 +16,10 @@ public class TestDriver {
     static Logger LOG = Logger.getLogger(TestDriver.class);
     static void runSelection(final String selection, String dataFilePath, String dataFileBase, Scanner scanner, String seperator, HashMap<String, HashMap<String, Integer>> userRateMap, int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN)
     {
-        IBLSHRecommender ibLshRecommender = new IBLSHRecommender();
-        IBLSHRecommenderNew ibLshRecommenderNew = new IBLSHRecommenderNew();
-        UBLSHRecommender ubLshRecommender = new UBLSHRecommender();
-        UBLSHRecommenderNew ubLshRecommenderNew = new UBLSHRecommenderNew();
+        IBLSH1Recommender ibLsh1Recommender = new IBLSH1Recommender();
+        IBLSH2Recommender ibLsh2Recommender = new IBLSH2Recommender();
+        UBLSH1Recommender ubLsh1Recommender = new UBLSH1Recommender();
+        UBLSH2Recommender ubLsh2Recommender = new UBLSH2Recommender();
         switch (selection) {
 
             case "00":
@@ -139,101 +139,101 @@ public class TestDriver {
             //
             ////////////////////////////////////////////////////////////////////
             case "54":
-                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "UB", smoothRun, seperator, kNN, y);
+                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "UBKNN", smoothRun, seperator, kNN, y);
                 break;
             case "55":
-                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "IB", smoothRun, seperator, kNN, y);
+                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "IBKNN", smoothRun, seperator, kNN, y);
                 break;
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
             case "60":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLshRecommender, "UBLSH-KNN", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLsh1Recommender, "UBKNNLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "61":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLshRecommender, "UBLSH-KNN", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLsh1Recommender, "UBKNNLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "62":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLshRecommender, "IBLSH-KNN", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLsh1Recommender, "IBKNNLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "63":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLshRecommender, "IBLSH-KNN", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLsh1Recommender, "IBKNNLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
             case "70":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLshRecommender, "LSH1-IB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLsh1Recommender, "IBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "71":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLshRecommender, "LSH1-IB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLsh1Recommender, "IBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "72":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLshRecommenderNew, "LSH2-IB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ibLsh2Recommender, "IBLSH2", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "73":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLshRecommenderNew, "LSH2-IB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLsh2Recommender, "IBLSH2", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "74":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLshRecommender, "LSH1-UB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLsh1Recommender, "UBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "75":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLshRecommender, "LSH1-UB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLsh1Recommender, "UBLSH1", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "76":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLshRecommenderNew, "LSH2-UB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashTablesAndPrediction(ubLsh2Recommender, "UBLSH2", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             case "77":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLshRecommenderNew, "LSH2-UB", dataFileBase, "test", seperator,
+                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLsh2Recommender, "UBLSH2", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
             case "100":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "101":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "102":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "103":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "104":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "105":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLshRecommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "106":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "107":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLshRecommenderNew, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
             case "110":
-                IBCFRecommender ibRecommender = new IBCFRecommender();
+                IBKNNRecommender ibRecommender = new IBKNNRecommender();
                 CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, smoothRun, topN, y);
                 break;
             case "111":
-                UBCFRecommender ubRecommender = new UBCFRecommender();
+                UBKNNRecommender ubRecommender = new UBKNNRecommender();
                 CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, smoothRun, topN, y);
                 break;
 
