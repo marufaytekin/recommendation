@@ -149,7 +149,7 @@ public class LSHPredictionTest extends AbstractTest
         int numOfHashFunctions;
         if (testType == "HashFunctions") {
             numOfBands = l;
-            numOfHashFunctions = 1;
+            numOfHashFunctions = 4;
         } else if (testType == "HashTables"){
             numOfBands = 1;
             numOfHashFunctions = k;
@@ -162,7 +162,7 @@ public class LSHPredictionTest extends AbstractTest
         ArrayList<Double> candidate_set_list = new ArrayList<>();
         HashMap<Integer, HashMap<String, Set<String>>> hashTables;
         for (int i = 0; i < numOfRun; i++) {
-            long runTime = (long) 0;
+            double runTime = 0;
             double mae = 0;
             double candidate_set_size = 0;
             double predictedItems = 0;
@@ -192,7 +192,7 @@ public class LSHPredictionTest extends AbstractTest
                             IBKNNLSHPrediction.getOutputList(),
                             IBKNNLSHPrediction.getTargetList());
                     predictedItems += IBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "IBLSH1" || type == "IBLSH2" ) {
+                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3" || type == "IBLSH1" || type == "IBLSH2" ) {
                     runTime += LSHPredictionTests.runLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, lshRecommender);
                     candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
@@ -213,7 +213,7 @@ public class LSHPredictionTest extends AbstractTest
                     + " numOfHashFunctions:" + numOfHashFunctions);
             LOG.info("Mae: " + mae/ smoothRun);
             LOG.info("Runtime: " + runTime/ smoothRun);
-            LOG.info("Predicted Items :" + (predictedItems/ smoothRun));
+            LOG.info("Predicted Items :" + (predictedItems / smoothRun));
             if (testType == "HashFunctions") {
                 numOfHashFunctions++;
             } else {

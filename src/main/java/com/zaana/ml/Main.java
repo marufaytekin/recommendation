@@ -15,16 +15,16 @@ public class Main {
     private Main() {
     }
 
-    static HashMap<String, HashMap<String, Integer>> userRateMap = null;
-    private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
-    private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> userRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
     //static String dataFilePath = "data/music/music.dat";
     //static String dataFileBase = "data/music/music";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/movies_tv/movies_tv.data";
     //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/300k/xaa.data";
@@ -35,8 +35,8 @@ public class Main {
     static int topN = 20;
     static int kNN = 20;
     static int y = 5; // significance value. Must not be 0!
-    static int numOfRun = 1;
-    static final int smoothRun = 1;
+    static int numOfRun = 10;
+    static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
     static int l = 5;
@@ -76,7 +76,7 @@ public class Main {
 
             selection = scanner.nextLine();
             LOG.info("Selected menu: " + selection);
-            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, userRateMap, numOfRun, smoothRun, kNN, k, l, y, topN);
+            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
 
         } while (!selection.equals("99"));
 

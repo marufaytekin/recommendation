@@ -43,19 +43,18 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
      * @param hashKeyLookupTable
      * @return
      * */
-    public static long runUserBasedLSHPredictionOnTestData(
+    public static double runUserBasedLSHPredictionOnTestData(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             int kNN, int y, HashMap<String, String> hashKeyLookupTable)
     {
-
-        final long startTime = System.currentTimeMillis();
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
         int cnt = 0;
+        final long startTime = System.currentTimeMillis();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
                 .entrySet()) {
             String userId = testDataEntry.getKey();
@@ -70,11 +69,12 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                     testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);
         }
         final long endTime = System.currentTimeMillis();
+        double avgTime = (double)(endTime - startTime)/outputList.size();
         avg_candidate_set_size = (double) total_candidate_set_size / cnt;
-        LOG.info("UB-LSH Running time: " + (endTime - startTime) + " ms.");
-        LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
 
-        return (endTime - startTime);
+        LOG.info("UB-LSH Running time: " + avgTime + " ms.");
+        LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
+        return avgTime;
 
     }
 

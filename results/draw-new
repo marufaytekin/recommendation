@@ -23,84 +23,57 @@ write (f, 'ml-mae-k');
 
 
 # ========================================================
-# Model build time
-# Test case: 8
+# MAE and Runtime
+# Hash Tables
 # ========================================================
 
-# Running time
-
-x = UBnumOfUsersList/1000;
-x2 = IBnumOfItemsList/1000;
-y1 = UBmodelBuildTimeList/1000;
-y2 = IBmodelBuildTimeList/1000;
-y3 = UBLSHmodelBuildTimeList/1000;
-y4 = IBLSHmodelBuildTimeList/1000;
-
-f= figure();
-plot (x, y1, '-dk', x, y3, '--*k');
-legend('UB','UB-LSH', 'location', 'northwest');
-xlabel('users(x1000)')
-ylabel('Model Build Time (sec)');
-write(f, strcat(fileName,'-model-build-time-ub'));
-
-f= figure();
-plot (x2, y2, '-dk', x2, y4, '--*k' );
-legend('IB', 'IB-LSH', 'location', 'northwest');
-xlabel('items(x1000)')
-ylabel('Model Build Time(sec)');
-write(f, strcat(fileName,'-model-build-time-ib'));
-
-
-# ========================================================
-# Hash Tables against to MAE and Runtime
-# test case: 5000
-# ========================================================
 x = 1:10;
 n = 10;
 f= figure();
-y1 = UBMaeList;
-y2 = IBMaeList;
-y3 = UBLSHHashTablesMaeList;
-y4 = IBLSHHashTablesMaeList;
-y5 = LSHFreqHashTablesMaeList;
-y6 = LSHHashTablesMaeList;
-plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-h = legend('UB', 'IB', 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northeast');
+y1 = UBKNNMaeList;
+y2 = IBKNNMaeList;
+y3 = UBKNNLSHHashTablesMaeList;
+y4 = IBKNNLSHHashTablesMaeList;
+y5 = UBLSH1HashTablesMaeList;
+y6 = UBLSH2HashTablesMaeList;
+y7 = IBLSH1HashTablesMaeList;
+y8 = IBLSH2HashTablesMaeList;
+plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN', 'IB-KNN', 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
 xlabel('Number of Hash Tables');
 ylabel('MAE');
 legend boxon;
-ylim([0.5 1.8])
+#ylim([0.5 1.8])
 write(f, strcat(fileName,'-hash-tables-mae'));
 
 f= figure();
 x = 1:10;
-y1 = UBRuntime/testdatasize;
-y2 = IBRuntime/testdatasize;
-y3 = UBLSHHashTablesRuntimeList/testdatasize;
-y4 = IBLSHHashTablesRuntimeList/testdatasize;
-y5 = LSHFreqHashTablesRuntimeList/testdatasize;
-y6 = LSHHashTablesRuntimeList/testdatasize;
-plot ( x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northwest');
-text(4.0, 0.66, strcat("UB: ", num2str(y1, "%5.2f")))
-text(4.0, 0.62, strcat("IB: ", num2str(y2, "%5.2f")))
+y1 = UBKNNRuntimeList;
+y2 = IBKNNRuntimeList;
+y3 = UBKNNLSHHashTablesRuntimeList;
+y4 = IBKNNLSHHashTablesRuntimeList;
+y5 = UBLSH1HashTablesRuntimeList;
+y6 = UBLSH2HashTablesRuntimeList;
+y7 = IBLSH1HashTablesRuntimeList;
+y8 = IBLSH2HashTablesRuntimeList;
+plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
 xlabel('Number of Hash Tables');
 ylabel('Run Time(ms/prediction)');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-runtime'));
 
 f= figure();
-y1 = numOfUsers/1000;
-y2 = numOfItems/1000;
-y3 = UBLSHHashTablesCandidateSetList/1000;
-y4 = IBLSHHashTablesCandidateSetList/1000;
-y5 = LSHFreqHashTablesCandidateSetList/1000;
-y6 = LSHHashTablesCandidateSetList/1000;
-
-plot(x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
+y3 = UBKNNLSHHashTablesCandidateSetList;
+y4 = IBKNNLSHHashTablesCandidateSetList;
+y5 = UBLSH1HashTablesCandidateSetList;
+y6 = UBLSH2HashTablesCandidateSetList;
+y7 = IBLSH1HashTablesCandidateSetList;
+y8 = IBLSH2HashTablesCandidateSetList;
+plot (x, y3,'-dk', x, y4,'-*k',x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 xlabel('Number of Hash Tables');
-ylabel('Candidate set size (K)');
-legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northwest');
+ylabel('Candidate set size');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-candidate-set'));
 
@@ -110,63 +83,67 @@ write(f, strcat(fileName,'-hash-tables-candidate-set'));
 # test case: 5000
 # ========================================================
 
-x = 4:10;
+x = 1:10;
 n = 10;
-
-f = figure();
-y1 = UBMaeList;
-y2 = IBMaeList;
-y3 = UBLSHHashFunctionsMaeList(4:10);
-y4 = IBLSHHashFunctionsMaeList(4:10);
-y5 = LSHFreqHashFunctionsMaeList(1:7);
-y6 = LSHHashFunctionsMaeList(4:10);
-plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k', x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-h = legend('UB', 'IB', 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northwest');
+f= figure();
+y1 = UBKNNMaeList;
+y2 = IBKNNMaeList;
+y3 = UBKNNLSHHashFunctionsMaeList;
+y4 = IBKNNLSHHashFunctionsMaeList;
+y5 = UBLSH1HashFunctionsMaeList;
+y6 = UBLSH2HashFunctionsMaeList;
+y7 = IBLSH1HashFunctionsMaeList;
+y8 = IBLSH2HashFunctionsMaeList;
+plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN', 'IB-KNN', 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 xlabel('Number of Hash Functions');
 ylabel('MAE');
 legend boxon;
+#ylim([0.5 1.8])
 write(f, strcat(fileName,'-hash-functions-mae'));
 
 f= figure();
-x = 4:10
-y1 = UBRuntime/testdatasize;
-y2 = IBRuntime/testdatasize;
-y3 = UBLSHHashFunctionsRuntimeList(4:10)/testdatasize;
-y4 = IBLSHHashFunctionsRuntimeList(4:10)/testdatasize;
-y5 = LSHFreqHashFunctionsRuntimeList(1:7)/testdatasize;
-y6 = LSHHashFunctionsRuntimeList(4:10)/testdatasize;
-plot ( x, y3,'-dk', x, y4,'-xk', x, y5,'-ok', x, y6,'-^k');
-legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northeast');
-text(6, 1.35, strcat("UB: ", num2str(y1, "%5.2f")))
-text(6, 1.28, strcat("IB: ", num2str(y2, "%5.2f")))
+x = 5:10;
+y1 = UBKNNRuntimeList;
+y2 = IBKNNRuntimeList;
+y3 = UBKNNLSHHashFunctionsRuntimeList(5:10);
+y4 = IBKNNLSHHashFunctionsRuntimeList(5:10);
+y5 = UBLSH1HashFunctionsRuntimeList(5:10);
+y6 = UBLSH2HashFunctionsRuntimeList(5:10);
+y7 = IBLSH1HashFunctionsRuntimeList(5:10);
+y8 = IBLSH2HashFunctionsRuntimeList(5:10);
+plot (x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend( 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
 xlabel('Number of Hash Functions');
 ylabel('Run Time(ms/prediction)');
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-runtime'));
 
-f = figure();
-x = 4:10
-y3 = UBLSHHashFunctionsCandidateSetList(4:10);
-y4 = IBLSHHashFunctionsCandidateSetList(4:10);
-y5 = LSHFreqHashFunctionsCandidateSetList(1:7);
-y6 = LSHHashFunctionsCandidateSetList(4:10);
-plot(x, y3,'-dk', x, y4,'-xk', x, y5,'-ok', x, y6,'-^k');
-legend('UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'northeast');
-legend boxon;
+f= figure();
+y3 = UBKNNLSHHashFunctionsCandidateSetList;
+y4 = IBKNNLSHHashFunctionsCandidateSetList;
+y5 = UBLSH1HashFunctionsCandidateSetList;
+y6 = UBLSH2HashFunctionsCandidateSetList;
+y7 = IBLSH1HashFunctionsCandidateSetList;
+y8 = IBLSH2HashFunctionsCandidateSetList;
+plot (x, y3,'-dk', x, y4,'-*k',x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
 xlabel('Number of Hash Functions');
-ylabel('Avg. Candidate Set Size');
+ylabel('Candidate set size');
+legend boxon;
 write(f, strcat(fileName,'-hash-functions-candidate-set'));
 
-f = figure();
-x = 4:10;
-total_test_data = max (UBLSHHashFunctionsPredictedItemsList);
-y3 = UBLSHHashFunctionsPredictedItemsList(4:10)/total_test_data;
-y4 = IBLSHHashFunctionsPredictedItemsList(4:10)/total_test_data;
-y5 = LSHFreqHashFunctionsPredictedItemsList(1:7)/total_test_data;
-y6 = LSHHashFunctionsPredictedItemsList(4:10)/total_test_data;
-plot (x,y3,'-dk', x,y4,'-xk', x,y5,'-ok', x,y6,'-^k');
-h = legend( 'UB-LSH', 'IB-LSH', 'LSH1', 'LSH2', 'location', 'west');
-legend boxon;
+
+total_test_data = max (UBKNNLSHHashFunctionsPredictedItemsList);
+f= figure();
+y3 = UBKNNLSHHashFunctionsPredictedItemsList/total_test_data;
+y4 = IBKNNLSHHashFunctionsPredictedItemsList/total_test_data;
+y5 = UBLSH1HashFunctionsPredictedItemsList/total_test_data;
+y6 = UBLSH2HashFunctionsPredictedItemsList/total_test_data;
+y7 = IBLSH1HashFunctionsPredictedItemsList/total_test_data;
+y8 = IBLSH2HashFunctionsPredictedItemsList/total_test_data;
+plot (x, y3,'-dk', x, y4,'-*k',x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'west');
 xlabel('Number of Hash Functions');
 ylabel('Prediction Ratio');
 write(f, strcat(fileName,'-hash-functions-prediction-ratio'));

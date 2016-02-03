@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class IBKNNLSHPrediction extends AbstractPredictionTests
 {
-    public static long runItemBasedLSHPredictionOnTestData(
+    public static double runItemBasedLSHPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
@@ -18,10 +18,10 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
             int kNN, int y) {
 
         LOG.info("Running runItemBasedLSHPredictionOnTestData...");
-        final long startTime = System.currentTimeMillis();
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
+        final long startTime = System.currentTimeMillis();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
                 .entrySet()) {
             String userId = testDataEntry.getKey();
@@ -34,7 +34,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         }
 
         final long endTime = System.currentTimeMillis();
-        final long runningTime = (endTime - startTime);
+        final double runningTime = (double) (endTime - startTime)/outputList.size();
         avg_candidate_set_size = (double) total_candidate_set_size / testDataMap.size();
         LOG.info("ItemBasedLSH Running time: " + runningTime);
         LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);

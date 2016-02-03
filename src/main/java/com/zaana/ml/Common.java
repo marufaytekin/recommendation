@@ -69,9 +69,9 @@ public final class Common
     {
     
         LinkedHashMap<String, Double> sorted = SortHashMap.sortByValues(list);
-        Iterator<Entry<String, Double>> iter = sorted.entrySet().iterator();
         Set<String> recommList = new HashSet<>();
         int i = 0;
+        Iterator<Entry<String, Double>> iter = sorted.entrySet().iterator();
         while (iter.hasNext() && i < topN) {
             Entry<String, Double> entry = iter.next();
             recommList.add(entry.getKey());

@@ -39,7 +39,7 @@ public final class UBKNNPrediction extends AbstractPredictionTests
      * @param y
      * @return
      */
-    public static long runUserBasedNNPredictionOnTestData(
+    public static double runUserBasedNNPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final int kNN, int y)
@@ -47,12 +47,9 @@ public final class UBKNNPrediction extends AbstractPredictionTests
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         LOG.info("Running UserBasedNN test...");
-        final long startTime = System.currentTimeMillis();
-        Iterator<Entry<String, HashMap<String, Integer>>> testDataIter =
-                testDataMap.entrySet().iterator();
         Set<String> candidateUserSet = userRateMap.keySet();
-        while (testDataIter.hasNext()) {
-            Entry <String, HashMap<String, Integer>> testDataEntry = testDataIter.next();
+        final long startTime = System.currentTimeMillis();
+        for (Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
@@ -64,10 +61,11 @@ public final class UBKNNPrediction extends AbstractPredictionTests
         }
 
         final long endTime = System.currentTimeMillis();
-        LOG.info( "UserBasedNN Running time: " );
-        LOG.info( endTime - startTime );
+        double avgRunTime = (double)(endTime - startTime)/outputList.size();
+        LOG.info( "UserBasedNN Running time: " + avgRunTime);
 
-        return (endTime - startTime);
+        return avgRunTime;
+
     }
 
     private static void predictRatingsForTestUsers(

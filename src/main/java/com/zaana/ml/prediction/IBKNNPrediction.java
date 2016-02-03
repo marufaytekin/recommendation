@@ -35,34 +35,31 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
      * @param userRateMap
      * @param testDataMap
      * @param kNN    @return
-     * @param y     */
-    public static long runItemBasedNNPredictionOnTestData(
+     * @param y        */
+    public static double runItemBasedNNPredictionOnTestData(
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             final int kNN, int y) {
 
         LOG.info("Running prediction tests on test data set...");
-        final long startTime = System.currentTimeMillis();
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
-        Iterator<Entry<String, HashMap<String, Integer>>> testDataIter = testDataMap
-                .entrySet().iterator();
-        LOG.info("testDataMap size :" + testDataMap.size());
-        while (testDataIter.hasNext()) {
-            Entry<String, HashMap<String, Integer>> testDataEntry = testDataIter
-                    .next();
+        int testDataSize = testDataMap.size();
+        LOG.info("testDataMap size :" + testDataSize);
+        final long startTime = System.currentTimeMillis();
+        for (Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
+                .entrySet()) {
             String testUserId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(testUserId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             Set<String> ratedItemsSet = userRateMap.get(testUserId).keySet();
-            predictRatingsForTestUsers(testDataEntry,userRateMap,itemRateMap, ratedItemsSet, testUserId, outputList,targetList,kNN, y);
+            predictRatingsForTestUsers(testDataEntry, itemRateMap, ratedItemsSet, testUserId, outputList, targetList, kNN, y);
         }
-
         final long endTime = System.currentTimeMillis();
-        final long runningTime = (endTime - startTime);
+        final double runningTime = (double) (endTime - startTime)/outputList.size();
 
         LOG.info("ItemBasedNN Running time: " + runningTime);
 
@@ -73,7 +70,6 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
 
     public static void predictRatingsForTestUsers(
             Entry<String, HashMap<String, Integer>> testDataEntry,
-            HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             Set<String> ratedItemsSet, String testUserId, LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
