@@ -57,10 +57,14 @@ y5 = UBLSH1HashTablesRuntimeList;
 y6 = UBLSH2HashTablesRuntimeList;
 y7 = IBLSH1HashTablesRuntimeList;
 y8 = IBLSH2HashTablesRuntimeList;
-
 plot (x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend('UB-KNN-LSH', 'IB-KNN-LSH','UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
-
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Tables');
+ylabel('Run Time(ms)');
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-runtime'));
+f= figure();
 plot ( x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
@@ -78,6 +82,7 @@ y7 = IBLSH1HashTablesCandidateSetList;
 y8 = IBLSH2HashTablesCandidateSetList;
 plot (x, y3,'-dk', x, y4,'-*k',x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
 xlabel('Number of Hash Tables');
 ylabel('Candidate set size');
 legend boxon;
@@ -105,7 +110,6 @@ set (h, 'fontsize', 8);
 xlabel('Number of Hash Functions');
 ylabel('MAE');
 legend boxon;
-
 write(f, strcat(fileName,'-hash-functions-mae'));
 
 f= figure();
@@ -118,16 +122,21 @@ y5 = UBLSH1HashFunctionsRuntimeList;
 y6 = UBLSH2HashFunctionsRuntimeList;
 y7 = IBLSH1HashFunctionsRuntimeList;
 y8 = IBLSH2HashFunctionsRuntimeList;
-plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
-h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
 plot (x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend( 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-
 set (h, 'fontsize', 8);
 xlabel('Number of Hash Functions');
 ylabel('Run Time(ms)');
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-runtime'));
+f= figure();
+plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Functions');
+ylabel('Run Time(ms)');
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-runtime2'));
 
 f= figure();
 y3 = UBKNNLSHHashFunctionsCandidateSetList;
@@ -195,13 +204,13 @@ y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime(4:10);
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
 h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('Avg Recc. Time (ms)')
 write(f, strcat(fileName,'-hash-functions-topn-runtime'));
 
-
-/////////////////
+f= figure();
 y3 = IBLSH1RecommenderHashFunctionsCandidateItemListSize;
 y4 = IBLSH2RecommenderHashFunctionsCandidateItemListSize;
 y5 = UBLSH1RecommenderHashFunctionsCandidateItemListSize;
@@ -212,10 +221,10 @@ y44 = IBLSH2RecommenderHashFunctionsUniqueItemListSize;
 y55 = UBLSH1RecommenderHashFunctionsUniqueItemListSize;
 y66 = UBLSH2RecommenderHashFunctionsUniqueItemListSize;
 
-f= figure();
 x = 1:10;
 plot (x, y3 ./ y33,'-+k', x, y4 ./ y44,'->k', x, y5 ./ y55,'-ok', x, y6 ./ y66,'-<k');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('C_l Size')
@@ -236,6 +245,7 @@ y6 = UBLSH2RecommenderHashTablesPrecision;
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
 h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Precision');
@@ -251,6 +261,7 @@ y6 = UBLSH2RecommenderHashTablesAvgRecommTime;
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
 h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Avg Recc. Time (ms)')
@@ -272,6 +283,7 @@ f= figure();
 x = 1:10;
 plot (x, y3 ./ y33,'-+k', x, y4 ./ y44,'->k', x, y5 ./ y55,'-ok', x, y6 ./ y66,'-<k');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('C_l Size')
