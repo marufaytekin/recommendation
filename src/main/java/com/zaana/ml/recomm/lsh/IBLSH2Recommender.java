@@ -32,7 +32,8 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
             String userId, int topN)
     {
         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
-        Set<String> userRatingSet = ratingsSet.keySet();
+        //Set<String> userRatingSet = ratingsSet.keySet(); // use all items rated by user.
+        Set<String> userRatingSet = Common.sortByValueAndGetTopNItems(ratingsSet, 20);// selects top n liked items
         Set<String> uniqueueItemsSet = new HashSet<>();
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : userRatingSet) {
