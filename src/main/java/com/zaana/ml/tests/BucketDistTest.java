@@ -22,7 +22,8 @@ public class BucketDistTest extends AbstractTest {
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.buildModel(userRateMap, vmap, l);
+            LSH.buildModel(userRateMap, vmap, l);
+            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.getHashTables();
             int size;
             int maxSize = 0;
             for (Map.Entry<String, Set<String>> bucket : hashTable.get(0).entrySet()) {

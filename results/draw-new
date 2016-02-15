@@ -279,7 +279,7 @@ set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Recommendation Time (ms.)')
-write(f, strcat(fileName,'-hash-tables-topn-runtime'));
+write(f, strcat(fileName,'-hash-tables-topn-runtime2'));
 
 
 

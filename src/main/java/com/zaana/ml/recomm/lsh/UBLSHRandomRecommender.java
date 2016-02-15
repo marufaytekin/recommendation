@@ -7,7 +7,6 @@ package com.zaana.ml.recomm.lsh;
 import com.zaana.ml.LSH;
 import com.zaana.ml.Vector;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
@@ -24,14 +23,15 @@ public class UBLSHRandomRecommender extends AbstractLSHRecommender {
         Set<String> itemSet = itemRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
+        LSH.buildModel(userRateMap, vmap, numOfBands);
+        hashTables = LSH.getHashTables();
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
     @Override
     public Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
+            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
     {
         return null;
     }

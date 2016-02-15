@@ -25,12 +25,12 @@ public class Main {
     //static String dataFileBase = "data/music/music";
     //static String dataFilePath = "data/100k/ml.data";
     //static String dataFileBase = "data/100k/ml";
-    static String dataFilePath = "data/movies_tv/movies_tv.data";
-    static String dataFileBase = "data/movies_tv/movies_tv";
+    //static String dataFilePath = "data/movies_tv/movies_tv.data";
+    //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/300k/xaa.data";
     //static String dataFileBase = "data/300k/xaa";
-    //static String dataFilePath = "data/1m/ml-1m.data";
-    //static String dataFileBase = "data/1m/ml-1m";
+    static String dataFilePath = "data/1m/ml1m.data";
+    static String dataFileBase = "data/1m/ml1m";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
@@ -39,8 +39,8 @@ public class Main {
     static final int smoothRun = 3;
     // l: number of bands
     // k: number of hash functions
-    static int l = 5;
-    static int k = 6;
+    static int l = 10;
+    static int k = 10;
 
     public static void main(final String[] args) throws IOException
     {

@@ -22,28 +22,29 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         Set<String> userSet = userRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
+        LSH.buildModel(itemRateMap, vmap, numOfBands);
+        hashTables = LSH.getHashTables();
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
     @Override
     public Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
+            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
     {
         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
         //Set<String> userRatingSet = ratingsSet.keySet(); // use all items rated by user.
         Set<String> userRatingSet = Common.sortByValueAndGetTopNItems(ratingsSet, 20);// selects top n liked items
-        Set<String> uniqueueItemsSet = new HashSet<>();
+        //Set<String> uniqueueItemsSet = new HashSet<>();
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : userRatingSet) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
                     (hashTables, ratingsSet, testItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
-            uniqueueItemsSet.addAll(candidateSet);
+            //uniqueueItemsSet.addAll(candidateSet);
         }
-        candidateItemListSize = candidateList.size();
-        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+        //candidateItemListSize = candidateList.size();
+        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
         Set<String> recSet = new HashSet<>();
         int size = candidateList.size();
         for (int i = candidateList.size(); i > 0 && recSet.size() < topN; i--) {

@@ -20,6 +20,13 @@ public final class LSH {
     
     static double avg_bucket_size;
     static HashMap<String, String> hashKeyLookupTable;
+
+    public static HashMap<Integer, HashMap<String, Set<String>>> getHashTables() {
+        return hashTables;
+    }
+
+    private static HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+
     public double getAvg_bucket_size()
     {
         return avg_bucket_size;
@@ -41,12 +48,12 @@ public final class LSH {
      * @param l
      * 
      */
-    public static HashMap<Integer,HashMap<String,Set<String>>> buildModel(
+    public static void buildModel(
             HashMap<String, HashMap<String, Integer>> ratingMap,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 
         long startTime = System.currentTimeMillis();
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
+        hashTables = generateHashTables(l);
 
         Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
         hashKeyLookupTable = new HashMap<>();
@@ -68,8 +75,6 @@ public final class LSH {
         avg_bucket_size = avg_num_of_buckets(hashTables);
         LOG.info("LSH Index Tables generated in " + (endTime - startTime) + " ms ...");
         LOG.info("Avg number of buckets : " + avg_bucket_size);
-
-        return hashTables;
 
     }
 

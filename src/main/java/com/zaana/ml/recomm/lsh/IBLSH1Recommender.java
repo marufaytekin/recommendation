@@ -22,7 +22,8 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         Set<String> userSet = userRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
+        LSH.buildModel(itemRateMap, vmap, numOfBands);
+        hashTables = LSH.getHashTables();
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
@@ -30,12 +31,14 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
      * IBRecommender with LSH based on frequency of items in the buckets.
      * Instead of merged similarity value we use frequency of items in candidate list.
      * @param userRateMap
+     * @param userCandidateSet
+     * @param userRatingList
      * @param userId
-     * @param topN    @return    */
+     * @param topN    @return       */
     @Override
     public Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
+            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
     {
         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
         Set<String> ratedItemSet = userRateMap.get(userId).keySet();
