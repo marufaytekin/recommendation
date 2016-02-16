@@ -20,13 +20,6 @@ public final class LSH {
     
     static double avg_bucket_size;
     static HashMap<String, String> hashKeyLookupTable;
-
-    public static HashMap<Integer, HashMap<String, Set<String>>> getHashTables() {
-        return hashTables;
-    }
-
-    private static HashMap<Integer, HashMap<String, Set<String>>> hashTables;
-
     public double getAvg_bucket_size()
     {
         return avg_bucket_size;
@@ -48,15 +41,15 @@ public final class LSH {
      * @param l
      * 
      */
-    public static void buildModel(
+    public static HashMap<Integer,HashMap<String,Set<String>>> buildModel(
             HashMap<String, HashMap<String, Integer>> ratingMap,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 
         long startTime = System.currentTimeMillis();
-        hashTables = generateHashTables(l);
+        HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
 
         Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
-        hashKeyLookupTable = new HashMap<>();
+        hashKeyLookupTable = new HashMap<>(32000, (float) 1);
 
         while (iter.hasNext()) {
             Entry<String, HashMap<String, Integer>> entry = iter.next();
@@ -75,6 +68,8 @@ public final class LSH {
         avg_bucket_size = avg_num_of_buckets(hashTables);
         LOG.info("LSH Index Tables generated in " + (endTime - startTime) + " ms ...");
         LOG.info("Avg number of buckets : " + avg_bucket_size);
+
+        return hashTables;
 
     }
 
@@ -126,7 +121,7 @@ public final class LSH {
             String itemId,
             HashMap<String, String> hashKeyTable)
     {
-        Set<String> candidateSet = new HashSet<>();
+        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
@@ -172,7 +167,7 @@ public final class LSH {
             String userId,
             HashMap<String, String> hashKeyLookupTable)
     {
-        Set<String> candidateSet = new HashSet<>();
+        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
@@ -248,7 +243,7 @@ public final class LSH {
 
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<>();
         for (int tableNum = 0; tableNum < l; tableNum++) {
-            HashMap<String, Set<String>> hashTable = new HashMap<>();
+            HashMap<String, Set<String>> hashTable = new HashMap<>(1024, (float) 1);
             hashTables.put(tableNum, hashTable);
         }
         return hashTables;
@@ -313,7 +308,7 @@ public final class LSH {
             HashMap<String, Set<String>> hashTable) {
         if (hashTable.containsKey(hashKey)) hashTable.get(hashKey).add(item);
         else {
-            Set<String> set = new HashSet<>();
+            Set<String> set = new HashSet<>(1024, (float) 1);
             set.add(item);
             hashTable.put(hashKey, set);
         }

@@ -1,6 +1,5 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.LSH;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
@@ -30,14 +29,12 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfHashFunctions = 10;
+        int numOfHashFunctions = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                hashTables = recommender.getHashTables();
-                hashKeyLookupTable = recommender.getHashKeyLookupTable();
                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision/smoothRun);
@@ -93,14 +90,12 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfBands = 10;
+        int numOfBands = 1;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                hashTables = recommender.getHashTables();
-                hashKeyLookupTable = recommender.getHashKeyLookupTable();
                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
             }
             precisionList.add(precision / smoothRun);
@@ -157,12 +152,9 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             if (userRateList == null) {
                 continue;
             }
-            Set<String> userRatingList = userRateList.keySet();
-            Set<String> userCandidateSet =
-                    LSH.getCandidateSetFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
             startTime = System.currentTimeMillis();
             Set<String> topNRecommendedItems =
-                    recommender.recommendItems(userRateMap, userCandidateSet, userRatingList, targetUserId, topN);
+                    recommender.recommendItems(userRateMap, targetUserId, topN);
             endTime = System.currentTimeMillis();
             totalReccTime += (endTime - startTime);
             totalPrecision += Precision

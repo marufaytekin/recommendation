@@ -35,7 +35,7 @@ public abstract class AbstractLSHRecommender {
 
     public abstract Set<String> recommendItems(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN);
+            String userId, int topN);
 
     public abstract Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,

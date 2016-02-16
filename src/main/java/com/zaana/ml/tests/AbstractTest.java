@@ -15,7 +15,7 @@ public abstract class AbstractTest {
     static HashMap<String, HashMap<String, Integer>> itemRateMap;
     static HashMap<String, HashMap<String, Integer>> testDataMap;
     static List<HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>>> vmaps;
-    static HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+    static List<HashMap<Integer, HashMap<String, Set<String>>>> hashTables;
     static Set<String> itemSet;
     static Set<String> userSet;
     static Logger LOG = Logger.getLogger(AbstractTest.class);
@@ -50,5 +50,23 @@ public abstract class AbstractTest {
         //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
 
     }
+
+    public static void prepareHashTables(String baseUrl, double smoothRun, String seperator, int l, int k) {
+        vmaps = new LinkedList<>();
+        hashTables = new LinkedList<>();
+        hashKeyLookupTable = new HashMap<>();
+        for (int j = 0; j < smoothRun; j++) {
+            preprocessDataForRecommendation(baseUrl, (j + 1), seperator);
+            Set<String> itemSet = itemRateMap.keySet();
+            Set<String> userSet = userRateMap.keySet();
+            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
+            HashMap<Integer, HashMap<String, Set<String>>> tables = LSH.buildModel(userRateMap, vmap, l);
+            vmaps.add(vmap);
+            hashTables.add(tables);
+
+        }
+        LOG.info("Hash Tables created...");
+    }
+
 
 }
