@@ -1,39 +1,33 @@
-package com.zaana.ml;
+package com.zaana.ml.deprecated;
 
 import com.zaana.ml.metrics.Precision;
-import com.zaana.ml.recomm.cf.DEPUBRecommender;
-import org.apache.log4j.Logger;
 
 import java.util.*;
 
 /**
- * Created by maytekin on 20.01.2015.
+ * Created by maruf on 25/04/15.
  */
-public class DEPUBPrecision extends Precision {
+public class DEPIBPrecision extends Precision {
 
-    static Logger LOG = Logger.getLogger(DEPUBPrecision.class);
-    public DEPUBPrecision() {
-    }
-
-    @Deprecated
-    public static double calculateUBPrecision(
+    public static double calculateItemBasedPrecision(
             HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
             Set<String> itemSet,
-            int topN, int kNN, int y)
-    {
+            int topN, int kNN, int y) {
+
         double totalPrecision = 0;
+
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
-            Set<String> candidateUserSet = userRateMap.keySet();
             try {
-                Set<String> retrieved = DEPUBRecommender.recommendItems(
-                        userRateMap, itemSet, userId, candidateUserSet, topN, kNN, y);
+                Set<String> retrieved = DEPIBRecommender.recommendItems(userRateMap,
+                        itemRateMap, itemSet, userId, kNN, topN, y);
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += calculatePrecision(relevant, retrieved);
             } catch (NullPointerException e) {
-                LOG.error(e.getLocalizedMessage());
+                //LOG.debug(e.getLocalizedMessage());
             }
         }
 

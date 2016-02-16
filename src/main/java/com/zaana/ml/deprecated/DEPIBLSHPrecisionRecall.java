@@ -1,8 +1,7 @@
-package com.zaana.ml;
+package com.zaana.ml.deprecated;
 
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
-import com.zaana.ml.recomm.lsh.DEPIBLSHRecommender;
 
 import java.util.*;
 

@@ -1,7 +1,7 @@
-package com.zaana.ml.recomm.lsh;
+package com.zaana.ml.deprecated;
 
 import com.zaana.ml.LSH;
-import com.zaana.ml.recomm.cf.DEPUBRecommender;
+import com.zaana.ml.deprecated.DEPUBRecommender;
 
 import java.util.HashMap;
 import java.util.Set;

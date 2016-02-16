@@ -1,4 +1,4 @@
-package com.zaana.ml.recomm.cf;
+package com.zaana.ml.deprecated;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.prediction.Prediction;
