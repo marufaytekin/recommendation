@@ -49,7 +49,7 @@ public final class LSH {
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
 
         Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
-        hashKeyLookupTable = new HashMap<>(32000, (float) 1);
+        hashKeyLookupTable = new HashMap<>();
 
         while (iter.hasNext()) {
             Entry<String, HashMap<String, Integer>> entry = iter.next();
@@ -121,7 +121,7 @@ public final class LSH {
             String itemId,
             HashMap<String, String> hashKeyTable)
     {
-        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
+        Set<String> candidateSet = new HashSet<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
@@ -167,7 +167,7 @@ public final class LSH {
             String userId,
             HashMap<String, String> hashKeyLookupTable)
     {
-        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
+        Set<String> candidateSet = new HashSet<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
             String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
@@ -243,7 +243,7 @@ public final class LSH {
 
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<>();
         for (int tableNum = 0; tableNum < l; tableNum++) {
-            HashMap<String, Set<String>> hashTable = new HashMap<>(1024, (float) 1);
+            HashMap<String, Set<String>> hashTable = new HashMap<>();
             hashTables.put(tableNum, hashTable);
         }
         return hashTables;
@@ -308,7 +308,7 @@ public final class LSH {
             HashMap<String, Set<String>> hashTable) {
         if (hashTable.containsKey(hashKey)) hashTable.get(hashKey).add(item);
         else {
-            Set<String> set = new HashSet<>(1024, (float) 1);
+            Set<String> set = new HashSet<>();
             set.add(item);
             hashTable.put(hashKey, set);
         }
