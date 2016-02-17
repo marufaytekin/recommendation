@@ -110,14 +110,14 @@ public final class LSH {
      * Eliminates the recalculation of hash keys. for use with LSH1 and LSH2
      *
      * @param hashTables
-     * @param ratingsSet
+     * @param ratedItemsSet
      * @param itemId
      * @param hashKeyTable
      * @return candidateSet
      */
     public static Set<String> getCandidateItemSetFromHashTable(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<String, Integer> ratingsSet,
+            Set<String> ratedItemsSet,
             String itemId,
             HashMap<String, String> hashKeyTable)
     {
@@ -129,10 +129,40 @@ public final class LSH {
             candidateSet.addAll(candidates);
         }
         candidateSet.remove(itemId);
-        candidateSet.removeAll(ratingsSet.keySet());
+        candidateSet.removeAll(ratedItemsSet);
 
         return candidateSet;
     }
+
+    /***
+     * Returns candidate list by using hashKeyLookupTable.
+     * Eliminates the recalculation of hash keys. for use with LSH1 and LSH2
+     *
+     * @param hashTables
+     * @param ratedItemsSet
+     * @param itemId
+     * @param hashKeyTable
+     * @return candidateSet
+     */
+    public static List<String> getCandidateItemListFromHashTable(
+            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
+            Set<String> ratedItemsSet,
+            String itemId,
+            HashMap<String, String> hashKeyTable)
+    {
+        List<String> candidateList = new ArrayList<>();
+        for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+        {
+            String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
+            Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
+            candidateList.addAll(candidates);
+        }
+        candidateList.remove(itemId);
+        candidateList.removeAll(ratedItemsSet);
+
+        return candidateList;
+    }
+
 
     /***
      * Returns candidate user set by using hashKeyLookupTable.

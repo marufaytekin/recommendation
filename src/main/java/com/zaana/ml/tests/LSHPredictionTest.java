@@ -99,7 +99,7 @@ public class LSHPredictionTest extends AbstractTest
                         hashTables = LSH.buildModel(userRateMap, vmap,
                                 numOfBands);
                         hashKeyLookupTable =  LSH.getHashKeyLookupTable();
-                        runTime += LSHPredictionTests.runLSHPredictionOnTestData(
+                        runTime += LSHPredictionTests.runUBLSHPredictionOnTestData(
                                 userRateMap, itemRateMap, testDataMap, hashTables, hashKeyLookupTable, lshEstimator);
                         candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
                         mae += MAE.calculateMAE(
@@ -192,17 +192,24 @@ public class LSHPredictionTest extends AbstractTest
                             IBKNNLSHPrediction.getOutputList(),
                             IBKNNLSHPrediction.getTargetList());
                     predictedItems += IBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3" || type == "IBLSH1" || type == "IBLSH2" ) {
-                    runTime += LSHPredictionTests.runLSHPredictionOnTestData(
+                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3") {
+                    runTime += LSHPredictionTests.runUBLSHPredictionOnTestData(
                             userRateMap, itemRateMap, testDataMap, lshRecommender);
                     candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
                             LSHPredictionTests.getOutputList(),
                             LSHPredictionTests.getTargetList());
                     predictedItems += LSHPredictionTests.getOutputList().size();
-                } else {
-                    throw new UnsupportedOperationException("Invalid type.");
-                }
+                } else if (type == "IBLSH1" || type == "IBLSH2" ){
+                    runTime += LSHPredictionTests.runIBLSHPredictionOnTestData(
+                            userRateMap, itemRateMap, testDataMap, lshRecommender);
+                    candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
+                    mae += MAE.calculateMAE(
+                            LSHPredictionTests.getOutputList(),
+                            LSHPredictionTests.getTargetList());
+                    predictedItems += LSHPredictionTests.getOutputList().size();
+                } else throw new UnsupportedOperationException("Invalid type.");
+
             }
             maeList.add(mae / smoothRun);
             runtimeList.add(runTime / smoothRun);

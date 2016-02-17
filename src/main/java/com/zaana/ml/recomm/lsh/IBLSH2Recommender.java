@@ -38,12 +38,12 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : userRatingSet) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
-                    (hashTables, ratingsSet, testItemId, hashKeyLookupTable);
+                    (hashTables, ratingsSet.keySet(), testItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
             uniqueueItemsSet.addAll(candidateSet);
         }
         candidateItemListSize = candidateList.size();
-        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
         Set<String> recSet = new HashSet<>();
         int size = candidateList.size();
         for (int i = candidateList.size(); i > 0 && recSet.size() < topN; i--) {
@@ -58,22 +58,28 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
     public Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            String targetUserId, String itemId) {
+            String targetUserId, String itemId,
+            Set <String> intersectionOfCandidateItemSet,
+            List<String> candidateSetList) {
 
         double rating;
         double weightedRatingsTotal = 0;
-        Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
-        List <String> candidateSetList =
-                LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
-        Set <String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
-        ratedItemsSet.retainAll(uniqueueCandidateSet); //take intersection with candidate set
-        if (ratedItemsSet.isEmpty()) return null;
-        for (String item : ratedItemsSet) {
-            rating = userRateMap.get(targetUserId).get(item);
+        int size = candidateSetList.size();
+        int idx;
+        List <String> kNNList = new ArrayList<>();
+        for (int i = candidateSetList.size(); i > 0 && kNNList.size() <= 20; i--) {
+            idx = (int) Math.floor(Math.random()*size);
+            String candidateUser = candidateSetList.get(idx);
+            if (intersectionOfCandidateItemSet.contains(candidateUser)) {
+                kNNList.add(candidateUser);
+            }
+        }
+        for (String candidateItem : kNNList) {
+            rating = userRateMap.get(targetUserId).get(candidateItem);
             weightedRatingsTotal += rating;
         }
         candidateItemListSize = candidateSetList.size();
-        uniqueCandidateItemListSize = uniqueueCandidateSet.size();
-        return weightedRatingsTotal / ratedItemsSet.size();
+        //uniqueCandidateItemListSize = intersectionOfCandidateItemSet.size();
+        return weightedRatingsTotal / kNNList.size();
     }
 }

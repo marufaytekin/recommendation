@@ -43,14 +43,14 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         Set<String> uniqueueItemsSet = new HashSet<>();
         for (String ratedItemId : ratedItemSet) {
             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
-                    (hashTables, ratingsSet, ratedItemId, hashKeyLookupTable);
+                    (hashTables, ratingsSet.keySet(), ratedItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
             uniqueueItemsSet.addAll(candidateSet);
         }
         candidateItemListSize = candidateList.size();
         uniqueCandidateItemListSize = uniqueueItemsSet.size();
 
-        return Common.getMostFrequentTopNElements(candidateList, topN);
+        return Common.getMostFrequentTopNElementSet(candidateList, topN);
 
     }
 
@@ -59,27 +59,24 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             String targetUserId,
-            String itemId) {
+            String itemId,
+            Set <String> intersetItemsCandidateSet,
+            List<String> candidateSetList) {
 
         int frequency;
         double rating;
         double weightedRatingsTotal = 0.0;
         int weightsTotal = 0;
-        Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
-        List <String> candidateSetList =
-                LSH.getCandidateListFromHashTables(hashTables, itemId, hashKeyLookupTable);
-        Set<String> uniqueueCandidateSet = new HashSet<>(candidateSetList);
-        ratedItemsSet.retainAll(uniqueueCandidateSet); //intersection with candidate set
-        if (ratedItemsSet.isEmpty()) return null;
-        HashMap <String, Integer> frequencyMap = Common.getFrequencyMap(candidateSetList);
-        for (String item : ratedItemsSet) {
+        HashMap <String, Integer> frequencyMap = Common.getCandidateFrequentNElementsMap(
+                candidateSetList, intersetItemsCandidateSet, 20);
+        for (String item : intersetItemsCandidateSet) {
             frequency = frequencyMap.get(item);
             rating = userRateMap.get(targetUserId).get(item);
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }
         candidateItemListSize = candidateSetList.size();
-        uniqueCandidateItemListSize = uniqueueCandidateSet.size();
+        //uniqueCandidateItemListSize = intersetItemsCandidateSet.size();
         if (weightsTotal != 0)
             return weightedRatingsTotal / weightsTotal;
         else

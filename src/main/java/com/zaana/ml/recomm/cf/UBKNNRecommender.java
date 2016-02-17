@@ -47,7 +47,7 @@ public class UBKNNRecommender extends AbstractCFRecommender {
             ratedItemList.addAll(neighborsRatingList);
         }
 
-        return Common.getMostFrequentTopNElements(ratedItemList, topN);
+        return Common.getMostFrequentTopNElementSet(ratedItemList, topN);
 
     }
 

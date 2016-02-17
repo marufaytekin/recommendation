@@ -99,6 +99,66 @@ public final class Common
         return frequencyMap;
     }
 
+    public static HashMap<String, Integer> getFrequentTopNElementsMap(
+            List<String> candidateList, int n) {
+
+        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
+            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
+                return Integer.compare(o2.getValue(), o1.getValue());
+            }
+        };
+        HashMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(n)
+                .create();
+        for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) q.offer(elementId);
+
+        HashMap <String,Integer> frequencyMapList = new HashMap<>();
+        for (;0 < q.size() && frequencyMapList.size() < n;)
+            try {
+                HashMap.Entry<String, Integer> entry = q.remove();
+                frequencyMapList.put(entry.getKey(), entry.getValue());
+            } catch (NoSuchElementException ignored) {}
+
+        return frequencyMapList;
+
+    }
+
+    public static HashMap<String, Integer> getCandidateFrequentNElementsMap(
+            List<String> candidateList, Set <String> intersectionOfCandidateRatedUserSets, int n) {
+
+        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
+            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
+                return Integer.compare(o2.getValue(), o1.getValue());
+            }
+        };
+
+        HashMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+
+        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(n)
+                .create();
+
+        for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) {
+            if (intersectionOfCandidateRatedUserSets.contains(elementId.getKey())) {
+                q.offer(elementId);
+            }
+        }
+
+        HashMap <String, Integer> topNFrequencyMap = new HashMap<>();
+        for (;0 < q.size() && topNFrequencyMap.size() < n;)
+            try {
+                HashMap.Entry<String, Integer> entry = q.remove();
+                topNFrequencyMap.put(entry.getKey(), entry.getValue());
+            } catch (NoSuchElementException ignored) {}
+
+        return topNFrequencyMap;
+
+    }
+
+
 
     /**
      * Returns most frequent n elements at the front of the queue.
@@ -107,37 +167,12 @@ public final class Common
      * @param n
      * @return
      */
-    public static Set<String> getMostFrequentTopNElements(
+    public static Set<String> getMostFrequentTopNElementSet(
             List<String> candidateList, int n) {
 
-        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
-            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
-                return Integer.compare(o2.getValue(), o1.getValue());
-            }
-        };
-        HashMap <String,Integer> frequencyMap = new HashMap<>();
-        for (String element: candidateList) {
-            if(frequencyMap.containsKey(element)) {
-                frequencyMap.put(element, frequencyMap.get(element)+1);
-            }
-            else{ frequencyMap.put(element, 1); }
-        }
+        HashMap <String,Integer> s = getFrequentTopNElementsMap(candidateList, n);
 
-        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
-                .orderedBy(comparator)
-                .maximumSize(n)
-                .create();
-        for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) q.offer(elementId);
-
-        Set<String> recSet = new HashSet<>();
-        for (;0 < q.size() && recSet.size() < n;)
-            try {
-                HashMap.Entry<String, Integer> entry = q.remove();
-                recSet.add(entry.getKey());
-            } catch (NoSuchElementException ignored) {}
-
-        return recSet;
-
+        return s.keySet();
     }
 
     static class CustomComparatorInt implements Comparator<Map.Entry <String, Integer>>, Serializable {

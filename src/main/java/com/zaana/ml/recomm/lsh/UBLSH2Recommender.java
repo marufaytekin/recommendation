@@ -55,26 +55,27 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             String targetUserId,
-            String movieId)
+            String movieId, Set <String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList)
     {
-        HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
-        if (itemRatings == null) return null;
-        List<String> candidateSetList =
-                LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
-        Set<String> candidateSet = new HashSet<>(candidateSetList);
-        Set<String> ratedUserSet = itemRatings.keySet();
-        Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
-        intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-        if (intersectionOfCandidateRatedUserSets.isEmpty()) return null;
         double weightedRatingsTotal = 0.0;
         Integer rating;
-        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+        int size = candidateSetList.size();
+        int idx;
+        List <String> kNNList = new ArrayList<>();
+        for (int i = candidateSetList.size(); i > 0 && kNNList.size() <= 20; i--) {
+            idx = (int) Math.floor(Math.random()*size);
+            String candidateUser = candidateSetList.get(idx);
+            if (intersectionOfCandidateRatedUserSets.contains(candidateUser)) {
+                kNNList.add(candidateUser);
+            }
+        }
+        for (String candidateUser : kNNList) {
             rating = userRateMap.get(candidateUser).get(movieId);
             weightedRatingsTotal += rating;
         }
         candidateItemListSize = candidateSetList.size();
-        uniqueCandidateItemListSize = candidateSet.size();
-        return weightedRatingsTotal/intersectionOfCandidateRatedUserSets.size();
+        //uniqueCandidateItemListSize = candidateSet.size();
+        return weightedRatingsTotal/kNNList.size();
     }
 
 }
