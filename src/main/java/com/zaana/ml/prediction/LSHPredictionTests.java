@@ -25,6 +25,8 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long totalTime = 0;
         long startTime;
         long endTime;
+        HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
+        HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
@@ -40,24 +42,22 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     Integer givenRating = entry.getValue();
                     HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
                     if (itemRatings == null) continue;
-                    HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
-                    HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
                     List<String> candidateSetList =
                             LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
                     Set<String> candidateSet = new HashSet<>(candidateSetList);
+
                     Set<String> ratedUserSet = itemRatings.keySet();
-                    Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
-                    intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
+
+                    Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(candidateSet);
+                    intersectionOfCandidateRatedUserSets.retainAll(ratedUserSet);
                     if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
                     Collections.shuffle(candidateSetList);
-
                     startTime = System.currentTimeMillis();
                     prediction = lshRecommender.calculatePrediction(userRateMap, itemRateMap, targetUserId, movieId,
                             intersectionOfCandidateRatedUserSets, candidateSetList);
                     endTime = System.currentTimeMillis();
                     totalTime += endTime - startTime;
-
-                    total_candidate_set_size += lshRecommender.getUniqueCandidateItemListSize();
+                    total_candidate_set_size += candidateSet.size();
                     cnt++;
                     if (prediction != null) {
                         outputList.add(prediction);
@@ -94,6 +94,8 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long totalTime = 0;
         long startTime;
         long endTime;
+        HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
+        HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
@@ -108,19 +110,18 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     String movieId = entry.getKey();
                     Integer givenRating = entry.getValue();
                     Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
-                    HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
-                    HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
                     List <String> candidateSetList =
-                            LSH.getCandidateItemListFromHashTable(hashTables, ratedItemsSet, movieId, hashKeyLookupTable);
+                            LSH.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
                     Set<String> intersecItemsCandidateSet = new HashSet<>(candidateSetList);
-                    //intersecItemsCandidateSet.retainAll(ratedItemsSet);
+                    intersecItemsCandidateSet.retainAll(ratedItemsSet);
                     if (intersecItemsCandidateSet.isEmpty()) continue;
                     startTime = System.currentTimeMillis();
                     prediction = lshRecommender.calculatePrediction(
                             userRateMap, itemRateMap, targetUserId, movieId, intersecItemsCandidateSet, candidateSetList);
                     endTime = System.currentTimeMillis();
                     totalTime += endTime - startTime;
-                    total_candidate_set_size += lshRecommender.getUniqueCandidateItemListSize();
+                    Set<String> candidateSet = new HashSet<>(candidateSetList);
+                    total_candidate_set_size += candidateSet.size();
                     cnt++;
                     if (prediction != null) {
                         outputList.add(prediction);

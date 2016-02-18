@@ -64,18 +64,17 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
         HashMap <String, Integer> frequencyMap =
                 Common.getCandidateFrequentNElementsMap(
                         candidateSetList, intersectionOfCandidateRatedUserSets, 20);
-        for (String candidateUser : intersectionOfCandidateRatedUserSets) {
+        //candidateItemListSize = candidateSetList.size();
+        if (frequencyMap.isEmpty()) return null;
+        for (String candidateUser : frequencyMap.keySet()) {
             frequency = frequencyMap.get(candidateUser);
             rating = userRateMap.get(candidateUser).get(movieId);
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }
-        candidateItemListSize = candidateSetList.size();
         //uniqueCandidateItemListSize = candidateSet.size();
-        if (weightsTotal != 0)
-            return weightedRatingsTotal / weightsTotal;
-        else
-            return 0.0;
+        return weightedRatingsTotal / weightsTotal;
+
     }
 
 

@@ -115,7 +115,7 @@ public final class LSH {
      * @param hashKeyTable
      * @return candidateSet
      */
-    public static Set<String> getCandidateItemSetFromHashTable(
+    public static Set<String> getCandidateItemSetForTopNRecommendation(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             Set<String> ratedItemsSet,
             String itemId,
@@ -144,7 +144,7 @@ public final class LSH {
      * @param hashKeyTable
      * @return candidateSet
      */
-    public static List<String> getCandidateItemListFromHashTable(
+    public static List<String> getCandidateItemListForTopNRecommendation(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             Set<String> ratedItemsSet,
             String itemId,
@@ -170,24 +170,24 @@ public final class LSH {
      * Preserves frequency of users in the ArrayList.
      *
      * @param hashTables
-     * @param userId
+     * @param objectId
      * @param hashKeyLookupTable
      * @return candidateSet
      */
     public static List<String> getCandidateListFromHashTables(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            String userId,
+            String objectId,
             HashMap<String, String> hashKeyLookupTable)
     {
         List<String> candidateList = new ArrayList<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
         {
-            String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
+            String hashKey = hashKeyLookupTable.get(objectId + ":" + hashTableNum);
             Set<String> candidates = hashTables.get(hashTableNum).get(hashKey);
             if (candidates != null)
                 candidateList.addAll(candidates);
         }
-        candidateList.remove(userId);
+        candidateList.remove(objectId);
 
         return candidateList;
     }

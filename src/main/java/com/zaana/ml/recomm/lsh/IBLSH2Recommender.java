@@ -37,7 +37,7 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         Set<String> uniqueueItemsSet = new HashSet<>();
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : userRatingSet) {
-            Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
+            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
                     (hashTables, ratingsSet.keySet(), testItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
             uniqueueItemsSet.addAll(candidateSet);
@@ -74,12 +74,15 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
                 kNNList.add(candidateUser);
             }
         }
+        //candidateItemListSize = candidateSetList.size();
+        if (kNNList.isEmpty()) return null;
         for (String candidateItem : kNNList) {
             rating = userRateMap.get(targetUserId).get(candidateItem);
             weightedRatingsTotal += rating;
         }
-        candidateItemListSize = candidateSetList.size();
         //uniqueCandidateItemListSize = intersectionOfCandidateItemSet.size();
         return weightedRatingsTotal / kNNList.size();
     }
+
+
 }

@@ -36,7 +36,7 @@ y6 = UBLSH2HashTablesMaeList;
 y7 = IBLSH1HashTablesMaeList;
 y8 = IBLSH2HashTablesMaeList;
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
-h = legend('UB-KNN', 'IB-KNN', 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+h = legend('UB-KNN', 'IB-KNN', 'UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
 xlabel('Number of Hash Tables');
 ylabel('MAE');
@@ -159,7 +159,7 @@ y6 = UBLSH2HashFunctionsPredictedItemsList/total_test_data;
 y7 = IBLSH1HashFunctionsPredictedItemsList/total_test_data;
 y8 = IBLSH2HashFunctionsPredictedItemsList/total_test_data;
 plot (x, y3,'-dk', x, y4,'-*k',x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
-h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'west');
 set (h, 'fontsize', 8);
 xlabel('Number of Hash Functions');
 ylabel('Prediction Ratio');
@@ -279,7 +279,7 @@ set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Recommendation Time (ms.)')
-write(f, strcat(fileName,'-hash-tables-topn-runtime'));
+write(f, strcat(fileName,'-hash-tables-topn-runtime2'));
 
 
 
@@ -304,3 +304,19 @@ set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('C_l Size')
+
+
+
+f= figure();
+x = 55:5:100
+y5 = UBLSH1RecommenderRunTimeList;
+y6 = UBLSH2RecommenderRunTimeList;
+y7 = IBLSH1RecommenderRunTimeList;
+y8 = IBLSH2RecommenderRunTimeList;
+
+plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('sparsity');
+ylabel('Runtime');
+

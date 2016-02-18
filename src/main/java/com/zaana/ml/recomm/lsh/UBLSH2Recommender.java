@@ -69,11 +69,12 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
                 kNNList.add(candidateUser);
             }
         }
+        if (kNNList.isEmpty()) return null;
         for (String candidateUser : kNNList) {
             rating = userRateMap.get(candidateUser).get(movieId);
             weightedRatingsTotal += rating;
         }
-        candidateItemListSize = candidateSetList.size();
+        //candidateItemListSize = candidateSetList.size();
         //uniqueCandidateItemListSize = candidateSet.size();
         return weightedRatingsTotal/kNNList.size();
     }

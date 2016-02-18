@@ -42,7 +42,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         List<String> candidateList = new ArrayList<>();
         Set<String> uniqueueItemsSet = new HashSet<>();
         for (String ratedItemId : ratedItemSet) {
-            Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
+            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
                     (hashTables, ratingsSet.keySet(), ratedItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
             uniqueueItemsSet.addAll(candidateSet);
@@ -67,20 +67,20 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         double rating;
         double weightedRatingsTotal = 0.0;
         int weightsTotal = 0;
-        HashMap <String, Integer> frequencyMap = Common.getCandidateFrequentNElementsMap(
-                candidateSetList, intersetItemsCandidateSet, 20);
-        for (String item : intersetItemsCandidateSet) {
+        HashMap <String, Integer> frequencyMap =
+                Common.getCandidateFrequentNElementsMap(candidateSetList, intersetItemsCandidateSet, 20);
+        //candidateItemListSize = candidateSetList.size();
+        if (frequencyMap.isEmpty()) return null;
+        for (String item : frequencyMap.keySet()) {
             frequency = frequencyMap.get(item);
             rating = userRateMap.get(targetUserId).get(item);
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }
-        candidateItemListSize = candidateSetList.size();
         //uniqueCandidateItemListSize = intersetItemsCandidateSet.size();
-        if (weightsTotal != 0)
-            return weightedRatingsTotal / weightsTotal;
-        else
-            return 0.0;
+
+        return weightedRatingsTotal / weightsTotal;
+
     }
 
 }
