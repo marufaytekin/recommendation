@@ -27,10 +27,16 @@ public class UBLSHRandomRecommender extends AbstractLSHRecommender {
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
+
+    @Override
+    public List<String> getCandidateItemList(HashMap<String, HashMap<String, Integer>> userRateMap, HashMap<String, HashSet<String>> userRateSet, String userId, Set<String> ratedItemSet) {
+        return null;
+    }
+
+
     @Override
     public Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
+            String userId, List<String> candidateList, int topN)
     {
         return null;
     }

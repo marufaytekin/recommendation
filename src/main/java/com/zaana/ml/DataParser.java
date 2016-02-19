@@ -17,6 +17,9 @@ public final class DataParser
     private static HashMap<String, HashMap<String, Integer>> userRateMap;
     private static HashMap<String, HashMap<String, Integer>> itemRateMap;
     private static HashMap<String, HashMap<String, Integer>> testDataMap;
+    static HashMap<String, HashSet<String>> userRateSet;
+    static HashMap<String, HashSet<String>> itemRateSet;
+    static HashMap<String, HashSet<String>> testRateSet;
     private static Set<String> itemSet;
     private static Set<String> userSet;
     private static HashMap<String, Integer> itemSetCount;
@@ -57,6 +60,17 @@ public final class DataParser
         return testDataMap;
     }
 
+    public static HashMap<String, HashSet<String>> getUserRateSet() {
+        return userRateSet;
+    }
+
+    public static HashMap<String, HashSet<String>> getItemRateSet() {
+        return itemRateSet;
+    }
+
+    public static HashMap<String, HashSet<String>> getTestRateSet() {
+        return testRateSet;
+    }
 
     public static void processDataFile(final String filePath,
             final String seperator, final double testDataPercentage,
@@ -133,6 +147,8 @@ public final class DataParser
     {
         userRateMap = new HashMap<>();
         itemRateMap = new HashMap<>();
+        userRateSet = new HashMap<>();
+        itemRateSet = new HashMap<>();
 
         userSet = new HashSet<>();
         itemSet = new HashSet<>();
@@ -160,6 +176,8 @@ public final class DataParser
                 itemSet.add(itemID);
                 insertDataInMap(userID, itemID, rating, userRateMap);
                 insertDataInMap(itemID, userID, rating, itemRateMap);
+                insertDataInSet(userID, itemID,userRateSet);
+                insertDataInSet(itemID, userID, itemRateSet);
                 updateCounter(itemID, itemSetCount);
                 updateCounter(userID, userSetCount);
                 totalDataSampleSize++;
@@ -183,6 +201,7 @@ public final class DataParser
             final String filePath, final String seperator)
     {
         testDataMap = new HashMap<>();
+        testRateSet =  new HashMap<>();
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(filePath));
@@ -201,6 +220,7 @@ public final class DataParser
                 String itemID = data[1];
                 Integer rating = (int) Math.round(Double.parseDouble(data[2]));
                 insertDataInMap(userID, itemID, rating, testDataMap);
+                insertDataInSet(userID,itemID,testRateSet);
                 totalDataSampleSize++;
             }
         }  catch (NumberFormatException | IOException e) {
@@ -229,6 +249,19 @@ public final class DataParser
             dataMap.put(id1, map);
         }
     }
+
+    private static void insertDataInSet(final String id1, final String id2,
+                                        final HashMap<String, HashSet<String>> dataSet)
+    {
+        if (dataSet.containsKey(id1)) {
+            dataSet.get(id1).add(id2);
+        } else {
+            HashSet<String> s = new HashSet<>();
+            s.add(id2);
+            dataSet.put(id1, s);
+        }
+    }
+
 
     private static void updateCounter(final String id,
             final HashMap<String, Integer> map)

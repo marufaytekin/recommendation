@@ -20,7 +20,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     public static void runHashFunctionsLSHEvaluation(
-            AbstractLSHRecommender recommender, String dataFileBase, String separator,
+            AbstractLSHRecommender recommender,
+            String dataFileBase, String separator,
             int numOfRun, int smoothRun, int numOfBands, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
@@ -35,7 +36,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
+                calculateLSHMetrics(userRateSet, testDataMap,recommender,topN);
             }
             precisionList.add(precision/smoothRun);
             recallList.add(recall/smoothRun);
@@ -81,7 +82,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     public static void runHashTablesLSHEvaluation(
-            AbstractLSHRecommender recommender, String dataFileBase, String separator,
+            AbstractLSHRecommender recommender,
+            String dataFileBase, String separator,
             int numOfRun, int smoothRun, int numOfHashFunctions, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
@@ -96,7 +98,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
+                calculateLSHMetrics(userRateSet, testDataMap,recommender,topN);
             }
             precisionList.add(precision / smoothRun);
             recallList.add(recall / smoothRun);
@@ -132,7 +134,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     private static void calculateLSHMetrics(
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
+            final HashMap<String, HashSet<String>> userRateSet,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             AbstractLSHRecommender recommender, int topN)
     {
@@ -148,15 +150,18 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String targetUserId = entry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(targetUserId);
-            if (userRateList == null) {
+            Set<String> ratedItemSet = userRateSet.get(targetUserId);
+            if (ratedItemSet == null) {
                 continue;
             }
             startTime = System.currentTimeMillis();
+            List<String> candidateList =
+                    recommender.getCandidateItemList(userRateMap, userRateSet, targetUserId, ratedItemSet);
             Set<String> topNRecommendedItems =
-                    recommender.recommendItems(userRateMap, targetUserId, topN);
+                    recommender.recommendItems(targetUserId, candidateList, topN);
             endTime = System.currentTimeMillis();
             totalReccTime += (endTime - startTime);
+
             totalPrecision += Precision
                     .getPrecision(topNRecommendedItems, entry);
             totalRecall += Recall

@@ -107,7 +107,9 @@ public final class Common
                 return Integer.compare(o2.getValue(), o1.getValue());
             }
         };
+
         HashMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+
         MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
                 .orderedBy(comparator)
                 .maximumSize(n)

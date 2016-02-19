@@ -26,29 +26,36 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
+    @Override
+    public List<String> getCandidateItemList(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashMap<String, HashSet<String>> userRateSet,
+            String userId,
+            Set<String> ratedItemSet) {
+        ratedItemSet = userRateSet.get(userId);
+        List<String> candidateList = new ArrayList<>();
+        for (String ratedItemId : ratedItemSet) {
+            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
+                    (hashTables, ratedItemSet, ratedItemId, hashKeyLookupTable);
+            candidateList.addAll(candidateSet);
+        }
+        //Collections.shuffle(candidateList);
+        return candidateList;
+    }
+
     /**
      * IBRecommender with LSH based on frequency of items in the buckets.
      * Instead of merged similarity value we use frequency of items in candidate list.
-     * @param userRateMap
      * @param userId
-     * @param topN    @return    */
+     * @param candidateList
+     * @param topN    @return      */
     @Override
     public Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
+            String userId, List<String> candidateList, int topN)
     {
-        HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
-        Set<String> ratedItemSet = userRateMap.get(userId).keySet();
-        List<String> candidateList = new ArrayList<>();
-        Set<String> uniqueueItemsSet = new HashSet<>();
-        for (String ratedItemId : ratedItemSet) {
-            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
-                    (hashTables, ratingsSet.keySet(), ratedItemId, hashKeyLookupTable);
-            candidateList.addAll(candidateSet);
-            uniqueueItemsSet.addAll(candidateSet);
-        }
-        candidateItemListSize = candidateList.size();
-        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+
+        //candidateItemListSize = candidateList.size();
+        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
 
         return Common.getMostFrequentTopNElementSet(candidateList, topN);
 
@@ -60,7 +67,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             String targetUserId,
             String itemId,
-            Set <String> intersetItemsCandidateSet,
+            Set <String> intersectItemsCandidateSet,
             List<String> candidateSetList) {
 
         int frequency;
@@ -68,8 +75,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         double weightedRatingsTotal = 0.0;
         int weightsTotal = 0;
         HashMap <String, Integer> frequencyMap =
-                Common.getCandidateFrequentNElementsMap(candidateSetList, intersetItemsCandidateSet, 20);
-        //candidateItemListSize = candidateSetList.size();
+                Common.getCandidateFrequentNElementsMap(candidateSetList, intersectItemsCandidateSet, 20);
         if (frequencyMap.isEmpty()) return null;
         for (String item : frequencyMap.keySet()) {
             frequency = frequencyMap.get(item);
@@ -77,7 +83,6 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }
-        //uniqueCandidateItemListSize = intersetItemsCandidateSet.size();
 
         return weightedRatingsTotal / weightsTotal;
 

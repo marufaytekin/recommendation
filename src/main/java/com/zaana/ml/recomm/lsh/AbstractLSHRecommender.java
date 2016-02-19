@@ -34,12 +34,13 @@ public abstract class AbstractLSHRecommender {
                                     int numOfBands, int numOfHashFunctions);
 
     public abstract Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN);
+            String userId, List<String> candidateList, int topN);
 
     public abstract Double calculatePrediction(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap, String targetUserId,
             String movieId, Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList);
+
+    public abstract List<String> getCandidateItemList(HashMap<String, HashMap<String, Integer>> userRateMap, HashMap<String, HashSet<String>> userRateSet, String userId, Set<String> ratedItemSet);
 
 }

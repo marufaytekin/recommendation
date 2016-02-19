@@ -25,26 +25,33 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public Set<String> recommendItems(
+    public List<String> getCandidateItemList(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            String userId, int topN)
-    {
-        Set<String> userRatingList = userRateMap.get(userId).keySet();
+            HashMap<String, HashSet<String>> userRateSet,
+            String userId,
+            Set<String> ratedItemSet) {
+        //Set<String> userRatingsSet = userRateSet.get(userId);
         Set<String> userCandidateSet =
                 LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
-        Set<String> neighborsRatingList;
-        Set<String> uniqueueItemsSet = new HashSet<>();
+        Set<String> neighborsRatingSet;
         List<String> ratedItemList = new ArrayList<>();
         for (String neighborId : userCandidateSet) {
-            neighborsRatingList = userRateMap.get(neighborId).keySet();
-            neighborsRatingList.removeAll(userRatingList);
-            ratedItemList.addAll(neighborsRatingList);
-            uniqueueItemsSet.addAll(neighborsRatingList);
+            neighborsRatingSet = userRateSet.get(neighborId);
+            neighborsRatingSet.removeAll(ratedItemSet);
+            ratedItemList.addAll(neighborsRatingSet);
         }
-        candidateItemListSize = ratedItemList.size();
-        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+        //Collections.shuffle(ratedItemList);
+        return ratedItemList;
+    }
 
-        return Common.getMostFrequentTopNElementSet(ratedItemList, topN);
+    @Override
+    public Set<String> recommendItems(
+            String userId, List<String> candidateList, int topN)
+    {
+        //candidateItemListSize = ratedItemList.size();
+        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
+
+        return Common.getMostFrequentTopNElementSet(candidateList, topN);
 
     }
 

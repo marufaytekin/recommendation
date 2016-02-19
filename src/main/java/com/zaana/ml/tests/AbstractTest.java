@@ -13,6 +13,9 @@ public abstract class AbstractTest {
 
     static HashMap<String, HashMap<String, Integer>> userRateMap;
     static HashMap<String, HashMap<String, Integer>> itemRateMap;
+    static HashMap<String, HashSet<String>> userRateSet;
+    static HashMap<String, HashSet<String>> itemRateSet;
+    static HashMap<String, HashSet<String>> testRateSet;
     static HashMap<String, HashMap<String, Integer>> testDataMap;
     static List<HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>>> vmaps;
     static List<HashMap<Integer, HashMap<String, Set<String>>>> hashTables;
@@ -47,6 +50,9 @@ public abstract class AbstractTest {
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
+        userRateSet = DataParser.getUserRateSet();
+        itemRateSet = DataParser.getItemRateSet();
+        testRateSet = DataParser.getTestRateSet();
         //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
 
     }
