@@ -1,5 +1,9 @@
 package com.zaana.ml;
 
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
+import net.openhft.koloboke.collect.set.hash.HashObjSets;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -17,9 +21,9 @@ public final class DataParser
     private static HashMap<String, HashMap<String, Integer>> userRateMap;
     private static HashMap<String, HashMap<String, Integer>> itemRateMap;
     private static HashMap<String, HashMap<String, Integer>> testDataMap;
-    static HashMap<String, HashSet<String>> userRateSet;
-    static HashMap<String, HashSet<String>> itemRateSet;
-    static HashMap<String, HashSet<String>> testRateSet;
+    static HashObjObjMap<Object, Object> userRateSet;
+    static HashObjObjMap<Object, Object> itemRateSet;
+    static HashObjObjMap<Object, Object> testRateSet;
     private static Set<String> itemSet;
     private static Set<String> userSet;
     private static HashMap<String, Integer> itemSetCount;
@@ -60,15 +64,15 @@ public final class DataParser
         return testDataMap;
     }
 
-    public static HashMap<String, HashSet<String>> getUserRateSet() {
+    public static HashObjObjMap<Object, Object> getUserRateSet() {
         return userRateSet;
     }
 
-    public static HashMap<String, HashSet<String>> getItemRateSet() {
+    public static HashObjObjMap<Object, Object> getItemRateSet() {
         return itemRateSet;
     }
 
-    public static HashMap<String, HashSet<String>> getTestRateSet() {
+    public static HashObjObjMap<Object, Object> getTestRateSet() {
         return testRateSet;
     }
 
@@ -147,8 +151,8 @@ public final class DataParser
     {
         userRateMap = new HashMap<>();
         itemRateMap = new HashMap<>();
-        userRateSet = new HashMap<>();
-        itemRateSet = new HashMap<>();
+        userRateSet = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        itemRateSet = HashObjObjMaps.getDefaultFactory().newMutableMap();
 
         userSet = new HashSet<>();
         itemSet = new HashSet<>();
@@ -176,7 +180,7 @@ public final class DataParser
                 itemSet.add(itemID);
                 insertDataInMap(userID, itemID, rating, userRateMap);
                 insertDataInMap(itemID, userID, rating, itemRateMap);
-                insertDataInSet(userID, itemID,userRateSet);
+                insertDataInSet(userID, itemID, userRateSet);
                 insertDataInSet(itemID, userID, itemRateSet);
                 updateCounter(itemID, itemSetCount);
                 updateCounter(userID, userSetCount);
@@ -201,7 +205,7 @@ public final class DataParser
             final String filePath, final String seperator)
     {
         testDataMap = new HashMap<>();
-        testRateSet =  new HashMap<>();
+        testRateSet =  HashObjObjMaps.getDefaultFactory().newMutableMap();
         BufferedReader in = null;
         try {
             in = new BufferedReader(new FileReader(filePath));
@@ -251,12 +255,15 @@ public final class DataParser
     }
 
     private static void insertDataInSet(final String id1, final String id2,
-                                        final HashMap<String, HashSet<String>> dataSet)
+                                        final HashObjObjMap<Object, Object> dataSet)
     {
         if (dataSet.containsKey(id1)) {
-            dataSet.get(id1).add(id2);
+            HashObjSet<String> s = (HashObjSet<String>) dataSet.get(id1);
+            s.add(id2);
+            //dataSet.get(id1).add(id2);
         } else {
-            HashSet<String> s = new HashSet<>();
+            HashObjSet <String> s = HashObjSets.getDefaultFactory().newMutableSet();
+            //HashSet<String> s = new HashSet<>();
             s.add(id2);
             dataSet.put(id1, s);
         }

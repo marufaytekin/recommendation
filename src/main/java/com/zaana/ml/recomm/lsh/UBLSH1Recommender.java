@@ -2,6 +2,8 @@ package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
 import java.util.*;
 
@@ -19,24 +21,24 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
         Set<String> itemSet = itemRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+        hashTables = LSH2.buildModel(userRateMap, vmap, numOfBands);
+        hashKeyLookupTable = LSH2.getHashKeyLookupTable();
 
     }
 
     @Override
     public List<String> getCandidateItemList(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashSet<String>> userRateSet,
+            HashObjObjMap<Object, Object> userRateSet,
             String userId,
-            Set<String> ratedItemSet) {
+            HashObjSet<String> ratedItemSet) {
         //Set<String> userRatingsSet = userRateSet.get(userId);
-        Set<String> userCandidateSet =
-                LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
-        Set<String> neighborsRatingSet;
+        HashObjSet <String> userCandidateSet =
+                LSH2.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+        HashObjSet<String> neighborsRatingSet;
         List<String> ratedItemList = new ArrayList<>();
         for (String neighborId : userCandidateSet) {
-            neighborsRatingSet = userRateSet.get(neighborId);
+            neighborsRatingSet = (HashObjSet<String>) userRateSet.get(neighborId);
             neighborsRatingSet.removeAll(ratedItemSet);
             ratedItemList.addAll(neighborsRatingSet);
         }
@@ -45,7 +47,7 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public Set<String> recommendItems(
+    public HashObjSet<String> recommendItems(
             String userId, List<String> candidateList, int topN)
     {
         //candidateItemListSize = ratedItemList.size();

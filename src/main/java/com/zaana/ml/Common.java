@@ -1,9 +1,12 @@
 package com.zaana.ml;
 
 import com.google.common.collect.MinMaxPriorityQueue;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
+import net.openhft.koloboke.collect.set.hash.HashObjSets;
 import org.apache.log4j.Logger;
 
-import java.io.Serializable;
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -26,9 +29,7 @@ public final class Common
      */
     public static Set<String> getUserNonRatedItemList(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            Set<String> itemSet, String targetUserId)
-    {
-
+            Set<String> itemSet, String targetUserId) {
         try {
             Set<String> ratedItems = userRateMap.get(targetUserId).keySet();
             Set<String> diff = new HashSet<>(itemSet);
@@ -42,12 +43,10 @@ public final class Common
     public static LinkedHashMap<String, Double> getkNNList(
             LinkedHashMap<String, Double> targetUserSimilarityList,
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            String movieId, int kNN)
-    {
-
+            String movieId, int kNN) {
         Iterator<Entry<String, Double>> iter = targetUserSimilarityList
                 .entrySet().iterator();
-        LinkedHashMap<String, Double> kNNList = new LinkedHashMap<String, Double>();
+        LinkedHashMap<String, Double> kNNList = new LinkedHashMap<>();
         // K:userId, V: similarity
         int numNN = 0;
 
@@ -64,10 +63,7 @@ public final class Common
         return kNNList;
     }
 
-    public static Set<String> getTopN(
-            LinkedHashMap<String, Double> list, int topN)
-    {
-    
+    public static Set<String> getTopN(LinkedHashMap<String, Double> list, int topN) {
         LinkedHashMap<String, Double> sorted = SortHashMap.sortByValues(list);
         Set<String> recommList = new HashSet<>();
         int i = 0;
@@ -77,9 +73,7 @@ public final class Common
             recommList.add(entry.getKey());
             i++;
         }
-    
         return recommList;
-    
     }
 
     /**
@@ -87,19 +81,21 @@ public final class Common
      * @param candidateList
      * @return HashMap of <item, frequency>
      */
-    public static HashMap<String, Integer> getFrequencyMap(
+    public static HashObjObjMap<String, Integer> getFrequencyMap(
             List<String> candidateList) {
-        HashMap <String,Integer> frequencyMap = new HashMap<>();
+        //HashMap <String,Integer> frequencyMap = new HashMap<>();
+        HashObjObjMap<String, Integer> frequencyMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
         for (String element: candidateList) {
             if(frequencyMap.containsKey(element)) {
-                frequencyMap.put(element, frequencyMap.get(element)+1);
+                Integer frequency = frequencyMap.get(element);
+                frequencyMap.put(element, frequency + 1);
             }
             else{ frequencyMap.put(element, 1); }
         }
         return frequencyMap;
     }
 
-    public static HashMap<String, Integer> getFrequentTopNElementsMap(
+    public static HashObjObjMap<String, Integer> getFrequentTopNElementsMap(
             List<String> candidateList, int n) {
 
         Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
@@ -108,23 +104,20 @@ public final class Common
             }
         };
 
-        HashMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+        HashObjObjMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
 
         MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
                 .orderedBy(comparator)
                 .maximumSize(n)
                 .create();
         for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) q.offer(elementId);
-
-        HashMap <String,Integer> frequencyMapList = new HashMap<>();
+        HashObjObjMap<String, Integer> frequencyMapList = HashObjObjMaps.getDefaultFactory().newMutableMap();
         for (;0 < q.size() && frequencyMapList.size() < n;)
             try {
                 HashMap.Entry<String, Integer> entry = q.remove();
                 frequencyMapList.put(entry.getKey(), entry.getValue());
             } catch (NoSuchElementException ignored) {}
-
         return frequencyMapList;
-
     }
 
     public static HashMap<String, Integer> getCandidateFrequentNElementsMap(
@@ -136,14 +129,14 @@ public final class Common
             }
         };
 
-        HashMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+        HashObjObjMap<String, Integer> frequencyMap = getFrequencyMap(candidateList);
 
         MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
                 .orderedBy(comparator)
                 .maximumSize(n)
                 .create();
 
-        for ( Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) {
+        for ( Entry<String, Integer> elementId : frequencyMap.entrySet()) {
             if (intersectionOfCandidateRatedUserSets.contains(elementId.getKey())) {
                 q.offer(elementId);
             }
@@ -161,7 +154,6 @@ public final class Common
     }
 
 
-
     /**
      * Returns most frequent n elements at the front of the queue.
      *
@@ -169,28 +161,30 @@ public final class Common
      * @param n
      * @return
      */
-    public static Set<String> getMostFrequentTopNElementSet(
-            List<String> candidateList, int n) {
-
-        HashMap <String,Integer> s = getFrequentTopNElementsMap(candidateList, n);
-
+    public static HashObjSet<String> getMostFrequentTopNElementSet(List<String> candidateList, int n) {
+        HashObjObjMap<String, Integer> s = getFrequentTopNElementsMap(candidateList, n);
         return s.keySet();
     }
 
-    static class CustomComparatorInt implements Comparator<Map.Entry <String, Integer>>, Serializable {
-        public int compare(Map.Entry <String, Integer> o1, Map.Entry<String, Integer> o2) {
-            return Double.compare(o2.getValue(), o1.getValue());
-        }
-    }
-    public static Set<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n)
-    {
-        MinMaxPriorityQueue<Entry<String, Integer>> topNReccQueue =
-                MinMaxPriorityQueue.orderedBy(new CustomComparatorInt()).maximumSize(n).create();
+
+    public static HashObjSet<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n) {
+
+        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
+            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
+                return Integer.compare(o2.getValue(), o1.getValue());
+            }
+        };
+
+        MinMaxPriorityQueue<Entry<String, Integer>> topNReccQueue = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(n)
+                .create();
+
         for (Map.Entry<String, Integer> entry : ratingsSet.entrySet()) {
             topNReccQueue.offer(entry);
         }
 
-        Set<String> topNSet = new HashSet<>();
+        HashObjSet<String> topNSet = HashObjSets.getDefaultFactory().newMutableSet();
 
         while (!topNReccQueue.isEmpty()) {
             try {
@@ -203,17 +197,16 @@ public final class Common
     }
 
 
-    static class CustomComparatorDouble implements Comparator<Map.Entry <String, Double>>, Serializable
-    {
-        public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
-            return Double.compare(o2.getValue(), o1.getValue());
-        }
-    }
-
-    public static Set<String> sortByValueAndGetTopN(HashMap<String, Double> simList, int topN)
-    {
-        MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue =
-                MinMaxPriorityQueue.orderedBy(new CustomComparatorDouble()).maximumSize(topN).create();
+    public static Set<String> sortByValueAndGetTopN(HashMap<String, Double> simList, int topN) {
+        Comparator<Entry <String, Double>> comparator = new Comparator<Entry <String, Double>>() {
+            public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
+                return Double.compare(o2.getValue(), o1.getValue());
+            }
+        };
+        MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(topN)
+                .create();
         for (Map.Entry<String, Double> entry : simList.entrySet()) {
             topNReccQueue.offer(entry);
         }
@@ -227,5 +220,6 @@ public final class Common
         }
         return topNSet;
     }
+
 
 }

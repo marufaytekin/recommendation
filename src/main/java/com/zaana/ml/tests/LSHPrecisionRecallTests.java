@@ -3,6 +3,8 @@ package com.zaana.ml.tests;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
 import java.util.*;
 
@@ -134,7 +136,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
 
     private static void calculateLSHMetrics(
-            final HashMap<String, HashSet<String>> userRateSet,
+            final HashObjObjMap<Object, Object> userRateSet,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
             AbstractLSHRecommender recommender, int topN)
     {
@@ -150,7 +152,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String targetUserId = entry.getKey();
-            Set<String> ratedItemSet = userRateSet.get(targetUserId);
+            HashObjSet <String> ratedItemSet = (HashObjSet<String>) userRateSet.get(targetUserId);
             if (ratedItemSet == null) {
                 continue;
             }

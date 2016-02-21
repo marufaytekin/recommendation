@@ -3,6 +3,7 @@ package com.zaana.ml.tests;
 import com.zaana.ml.*;
 import com.zaana.ml.prediction.*;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,101 +43,6 @@ public class LSHPredictionTest extends AbstractTest
                 separator, smoothRun, kNN, y);
     }
 
-/*
-
-    */
-/**
-     * Runs 2D LSH HashTables and HashFunctions tests to determine the effect
-     * of these parameters on prediction accuracy. Output will be 2D graph.*//*
-
-    public static void runLSH2DHashFunctionsTablesTest(
-            String testType, int numOfRun, double smoothRun, String dataFileBase, String separator, int kNN, int y) {
-        int numOfBands = 1;
-        int numOfHashFunctions = 1;
-        ArrayList<Object> runTimeList2D = new ArrayList<>();
-        ArrayList<Object> maeList2D = new ArrayList<>();
-        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
-        for (int i = 0; i < numOfRun; i++) {
-            ArrayList<Double> hashFuncRuntimeList = new ArrayList<>();
-            ArrayList<Double> hashFuncMaeList = new ArrayList<>();
-            ArrayList<Double> candidate_set_list = new ArrayList<>();
-            for (int j = 0; j < numOfRun; j++) {
-                double runTime = 0;
-                double mae = 0;
-                double candidate_set_size = 0;
-                for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "test", separator);
-                    Set<String> itemSet = itemRateMap.keySet();
-                    Set<String> userSet = userRateMap.keySet();
-                    HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap;
-                    HashMap<Integer, HashMap<String, Set<String>>> hashTables;
-                    if (testType == "UBLSH") {
-                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildModel(userRateMap, vmap,
-                                numOfBands);
-                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                        runTime += UBKNNLSHPrediction
-                                .runUserBasedLSHPredictionOnTestData(userRateMap,
-                                        itemRateMap, testDataMap, hashTables, kNN, y, hashKeyLookupTable);
-                        candidate_set_size += UBKNNLSHPrediction.getAvg_candidate_set_size();
-                        mae += MAE.calculateMAE(
-                                UBKNNLSHPrediction.getOutputList(),
-                                UBKNNLSHPrediction.getTargetList());
-                    } else if (testType == "IBLSH") {
-                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-                        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
-                        hashKeyLookupTable = LSH.getHashKeyLookupTable();
-                        runTime += IBKNNLSHPrediction.
-                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
-                                        testDataMap, hashTables, hashKeyLookupTable, kNN, y);
-                        candidate_set_size += IBKNNLSHPrediction.getAvg_candidate_set_size();
-                        mae += MAE.calculateMAE(
-                                IBKNNLSHPrediction.getOutputList(),
-                                IBKNNLSHPrediction.getTargetList());
-                    } else if (testType == "LSH1") {
-                        LSH1UBPrediction lshEstimator = new LSH1UBPrediction();
-                        vmap = Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-                        hashTables = LSH.buildModel(userRateMap, vmap,
-                                numOfBands);
-                        hashKeyLookupTable =  LSH.getHashKeyLookupTable();
-                        runTime += LSHPredictionTests.runUBLSHPredictionOnTestData(
-                                userRateMap, itemRateMap, testDataMap, hashTables, hashKeyLookupTable, lshEstimator);
-                        candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
-                        mae += MAE.calculateMAE(
-                                LSHPredictionTests.getOutputList(),
-                                LSHPredictionTests.getTargetList());
-                    } else {
-                        throw new UnsupportedOperationException("Invalid type.");
-                    }
-                }
-                LOG.info("numOfBands:" + numOfBands
-                        + " numOfHashFunctions:" + numOfHashFunctions);
-                LOG.info(testType + "MAE: " + mae / smoothRun);
-                LOG.info(testType + "Runtime: " + runTime / smoothRun);
-                hashFuncMaeList.add(mae / smoothRun);
-                hashFuncRuntimeList.add(runTime / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
-                numOfHashFunctions += 1;
-            }
-            runTimeList2D.add(hashFuncRuntimeList);
-            maeList2D.add(hashFuncMaeList);
-            candidate_set_list2D.add(candidate_set_list);
-
-            numOfBands += 1;
-            numOfHashFunctions = 1;
-        }
-        LOG2.info("# ========================================================");
-        LOG2.info("# test case: " + testType + " 2D ");
-        LOG2.info("# ========================================================");
-        LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info("k = " + kNN);
-        LOG2.info(testType + "Mae2D = " + maeList2D.toString() + ";");
-        LOG2.info(testType + "Runtime2D = " + runTimeList2D.toString() + ";");
-        LOG2.info(testType + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
-
-    }
-
-*/
 
     /**
      * Runs 2D UB LSH HashTables and HashFunctions tests to determine the effect
@@ -160,7 +66,7 @@ public class LSHPredictionTest extends AbstractTest
         ArrayList<Double> maeList = new ArrayList<>();
         ArrayList<Double> predictedItemsList = new ArrayList<>();
         ArrayList<Double> candidate_set_list = new ArrayList<>();
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+        HashObjObjMap<Object, Object> hashTables;
         for (int i = 0; i < numOfRun; i++) {
             double runTime = 0;
             double mae = 0;

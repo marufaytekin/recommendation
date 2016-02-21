@@ -1,6 +1,8 @@
 package com.zaana.ml.prediction;
 
 import com.zaana.ml.LSH;
+import com.zaana.ml.LSH2;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -13,8 +15,8 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
             final HashMap<String, HashMap<String, Integer>> itemRateMap,
             final HashMap<String, HashMap<String, Integer>> userRateMap,
             final HashMap<String, HashMap<String, Integer>> testDataMap,
-            final HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<String, String> hashKeyLookupTable,
+            final HashObjObjMap<Object, Object> hashTables,
+            HashObjObjMap<Object, Object> hashKeyLookupTable,
             int kNN, int y) {
 
         LOG.info("Running runItemBasedLSHPredictionOnTestData...");
@@ -68,8 +70,8 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
             Map.Entry<String, HashMap<String, Integer>> testDataEntry,
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
-            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            HashMap<String, String> hashKeyLookupTable,
+            HashObjObjMap<Object, Object> hashTables,
+            HashObjObjMap<Object, Object> hashKeyLookupTable,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
             final int kNN, int y)
@@ -82,7 +84,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
-                Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
+                Set<String> candidateSet = LSH2.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
                 total_candidate_set_size += candidateSet.size();
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);

@@ -296,7 +296,7 @@ public final class LSH {
      *            be generated for.
      * @return returns hash key of given rating vector V as string.
      */
-    private static String generateHashKeyForVector(
+    protected static String generateHashKeyForVector(
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
             HashMap<String, Integer> V, int hashTableNum) {
 

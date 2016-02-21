@@ -2,7 +2,9 @@ package com.zaana.ml.prediction;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.LSH;
+import com.zaana.ml.LSH2;
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -38,17 +40,17 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
      * @param userRateMap
      * @param itemRateMap
      * @param testDataMap
-     * @param kNN
+     * @param hashTables
+     *@param kNN
      * @param y
-     * @param hashKeyLookupTable
-     * @return
+     * @param hashKeyLookupTable    @return
      * */
     public static double runUserBasedLSHPredictionOnTestData(
             HashMap<String, HashMap<String, Integer>> userRateMap,
             HashMap<String, HashMap<String, Integer>> itemRateMap,
             HashMap<String, HashMap<String, Integer>> testDataMap,
-            HashMap<Integer, HashMap<String, Set<String>>> hashTables,
-            int kNN, int y, HashMap<String, String> hashKeyLookupTable)
+            HashObjObjMap<Object, Object> hashTables,
+            int kNN, int y, HashObjObjMap<Object, Object> hashKeyLookupTable)
     {
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
@@ -63,7 +65,7 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                 continue;
             }
             cnt++;
-            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+            Set<String> candidateSet = LSH2.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers(
                     testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);

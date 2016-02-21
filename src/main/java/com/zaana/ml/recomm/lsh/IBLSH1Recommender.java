@@ -2,6 +2,8 @@ package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
 import java.util.*;
 
@@ -22,20 +24,21 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         Set<String> userSet = userRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+        hashTables = LSH2.buildModel(itemRateMap, vmap, numOfBands);
+        hashKeyLookupTable = LSH2.getHashKeyLookupTable();
+
     }
 
     @Override
     public List<String> getCandidateItemList(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashSet<String>> userRateSet,
+            HashObjObjMap<Object, Object> userRateSet,
             String userId,
-            Set<String> ratedItemSet) {
-        ratedItemSet = userRateSet.get(userId);
+            HashObjSet<String> ratedItemSet) {
+        //ratedItemSet = userRateSet.get(userId);
         List<String> candidateList = new ArrayList<>();
         for (String ratedItemId : ratedItemSet) {
-            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
+            HashObjSet<String> candidateSet = LSH2.getCandidateItemSetForTopNRecommendation
                     (hashTables, ratedItemSet, ratedItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
         }
@@ -50,7 +53,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
      * @param candidateList
      * @param topN    @return      */
     @Override
-    public Set<String> recommendItems(
+    public HashObjSet<String> recommendItems(
             String userId, List<String> candidateList, int topN)
     {
 

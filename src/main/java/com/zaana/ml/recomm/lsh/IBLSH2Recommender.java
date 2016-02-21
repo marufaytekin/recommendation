@@ -2,6 +2,9 @@ package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
+import net.openhft.koloboke.collect.set.hash.HashObjSets;
 
 import java.util.*;
 
@@ -22,21 +25,21 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         Set<String> userSet = userRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH.getHashKeyLookupTable();
+        hashTables = LSH2.buildModel(itemRateMap, vmap, numOfBands);
+        hashKeyLookupTable = LSH2.getHashKeyLookupTable();
     }
 
     @Override
     public List<String> getCandidateItemList(
             HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashSet<String>> userRateSet,
+            HashObjObjMap<Object, Object> userRateSet,
             String userId,
-            Set<String> ratedItemSet) {
+            HashObjSet<String> ratedItemSet) {
         ratedItemSet = Common.sortByValueAndGetTopNItems(userRateMap.get(userId), 20);
-        //Set<String> ratedItemSet = userRateSet.get(userId);
+        //ratedItemSet = (HashObjSet<String>) userRateSet.get(userId);
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : ratedItemSet) {
-            Set<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
+            HashObjSet<String> candidateSet = LSH2.getCandidateItemSetForTopNRecommendation
                     (hashTables, ratedItemSet, testItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
         }
@@ -45,20 +48,13 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public Set<String> recommendItems(
-            String userId, List<String> candidateList, int topN)
-    {
-        //HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
-        //Set<String> userRatingSet = ratingsSet.keySet(); // use all items rated by user.
-        //candidateItemListSize = candidateList.size();
-        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
-        Set<String> recSet = new HashSet<>();
+    public HashObjSet<String> recommendItems(String userId, List<String> candidateList, int topN) {
+        HashObjSet<String> recSet = HashObjSets.getDefaultFactory().newMutableSet();
         int size = candidateList.size();
         for (int i = size; i > 0 && recSet.size() < topN; i--) {
             int idx = (int) Math.floor(Math.random()*size);
             recSet.add(candidateList.get(idx));
         }
-
         return recSet;
     }
 
@@ -69,11 +65,10 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
             String targetUserId, String itemId,
             Set <String> intersectionOfCandidateItemSet,
             List<String> candidateSetList) {
-
-        double rating;
         double weightedRatingsTotal = 0;
         int size = candidateSetList.size();
         int idx;
+        double rating;
         List <String> kNNList = new ArrayList<>();
         for (int i = size; i > 0 && kNNList.size() <= 20; i--) {
             idx = (int) Math.floor(Math.random()*size);
@@ -82,13 +77,11 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
                 kNNList.add(candidateUser);
             }
         }
-        //candidateItemListSize = candidateSetList.size();
         if (kNNList.isEmpty()) return null;
         for (String candidateItem : kNNList) {
             rating = userRateMap.get(targetUserId).get(candidateItem);
             weightedRatingsTotal += rating;
         }
-        //uniqueCandidateItemListSize = intersectionOfCandidateItemSet.size();
         return weightedRatingsTotal / kNNList.size();
     }
 

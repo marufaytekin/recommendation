@@ -1,7 +1,9 @@
 package com.zaana.ml.prediction;
 
 import com.zaana.ml.LSH;
+import com.zaana.ml.LSH2;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -25,8 +27,8 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long totalTime = 0;
         long startTime;
         long endTime;
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
-        HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
+        HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
+        HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
@@ -43,7 +45,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
                     if (itemRatings == null) continue;
                     List<String> candidateSetList =
-                            LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
+                            LSH2.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
                     Set<String> candidateSet = new HashSet<>(candidateSetList);
 
                     Set<String> ratedUserSet = itemRatings.keySet();
@@ -94,8 +96,8 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long totalTime = 0;
         long startTime;
         long endTime;
-        HashMap<Integer, HashMap<String, Set<String>>> hashTables = lshRecommender.getHashTables();
-        HashMap<String, String> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
+        HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
+        HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashMap<String, Integer> userRateList = userRateMap.get(userId);
@@ -111,7 +113,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     Integer givenRating = entry.getValue();
                     Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
                     List <String> candidateSetList =
-                            LSH.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
+                            LSH2.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
                     Set<String> intersecItemsCandidateSet = new HashSet<>(candidateSetList);
                     intersecItemsCandidateSet.retainAll(ratedItemsSet);
                     if (intersecItemsCandidateSet.isEmpty()) continue;
@@ -141,78 +143,6 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         return avgTime;
 
     }
-
-    /*
-    *//**
-     * This method runs prediction tests for LSH algorithm.
-     *
-     * For each hash table:
-     *   compute a hash key for the target user
-     *   retrieve the candidate users with the hash key from the hash table
-     *   add candidate set to a running list, C.
-     * Weight the candidate users with the number of occurrences in hash tables.
-     * Find the users who rated for the target item in candidate list
-     * Use the ratings of this users weighted with frequency to compute the prediction
-     * @param testDataEntry
-     * @param userRateMap
-     * @param itemRateMap
-     * @param lshRecommender
-     * @param candidateSetList
-     * @param candidateSet
-     * @param outputList
-     * @param targetList
-     *//*
-    private static void predictRatingsForTestUsers(
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            AbstractLSHRecommender lshRecommender,
-            List<String> candidateSetList,
-            Set<String> candidateSet,
-            LinkedList<Double> outputList,
-            LinkedList<Integer> targetList)
-    {
-        double prediction;
-        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
-        String targetUserId = testDataEntry.getKey();
-        for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
-            try {
-                String movieId = entry.getKey();
-                Integer givenRating = entry.getValue();
-                Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
-                Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
-                intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
-                if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
-                    prediction = lshRecommender.calculatePrediction(
-                            userRateMap, targetUserId, movieId, candidateSetList, intersectionOfCandidateRatedUserSets);
-                    if (prediction != 0) {
-                        outputList.add(prediction);
-                        targetList.add(givenRating);
-                    }
-                }
-            } catch (NullPointerException e) {
-                // do nothing
-            }
-        }
-    }
-
-*/
-    /*
-    private static List<String> getFrequentCandidateList(
-            Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList, int kNN) {
-        List<String> userSet = new ArrayList<>();
-        String userId;
-        int size = candidateSetList.size();
-        if (size == 0) return userSet;
-        for (int i = candidateSetList.size(); i >= 0 && userSet.size() < kNN; i--) {
-            int idx = (int) Math.floor(Math.random()*size);
-            //System.out.println("idx:" + idx);
-            userId = candidateSetList.get(idx);
-            if (intersectionOfCandidateRatedUserSets.contains(userId))
-                userSet.add(userId);
-        }
-        return userSet;
-    }*/
 
 
 }

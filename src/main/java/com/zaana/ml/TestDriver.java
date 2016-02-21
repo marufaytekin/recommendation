@@ -94,6 +94,28 @@ public class TestDriver {
                 runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
+            case "05":
+
+                runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("73", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("74", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+
+                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+
+                break;
+
             case "5000":
                 runLSHPredictionTests(dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
@@ -173,6 +195,7 @@ public class TestDriver {
                 LSHPredictionTest.runLSHHashFunctionsAndPrediction(ibLsh1Recommender, "IBKNNLSH", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
+
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
@@ -209,15 +232,6 @@ public class TestDriver {
                         numOfRun, l, k, smoothRun, kNN, y);
                 break;
 
-            case "78":
-                LSHPredictionTest.runLSHHashTablesAndPrediction(ublshRandomRecommender, "UBLSH3", dataFileBase, "test", seperator,
-                        numOfRun, l, k, smoothRun, kNN, y);
-                break;
-            case "79":
-                LSHPredictionTest.runLSHHashFunctionsAndPrediction(ublshRandomRecommender, "UBLSH3", dataFileBase, "test", seperator,
-                        numOfRun, l, k, smoothRun, kNN, y);
-                break;
-
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
@@ -245,6 +259,7 @@ public class TestDriver {
             case "107":
                 LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
+
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////

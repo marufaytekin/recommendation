@@ -4,8 +4,8 @@ package com.zaana.ml.recomm.lsh;
  * Created by maytekin on 03.02.2016.
  */
 
-import com.zaana.ml.LSH;
-import com.zaana.ml.Vector;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
 import java.util.*;
 import java.util.List;
@@ -19,20 +19,12 @@ public class UBLSHRandomRecommender extends AbstractLSHRecommender {
     @Override
     public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
                            HashMap<String, HashMap<String, Integer>> itemRateMap,
-                           int numOfBands, int numOfHashFunctions) {
-        Set<String> itemSet = itemRateMap.keySet();
-        HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
-                Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH.getHashKeyLookupTable();
-    }
-
+                           int numOfBands, int numOfHashFunctions) { }
 
     @Override
-    public List<String> getCandidateItemList(HashMap<String, HashMap<String, Integer>> userRateMap, HashMap<String, HashSet<String>> userRateSet, String userId, Set<String> ratedItemSet) {
+    public List<String> getCandidateItemList(HashMap<String, HashMap<String, Integer>> userRateMap, HashObjObjMap<Object, Object> userRateSet, String userId, HashObjSet<String> ratedItemSet) {
         return null;
     }
-
 
     @Override
     public Set<String> recommendItems(

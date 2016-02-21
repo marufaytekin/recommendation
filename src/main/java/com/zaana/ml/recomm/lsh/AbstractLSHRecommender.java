@@ -1,5 +1,8 @@
 package com.zaana.ml.recomm.lsh;
 
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
+
 import java.util.*;
 
 /**
@@ -7,15 +10,15 @@ import java.util.*;
  */
 public abstract class AbstractLSHRecommender {
 
-    HashMap<Integer, HashMap<String, Set<String>>> hashTables;
-    HashMap<String, String> hashKeyLookupTable;
+    HashObjObjMap<Object, Object> hashTables;
+    HashObjObjMap<Object, Object> hashKeyLookupTable;
     int uniqueCandidateItemListSize;
 
-    public HashMap<Integer, HashMap<String, Set<String>>> getHashTables() {
+    public HashObjObjMap<Object, Object> getHashTables() {
         return hashTables;
     }
 
-    public HashMap<String, String> getHashKeyLookupTable() {
+    public HashObjObjMap<Object, Object> getHashKeyLookupTable() {
         return hashKeyLookupTable;
     }
 
@@ -41,6 +44,10 @@ public abstract class AbstractLSHRecommender {
             HashMap<String, HashMap<String, Integer>> itemRateMap, String targetUserId,
             String movieId, Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList);
 
-    public abstract List<String> getCandidateItemList(HashMap<String, HashMap<String, Integer>> userRateMap, HashMap<String, HashSet<String>> userRateSet, String userId, Set<String> ratedItemSet);
+    public abstract List<String> getCandidateItemList(
+            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<Object, Object> userRateSet,
+            String userId,
+            HashObjSet<String> ratedItemSet);
 
 }
