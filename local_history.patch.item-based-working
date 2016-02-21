@@ -1,0 +1,513 @@
+Index: new plots
+===================================================================
+--- new plots	(revision )
++++ new plots	(revision )
+@@ -1,8 +0,0 @@
+-plot (1000 ./ UBLSH1RecommenderHashTablesAvgRecommTime, UBLSH1RecommenderHashTablesPrecision,
+-1000 ./ UBLSH2RecommenderHashTablesAvgRecommTime, UBLSH2RecommenderHashTablesPrecision)
+-1000 ./ IBLSH1RecommenderHashTablesAvgRecommTime, IBLSH1RecommenderHashTablesPrecision,
+-1000 ./ IBLSH2RecommenderHashTablesAvgRecommTime, IBLSH2RecommenderHashTablesPrecision)
+-
+-
+-plot (1000 ./ UBLSH1RecommenderHashFunctionsAvgRecommTime, UBLSH1RecommenderHashFunctionsPrecision,
+-1000 ./ UBLSH2RecommenderHashFunctionsAvgRecommTime, UBLSH2RecommenderHashFunctionsPrecision)
+\ No newline at end of file
+Index: src/main/java/com/zaana/ml/tests/AbstractTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/tests/AbstractTest.java	(revision )
++++ src/main/java/com/zaana/ml/tests/AbstractTest.java	(revision )
+@@ -15,7 +15,7 @@
+     static HashMap<String, HashMap<String, Integer>> itemRateMap;
+     static HashMap<String, HashMap<String, Integer>> testDataMap;
+     static List<HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>>> vmaps;
+-    static HashMap<Integer, HashMap<String, Set<String>>> hashTables;
++    static List<HashMap<Integer, HashMap<String, Set<String>>>> hashTables;
+     static Set<String> itemSet;
+     static Set<String> userSet;
+     static Logger LOG = Logger.getLogger(AbstractTest.class);
+@@ -50,5 +50,23 @@
+         //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
+ 
+     }
++
++    public static void prepareHashTables(String baseUrl, double smoothRun, String seperator, int l, int k) {
++        vmaps = new LinkedList<>();
++        hashTables = new LinkedList<>();
++        hashKeyLookupTable = new HashMap<>();
++        for (int j = 0; j < smoothRun; j++) {
++            preprocessDataForRecommendation(baseUrl, (j + 1), seperator);
++            Set<String> itemSet = itemRateMap.keySet();
++            Set<String> userSet = userRateMap.keySet();
++            HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
++            HashMap<Integer, HashMap<String, Set<String>>> tables = LSH.buildModel(userRateMap, vmap, l);
++            vmaps.add(vmap);
++            hashTables.add(tables);
++
++        }
++        LOG.info("Hash Tables created...");
++    }
++
+ 
+ }
+Index: src/main/java/com/zaana/ml/tests/BucketDistTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/tests/BucketDistTest.java	(revision )
++++ src/main/java/com/zaana/ml/tests/BucketDistTest.java	(revision )
+@@ -22,8 +22,7 @@
+             Set<String> itemSet = itemRateMap.keySet();
+             Set<String> userSet = userRateMap.keySet();
+             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
+-            LSH.buildModel(userRateMap, vmap, l);
+-            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.getHashTables();
++            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.buildModel(userRateMap, vmap, l);
+             int size;
+             int maxSize = 0;
+             for (Map.Entry<String, Set<String>> bucket : hashTable.get(0).entrySet()) {
+Index: src/main/java/com/zaana/ml/tests/LSHPrecisionRecallTests.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/tests/LSHPrecisionRecallTests.java	(revision )
++++ src/main/java/com/zaana/ml/tests/LSHPrecisionRecallTests.java	(revision )
+@@ -1,6 +1,5 @@
+ package com.zaana.ml.tests;
+ 
+-import com.zaana.ml.LSH;
+ import com.zaana.ml.metrics.Precision;
+ import com.zaana.ml.metrics.Recall;
+ import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
+@@ -30,14 +29,12 @@
+         ArrayList<Double> topNList = new ArrayList<>();
+         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
+         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+-        int numOfHashFunctions = 10;
++        int numOfHashFunctions = 4;
+         for (int i = 0; i < numOfRun; i++) {
+             initMetrics();
+             for (int s = 0; s < smoothRun; s++) {
+                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
+                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
+-                hashTables = recommender.getHashTables();
+-                hashKeyLookupTable = recommender.getHashKeyLookupTable();
+                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
+             }
+             precisionList.add(precision/smoothRun);
+@@ -93,14 +90,12 @@
+         ArrayList<Double> topNList = new ArrayList<>();
+         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
+         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+-        int numOfBands = 10;
++        int numOfBands = 1;
+         for (int i = 0; i < numOfRun; i++) {
+             initMetrics();
+             for (int s = 0; s < smoothRun; s++) {
+                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
+                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
+-                hashTables = recommender.getHashTables();
+-                hashKeyLookupTable = recommender.getHashKeyLookupTable();
+                 calculateLSHMetrics(userRateMap, testDataMap,recommender,topN);
+             }
+             precisionList.add(precision / smoothRun);
+@@ -157,12 +152,9 @@
+             if (userRateList == null) {
+                 continue;
+             }
+-            Set<String> userRatingList = userRateList.keySet();
+-            Set<String> userCandidateSet =
+-                    LSH.getCandidateSetFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
+             startTime = System.currentTimeMillis();
+             Set<String> topNRecommendedItems =
+-                    recommender.recommendItems(userRateMap, userCandidateSet, userRatingList, targetUserId, topN);
++                    recommender.recommendItems(userRateMap, targetUserId, topN);
+             endTime = System.currentTimeMillis();
+             totalReccTime += (endTime - startTime);
+             totalPrecision += Precision
+Index: src/main/java/com/zaana/ml/recomm/lsh/IBLSH1Recommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/IBLSH1Recommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/IBLSH1Recommender.java	(revision )
+@@ -22,8 +22,7 @@
+         Set<String> userSet = userRateMap.keySet();
+         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
+                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+-        LSH.buildModel(itemRateMap, vmap, numOfBands);
+-        hashTables = LSH.getHashTables();
++        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
+         hashKeyLookupTable = LSH.getHashKeyLookupTable();
+     }
+ 
+@@ -31,14 +30,12 @@
+      * IBRecommender with LSH based on frequency of items in the buckets.
+      * Instead of merged similarity value we use frequency of items in candidate list.
+      * @param userRateMap
+-     * @param userCandidateSet
+-     * @param userRatingList
+      * @param userId
+-     * @param topN    @return       */
++     * @param topN    @return    */
+     @Override
+     public Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
++            String userId, int topN)
+     {
+         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
+         Set<String> ratedItemSet = userRateMap.get(userId).keySet();
+Index: src/main/java/com/zaana/ml/recomm/lsh/IBLSH2Recommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/IBLSH2Recommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/IBLSH2Recommender.java	(revision )
+@@ -22,29 +22,28 @@
+         Set<String> userSet = userRateMap.keySet();
+         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
+                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
+-        LSH.buildModel(itemRateMap, vmap, numOfBands);
+-        hashTables = LSH.getHashTables();
++        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
+         hashKeyLookupTable = LSH.getHashKeyLookupTable();
+     }
+ 
+     @Override
+     public Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
++            String userId, int topN)
+     {
+         HashMap<String, Integer> ratingsSet = userRateMap.get(userId);
+         //Set<String> userRatingSet = ratingsSet.keySet(); // use all items rated by user.
+         Set<String> userRatingSet = Common.sortByValueAndGetTopNItems(ratingsSet, 20);// selects top n liked items
+-        //Set<String> uniqueueItemsSet = new HashSet<>();
++        Set<String> uniqueueItemsSet = new HashSet<>();
+         List<String> candidateList = new ArrayList<>();
+         for (String testItemId : userRatingSet) {
+             Set<String> candidateSet = LSH.getCandidateItemSetFromHashTable
+                     (hashTables, ratingsSet, testItemId, hashKeyLookupTable);
+             candidateList.addAll(candidateSet);
+-            //uniqueueItemsSet.addAll(candidateSet);
++            uniqueueItemsSet.addAll(candidateSet);
+         }
+-        //candidateItemListSize = candidateList.size();
+-        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
++        candidateItemListSize = candidateList.size();
++        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+         Set<String> recSet = new HashSet<>();
+         int size = candidateList.size();
+         for (int i = candidateList.size(); i > 0 && recSet.size() < topN; i--) {
+Index: src/main/java/com/zaana/ml/recomm/lsh/UBLSH1Recommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/UBLSH1Recommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/UBLSH1Recommender.java	(revision )
+@@ -19,30 +19,30 @@
+         Set<String> itemSet = itemRateMap.keySet();
+         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
+                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+-        LSH.buildModel(userRateMap, vmap, numOfBands);
+-        hashTables = LSH.getHashTables();
++        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
+         hashKeyLookupTable = LSH.getHashKeyLookupTable();
++
+     }
+ 
+     @Override
+     public Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
++            String userId, int topN)
+     {
+-        //Set<String> userRatingList = userRateMap.get(userId).keySet();
+-        //Set<String> userCandidateSet =
+-        //        LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
++        Set<String> userRatingList = userRateMap.get(userId).keySet();
++        Set<String> userCandidateSet =
++                LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+         Set<String> neighborsRatingList;
+-        //Set<String> uniqueueItemsSet = new HashSet<>();
++        Set<String> uniqueueItemsSet = new HashSet<>();
+         List<String> ratedItemList = new ArrayList<>();
+         for (String neighborId : userCandidateSet) {
+             neighborsRatingList = userRateMap.get(neighborId).keySet();
+             neighborsRatingList.removeAll(userRatingList);
+             ratedItemList.addAll(neighborsRatingList);
+-            //uniqueueItemsSet.addAll(neighborsRatingList);
++            uniqueueItemsSet.addAll(neighborsRatingList);
+         }
+-        //candidateItemListSize = ratedItemList.size();
+-        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
++        candidateItemListSize = ratedItemList.size();
++        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+ 
+         return Common.getMostFrequentTopNElements(ratedItemList, topN);
+ 
+Index: src/main/java/com/zaana/ml/recomm/lsh/UBLSH2Recommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/UBLSH2Recommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/UBLSH2Recommender.java	(revision )
+@@ -17,30 +17,29 @@
+         Set<String> itemSet = itemRateMap.keySet();
+         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
+                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+-        LSH.buildModel(userRateMap, vmap, numOfBands);
+-        hashTables = LSH.getHashTables();
++        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
+         hashKeyLookupTable = LSH.getHashKeyLookupTable();
+     }
+ 
+     @Override
+     public Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
++            String userId, int topN)
+     {
+-        //Set<String> userRatingList = userRateMap.get(userId).keySet();
+-        //Set<String> userCandidateSet =
+-        //        LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
++        Set<String> userRatingList = userRateMap.get(userId).keySet();
++        Set<String> userCandidateSet =
++                LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+         Set<String> neighborsRatingList;
+-        //Set<String> uniqueueItemsSet = new HashSet<>();
++        Set<String> uniqueueItemsSet = new HashSet<>();
+         List<String> ratedItemList = new ArrayList<>();
+         for (String neighborId : userCandidateSet) {
+             neighborsRatingList = userRateMap.get(neighborId).keySet();
+             neighborsRatingList.removeAll(userRatingList);
+             ratedItemList.addAll(neighborsRatingList);
+-            //uniqueueItemsSet.addAll(neighborsRatingList);
++            uniqueueItemsSet.addAll(neighborsRatingList);
+         }
+-        //candidateItemListSize = ratedItemList.size();
+-        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
++        candidateItemListSize = ratedItemList.size();
++        uniqueCandidateItemListSize = uniqueueItemsSet.size();
+         Set<String> recSet = new HashSet<>();
+         int size = ratedItemList.size();
+         int idx;
+Index: src/main/java/com/zaana/ml/recomm/lsh/AbstractLSHRecommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/AbstractLSHRecommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/AbstractLSHRecommender.java	(revision )
+@@ -35,7 +35,7 @@
+ 
+     public abstract Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN);
++            String userId, int topN);
+ 
+     public abstract Double calculatePrediction(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+Index: src/main/java/com/zaana/ml/recomm/lsh/UBLSHRandomRecommender.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/recomm/lsh/UBLSHRandomRecommender.java	(revision )
++++ src/main/java/com/zaana/ml/recomm/lsh/UBLSHRandomRecommender.java	(revision )
+@@ -7,6 +7,7 @@
+ import com.zaana.ml.LSH;
+ import com.zaana.ml.Vector;
+ 
++import java.awt.*;
+ import java.util.*;
+ import java.util.List;
+ 
+@@ -23,15 +24,14 @@
+         Set<String> itemSet = itemRateMap.keySet();
+         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
+                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
+-        LSH.buildModel(userRateMap, vmap, numOfBands);
+-        hashTables = LSH.getHashTables();
++        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
+         hashKeyLookupTable = LSH.getHashKeyLookupTable();
+     }
+ 
+     @Override
+     public Set<String> recommendItems(
+             HashMap<String, HashMap<String, Integer>> userRateMap,
+-            Set<String> userCandidateSet, Set<String> userRatingList, String userId, int topN)
++            String userId, int topN)
+     {
+         return null;
+     }
+Index: src/main/java/com/zaana/ml/LSH.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/LSH.java	(revision )
++++ src/main/java/com/zaana/ml/LSH.java	(revision )
+@@ -20,13 +20,6 @@
+     
+     static double avg_bucket_size;
+     static HashMap<String, String> hashKeyLookupTable;
+-
+-    public static HashMap<Integer, HashMap<String, Set<String>>> getHashTables() {
+-        return hashTables;
+-    }
+-
+-    private static HashMap<Integer, HashMap<String, Set<String>>> hashTables;
+-
+     public double getAvg_bucket_size()
+     {
+         return avg_bucket_size;
+@@ -48,15 +41,15 @@
+      * @param l
+      * 
+      */
+-    public static void buildModel(
++    public static HashMap<Integer,HashMap<String,Set<String>>> buildModel(
+             HashMap<String, HashMap<String, Integer>> ratingMap,
+             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
+ 
+         long startTime = System.currentTimeMillis();
+-        hashTables = generateHashTables(l);
++        HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
+ 
+         Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
+-        hashKeyLookupTable = new HashMap<>();
++        hashKeyLookupTable = new HashMap<>(32000, (float) 1);
+ 
+         while (iter.hasNext()) {
+             Entry<String, HashMap<String, Integer>> entry = iter.next();
+@@ -76,6 +69,8 @@
+         LOG.info("LSH Index Tables generated in " + (endTime - startTime) + " ms ...");
+         LOG.info("Avg number of buckets : " + avg_bucket_size);
+ 
++        return hashTables;
++
+     }
+ 
+     /**
+@@ -126,7 +121,7 @@
+             String itemId,
+             HashMap<String, String> hashKeyTable)
+     {
+-        Set<String> candidateSet = new HashSet<>();
++        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
+         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+         {
+             String hashKey = hashKeyTable.get(itemId + ":" + hashTableNum);
+@@ -172,7 +167,7 @@
+             String userId,
+             HashMap<String, String> hashKeyLookupTable)
+     {
+-        Set<String> candidateSet = new HashSet<>();
++        Set<String> candidateSet = new HashSet<>(1024, (float) 1);
+         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++)
+         {
+             String hashKey = hashKeyLookupTable.get(userId + ":" + hashTableNum);
+@@ -248,7 +243,7 @@
+ 
+         HashMap<Integer, HashMap<String, Set<String>>> hashTables = new HashMap<>();
+         for (int tableNum = 0; tableNum < l; tableNum++) {
+-            HashMap<String, Set<String>> hashTable = new HashMap<>();
++            HashMap<String, Set<String>> hashTable = new HashMap<>(1024, (float) 1);
+             hashTables.put(tableNum, hashTable);
+         }
+         return hashTables;
+@@ -313,7 +308,7 @@
+             HashMap<String, Set<String>> hashTable) {
+         if (hashTable.containsKey(hashKey)) hashTable.get(hashKey).add(item);
+         else {
+-            Set<String> set = new HashSet<>();
++            Set<String> set = new HashSet<>(1024, (float) 1);
+             set.add(item);
+             hashTable.put(hashKey, set);
+         }
+Index: src/main/java/com/zaana/ml/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/Main.java	(revision )
++++ src/main/java/com/zaana/ml/Main.java	(revision )
+@@ -19,8 +19,8 @@
+     //private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
+     //private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
+ 
+-    //static String dataFilePath = "data/ymusic/ymusic.data";
+-    //static String dataFileBase = "data/ymusic/ymusic";
++    static String dataFilePath = "data/ymusic/ymusic.data";
++    static String dataFileBase = "data/ymusic/ymusic";
+     //static String dataFilePath = "data/music/music.dat";
+     //static String dataFileBase = "data/music/music";
+     //static String dataFilePath = "data/100k/ml.data";
+@@ -29,8 +29,8 @@
+     //static String dataFileBase = "data/movies_tv/movies_tv";
+     //static String dataFilePath = "data/300k/xaa.data";
+     //static String dataFileBase = "data/300k/xaa";
+-    static String dataFilePath = "data/1m/ml1m.data";
+-    static String dataFileBase = "data/1m/ml1m";
++    //static String dataFilePath = "data/1m/ml-1m.data";
++    //static String dataFileBase = "data/1m/ml-1m";
+     static final String seperator = "\\t";
+     static int topN = 20;
+     static int kNN = 20;
+@@ -39,8 +39,8 @@
+     static final int smoothRun = 3;
+     // l: number of bands
+     // k: number of hash functions
+-    static int l = 10;
+-    static int k = 10;
++    static int l = 5;
++    static int k = 6;
+ 
+     public static void main(final String[] args) throws IOException
+     {
+Index: src/main/java/com/zaana/ml/TestDriver.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/zaana/ml/TestDriver.java	(revision )
++++ src/main/java/com/zaana/ml/TestDriver.java	(revision )
+@@ -70,10 +70,8 @@
+                 break;
+ 
+             case "03":
+-                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+-                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+-                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+-                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
++                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
++                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                 break;
+ 
+             case "04":
+Index: results/draw-new
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- results/draw-new	(revision )
++++ results/draw-new	(revision )
+@@ -279,7 +279,7 @@
+ legend boxon;
+ xlabel('Number of Hash Tables');
+ ylabel('Recommendation Time (ms.)')
+-write(f, strcat(fileName,'-hash-tables-topn-runtime2'));
++write(f, strcat(fileName,'-hash-tables-topn-runtime'));
+ 
+ 
+ 
