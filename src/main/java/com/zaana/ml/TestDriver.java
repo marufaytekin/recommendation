@@ -119,13 +119,6 @@ public class TestDriver {
                 ModelBuildTimeTest.runModelBuildTimeTest("IB", dataFilePath, seperator, k, l);
                 ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
-            case "11":
-                ClusterTest.runClusterTests1(dataFileBase, seperator, kNN, y);
-
-                break;
-            case "12":
-                ClusterTest.runClusterPredictionTests(dataFileBase, seperator, numOfRun, smoothRun, kNN, y);
-                break;
 
 //            case "50":
 //                CFPredictionValidationTest.runCFPredictionAndKTest(dataFilePath, dataFileBase, "UB", smoothRun, seperator, y);
