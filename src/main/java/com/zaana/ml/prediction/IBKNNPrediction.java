@@ -1,6 +1,7 @@
 package com.zaana.ml.prediction;
 
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -35,11 +36,11 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
      * @param userRateMap
      * @param testDataMap
      * @param kNN    @return
-     * @param y        */
+     * @param y           */
     public static double runItemBasedNNPredictionOnTestData(
-            final HashMap<String, HashMap<String, Integer>> itemRateMap,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            final HashMap<String, HashMap<String, Integer>> testDataMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             final int kNN, int y) {
 
         LOG.info("Running prediction tests on test data set...");
@@ -48,10 +49,10 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
         int testDataSize = testDataMap.size();
         LOG.info("testDataMap size :" + testDataSize);
         final long startTime = System.currentTimeMillis();
-        for (Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
+        for (Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap
                 .entrySet()) {
             String testUserId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(testUserId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(testUserId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
@@ -69,14 +70,16 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
 
 
     public static void predictRatingsForTestUsers(
-            Entry<String, HashMap<String, Integer>> testDataEntry,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            Set<String> ratedItemsSet, String testUserId, LinkedList<Double> outputList,
+            Entry<String, HashObjObjMap<String, Integer>> testDataEntry,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            Set<String> ratedItemsSet,
+            String testUserId,
+            LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
             int kNN, int y)
     {
 
-        HashMap<String, Integer> testMovieList = testDataEntry.getValue();
+        HashObjObjMap<String, Integer> testMovieList = testDataEntry.getValue();
         double prediction;
         for (Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
@@ -102,9 +105,9 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
      * @param itemId
      * @param ratedItemsSet
      * @param kNN   @return
-     * @param y     */
+     * @param y        */
     public static LinkedHashMap<String, Double> getSimilarItemsListRatedByUser(
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             String itemId, Set<String> ratedItemsSet, int kNN, int y)
     {
 

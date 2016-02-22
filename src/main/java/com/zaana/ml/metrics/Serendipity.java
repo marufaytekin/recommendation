@@ -1,6 +1,7 @@
 package com.zaana.ml.metrics;
 
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,13 +23,13 @@ public final class Serendipity
      * compute serendipity = dis_total / (|Hu|*N)
      * 
      * @param userRateMap
-     * @param topNRecom
-     * @param userId
-     * @return serendipity
+     * @param itemRateMap
+     *@param topNRecom
+     * @param userId   @return serendipity
      */
     public static Double serendipity(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             Set<String> topNRecom,
             String userId)
     {

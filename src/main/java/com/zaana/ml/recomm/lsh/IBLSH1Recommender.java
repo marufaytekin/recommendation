@@ -17,8 +17,8 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
-                           HashMap<String, HashMap<String, Integer>> itemRateMap,
+    public void buildModel(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+                           HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                            int numOfBands, int numOfHashFunctions)
     {
         Set<String> userSet = userRateMap.keySet();
@@ -31,7 +31,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
     public List<String> getCandidateItemList(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             HashObjObjMap<Object, Object> userRateSet,
             String userId,
             HashObjSet<String> ratedItemSet) {
@@ -66,11 +66,11 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
     public Double calculatePrediction(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             String targetUserId,
             String itemId,
-            Set <String> intersectItemsCandidateSet,
+            HashObjSet<String> intersectItemsCandidateSet,
             List<String> candidateSetList) {
 
         int frequency;
@@ -80,9 +80,10 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         HashMap <String, Integer> frequencyMap =
                 Common.getCandidateFrequentNElementsMap(candidateSetList, intersectItemsCandidateSet, 20);
         if (frequencyMap.isEmpty()) return null;
+        HashObjObjMap<String, Integer> userRatings = userRateMap.get(targetUserId);
         for (String item : frequencyMap.keySet()) {
             frequency = frequencyMap.get(item);
-            rating = userRateMap.get(targetUserId).get(item);
+            rating = userRatings.get(item);
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }

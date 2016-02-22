@@ -90,8 +90,8 @@ public class LSHPredictionTest extends AbstractTest
                     hashTables = lshRecommender.getHashTables();
                     hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
                     runTime += IBKNNLSHPrediction.
-                                runItemBasedLSHPredictionOnTestData(itemRateMap, userRateMap,
-                                        testDataMap, hashTables, hashKeyLookupTable, kNN, y);
+                            runItemBasedLSHPredictionOnTestData
+                                    (itemRateMap, userRateMap, testDataMap, hashTables, hashKeyLookupTable, kNN, y);
                     candidate_set_size += IBKNNLSHPrediction
                             .getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
@@ -99,16 +99,16 @@ public class LSHPredictionTest extends AbstractTest
                             IBKNNLSHPrediction.getTargetList());
                     predictedItems += IBKNNLSHPrediction.getOutputList().size();
                 } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3") {
-                    runTime += LSHPredictionTests.runUBLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, lshRecommender);
+                    runTime += LSHPredictionTests.runUBLSHPredictionOnTestData
+                            (userRateMap, itemRateMap, testDataMap, lshRecommender);
                     candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
                             LSHPredictionTests.getOutputList(),
                             LSHPredictionTests.getTargetList());
                     predictedItems += LSHPredictionTests.getOutputList().size();
                 } else if (type == "IBLSH1" || type == "IBLSH2" ){
-                    runTime += LSHPredictionTests.runIBLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, lshRecommender);
+                    runTime += LSHPredictionTests.runIBLSHPredictionOnTestData
+                            (userRateMap, itemRateMap, testDataMap, lshRecommender);
                     candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
                     mae += MAE.calculateMAE(
                             LSHPredictionTests.getOutputList(),

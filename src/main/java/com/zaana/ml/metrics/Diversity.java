@@ -1,6 +1,7 @@
 package com.zaana.ml.metrics;
 
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -20,8 +21,10 @@ public final class Diversity
      * @param y
      * @return diversity
      */
-    public static double intraListDissimilarity(Set<String> topNRecommendedItems,
-                                                HashMap<String, HashMap<String, Integer>> ratingMap, int y)
+    public static double intraListDissimilarity(
+            Set<String> topNRecommendedItems,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> ratingMap,
+            int y)
     {
 
         Iterator<String> iter = topNRecommendedItems.iterator();
@@ -34,8 +37,7 @@ public final class Diversity
             Iterator<String> iterSub = subList.iterator();
             while (iterSub.hasNext()) {
                 String subItemId = iterSub.next();
-                double sim = Cosine.getCosineSimilarity(itemId, subItemId,
-                        ratingMap, y);
+                double sim = Cosine.getCosineSimilarity(itemId, subItemId, ratingMap, y);
                 double distance = 1 - sim;
                 intraListDistTotal += distance;
                 cnt++;

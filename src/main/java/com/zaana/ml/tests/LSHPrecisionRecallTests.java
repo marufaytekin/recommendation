@@ -137,7 +137,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
     private static void calculateLSHMetrics(
             final HashObjObjMap<Object, Object> userRateSet,
-            final HashMap<String, HashMap<String, Integer>> testDataMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             AbstractLSHRecommender recommender, int topN)
     {
         double totalCandidateItemList = 0;
@@ -149,8 +149,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         long startTime ;
         long endTime;
         long totalReccTime = 0;
-        for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
-                .entrySet()) {
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> entry : testDataMap.entrySet()) {
             String targetUserId = entry.getKey();
             HashObjSet <String> ratedItemSet = (HashObjSet<String>) userRateSet.get(targetUserId);
             if (ratedItemSet == null) {
@@ -164,10 +163,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             endTime = System.currentTimeMillis();
             totalReccTime += (endTime - startTime);
 
-            totalPrecision += Precision
-                    .getPrecision(topNRecommendedItems, entry);
-            totalRecall += Recall
-                    .getRecall(topNRecommendedItems, entry);
+            totalPrecision += Precision.getPrecision(topNRecommendedItems, entry);
+            totalRecall += Recall.getRecall(topNRecommendedItems, entry);
             totalTopN += topNRecommendedItems.size();
             totalCandidateItemList += recommender.getCandidateItemListSize();
             totalUniqueItemList += recommender.getUniqueCandidateItemListSize();

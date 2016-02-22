@@ -15,8 +15,8 @@ import java.util.*;
 public class UBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
-    public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
-                           HashMap<String, HashMap<String, Integer>> itemRateMap,
+    public void buildModel(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+                           HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                            int numOfBands, int numOfHashFunctions) {
         Set<String> itemSet = itemRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
@@ -28,7 +28,7 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
     public List<String> getCandidateItemList(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             HashObjObjMap<Object, Object> userRateSet,
             String userId,
             HashObjSet<String> ratedItemSet) {
@@ -59,11 +59,11 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
 
     @Override
     public Double calculatePrediction(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             String targetUserId,
             String movieId,
-            Set<String> intersectionOfCandidateRatedUserSets,
+            HashObjSet<String> intersectionOfCandidateRatedUserSets,
             List<String> candidateSetList) {
 
         double weightedRatingsTotal = 0;
@@ -75,9 +75,10 @@ public class UBLSH1Recommender extends AbstractLSHRecommender {
                         candidateSetList, intersectionOfCandidateRatedUserSets, 20);
         //candidateItemListSize = candidateSetList.size();
         if (frequencyMap.isEmpty()) return null;
+        HashObjObjMap<String, Integer> usersRated = itemRateMap.get(movieId);
         for (String candidateUser : frequencyMap.keySet()) {
             frequency = frequencyMap.get(candidateUser);
-            rating = userRateMap.get(candidateUser).get(movieId);
+            rating = usersRated.get(candidateUser);
             weightedRatingsTotal += rating * frequency;
             weightsTotal += frequency;
         }

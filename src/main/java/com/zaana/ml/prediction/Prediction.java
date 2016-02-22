@@ -1,5 +1,7 @@
 package com.zaana.ml.prediction;
 
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+
 import java.util.*;
 import java.util.Map.Entry;
 
@@ -15,7 +17,7 @@ public class Prediction
      * @return
      */
     public static double calculateUserBasedPredicitonRate(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             LinkedHashMap<String, Double> kNNList, String movieId)
     {
 
@@ -53,7 +55,7 @@ public class Prediction
      * @return
      */
     public static double calculateItemBasedPredicitonRate(
-            final HashMap<String, HashMap<String, Integer>> itemRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             final LinkedHashMap<String, Double> kNNList,
             final String testUserId)
     {

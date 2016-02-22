@@ -36,19 +36,18 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
      * compute u's preference for i, by using top k user's preference for item i weighted by s (k)
      *
      *    O ( b * (h+c) + p* (m+c) + p*log(p) + p + k)
-     *
-     * @param userRateMap
+     *  @param userRateMap
      * @param itemRateMap
      * @param testDataMap
      * @param hashTables
-     *@param kNN
+     * @param kNN
      * @param y
      * @param hashKeyLookupTable    @return
      * */
     public static double runUserBasedLSHPredictionOnTestData(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            HashMap<String, HashMap<String, Integer>> testDataMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             HashObjObjMap<Object, Object> hashTables,
             int kNN, int y, HashObjObjMap<Object, Object> hashKeyLookupTable)
     {
@@ -57,18 +56,17 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
         Integer total_candidate_set_size = 0;
         int cnt = 0;
         final long startTime = System.currentTimeMillis();
-        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
-                .entrySet()) {
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             cnt++;
             Set<String> candidateSet = LSH2.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
             total_candidate_set_size += candidateSet.size();
-            predictRatingsForTestUsers(
-                    testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);
+            predictRatingsForTestUsers
+                    (testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);
         }
         final long endTime = System.currentTimeMillis();
         double avgTime = (double)(endTime - startTime)/outputList.size();
@@ -82,15 +80,15 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
 
 
     private static void predictRatingsForTestUsers(
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             Set<String> candidateSet, String userId,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
             final int kNN, int y)
     {
-        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
+        HashObjObjMap<String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
         for (Map.Entry<String, Integer> entry : movieRatePair.entrySet()) {
             try {

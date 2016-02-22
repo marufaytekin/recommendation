@@ -312,8 +312,6 @@ n= 10;
 x = 1:1:n;
 numOfHashFunctions = 6;
 
-x1 = IBKNNRecommenderPrecision;
-x2 = UBKNNRecommenderPrecision;
 x3 = IBLSH1RecommenderHashTablesPrecision;
 x4 = IBLSH2RecommenderHashTablesPrecision;
 x5 = UBLSH1RecommenderHashTablesPrecision;
@@ -331,8 +329,8 @@ plot (x3, y3,'-+', x4, y4,'->', x5, y5,'-o', x6, y6,'-<');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
 set (h, 'fontsize', 8);
 xlabel('Precision - right is better');
-ylabel('Running Time(ms./topN recc.) - lower is better');
-title('Precision-Performance tradeoff - lower and to the right is better');
+ylabel('Running Time(ms.) - lower is better');
+title('Precision-Performance tradeoff - lower and right is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-topn-comp2'));
 

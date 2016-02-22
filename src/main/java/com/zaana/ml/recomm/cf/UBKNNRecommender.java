@@ -2,6 +2,7 @@ package com.zaana.ml.recomm.cf;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.Common;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -11,8 +12,8 @@ import java.util.*;
 public class UBKNNRecommender extends AbstractCFRecommender {
 
     @Override
-    public void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
-                           HashMap<String, HashMap<String, Integer>> itemRateMap,
+    public void buildModel(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+                           HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                            int y, int k) {
         buildSimilarityMatrix(userRateMap, y, k);
     }
@@ -29,7 +30,7 @@ public class UBKNNRecommender extends AbstractCFRecommender {
      */
     @Override
     public Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String userId, int topN)
     {
         if (model == null) {

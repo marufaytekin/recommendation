@@ -2,6 +2,8 @@ package com.zaana.ml.recomm.cf;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
 
 import java.io.*;
 import java.util.*;
@@ -14,11 +16,11 @@ public abstract class AbstractCFRecommender implements Serializable {
     HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> model;
 
     public abstract Set<String> recommendItems(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String userId, int topN);
 
-    public abstract void buildModel(final HashMap<String, HashMap<String, Integer>> userRateMap,
-                                    final HashMap<String, HashMap<String, Integer>> itemRateMap,
+    public abstract void buildModel(final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+                                    final HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                                     int y, int k);
 
     /**
@@ -30,22 +32,23 @@ public abstract class AbstractCFRecommender implements Serializable {
      * @param k
      * @return model: similarity matrix.
      */
-    protected void buildSimilarityMatrix(final HashMap<String, HashMap<String, Integer>> ratingMap,
+    protected void buildSimilarityMatrix(final HashObjObjMap<String, HashObjObjMap<String, Integer>> ratingMap,
                            int y, int k)
     {
         model = new HashMap<>();
-        HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(ratingMap);
-        for (Map.Entry<String, HashMap<String, Integer>> userItemRatesPairA : ratingMap
+
+        HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMapCopy = HashObjObjMaps.getDefaultFactory().newMutableMap(ratingMap);
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> userItemRatesPairA : ratingMap
                 .entrySet()) {
             String objectIdA = userItemRatesPairA.getKey();
-            HashMap<String, Integer> objectRatingsA = userItemRatesPairA
+            HashObjObjMap<String, Integer> objectRatingsA = userItemRatesPairA
                     .getValue();
             Set<String> ratedItemIDSetA = objectRatingsA.keySet();
-            for (Map.Entry<String, HashMap<String, Integer>> entryB : userRateMapCopy
+            for (Map.Entry<String, HashObjObjMap<String, Integer>> entryB : userRateMapCopy
                     .entrySet()) {
                 String objectIdB = entryB.getKey();
                 if (objectIdA.equals(objectIdB)) continue;
-                HashMap<String, Integer> objectRatingsB = entryB.getValue();
+                HashObjObjMap<String, Integer> objectRatingsB = entryB.getValue();
                 Set<String> ratedItemIDSetB = objectRatingsB.keySet();
                 Set<String> intersectionAB = new HashSet<>(ratedItemIDSetA);
                 intersectionAB.retainAll(ratedItemIDSetB);

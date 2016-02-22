@@ -32,22 +32,25 @@ public abstract class AbstractLSHRecommender {
 
     int candidateItemListSize;
 
-    public abstract void buildModel(HashMap<String, HashMap<String, Integer>> userRateMap,
-                                    HashMap<String, HashMap<String, Integer>> itemRateMap,
+    public abstract void buildModel(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+                                    HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                                     int numOfBands, int numOfHashFunctions);
 
     public abstract Set<String> recommendItems(
             String userId, List<String> candidateList, int topN);
 
-    public abstract Double calculatePrediction(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap, String targetUserId,
-            String movieId, Set<String> intersectionOfCandidateRatedUserSets, List<String> candidateSetList);
-
     public abstract List<String> getCandidateItemList(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             HashObjObjMap<Object, Object> userRateSet,
             String userId,
             HashObjSet<String> ratedItemSet);
+
+    public abstract Double calculatePrediction(
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            String targetUserId,
+            String movieId,
+            HashObjSet<String> intersectionOfCandidateRatedUserSets,
+            List<String> candidateSetList);
 
 }

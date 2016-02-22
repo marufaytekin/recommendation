@@ -4,6 +4,8 @@ import com.zaana.ml.LSH;
 import com.zaana.ml.LSH2;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
+import net.openhft.koloboke.collect.set.hash.HashObjSets;
 
 import java.util.*;
 
@@ -15,9 +17,9 @@ public class LSHPredictionTests extends AbstractPredictionTests {
     /**
      * Runs LSH prediction on test data */
     public static double runUBLSHPredictionOnTestData(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            HashMap<String, HashMap<String, Integer>> testDataMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             AbstractLSHRecommender lshRecommender)
     {
         outputList = new LinkedList<>();
@@ -29,37 +31,33 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long endTime;
         HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
         HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             Double prediction;
-            HashMap <String, Integer> userRatings = testDataEntry.getValue();
+            HashObjObjMap<String, Integer> userRatings = testDataEntry.getValue();
             String targetUserId = testDataEntry.getKey();
             for (Map.Entry<String, Integer> entry : userRatings.entrySet()) {
                 try {
                     String movieId = entry.getKey();
                     Integer givenRating = entry.getValue();
-                    HashMap<String, Integer> itemRatings = itemRateMap.get(movieId);
+                    HashObjObjMap<String, Integer> itemRatings = itemRateMap.get(movieId);
                     if (itemRatings == null) continue;
+                    Set<String> ratedUserSet = itemRatings.keySet();
+                    startTime = System.currentTimeMillis();
                     List<String> candidateSetList =
                             LSH2.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
-                    Set<String> candidateSet = new HashSet<>(candidateSetList);
-
-                    Set<String> ratedUserSet = itemRatings.keySet();
-
-                    Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(candidateSet);
+                    HashObjSet<String> intersectionOfCandidateRatedUserSets = HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersectionOfCandidateRatedUserSets.retainAll(ratedUserSet);
-                    if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
-                    Collections.shuffle(candidateSetList);
-                    startTime = System.currentTimeMillis();
-                    prediction = lshRecommender.calculatePrediction(userRateMap, itemRateMap, targetUserId, movieId,
-                            intersectionOfCandidateRatedUserSets, candidateSetList);
+                    //if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
+                    prediction = lshRecommender.calculatePrediction
+                            (userRateMap, itemRateMap, targetUserId, movieId, intersectionOfCandidateRatedUserSets, candidateSetList);
                     endTime = System.currentTimeMillis();
                     totalTime += endTime - startTime;
-                    total_candidate_set_size += candidateSet.size();
+                    total_candidate_set_size += (new HashSet<>(candidateSetList)).size();
                     cnt++;
                     if (prediction != null) {
                         outputList.add(prediction);
@@ -84,9 +82,9 @@ public class LSHPredictionTests extends AbstractPredictionTests {
     /**
      * Runs LSH prediction on test data */
     public static double runIBLSHPredictionOnTestData(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
-            HashMap<String, HashMap<String, Integer>> testDataMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             AbstractLSHRecommender lshRecommender)
     {
         outputList = new LinkedList<>();
@@ -98,32 +96,32 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long endTime;
         HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
         HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             Double prediction;
-            HashMap <String, Integer> userRatings = testDataEntry.getValue();
+            HashObjObjMap<String, Integer> userRatings = testDataEntry.getValue();
             String targetUserId = testDataEntry.getKey();
             for (Map.Entry<String, Integer> entry : userRatings.entrySet()) {
                 try {
                     String movieId = entry.getKey();
                     Integer givenRating = entry.getValue();
                     Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
+                    startTime = System.currentTimeMillis();
                     List <String> candidateSetList =
                             LSH2.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
-                    Set<String> intersecItemsCandidateSet = new HashSet<>(candidateSetList);
+                    HashObjSet<String> intersecItemsCandidateSet =
+                            HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersecItemsCandidateSet.retainAll(ratedItemsSet);
                     if (intersecItemsCandidateSet.isEmpty()) continue;
-                    startTime = System.currentTimeMillis();
                     prediction = lshRecommender.calculatePrediction(
                             userRateMap, itemRateMap, targetUserId, movieId, intersecItemsCandidateSet, candidateSetList);
                     endTime = System.currentTimeMillis();
-                    totalTime += endTime - startTime;
-                    Set<String> candidateSet = new HashSet<>(candidateSetList);
-                    total_candidate_set_size += candidateSet.size();
+                    totalTime += (endTime - startTime);
+                    total_candidate_set_size += (new HashSet<>(candidateSetList)).size();
                     cnt++;
                     if (prediction != null) {
                         outputList.add(prediction);

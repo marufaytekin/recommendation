@@ -1,5 +1,7 @@
 package com.zaana.ml;
 
+import net.openhft.koloboke.collect.ObjIterator;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -42,19 +44,19 @@ public final class LSH {
      * 
      */
     public static HashMap<Integer,HashMap<String,Set<String>>> buildModel(
-            HashMap<String, HashMap<String, Integer>> ratingMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> ratingMap,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 
         long startTime = System.currentTimeMillis();
         HashMap<Integer, HashMap<String, Set<String>>> hashTables = generateHashTables(l);
 
-        Iterator<Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
+        ObjIterator<Entry<String, HashObjObjMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
         hashKeyLookupTable = new HashMap<>();
 
         while (iter.hasNext()) {
-            Entry<String, HashMap<String, Integer>> entry = iter.next();
+            Entry<String, HashObjObjMap<String, Integer>> entry = iter.next();
             String K = entry.getKey();
-            HashMap<String, Integer> V = entry.getValue();
+            HashObjObjMap<String, Integer> V = entry.getValue();
             for (int hashTableNum = 0; hashTableNum < l; hashTableNum++) {
                 HashMap<String, Set<String>> hashTable = hashTables
                         .get(hashTableNum);
@@ -72,8 +74,11 @@ public final class LSH {
         return hashTables;
 
     }
+/*
 
-    /**
+
+    */
+/**
      * This method calculates candidate set for a user/item based on its
      * ratings. Generates hashkey for each hash table(band) and queries the
      * candidates based on generated hashkey and bulds the candidate set.
@@ -86,7 +91,8 @@ public final class LSH {
      * @param userRates
      *            rate vector of the userId
      * @return candidate set for userId
-     */
+     *//*
+
     public static Set<String> getCandidateSet(
             HashMap<Integer, HashMap<String, Set<String>>> hashTables,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
@@ -94,8 +100,7 @@ public final class LSH {
             HashMap<String, Integer> userRates) {
         Set<String> candidateSet = new HashSet<>();
         for (int hashTableNum = 0; hashTableNum < hashTables.size(); hashTableNum++) {
-            String hashKey = generateHashKeyForVector(vmap, userRates,
-                    hashTableNum);
+            String hashKey = generateHashKeyForVector(vmap, userRates, hashTableNum);
             Set<String> candidates = hashTables.get(
                     Integer.valueOf(hashTableNum)).get(hashKey);
             candidateSet.addAll(candidates);
@@ -104,6 +109,7 @@ public final class LSH {
 
         return candidateSet;
     }
+*/
 
     /***
      * Returns candidate set by using hashKeyLookupTable.
@@ -298,7 +304,7 @@ public final class LSH {
      */
     protected static String generateHashKeyForVector(
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap,
-            HashMap<String, Integer> V, int hashTableNum) {
+            HashObjObjMap<String, Integer> V, int hashTableNum) {
 
         HashMap<Integer, HashMap<String, Integer>> vectors = vmap
                 .get(hashTableNum);

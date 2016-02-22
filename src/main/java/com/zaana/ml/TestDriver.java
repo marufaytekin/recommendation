@@ -4,6 +4,7 @@ import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import com.zaana.ml.recomm.lsh.*;
 import com.zaana.ml.tests.*;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 
 import java.util.HashMap;
@@ -20,7 +21,6 @@ public class TestDriver {
         IBLSH2Recommender ibLsh2Recommender = new IBLSH2Recommender();
         UBLSH1Recommender ubLsh1Recommender = new UBLSH1Recommender();
         UBLSH2Recommender ubLsh2Recommender = new UBLSH2Recommender();
-        UBLSHRandomRecommender ublshRandomRecommender = new UBLSHRandomRecommender();
         switch (selection) {
 
             case "00":
@@ -61,7 +61,7 @@ public class TestDriver {
 
             case "02":
                 DataParser.processDataFile(dataFilePath, seperator,5,95);
-                HashMap<String, HashMap<String, Integer>> userRateMap = DataParser.getUserRateMap();
+                HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap = DataParser.getUserRateMap();
                 System.out.println("User based histogram");
                 DataParser.calculateDataSetHistogram(userRateMap);
                 System.out.println("Item based histogram");

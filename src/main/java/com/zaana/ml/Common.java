@@ -19,30 +19,9 @@ public final class Common
 
     }
 
-    /**
-     * This method returns the list of items that have not been rated by the target user
-     * 
-     * @param userRateMap
-     * @param itemSet
-     * @param targetUserId
-     * @return The list of items that have not been rated by the target user
-     */
-    public static Set<String> getUserNonRatedItemList(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            Set<String> itemSet, String targetUserId) {
-        try {
-            Set<String> ratedItems = userRateMap.get(targetUserId).keySet();
-            Set<String> diff = new HashSet<>(itemSet);
-            diff.removeAll(ratedItems);
-            return diff;
-        } catch (NullPointerException e) {
-            throw e;
-        }
-    }
-
     public static LinkedHashMap<String, Double> getkNNList(
             LinkedHashMap<String, Double> targetUserSimilarityList,
-            HashMap<String, HashMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String movieId, int kNN) {
         Iterator<Entry<String, Double>> iter = targetUserSimilarityList
                 .entrySet().iterator();
@@ -167,7 +146,7 @@ public final class Common
     }
 
 
-    public static HashObjSet<String> sortByValueAndGetTopNItems(HashMap<String, Integer> ratingsSet, int n) {
+    public static HashObjSet<String> sortByValueAndGetTopNItems(HashObjObjMap<String, Integer> ratingsSet, int n) {
 
         Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
             public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {

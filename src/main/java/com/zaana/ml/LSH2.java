@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import net.openhft.koloboke.collect.ObjIterator;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
@@ -36,18 +37,18 @@ public final class LSH2 {
     }
 
     public static HashObjObjMap<Object, Object> buildModel(
-            HashMap<String, HashMap<String, Integer>> ratingMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> ratingMap,
             HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap, int l) {
 
         HashObjObjMap<Object, Object> hashTables = generateHashTables(l);
 
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
+        ObjIterator<Map.Entry<String, HashObjObjMap<String, Integer>>> iter = ratingMap.entrySet().iterator();
         hashKeyLookupTable = HashObjObjMaps.getDefaultFactory().newMutableMap();
 
         while (iter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
+            Map.Entry<String, HashObjObjMap<String, Integer>> entry = iter.next();
             String K = entry.getKey();
-            HashMap<String, Integer> V = entry.getValue();
+            HashObjObjMap<String, Integer> V = entry.getValue();
 
             for (int hashTableNum = 0; hashTableNum < l; hashTableNum++) {
                 HashObjObjMap<Object, Object> hashTable = (HashObjObjMap<Object, Object>) hashTables.get(hashTableNum);

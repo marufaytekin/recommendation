@@ -3,6 +3,7 @@ package com.zaana.ml.tests;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.cf.AbstractCFRecommender;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -50,8 +51,8 @@ public class CFPrecisionRecallTests extends AbstractTest {
     }
 
     public static void calculateCFPrecisionRecall(
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> testDataMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             AbstractCFRecommender recommender, int topN)
     {
         totalPrecision = 0;
@@ -59,10 +60,10 @@ public class CFPrecisionRecallTests extends AbstractTest {
         totalTime = 0;
         long startTime;
         long endTime;
-        for (Map.Entry<String, HashMap<String, Integer>> entry : testDataMap
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null) {
                 continue;
             }

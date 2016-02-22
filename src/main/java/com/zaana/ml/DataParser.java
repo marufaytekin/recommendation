@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import net.openhft.koloboke.collect.ObjIterator;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
@@ -18,9 +19,9 @@ public final class DataParser
 
     private DataParser() {}
 
-    private static HashMap<String, HashMap<String, Integer>> userRateMap;
-    private static HashMap<String, HashMap<String, Integer>> itemRateMap;
-    private static HashMap<String, HashMap<String, Integer>> testDataMap;
+    private static HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap;
+    private static HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap;
+    private static HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap;
     static HashObjObjMap<Object, Object> userRateSet;
     static HashObjObjMap<Object, Object> itemRateSet;
     static HashObjObjMap<Object, Object> testRateSet;
@@ -39,7 +40,7 @@ public final class DataParser
         return userSetCount;
     }
 
-    public static HashMap<String, HashMap<String, Integer>> getUserRateMap()
+    public static HashObjObjMap<String, HashObjObjMap<String, Integer>> getUserRateMap()
     {
         return userRateMap;
     }
@@ -54,12 +55,12 @@ public final class DataParser
         return userSet;
     }
 
-    public static HashMap<String, HashMap<String, Integer>> getItemRateMap()
+    public static HashObjObjMap<String, HashObjObjMap<String, Integer>> getItemRateMap()
     {
         return itemRateMap;
     }
 
-    public static HashMap<String, HashMap<String, Integer>> getTestDataMap()
+    public static HashObjObjMap<String, HashObjObjMap<String, Integer>> getTestDataMap()
     {
         return testDataMap;
     }
@@ -80,9 +81,9 @@ public final class DataParser
             final String seperator, final double testDataPercentage,
             final double dataSizePercentage)
     {
-        userRateMap = new HashMap<>();
-        itemRateMap = new HashMap<>();
-        testDataMap = new HashMap<>();
+        userRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        itemRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        testDataMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
         itemSet = new HashSet<>();
         userSet = new HashSet<>();
         itemSetCount = new HashMap<>();
@@ -149,8 +150,8 @@ public final class DataParser
     public static void readTrainingDataFile(
             final String filePath, final String seperator)
     {
-        userRateMap = new HashMap<>();
-        itemRateMap = new HashMap<>();
+        userRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        itemRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
         userRateSet = HashObjObjMaps.getDefaultFactory().newMutableMap();
         itemRateSet = HashObjObjMaps.getDefaultFactory().newMutableMap();
 
@@ -204,7 +205,7 @@ public final class DataParser
     public static void readTestDataFile(
             final String filePath, final String seperator)
     {
-        testDataMap = new HashMap<>();
+        testDataMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
         testRateSet =  HashObjObjMaps.getDefaultFactory().newMutableMap();
         BufferedReader in = null;
         try {
@@ -243,12 +244,12 @@ public final class DataParser
 
     private static void insertDataInMap(final String id1, final String id2,
             final Integer rating,
-            final HashMap<String, HashMap<String, Integer>> dataMap)
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> dataMap)
     {
         if (dataMap.containsKey(id1)) {
             dataMap.get(id1).put(id2, rating);
         } else {
-            HashMap<String, Integer> map = new HashMap<>();
+            HashObjObjMap<String, Integer> map = HashObjObjMaps.getDefaultFactory().newMutableMap();
             map.put(id2, rating);
             dataMap.put(id1, map);
         }
@@ -260,10 +261,8 @@ public final class DataParser
         if (dataSet.containsKey(id1)) {
             HashObjSet<String> s = (HashObjSet<String>) dataSet.get(id1);
             s.add(id2);
-            //dataSet.get(id1).add(id2);
         } else {
             HashObjSet <String> s = HashObjSets.getDefaultFactory().newMutableSet();
-            //HashSet<String> s = new HashSet<>();
             s.add(id2);
             dataSet.put(id1, s);
         }
@@ -299,15 +298,16 @@ public final class DataParser
     
     }
 
-    public static void calculateDataSetHistogram(HashMap<String, HashMap<String, Integer>> userRateMap)
+    public static void calculateDataSetHistogram(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap)
     {
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> iter = userRateMap.entrySet().iterator();
+        ObjIterator<Map.Entry<String, HashObjObjMap<String, Integer>>> iter =
+                userRateMap.entrySet().iterator();
         HashMap <Integer, Integer>histogram = new HashMap<>();
         for (int i=0; i <= 10; i++) {
             histogram.put(i,0); //init historgram
         }
         while (iter.hasNext()) {
-            Map.Entry<String, HashMap<String, Integer>> entry = iter.next();
+            Map.Entry<String, HashObjObjMap<String, Integer>> entry = iter.next();
             int ratings = entry.getValue().size();
             Integer rate = (ratings / 10);
             Integer key = Math.min(rate, 10);
@@ -329,6 +329,7 @@ public final class DataParser
     }
 
 
+    /*
     public static void processDataFileForRecommendation (
             final String filePath,
             final String seperator,
@@ -344,14 +345,15 @@ public final class DataParser
         LOG.info("numOfUsers = " + numOfUsers);
         LOG.info("numOfItems = " + numOfItems);
         LOG.info("Data file parsing completed...");
-    }
+    }*/
 
 
+    /*
     private static void readDataFile(final String filePath, final String seperator)
     {
-        userRateMap = new HashMap<>();
-        itemRateMap = new HashMap<>();
-        testDataMap = new HashMap<>();
+        userRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        itemRateMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
+        testDataMap = HashObjObjMaps.getDefaultFactory().newMutableMap();
         userSet = new HashSet<>();
         itemSet = new HashSet<>();
         itemSetCount = new HashMap<>();
@@ -394,9 +396,9 @@ public final class DataParser
             }
         }
         LOG.info("Total datasize: " + totalDataSampleSize);
-    }
+    }*/
 
-
+    /*
     private static void selectTestData (
             HashMap<String, HashMap<String, Integer>> _userRateMap,
             HashMap<String, HashMap<String, Integer>> _itemRateMap,
@@ -424,8 +426,9 @@ public final class DataParser
 
         LOG.info("Selected test users number: " + _testDataMap.size());
 
-    }
+    }*/
 
+    /*
     private static Set<String> getUsersTestItems(
             HashMap<String,HashMap<String,Double>> userStatsMap,
             Map.Entry<String, HashMap<String, Integer>> entry, int numOfTestItemsForEachUser)
@@ -458,8 +461,9 @@ public final class DataParser
             return null;
         }
 
-    }
+    }*/
 
+    /*
     private static void updateUserItemTestRateMaps(
             HashMap<String, HashMap<String, Integer>> _userRateMap,
             HashMap<String, HashMap<String, Integer>> _itemRateMap,
@@ -473,21 +477,20 @@ public final class DataParser
             insertDataInMap(userId, itemId, rating, _testDataMap);
         }
 
-    }
+    }*/
 
 
     public static void removeDuplicateData(
-            HashMap<String, HashMap<String, Integer>> _userRateMap,
-            HashMap<String, HashMap<String, Integer>> _itemRateMap,
-            HashMap<String, HashMap<String, Integer>> _testDataMap)
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> _userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> _itemRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> _testDataMap)
     {
         int cnt1 = 0;
         int cnt2 = 0;
-        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : _testDataMap
-                .entrySet()) {
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : _testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> movieRatePair = testDataEntry.getValue();
-            HashMap<String, Integer> userRateList = _userRateMap.get(userId);
+            HashObjObjMap<String, Integer> movieRatePair = testDataEntry.getValue();
+            HashObjObjMap<String, Integer> userRateList = _userRateMap.get(userId);
             if (userRateList == null) {
                 continue;
             }

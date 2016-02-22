@@ -3,6 +3,7 @@ package com.zaana.ml.tests;
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -12,14 +13,12 @@ import java.util.*;
  */
 public abstract class AbstractTest {
 
-    static HashMap<String, HashMap<String, Integer>> userRateMap;
-    static HashMap<String, HashMap<String, Integer>> itemRateMap;
+    static HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap;
+    static HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap;
+    static HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap;
     static HashObjObjMap<Object, Object> userRateSet;
     static HashObjObjMap<Object, Object> itemRateSet;
     static HashObjObjMap<Object, Object> testRateSet;
-    static HashMap<String, HashMap<String, Integer>> testDataMap;
-    static List<HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>>> vmaps;
-    static List<HashMap<Integer, HashMap<String, Set<String>>>> hashTables;
     static Set<String> itemSet;
     static Set<String> userSet;
     static Logger LOG = Logger.getLogger(AbstractTest.class);

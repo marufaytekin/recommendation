@@ -1,5 +1,6 @@
 package com.zaana.ml.metrics;
 
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -29,7 +30,7 @@ public final class Recall {
     }
     public static Double getRecall(
             Set<String> topNRecommendation,
-            Map.Entry<String, HashMap<String, Integer>> entry)
+            Map.Entry<String, HashObjObjMap<String, Integer>> entry)
     {
         //Set<String> retreived = new HashSet<>(topNRecommendation);
         Set<String> relevant = entry.getValue().keySet();

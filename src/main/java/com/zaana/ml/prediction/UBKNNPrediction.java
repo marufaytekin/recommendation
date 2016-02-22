@@ -2,6 +2,7 @@ package com.zaana.ml.prediction;
 
 import com.zaana.ml.Common;
 import com.zaana.ml.similarity.Cosine;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 import java.util.Map.Entry;
@@ -40,8 +41,8 @@ public final class UBKNNPrediction extends AbstractPredictionTests
      * @return
      */
     public static double runUserBasedNNPredictionOnTestData(
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            final HashMap<String, HashMap<String, Integer>> testDataMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             final int kNN, int y)
     {
         outputList = new LinkedList<>();
@@ -49,15 +50,16 @@ public final class UBKNNPrediction extends AbstractPredictionTests
         LOG.info("Running UserBasedNN test...");
         Set<String> candidateUserSet = userRateMap.keySet();
         final long startTime = System.currentTimeMillis();
-        for (Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
+        for (Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null || userRateList.isEmpty()) {
                 continue;
             }
             LinkedHashMap<String, Double> similarityListMap =
                     Cosine.getSimilarityListWithCandidateSet(userId, candidateUserSet, userRateMap, y);
-            predictRatingsForTestUsers(testDataEntry, userRateMap, similarityListMap, outputList, targetList, kNN);
+            predictRatingsForTestUsers
+                    (testDataEntry, userRateMap, similarityListMap, outputList, targetList, kNN);
         }
 
         final long endTime = System.currentTimeMillis();
@@ -69,15 +71,15 @@ public final class UBKNNPrediction extends AbstractPredictionTests
     }
 
     private static void predictRatingsForTestUsers(
-            Entry<String, HashMap<String, Integer>> testDataEntry,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
+            Entry<String, HashObjObjMap<String, Integer>> testDataEntry,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             LinkedHashMap<String, Double> similarityListMap,
             LinkedList<Double> outputList,
             LinkedList<Integer> targetList,
             final int kNN)
     {
 
-        HashMap <String, Integer> movieRatePair = testDataEntry.getValue();
+        HashObjObjMap<String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
         for (Entry<String, Integer> entry : movieRatePair.entrySet()) {
             try {

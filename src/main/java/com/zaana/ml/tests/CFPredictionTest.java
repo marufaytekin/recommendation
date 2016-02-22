@@ -18,13 +18,13 @@ public class CFPredictionTest extends AbstractTest {
         for (int j = 0; j < smoothRun; j++) {
             preprocessDataForValidation(dataFileBase, (j+1), "test", seperator);
             if (type == "UBKNN") {
-                runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
-                        testDataMap, kNN, y);
-                mae += MAE.calculateMAE(UBKNNPrediction.getOutputList(),
-                        UBKNNPrediction.getTargetList());
+                runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData
+                        (userRateMap, testDataMap, kNN, y);
+                mae += MAE.calculateMAE
+                        (UBKNNPrediction.getOutputList(), UBKNNPrediction.getTargetList());
             } else if (type == "IBKNN") {
-                runTime += IBKNNPrediction.runItemBasedNNPredictionOnTestData(itemRateMap, userRateMap,
-                        testDataMap, kNN, y);
+                runTime += IBKNNPrediction.runItemBasedNNPredictionOnTestData
+                        (itemRateMap, userRateMap, testDataMap, kNN, y);
                 mae += MAE.calculateMAE(IBKNNPrediction.getOutputList(),
                         IBKNNPrediction.getTargetList());
             } else {

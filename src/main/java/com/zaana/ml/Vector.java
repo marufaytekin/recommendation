@@ -1,5 +1,7 @@
 package com.zaana.ml;
 
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -43,7 +45,7 @@ public final class Vector
         return V;
     }
 
-    public static int calculateDotProduct(final HashMap<String, Integer> V1,
+    public static int calculateDotProduct(final HashObjObjMap<String, Integer> V1,
             final HashMap<String, Integer> V2)
     {
 

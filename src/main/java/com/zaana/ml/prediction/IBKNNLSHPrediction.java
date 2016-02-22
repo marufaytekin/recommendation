@@ -12,9 +12,9 @@ import java.util.*;
 public class IBKNNLSHPrediction extends AbstractPredictionTests
 {
     public static double runItemBasedLSHPredictionOnTestData(
-            final HashMap<String, HashMap<String, Integer>> itemRateMap,
-            final HashMap<String, HashMap<String, Integer>> userRateMap,
-            final HashMap<String, HashMap<String, Integer>> testDataMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> testDataMap,
             final HashObjObjMap<Object, Object> hashTables,
             HashObjObjMap<Object, Object> hashKeyLookupTable,
             int kNN, int y) {
@@ -24,10 +24,10 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
         final long startTime = System.currentTimeMillis();
-        for (Map.Entry<String, HashMap<String, Integer>> testDataEntry : testDataMap
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap
                 .entrySet()) {
             String userId = testDataEntry.getKey();
-            HashMap<String, Integer> userRateList = userRateMap.get(userId);
+            HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
             if (userRateList == null) {
                 continue;
             }
@@ -67,9 +67,9 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
      * @param y
      */
     private  static int predictRatingsForTestEntry(
-            Map.Entry<String, HashMap<String, Integer>> testDataEntry,
-            HashMap<String, HashMap<String, Integer>> userRateMap,
-            HashMap<String, HashMap<String, Integer>> itemRateMap,
+            Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             HashObjObjMap<Object, Object> hashTables,
             HashObjObjMap<Object, Object> hashKeyLookupTable,
             LinkedList<Double> outputList,
@@ -77,7 +77,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
             final int kNN, int y)
     {
         String testUserId = testDataEntry.getKey();
-        HashMap<String, Integer> testMovieList = testDataEntry.getValue();
+        HashObjObjMap<String, Integer> testMovieList = testDataEntry.getValue();
         Set<String> ratedItemsSet = new HashSet<>(userRateMap.get(testUserId).keySet());
         Integer total_candidate_set_size = 0;
         double prediction;

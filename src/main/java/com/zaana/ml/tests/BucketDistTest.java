@@ -2,6 +2,8 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
 import java.util.*;
 
@@ -22,10 +24,11 @@ public class BucketDistTest extends AbstractTest {
             Set<String> itemSet = itemRateMap.keySet();
             Set<String> userSet = userRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-            HashMap<Integer, HashMap<String, Set<String>>> hashTable = LSH.buildModel(userRateMap, vmap, l);
+            HashObjObjMap<Object, Object> hashTables = LSH2.buildModel(userRateMap, vmap, l);
             int size;
             int maxSize = 0;
-            for (Map.Entry<String, Set<String>> bucket : hashTable.get(0).entrySet()) {
+            HashObjObjMap<String, HashObjSet> hashTable = (HashObjObjMap<String, HashObjSet>) hashTables.get(0);
+            for (Map.Entry<String, HashObjSet> bucket : hashTable.entrySet()) {
                 size = bucket.getValue().size();
                 if (size > maxSize)
                     maxSize = size;

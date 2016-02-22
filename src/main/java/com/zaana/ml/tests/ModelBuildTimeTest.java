@@ -5,6 +5,8 @@ import com.zaana.ml.LSH;
 import com.zaana.ml.Vector;
 import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
+import net.openhft.koloboke.collect.ObjIterator;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
 
@@ -77,13 +79,13 @@ public class ModelBuildTimeTest extends AbstractTest {
         LOG.info(itemRateMap.size());
         LOG.info("userRateMap Size:");
         LOG.info(userRateMap.size());
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> userDataIter =
+        ObjIterator<Map.Entry<String, HashObjObjMap<String, Integer>>> userDataIter =
                 userRateMap.entrySet().iterator();
         for (int i = 0; i < num * userDataPercentage; i++) {
             userDataIter.next();
             userDataIter.remove();
         }
-        Iterator<Map.Entry<String, HashMap<String, Integer>>> itemDataIter =
+        ObjIterator<Map.Entry<String, HashObjObjMap<String, Integer>>> itemDataIter =
                 itemRateMap.entrySet().iterator();
         for (int i = 0; i < num * itemDataPercentage; i++) {
             itemDataIter.next();

@@ -1,6 +1,9 @@
 package com.zaana.ml.similarity;
 
 import com.zaana.ml.SortHashMap;
+import net.openhft.koloboke.collect.ObjIterator;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
+import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -17,14 +20,14 @@ public final class Cosine implements Similarity {
 
     public static LinkedHashMap<String, Double> getSimilarityListWithCandidateSet(
             String itemId, Set<String> candidateSet,
-            HashMap<String, HashMap<String, Integer>> rateMap, int y) {
+            HashObjObjMap<String, HashObjObjMap<String, Integer>> rateMap, int y) {
         
         LinkedHashMap<String, Double> similarityHashMap = new LinkedHashMap<>();
-        HashMap<String, Integer> mapA = rateMap.get(itemId);
+        HashObjObjMap<String, Integer> mapA = rateMap.get(itemId);
         Set<String> setA = mapA.keySet();
         Double similarity = 0.0;
         Set<String> intersectionAB;
-        HashMap<String, Integer> mapB;
+        HashObjObjMap<String, Integer> mapB;
         for (String user : candidateSet) {
             try {
                 mapB = rateMap.get(user);
@@ -51,10 +54,10 @@ public final class Cosine implements Similarity {
 
     public static double getCosineSimilarity(
             String userId1, String userId2,
-            final HashMap<String, HashMap<String, Integer>> ratingMap, int y)
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> ratingMap, int y)
     {
-        HashMap<String, Integer> ratings1 = ratingMap.get(userId1);
-        HashMap<String, Integer> ratings2 = ratingMap.get(userId2);
+        HashObjObjMap<String, Integer> ratings1 = ratingMap.get(userId1);
+        HashObjObjMap<String, Integer> ratings2 = ratingMap.get(userId2);
         Set<String> set1 = ratings1.keySet();
         Set<String> set2 = ratings2.keySet();
 
@@ -71,8 +74,8 @@ public final class Cosine implements Similarity {
 
     public static double calculateCosineSimilarity(
             final Set<String> intersection,
-            final HashMap<String, Integer> map1,
-            final HashMap<String, Integer> map2, int y)
+            final HashObjObjMap<String, Integer> map1,
+            final HashObjObjMap<String, Integer> map2, int y)
     {
         int intersec_size = intersection.size();
         int num = 0;
@@ -100,28 +103,29 @@ public final class Cosine implements Similarity {
      * HashMap format.
      */
     public static double[][] createDistanceMatrix(
-            final HashMap<String, HashMap<String, Integer>> userRateMap, int y) {
+            final HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap, int y) {
 
         HashMap<String, LinkedHashMap<String, Double>> similarityMatrix = new HashMap<>();
-        HashMap<String, HashMap<String, Integer>> userRateMapCopy = new HashMap<>(userRateMap);
+        HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMapCopy =
+                HashObjObjMaps.getDefaultFactory().newMutableMap(userRateMap);
 
-        Iterator<Entry<String, HashMap<String, Integer>>> entryAIter = userRateMap
+        ObjIterator<Entry<String, HashObjObjMap<String, Integer>>> entryAIter = userRateMap
                 .entrySet().iterator();
 
         ArrayList<Double> tempArr = new ArrayList<>();
         while (entryAIter.hasNext()) {
-            Entry<String, HashMap<String, Integer>> userItemRatesPairA = entryAIter
+            Entry<String, HashObjObjMap<String, Integer>> userItemRatesPairA = entryAIter
                     .next();
             String userIdA = userItemRatesPairA.getKey();
-            HashMap<String, Integer> userItemRatesA = userItemRatesPairA
+            HashObjObjMap<String, Integer> userItemRatesA = userItemRatesPairA
                     .getValue();
             Set<String> ratedItemIDSetA = userItemRatesA.keySet();
             userRateMapCopy.remove(userIdA);
-            for (Entry<String, HashMap<String, Integer>> entryB : userRateMapCopy
+            for (Entry<String, HashObjObjMap<String, Integer>> entryB : userRateMapCopy
                     .entrySet()) {
                 String userIdB = entryB.getKey();
                 //if ( userIdA == userIdB) continue;
-                HashMap<String, Integer> userItemRatesB = entryB.getValue();
+                HashObjObjMap<String, Integer> userItemRatesB = entryB.getValue();
                 Set<String> ratedItemIDSetB = userItemRatesB.keySet();
                 Set<String> intersectionAB = new HashSet<>(
                         ratedItemIDSetA);
