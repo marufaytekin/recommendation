@@ -57,7 +57,7 @@ public class LSHPredictionTest extends AbstractTest
             numOfBands = l;
             numOfHashFunctions = 4;
         } else if (testType == "HashTables"){
-            numOfBands = 1;
+            numOfBands = 4;
             numOfHashFunctions = k;
         } else {
             throw new UnsupportedOperationException("Invalid type.");

@@ -94,7 +94,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfBands = 1;
+        int numOfBands = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < smoothRun; s++) {
@@ -155,12 +155,14 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             if (ratedItemSet == null) {
                 continue;
             }
+            //////////////////////////////////
             startTime = System.currentTimeMillis();
             List<String> candidateList =
                     recommender.getCandidateItemList(userRateMap, userRateSet, targetUserId, ratedItemSet);
             Set<String> topNRecommendedItems =
                     recommender.recommendItems(targetUserId, candidateList, topN);
             endTime = System.currentTimeMillis();
+            //////////////////////////////////
             totalReccTime += (endTime - startTime);
 
             totalPrecision += Precision.getPrecision(topNRecommendedItems, entry);
