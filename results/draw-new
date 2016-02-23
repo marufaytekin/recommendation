@@ -44,10 +44,10 @@ xlim([4, 13])
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-mae'));
 
+f= figure();
 x = 4:13;
 plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'east');
-
 set (h, 'fontsize', 8);
 xlabel('Number of Hash Tables');
 ylabel('MAE');
@@ -101,6 +101,51 @@ legend boxon;
 write(f, strcat(fileName,'-hash-tables-candidate-set'));
 
 
+####################################
+# MAE-Performance tradeoff
+####################################
+
+x = 4:13;
+n = 13;
+f= figure();
+x1 = UBKNNMaeList;
+x2 = IBKNNMaeList;
+x3 = UBKNNLSHHashTablesMaeList;
+x4 = IBKNNLSHHashTablesMaeList;
+x5 = UBLSH1HashTablesMaeList;
+x6 = UBLSH2HashTablesMaeList;
+x7 = IBLSH1HashTablesMaeList;
+x8 = IBLSH2HashTablesMaeList;
+y1 = UBKNNRuntimeList;
+y2 = IBKNNRuntimeList;
+y3 = UBKNNLSHHashTablesRuntimeList;
+y4 = IBKNNLSHHashTablesRuntimeList;
+y5 = UBLSH1HashTablesRuntimeList;
+y6 = UBLSH2HashTablesRuntimeList;
+y7 = IBLSH1HashTablesRuntimeList;
+y8 = IBLSH2HashTablesRuntimeList;
+
+plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('MAE -lower is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Error-Performance tradeoff -lower and left is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-mae-comp'));
+
+f= figure();
+plot (x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
+h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('MAE -lower is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Error-Performance tradeoff -lower and left is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-mae-comp2'));
+
+
+
 # ========================================================
 # MAE and Runtime
 # Hash Functions
@@ -125,6 +170,7 @@ ylabel('MAE');
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-mae'));
 
+f= figure();
 plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
 h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
@@ -193,6 +239,49 @@ ylim([0 1])
 write(f, strcat(fileName,'-hash-functions-prediction-ratio'));
 
 
+
+####################################
+# MAE-Performance tradeoff
+####################################
+
+x1 = UBKNNMaeList;
+x2 = IBKNNMaeList;
+x3 = UBKNNLSHHashFunctionsMaeList(1:5);
+x4 = IBKNNLSHHashFunctionsMaeList(1:5);
+x5 = UBLSH1HashFunctionsMaeList(1:5);
+x6 = UBLSH2HashFunctionsMaeList(1:5);
+x7 = IBLSH1HashFunctionsMaeList(1:5);
+x8 = IBLSH2HashFunctionsMaeList(1:5);
+
+y1 = UBKNNRuntimeList;
+y2 = IBKNNRuntimeList;
+y3 = UBKNNLSHHashFunctionsRuntimeList(1:5);
+y4 = IBKNNLSHHashFunctionsRuntimeList(1:5);
+y5 = UBLSH1HashFunctionsRuntimeList(1:5);
+y6 = UBLSH2HashFunctionsRuntimeList(1:5);
+y7 = IBLSH1HashFunctionsRuntimeList(1:5);
+y8 = IBLSH2HashFunctionsRuntimeList(1:5);
+
+f= figure();
+plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
+h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('MAE -lower is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Error-Performance tradeoff -lower and left is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-mae-comp'));
+
+f= figure();
+plot (x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
+h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('MAE -lower is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Error-Performance tradeoff -lower and left is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-mae-comp2'));
+
 # ========================================================
 # Number of Hash Functions on the metrics
 # ========================================================
@@ -224,24 +313,6 @@ y3 = IBLSH1RecommenderHashFunctionsAvgRecommTime;
 y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime;
 y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime;
 y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime;
-f= figure();
-plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
-h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-legend boxon;
-xlabel('Number of Hash Functions');
-ylabel('Avg Recc. Time (ms.)')
-write(f, strcat(fileName,'-hash-functions-topn-runtime'));
-
-
-max_x = n = 13;
-x = 6:max_x;
-y1 = IBKNNRecommenderAvgRecommTime;
-y2 = UBKNNRecommenderAvgRecommTime;
-y3 = IBLSH1RecommenderHashFunctionsAvgRecommTime(3:10);
-y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime(3:10);
-y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime(3:10);
-y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime(3:10);
 f= figure();
 plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
@@ -296,7 +367,7 @@ y5 = UBLSH1RecommenderHashTablesPrecision;
 y6 = UBLSH2RecommenderHashTablesPrecision;
 f= figure();
 plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
-h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'west');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
 legend boxon;
 xlabel('Number of Hash Tables');
@@ -351,88 +422,3 @@ write(f, strcat(fileName,'-hash-tables-topn-comp2'));
 
 
 
-
-
-####################################
-# MAE-Performance tradeoff
-####################################
-
-x = 1:10;
-n = 10;
-f= figure();
-x1 = UBKNNMaeList;
-x2 = IBKNNMaeList;
-x3 = UBKNNLSHHashTablesMaeList;
-x4 = IBKNNLSHHashTablesMaeList;
-x5 = UBLSH1HashTablesMaeList;
-x6 = UBLSH2HashTablesMaeList;
-x7 = IBLSH1HashTablesMaeList;
-x8 = IBLSH2HashTablesMaeList;
-y1 = UBKNNRuntimeList;
-y2 = IBKNNRuntimeList;
-y3 = UBKNNLSHHashTablesRuntimeList;
-y4 = IBKNNLSHHashTablesRuntimeList;
-y5 = UBLSH1HashTablesRuntimeList;
-y6 = UBLSH2HashTablesRuntimeList;
-y7 = IBLSH1HashTablesRuntimeList;
-y8 = IBLSH2HashTablesRuntimeList;
-
-plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('MAE -lower is better');
-ylabel('Running Time(ms.) -lower is better');
-title('Error-Performance tradeoff -lower and left is better');
-legend boxon;
-write(f, strcat(fileName,'-hash-tables-mae-comp'));
-
-plot (x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('MAE -lower is better');
-ylabel('Running Time(ms.) -lower is better');
-title('Error-Performance tradeoff -lower and left is better');
-legend boxon;
-write(f, strcat(fileName,'-hash-tables-mae-comp2'));
-
-
-x = 4:13;
-n = 13;
-f= figure();
-x1 = UBKNNMaeList;
-x2 = IBKNNMaeList;
-x3 = UBKNNLSHHashFunctionsMaeList;
-x4 = IBKNNLSHHashFunctionsMaeList;
-x5 = UBLSH1HashFunctionsMaeList;
-x6 = UBLSH2HashFunctionsMaeList;
-x7 = IBLSH1HashFunctionsMaeList;
-x8 = IBLSH2HashFunctionsMaeList;
-
-y1 = UBKNNRuntimeList;
-y2 = IBKNNRuntimeList;
-y3 = UBKNNLSHHashFunctionsRuntimeList;
-y4 = IBKNNLSHHashFunctionsRuntimeList;
-y5 = UBLSH1HashFunctionsRuntimeList;
-y6 = UBLSH2HashFunctionsRuntimeList;
-y7 = IBLSH1HashFunctionsRuntimeList;
-y8 = IBLSH2HashFunctionsRuntimeList;
-
-f= figure();
-plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('MAE -lower is better');
-ylabel('Running Time(ms.) -lower is better');
-title('Error-Performance tradeoff -lower and left is better');
-legend boxon;
-write(f, strcat(fileName,'-hash-functions-mae-comp'));
-
-f= figure();
-plot (x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('MAE -lower is better');
-ylabel('Running Time(ms.) -lower is better');
-title('Error-Performance tradeoff -lower and left is better');
-legend boxon;
-write(f, strcat(fileName,'-hash-functions-mae-comp2'));

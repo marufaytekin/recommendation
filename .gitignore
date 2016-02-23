@@ -13,7 +13,6 @@ data/ml-1m.data
 data/ymusic-test.data
 data/ymusic.data
 data/xaa
-results/latex
 **/*.pdf
 *.aux
 *.log
