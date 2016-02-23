@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ml-hash-tables-candidate-set.eps
+%%Title: ml-hash-tables-topn-runtime2.eps
 %%Creator: gnuplot 4.6 patchlevel 6
-%%CreationDate: Tue Feb 23 20:36:12 2016
+%%CreationDate: Tue Feb 23 21:13:58 2016
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -455,13 +455,13 @@ systemdict /pdfmark known not {
   userdict /pdfmark systemdict /cleartomark get put
 } if
 SDict begin [
-  /Title (ml-hash-tables-candidate-set.eps)
+  /Title (ml-hash-tables-topn-runtime2.eps)
   /Subject (gnuplot plot)
   /Creator (gnuplot 4.6 patchlevel 6)
   /Author (maruf)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Tue Feb 23 20:36:12 2016)
+  /CreationDate (Tue Feb 23 21:13:58 2016)
   /DOCINFO pdfmark
 end
 } ifelse
@@ -553,152 +553,192 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 } ifelse
 1.000 UL
 LTb
-1.00 1.00 1.00 C 1.000 784 512 4686 3902 BoxColFill
+1.00 1.00 1.00 C 1.000 592 512 4878 3902 BoxColFill
 LCb setrgbcolor
-784 512 M
+592 512 M
 0 3902 V
-4686 0 V
+4878 0 V
 0 -3902 V
-784 512 L
+592 512 L
 stroke
 0.500 UL
 LTb
-784 512 M
+592 512 M
 88 0 V
-4599 0 R
+4791 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 688 512 M
+0.00 0.00 0.00 C 496 512 M
 [ [({}) 160.0 0.0 true true 0 (0)]
 ] -53.3 MRshow
 0.500 UL
 LTb
-784 1488 M
+592 1000 M
 88 0 V
-4599 0 R
+4791 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 688 1488 M
-[ [({}) 160.0 0.0 true true 0 (500)]
+0.00 0.00 0.00 C 496 1000 M
+[ [({}) 160.0 0.0 true true 0 (10)]
 ] -53.3 MRshow
 0.500 UL
 LTb
-784 2464 M
+592 1488 M
 88 0 V
-4599 0 R
+4791 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 688 2464 M
-[ [({}) 160.0 0.0 true true 0 (1000)]
+0.00 0.00 0.00 C 496 1488 M
+[ [({}) 160.0 0.0 true true 0 (20)]
 ] -53.3 MRshow
 0.500 UL
 LTb
-784 3439 M
+592 1976 M
 88 0 V
-4599 0 R
+4791 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 688 3439 M
-[ [({}) 160.0 0.0 true true 0 (1500)]
+0.00 0.00 0.00 C 496 1976 M
+[ [({}) 160.0 0.0 true true 0 (30)]
 ] -53.3 MRshow
 0.500 UL
 LTb
-784 4415 M
+592 2464 M
 88 0 V
-4599 0 R
+4791 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 688 4415 M
-[ [({}) 160.0 0.0 true true 0 (2000)]
+0.00 0.00 0.00 C 496 2464 M
+[ [({}) 160.0 0.0 true true 0 (40)]
 ] -53.3 MRshow
 0.500 UL
 LTb
-784 512 M
+592 2951 M
+88 0 V
+4791 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 496 2951 M
+[ [({}) 160.0 0.0 true true 0 (50)]
+] -53.3 MRshow
+0.500 UL
+LTb
+592 3439 M
+88 0 V
+4791 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 496 3439 M
+[ [({}) 160.0 0.0 true true 0 (60)]
+] -53.3 MRshow
+0.500 UL
+LTb
+592 3927 M
+88 0 V
+4791 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 496 3927 M
+[ [({}) 160.0 0.0 true true 0 (70)]
+] -53.3 MRshow
+0.500 UL
+LTb
+592 4415 M
+88 0 V
+4791 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 496 4415 M
+[ [({}) 160.0 0.0 true true 0 (80)]
+] -53.3 MRshow
+0.500 UL
+LTb
+592 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 784 352 M
+0.00 0.00 0.00 C 592 352 M
 [ [({}) 160.0 0.0 true true 0 (4)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-1305 512 M
+1134 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1305 352 M
+0.00 0.00 0.00 C 1134 352 M
 [ [({}) 160.0 0.0 true true 0 (5)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-1826 512 M
+1676 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1826 352 M
+0.00 0.00 0.00 C 1676 352 M
 [ [({}) 160.0 0.0 true true 0 (6)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-2346 512 M
+2218 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 2346 352 M
+0.00 0.00 0.00 C 2218 352 M
 [ [({}) 160.0 0.0 true true 0 (7)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-2867 512 M
+2760 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 2867 352 M
+0.00 0.00 0.00 C 2760 352 M
 [ [({}) 160.0 0.0 true true 0 (8)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-3388 512 M
+3303 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 3388 352 M
+0.00 0.00 0.00 C 3303 352 M
 [ [({}) 160.0 0.0 true true 0 (9)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-3909 512 M
+3845 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 3909 352 M
+0.00 0.00 0.00 C 3845 352 M
 [ [({}) 160.0 0.0 true true 0 (10)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-4429 512 M
+4387 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 4429 352 M
+0.00 0.00 0.00 C 4387 352 M
 [ [({}) 160.0 0.0 true true 0 (11)]
 ] -53.3 MCshow
 0.500 UL
 LTb
-4950 512 M
+4929 512 M
 0 88 V
 0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 4950 352 M
+0.00 0.00 0.00 C 4929 352 M
 [ [({}) 160.0 0.0 true true 0 (12)]
 ] -53.3 MCshow
 0.500 UL
@@ -715,19 +755,19 @@ stroke
 LTb
 0.500 UL
 LTb
-784 4415 N
-784 512 L
-4687 0 V
+592 4415 N
+592 512 L
+4879 0 V
 0 3903 V
--4687 0 V
+-4879 0 V
 Z stroke
 0.00 0.00 0.00 C 128 2463 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 160.0 0.0 true true 0 (Candidate set size)]
+[ [({}) 160.0 0.0 true true 0 (Recommendation Time \(ms.\))]
 ] -53.3 MCshow
 grestore
 LTb
-0.00 0.00 0.00 C 3127 112 M
+0.00 0.00 0.00 C 3031 112 M
 [ [({}) 160.0 0.0 true true 0 (Number of Hash Tables)]
 ] -53.3 MCshow
 LTb
@@ -736,204 +776,140 @@ LTb
 LTb
 1.000 UL
 LTb
-880 3392 N
-0 960 V
-1599 0 V
-0 -960 V
--1599 0 V
+688 3712 N
+0 640 V
+1311 0 V
+0 -640 V
+-1311 0 V
 Z stroke
 % Begin plot #1
 2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 4272 M
-[ [({}) 160.0 0.0 true true 0 (UB-KNN-LSH)]
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 1999 4272 M
+[ [({}) 160.0 0.0 true true 0 (IB-LSH1)]
 ] -53.3 MRshow
 LT0
-0.00 0.00 0.00 C 976 4272 M
+0.00 0.00 0.00 C 784 4272 M
 447 0 V
-784 1636 M
-521 195 V
-521 365 V
-520 87 V
-521 354 V
-521 280 V
-521 278 V
-520 271 V
-521 226 V
-521 57 V
-784 1636 Dia
-1305 1831 Dia
-1826 2196 Dia
-2346 2283 Dia
-2867 2637 Dia
-3388 2917 Dia
-3909 3195 Dia
-4429 3466 Dia
-4950 3692 Dia
-5471 3749 Dia
-1200 4272 Dia
+592 1653 M
+542 375 V
+542 310 V
+542 246 V
+542 405 V
+543 303 V
+542 172 V
+542 196 V
+542 394 V
+542 252 V
+592 1653 Pls
+1134 2028 Pls
+1676 2338 Pls
+2218 2584 Pls
+2760 2989 Pls
+3303 3292 Pls
+3845 3464 Pls
+4387 3660 Pls
+4929 4054 Pls
+5471 4306 Pls
+1008 4272 Pls
 % End plot #1
 % Begin plot #2
 2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 4112 M
-[ [({}) 160.0 0.0 true true 0 (IB-KNN-LSH)]
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 1999 4112 M
+[ [({}) 160.0 0.0 true true 0 (IB-LSH2)]
 ] -53.3 MRshow
 LT0
-0.00 0.00 0.00 C 976 4112 M
+0.00 0.00 0.00 C 784 4112 M
 447 0 V
-784 1200 M
-521 120 V
-521 162 V
-520 206 V
-521 66 V
-521 168 V
-521 290 V
-520 59 V
-521 -26 V
-521 229 V
-784 1200 Star
-1305 1320 Star
-1826 1482 Star
-2346 1688 Star
-2867 1754 Star
-3388 1922 Star
-3909 2212 Star
-4429 2271 Star
-4950 2245 Star
-5471 2474 Star
-1200 4112 Star
+592 541 M
+542 4 V
+542 10 V
+542 7 V
+542 15 V
+543 4 V
+542 10 V
+542 -2 V
+542 13 V
+542 11 V
+592 541 TriU
+1134 545 TriU
+1676 555 TriU
+2218 562 TriU
+2760 577 TriU
+3303 581 TriU
+3845 591 TriU
+4387 589 TriU
+4929 602 TriU
+5471 613 TriU
+1008 4112 TriU
 % End plot #2
 % Begin plot #3
 2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 3952 M
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 1999 3952 M
 [ [({}) 160.0 0.0 true true 0 (UB-LSH1)]
 ] -53.3 MRshow
 LT0
-0.00 0.00 0.00 C 976 3952 M
+0.00 0.00 0.00 C 784 3952 M
 447 0 V
-784 1883 M
-521 141 V
-521 371 V
-520 225 V
-521 526 V
-521 95 V
-521 138 V
-520 545 V
-521 26 V
-521 350 V
-784 1883 Pls
-1305 2024 Pls
-1826 2395 Pls
-2346 2620 Pls
-2867 3146 Pls
-3388 3241 Pls
-3909 3379 Pls
-4429 3924 Pls
-4950 3950 Pls
-5471 4300 Pls
-1200 3952 Pls
+592 970 M
+542 77 V
+542 78 V
+542 81 V
+542 0 V
+543 54 V
+542 82 V
+542 17 V
+542 31 V
+542 33 V
+592 970 Circle
+1134 1047 Circle
+1676 1125 Circle
+2218 1206 Circle
+2760 1206 Circle
+3303 1260 Circle
+3845 1342 Circle
+4387 1359 Circle
+4929 1390 Circle
+5471 1423 Circle
+1008 3952 Circle
 % End plot #3
 % Begin plot #4
 2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 3792 M
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 1999 3792 M
 [ [({}) 160.0 0.0 true true 0 (UB-LSH2)]
 ] -53.3 MRshow
 LT0
-0.00 0.00 0.00 C 976 3792 M
+0.00 0.00 0.00 C 784 3792 M
 447 0 V
-784 1983 M
-521 268 V
-521 172 V
-520 241 V
-521 51 V
-521 475 V
-521 139 V
-520 460 V
-521 382 V
-521 206 V
-784 1983 TriU
-1305 2251 TriU
-1826 2423 TriU
-2346 2664 TriU
-2867 2715 TriU
-3388 3190 TriU
-3909 3329 TriU
-4429 3789 TriU
-4950 4171 TriU
-5471 4377 TriU
-1200 3792 TriU
+592 608 M
+542 16 V
+542 13 V
+542 23 V
+542 4 V
+543 11 V
+542 12 V
+542 10 V
+542 9 V
+542 12 V
+592 608 TriD
+1134 624 TriD
+1676 637 TriD
+2218 660 TriD
+2760 664 TriD
+3303 675 TriD
+3845 687 TriD
+4387 697 TriD
+4929 706 TriD
+5471 718 TriD
+1008 3792 TriD
 % End plot #4
-% Begin plot #5
-2.000 UP
-0.500 UL
-LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 3632 M
-[ [({}) 160.0 0.0 true true 0 (IB-LSH1)]
-] -53.3 MRshow
-LT0
-0.00 0.00 0.00 C 976 3632 M
-447 0 V
-784 1290 M
-521 33 V
-521 210 V
-520 149 V
-521 52 V
-521 155 V
-521 157 V
-520 136 V
-521 201 V
-521 136 V
-784 1290 Circle
-1305 1323 Circle
-1826 1533 Circle
-2346 1682 Circle
-2867 1734 Circle
-3388 1889 Circle
-3909 2046 Circle
-4429 2182 Circle
-4950 2383 Circle
-5471 2519 Circle
-1200 3632 Circle
-% End plot #5
-% Begin plot #6
-2.000 UP
-0.500 UL
-LT0
-0.00 0.00 0.00 C 0.00 0.00 0.00 C 2479 3472 M
-[ [({}) 160.0 0.0 true true 0 (IB-LSH2)]
-] -53.3 MRshow
-LT0
-0.00 0.00 0.00 C 976 3472 M
-447 0 V
-784 1208 M
-521 199 V
-521 161 V
-520 76 V
-521 216 V
-521 139 V
-521 73 V
-520 76 V
-521 144 V
-521 327 V
-784 1208 TriD
-1305 1407 TriD
-1826 1568 TriD
-2346 1644 TriD
-2867 1860 TriD
-3388 1999 TriD
-3909 2072 TriD
-4429 2148 TriD
-4950 2292 TriD
-5471 2619 TriD
-1200 3472 TriD
-% End plot #6
 1.000 UP
 0.500 UL
 LTb

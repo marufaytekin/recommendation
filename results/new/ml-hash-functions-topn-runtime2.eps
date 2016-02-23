@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
-%%Title: ml-bucket-data-dist.eps
-%%Creator: gnuplot 4.4 patchlevel 4
-%%CreationDate: Thu Dec 24 15:22:58 2015
+%%Title: ml-hash-functions-topn-runtime2.eps
+%%Creator: gnuplot 4.6 patchlevel 6
+%%CreationDate: Tue Feb 23 21:11:16 2016
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 338 280
 %%EndComments
@@ -15,17 +15,19 @@ gnudict begin
 /Color false def
 /Blacktext false def
 /Solid false def
-/Dashlength 1 def
+/Dashlength 2 def
 /Landscape false def
 /Level1 true def
 /Rounded false def
 /ClipToBoundingBox false def
+/SuppressPDFMark false def
 /TransparentPatterns false def
 /gnulinewidth 5.000 def
 /userlinewidth gnulinewidth def
 /Gamma 1.0 def
+/BackgroundColor {-1.000 -1.000 -1.000} def
 %
-/vshift -66 def
+/vshift -53 def
 /dl1 {
   10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
@@ -38,22 +40,6 @@ gnudict begin
 /vpt_ 31.5 def
 /hpt hpt_ def
 /vpt vpt_ def
-Level1 {} {
-/SDict 10 dict def
-systemdict /pdfmark known not {
-  userdict /pdfmark systemdict /cleartomark get put
-} if
-SDict begin [
-  /Title (ml-bucket-data-dist.eps)
-  /Subject (gnuplot plot)
-  /Creator (gnuplot 4.4 patchlevel 4)
-  /Author (maytekin)
-%  /Producer (gnuplot)
-%  /Keywords ()
-  /CreationDate (Thu Dec 24 15:22:58 2015)
-  /DOCINFO pdfmark
-end
-} ifelse
 /doclip {
   ClipToBoundingBox {
     newpath 50 50 moveto 338 50 lineto 338 280 lineto 50 280 lineto closepath
@@ -61,7 +47,7 @@ end
   } if
 } def
 %
-% Gnuplot Prolog Version 4.4 (August 2010)
+% Gnuplot Prolog Version 4.6 (September 2012)
 %
 %/SuppressPDFMark true def
 %
@@ -328,7 +314,8 @@ end
 /PatternFill {gsave /PFa [ 9 2 roll ] def
   PFa 0 get PFa 2 get 2 div add PFa 1 get PFa 3 get 2 div add translate
   PFa 2 get -2 div PFa 3 get -2 div PFa 2 get PFa 3 get Rec
-  gsave 1 setgray fill grestore clip
+  TransparentPatterns {} {gsave 1 setgray fill grestore} ifelse
+  clip
   currentlinewidth 0.5 mul setlinewidth
   /PFs PFa 2 get dup mul PFa 3 get dup mul add sqrt def
   0 0 M PFa 5 get rotate PFs -2 div dup translate
@@ -461,8 +448,26 @@ currentdict end definefont pop
   Blacktext {gsave 0 setgray MFshow grestore} {MFshow} ifelse } bind def
 /XYsave    { [( ) 1 2 true false 3 ()] } bind def
 /XYrestore { [( ) 1 2 true false 4 ()] } bind def
+Level1 SuppressPDFMark or 
+{} {
+/SDict 10 dict def
+systemdict /pdfmark known not {
+  userdict /pdfmark systemdict /cleartomark get put
+} if
+SDict begin [
+  /Title (ml-hash-functions-topn-runtime2.eps)
+  /Subject (gnuplot plot)
+  /Creator (gnuplot 4.6 patchlevel 6)
+  /Author (maruf)
+%  /Producer (gnuplot)
+%  /Keywords ()
+  /CreationDate (Tue Feb 23 21:11:16 2016)
+  /DOCINFO pdfmark
+end
+} ifelse
 end
 %%EndProlog
+%%Page: 1 1
 gnudict begin
 gsave
 doclip
@@ -470,7 +475,8 @@ doclip
 0.050 0.050 scale
 0 setgray
 newpath
-(Helvetica) findfont 200 scalefont setfont
+(Helvetica) findfont 160 scalefont setfont
+BackgroundColor 0 lt 3 1 roll 0 lt exch 0 lt or or not {BackgroundColor C 1.000 0 0 5760.00 4608.00 BoxColFill} if
 gsave % colour palette begin
 /maxcolors 64 def
 /HSV2RGB {  exch dup 0.0 eq {pop exch pop dup dup} % achromatic gray
@@ -545,354 +551,297 @@ Color InterpolatedColor or { % COLOUR vs. GRAY map
 }{
   /g {stroke pm3dround pm3dGamma exp setgray} bind def
 } ifelse
+1.000 UL
+LTb
+1.00 1.00 1.00 C 1.000 688 512 4782 3902 BoxColFill
+LCb setrgbcolor
+688 512 M
+0 3902 V
+4782 0 V
+0 -3902 V
+688 512 L
+stroke
 0.500 UL
 LTb
-740 640 M
+688 512 M
 88 0 V
-4571 0 R
+4695 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 620 640 M
-[ [({}) 200.0 0.0 true true 0 (0)]
-] -66.7 MRshow
+0.00 0.00 0.00 C 592 512 M
+[ [({}) 160.0 0.0 true true 0 (0)]
+] -53.3 MRshow
 0.500 UL
 LTb
-740 1572 M
+688 1293 M
 88 0 V
-4571 0 R
+4695 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 620 1572 M
-[ [({}) 200.0 0.0 true true 0 (5)]
-] -66.7 MRshow
+0.00 0.00 0.00 C 592 1293 M
+[ [({}) 160.0 0.0 true true 0 (20)]
+] -53.3 MRshow
 0.500 UL
 LTb
-740 2504 M
+688 2073 M
 88 0 V
-4571 0 R
+4695 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 620 2504 M
-[ [({}) 200.0 0.0 true true 0 (10)]
-] -66.7 MRshow
+0.00 0.00 0.00 C 592 2073 M
+[ [({}) 160.0 0.0 true true 0 (40)]
+] -53.3 MRshow
 0.500 UL
 LTb
-740 3435 M
+688 2854 M
 88 0 V
-4571 0 R
+4695 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 620 3435 M
-[ [({}) 200.0 0.0 true true 0 (15)]
-] -66.7 MRshow
+0.00 0.00 0.00 C 592 2854 M
+[ [({}) 160.0 0.0 true true 0 (60)]
+] -53.3 MRshow
 0.500 UL
 LTb
-740 4367 M
+688 3634 M
 88 0 V
-4571 0 R
+4695 0 R
 -88 0 V
 stroke
-0.00 0.00 0.00 C 620 4367 M
-[ [({}) 200.0 0.0 true true 0 (20)]
-] -66.7 MRshow
+0.00 0.00 0.00 C 592 3634 M
+[ [({}) 160.0 0.0 true true 0 (80)]
+] -53.3 MRshow
 0.500 UL
 LTb
-740 640 M
+688 4415 M
+88 0 V
+4695 0 R
+-88 0 V
+stroke
+0.00 0.00 0.00 C 592 4415 M
+[ [({}) 160.0 0.0 true true 0 (100)]
+] -53.3 MRshow
+0.500 UL
+LTb
+688 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 740 440 M
-[ [({}) 200.0 0.0 true true 0 (0)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 688 352 M
+[ [({}) 160.0 0.0 true true 0 (4)]
+] -53.3 MCshow
 0.500 UL
 LTb
-1672 640 M
+1645 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 1672 440 M
-[ [({}) 200.0 0.0 true true 0 (50)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 1645 352 M
+[ [({}) 160.0 0.0 true true 0 (6)]
+] -53.3 MCshow
 0.500 UL
 LTb
-2604 640 M
+2601 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 2604 440 M
-[ [({}) 200.0 0.0 true true 0 (100)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 2601 352 M
+[ [({}) 160.0 0.0 true true 0 (8)]
+] -53.3 MCshow
 0.500 UL
 LTb
-3535 640 M
+3558 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 3535 440 M
-[ [({}) 200.0 0.0 true true 0 (150)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 3558 352 M
+[ [({}) 160.0 0.0 true true 0 (10)]
+] -53.3 MCshow
 0.500 UL
 LTb
-4467 640 M
+4514 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 4467 440 M
-[ [({}) 200.0 0.0 true true 0 (200)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 4514 352 M
+[ [({}) 160.0 0.0 true true 0 (12)]
+] -53.3 MCshow
 0.500 UL
 LTb
-5399 640 M
+5471 512 M
 0 88 V
-0 3639 R
+0 3815 R
 0 -88 V
 stroke
-0.00 0.00 0.00 C 5399 440 M
-[ [({}) 200.0 0.0 true true 0 (250)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 5471 352 M
+[ [({}) 160.0 0.0 true true 0 (14)]
+] -53.3 MCshow
 0.500 UL
 LTb
 0.500 UL
 LTb
-740 4367 N
-740 640 L
-4659 0 V
-0 3727 V
--4659 0 V
+688 4415 N
+688 512 L
+4783 0 V
+0 3903 V
+-4783 0 V
 Z stroke
-0.00 0.00 0.00 C 160 2503 M
+0.00 0.00 0.00 C 128 2463 M
 currentpoint gsave translate 90 rotate 0 0 moveto
-[ [({}) 200.0 0.0 true true 0 (number of buckets)]
-] -66.7 MCshow
+[ [({}) 160.0 0.0 true true 0 (Avg Recc. Time \(ms.\))]
+] -53.3 MCshow
 grestore
 LTb
-0.00 0.00 0.00 C 3069 140 M
-[ [({}) 200.0 0.0 true true 0 (number of users)]
-] -66.7 MCshow
+0.00 0.00 0.00 C 3079 112 M
+[ [({}) 160.0 0.0 true true 0 (Number of Hash Functions)]
+] -53.3 MCshow
 LTb
 1.000 UP
 0.500 UL
 LTb
-% Begin plot #1
 1.000 UL
+LTb
+4064 3712 N
+0 640 V
+1311 0 V
+0 -640 V
+-1311 0 V
+Z stroke
+% Begin plot #1
+2.000 UP
+0.500 UL
 LT0
-0.53 1.00 0.47 C gsave 964 640 N 0 0 V 0 0 V 298 0 V 0 0 V 1 PolyFill
-964 640 M
-298 0 V
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5375 4272 M
+[ [({}) 160.0 0.0 true true 0 (IB-LSH1)]
+] -53.3 MRshow
+LT0
+0.00 0.00 0.00 C 4160 4272 M
+447 0 V
+688 4152 M
+1166 2674 L
+479 -869 V
+478 -634 V
+2601 869 L
+3080 704 L
+478 -73 V
+478 -45 V
+478 -25 V
+479 -17 V
+688 4152 Pls
+1166 2674 Pls
+1645 1805 Pls
+2123 1171 Pls
+2601 869 Pls
+3080 704 Pls
+3558 631 Pls
+4036 586 Pls
+4514 561 Pls
+4993 544 Pls
+4384 4272 Pls
 % End plot #1
 % Begin plot #2
-stroke
+2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 964 640 M
-298 0 V
--298 0 V
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5375 4112 M
+[ [({}) 160.0 0.0 true true 0 (IB-LSH2)]
+] -53.3 MRshow
+LT0
+0.00 0.00 0.00 C 4160 4112 M
+447 0 V
+688 593 M
+478 -32 V
+479 -25 V
+478 -8 V
+478 -6 V
+479 -3 V
+478 -2 V
+478 -1 V
+478 0 V
+479 -1 V
+688 593 TriU
+1166 561 TriU
+1645 536 TriU
+2123 528 TriU
+2601 522 TriU
+3080 519 TriU
+3558 517 TriU
+4036 516 TriU
+4514 516 TriU
+4993 515 TriU
+4384 4112 TriU
 % End plot #2
 % Begin plot #3
-stroke
-1.000 UL
-LT2
-0.53 1.00 0.47 C gsave 1336 640 N 0 0 V 0 186 V 299 0 V 0 -186 V 1 PolyFill
-1336 640 M
-0 186 V
-299 0 V
-0 -186 V
+2.000 UP
+0.500 UL
+LT0
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5375 3952 M
+[ [({}) 160.0 0.0 true true 0 (UB-LSH1)]
+] -53.3 MRshow
+LT0
+0.00 0.00 0.00 C 4160 3952 M
+447 0 V
+688 1239 M
+478 -155 V
+1645 942 L
+2123 830 L
+2601 716 L
+479 -62 V
+478 -34 V
+478 -42 V
+478 -25 V
+479 -11 V
+688 1239 Circle
+1166 1084 Circle
+1645 942 Circle
+2123 830 Circle
+2601 716 Circle
+3080 654 Circle
+3558 620 Circle
+4036 578 Circle
+4514 553 Circle
+4993 542 Circle
+4384 3952 Circle
 % End plot #3
 % Begin plot #4
-stroke
+2.000 UP
 0.500 UL
 LT0
-0.00 0.00 0.00 C 1336 640 M
-0 186 V
-299 0 V
-0 -186 V
--299 0 V
+0.00 0.00 0.00 C 0.00 0.00 0.00 C 5375 3792 M
+[ [({}) 160.0 0.0 true true 0 (UB-LSH2)]
+] -53.3 MRshow
+LT0
+0.00 0.00 0.00 C 4160 3792 M
+447 0 V
+688 686 M
+478 -54 V
+479 -30 V
+478 -31 V
+478 -12 V
+479 -17 V
+478 -9 V
+478 -6 V
+478 -7 V
+479 -2 V
+688 686 TriD
+1166 632 TriD
+1645 602 TriD
+2123 571 TriD
+2601 559 TriD
+3080 542 TriD
+3558 533 TriD
+4036 527 TriD
+4514 520 TriD
+4993 518 TriD
+4384 3792 TriD
 % End plot #4
-% Begin plot #5
-stroke
-1.000 UL
-LT4
-0.53 1.00 0.47 C gsave 1709 640 N 0 0 V 0 1304 V 298 0 V 0 -1304 V 1 PolyFill
-1709 640 M
-0 1304 V
-298 0 V
-0 -1304 V
-% End plot #5
-% Begin plot #6
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 1709 640 M
-0 1304 V
-298 0 V
-0 -1304 V
--298 0 V
-% End plot #6
-% Begin plot #7
-stroke
-1.000 UL
-LT6
-0.53 1.00 0.47 C gsave 2082 640 N 0 0 V 0 2423 V 298 0 V 0 -2423 V 1 PolyFill
-2082 640 M
-0 2423 V
-298 0 V
-0 -2423 V
-% End plot #7
-% Begin plot #8
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 2082 640 M
-0 2423 V
-298 0 V
-0 -2423 V
--298 0 V
-% End plot #8
-% Begin plot #9
-stroke
-1.000 UL
-LT8
-0.53 1.00 0.47 C gsave 2455 640 N 0 0 V 0 3541 V 298 0 V 0 -3541 V 1 PolyFill
-2455 640 M
-0 3541 V
-298 0 V
-0 -3541 V
-% End plot #9
-% Begin plot #10
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 2455 640 M
-0 3541 V
-298 0 V
-0 -3541 V
--298 0 V
-% End plot #10
-% Begin plot #11
-stroke
-1.000 UL
-LT1
-0.53 1.00 0.47 C gsave 2827 640 N 0 0 V 0 2050 V 298 0 V 0 -2050 V 1 PolyFill
-2827 640 M
-0 2050 V
-298 0 V
-0 -2050 V
-% End plot #11
-% Begin plot #12
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 2827 640 M
-0 2050 V
-298 0 V
-0 -2050 V
--298 0 V
-% End plot #12
-% Begin plot #13
-stroke
-1.000 UL
-LT3
-0.53 1.00 0.47 C gsave 3200 640 N 0 0 V 0 1677 V 298 0 V 0 -1677 V 1 PolyFill
-3200 640 M
-0 1677 V
-298 0 V
-0 -1677 V
-% End plot #13
-% Begin plot #14
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 3200 640 M
-0 1677 V
-298 0 V
-0 -1677 V
--298 0 V
-% End plot #14
-% Begin plot #15
-stroke
-1.000 UL
-LT5
-0.53 1.00 0.47 C gsave 3573 640 N 0 0 V 0 559 V 298 0 V 0 -559 V 1 PolyFill
-3573 640 M
-0 559 V
-298 0 V
-0 -559 V
-% End plot #15
-% Begin plot #16
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 3573 640 M
-0 559 V
-298 0 V
-0 -559 V
--298 0 V
-% End plot #16
-% Begin plot #17
-stroke
-1.000 UL
-LT7
-0.53 1.00 0.47 C gsave 3945 640 N 0 0 V 0 186 V 299 0 V 0 -186 V 1 PolyFill
-3945 640 M
-0 186 V
-299 0 V
-0 -186 V
-% End plot #17
-% Begin plot #18
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 3945 640 M
-0 186 V
-299 0 V
-0 -186 V
--299 0 V
-% End plot #18
-% Begin plot #19
-stroke
-1.000 UL
-LT0
-0.53 1.00 0.47 C gsave 4318 640 N 0 0 V 0 0 V 298 0 V 0 0 V 1 PolyFill
-4318 640 M
-298 0 V
-% End plot #19
-% Begin plot #20
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 4318 640 M
-298 0 V
--298 0 V
-% End plot #20
-% Begin plot #21
-stroke
-1.000 UL
-LT2
-0.53 1.00 0.47 C gsave 4691 640 N 0 0 V 0 0 V 298 0 V 0 0 V 1 PolyFill
-4691 640 M
-298 0 V
-% End plot #21
-% Begin plot #22
-stroke
-0.500 UL
-LT0
-0.00 0.00 0.00 C 4691 640 M
-298 0 V
--298 0 V
-% End plot #22
-% Begin plot #23
-stroke
-LT0
-0.00 0.00 0.00 C 740 640 M
-4659 0 V
-% End plot #23
 1.000 UP
-stroke
+0.500 UL
 LTb
 grestore % colour palette end
 stroke
