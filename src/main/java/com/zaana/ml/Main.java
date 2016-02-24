@@ -15,8 +15,12 @@ public class Main {
     private Main() {
     }
 
-    //static String dataFilePath = "data/ymusic/ymusic.data";
-    //static String dataFileBase = "data/ymusic/ymusic";
+    //private static HashMap<String, HashMap<String, Integer>> userRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
+
+    static String dataFilePath = "data/ymusic/ymusic.data";
+    static String dataFileBase = "data/ymusic/ymusic";
     //static String dataFilePath = "data/music/music.dat";
     //static String dataFileBase = "data/music/music";
     //static String dataFilePath = "data/100k/ml.data";
@@ -25,8 +29,8 @@ public class Main {
     //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/300k/xaa.data";
     //static String dataFileBase = "data/300k/xaa";
-    static String dataFilePath = "data/1m/ml-1m.data";
-    static String dataFileBase = "data/1m/ml-1m";
+    //static String dataFilePath = "data/1m/ml-1m.data";
+    //static String dataFileBase = "data/1m/ml-1m";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
