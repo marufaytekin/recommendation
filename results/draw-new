@@ -253,21 +253,21 @@ write(f, strcat(fileName,'-hash-functions-prediction-ratio'));
 
 x1 = UBKNNMaeList;
 x2 = IBKNNMaeList;
-x3 = UBKNNLSHHashFunctionsMaeList(1:3);
-x4 = IBKNNLSHHashFunctionsMaeList(1:3);
-x5 = UBLSH1HashFunctionsMaeList(1:3);
-x6 = UBLSH2HashFunctionsMaeList(1:3);
-x7 = IBLSH1HashFunctionsMaeList(1:3);
-x8 = IBLSH2HashFunctionsMaeList(1:3);
+x3 = UBKNNLSHHashFunctionsMaeList;
+x4 = IBKNNLSHHashFunctionsMaeList;
+x5 = UBLSH1HashFunctionsMaeList;
+x6 = UBLSH2HashFunctionsMaeList;
+x7 = IBLSH1HashFunctionsMaeList;
+x8 = IBLSH2HashFunctionsMaeList;
 
 y1 = UBKNNRuntimeList;
 y2 = IBKNNRuntimeList;
-y3 = UBKNNLSHHashFunctionsRuntimeList(1:3);
-y4 = IBKNNLSHHashFunctionsRuntimeList(1:3);
-y5 = UBLSH1HashFunctionsRuntimeList(1:3);
-y6 = UBLSH2HashFunctionsRuntimeList(1:3);
-y7 = IBLSH1HashFunctionsRuntimeList(1:3);
-y8 = IBLSH2HashFunctionsRuntimeList(1:3);
+y3 = UBKNNLSHHashFunctionsRuntimeList;
+y4 = IBKNNLSHHashFunctionsRuntimeList;
+y5 = UBLSH1HashFunctionsRuntimeList;
+y6 = UBLSH2HashFunctionsRuntimeList;
+y7 = IBLSH1HashFunctionsRuntimeList;
+y8 = IBLSH2HashFunctionsRuntimeList;
 
 f= figure();
 plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
@@ -289,47 +289,6 @@ title('MAE-Performance tradeoff -lower and left is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-mae-comp2'));
 
-
-
-####################################
-# Ratio-Performance tradeoff
-####################################
-
-total_test_data = max(UBKNNLSHHashFunctionsPredictedItemsList);
-y3 = UBKNNLSHHashFunctionsPredictedItemsList/total_test_data;
-y4 = IBKNNLSHHashFunctionsPredictedItemsList/total_test_data;
-y5 = UBLSH1HashFunctionsPredictedItemsList/total_test_data;
-y6 = UBLSH2HashFunctionsPredictedItemsList/total_test_data;
-y7 = IBLSH1HashFunctionsPredictedItemsList/total_test_data;
-y8 = IBLSH2HashFunctionsPredictedItemsList/total_test_data;
-
-x3 = UBKNNLSHHashFunctionsRuntimeList;
-x4 = IBKNNLSHHashFunctionsRuntimeList;
-x5 = UBLSH1HashFunctionsRuntimeList;
-x6 = UBLSH2HashFunctionsRuntimeList;
-x7 = IBLSH1HashFunctionsRuntimeList;
-x8 = IBLSH2HashFunctionsRuntimeList;
-
-f= figure();
-plot (x3, y3,'-d', x4, y4,'-*', x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-KNN-LSH', 'IB-KNN-LSH', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('MAE -lower is better');
-ylabel('Running Time(ms.) -lower is better');
-title('MAE-Performance tradeoff -lower and left is better');
-legend boxon;
-write(f, strcat(fileName,'-hash-functions-mae-comp'));
-
-f= figure();
-plot (x5, y5,'-+', x6, y6,'->', x7, y7,'-o', x8, y8,'-<');
-h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel('Running time (ms.) -lower is better');
-ylabel('Prediction Ratio -larger is better');
-title('Ratio-Performance tradeoff -upper and left is better');
-ylim([0 1]);
-legend boxon;
-write(f, strcat(fileName,'-hash-functions-ratio-runtime'));
 
 # ========================================================
 # Number of Hash Functions on the metrics
@@ -381,15 +340,15 @@ write(f, strcat(fileName,'-hash-functions-topn-runtime2'));
 
 f= figure();
 
-x3 = IBLSH1RecommenderHashFunctionsPrecision(1:3);
-x4 = IBLSH2RecommenderHashFunctionsPrecision(1:3);
-x5 = UBLSH1RecommenderHashFunctionsPrecision(1:3);
-x6 = UBLSH2RecommenderHashFunctionsPrecision(1:3);
+x3 = IBLSH1RecommenderHashFunctionsPrecision(1:5);
+x4 = IBLSH2RecommenderHashFunctionsPrecision(1:5);
+x5 = UBLSH1RecommenderHashFunctionsPrecision(1:5);
+x6 = UBLSH2RecommenderHashFunctionsPrecision(1:5);
 
-y3 = IBLSH1RecommenderHashFunctionsAvgRecommTime(1:3);
-y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime(1:3);
-y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime(1:3);
-y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime(1:3);
+y3 = IBLSH1RecommenderHashFunctionsAvgRecommTime(1:5);
+y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime(1:5);
+y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime(1:5);
+y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime(1:5);
 
 plot (x3, y3,'-+', x4, y4,'->', x5, y5,'-o', x6, y6,'-<');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
@@ -447,6 +406,8 @@ write(f, strcat(fileName,'-hash-tables-topn-runtime2'));
 ###########################
 
 
+x1 = IBKNNRecommenderPrecision;
+x2 = UBKNNRecommenderPrecision;
 x3 = IBLSH1RecommenderHashTablesPrecision;
 x4 = IBLSH2RecommenderHashTablesPrecision;
 x5 = UBLSH1RecommenderHashTablesPrecision;
@@ -466,7 +427,4 @@ ylabel('Running Time(ms.) -lower is better');
 title('Precision-Performance tradeoff -lower and right is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-topn-comp2'));
-
-
-
 
