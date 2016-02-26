@@ -104,12 +104,15 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                                     intersectionOfCandidateRatedUserSets, userRateMap, y);
                     LinkedHashMap<String, Double> kNNList = Common.getkNNList(
                             similarityListMap, userRateMap, movieId, kNN);
-                    if (!kNNList.isEmpty()) { // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
-                        prediction = Prediction.calculateUserBasedPredicitonRate(
-                                userRateMap, kNNList, movieId);
-                        outputList.add(prediction);
-                        targetList.add(givenRating);
-                    }
+                    //if (!kNNList.isEmpty()) { // && kNNList.size() >= kNN) { //BUG: calculating prediction with lt k NN
+                    prediction = Prediction.calculateUserBasedPredicitonRate(
+                            userRateMap, kNNList, movieId);
+                    outputList.add(prediction);
+                    targetList.add(givenRating);
+                    //}
+                } else {
+                    outputList.add(2.5);
+                    targetList.add(givenRating);
                 }
             } catch (NullPointerException e) {
                 // do nothing

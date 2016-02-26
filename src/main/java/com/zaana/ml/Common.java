@@ -22,13 +22,12 @@ public final class Common
     public static LinkedHashMap<String, Double> getkNNList(
             LinkedHashMap<String, Double> targetUserSimilarityList,
             HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
-            String movieId, int kNN) {
-        Iterator<Entry<String, Double>> iter = targetUserSimilarityList
-                .entrySet().iterator();
+            String movieId, int kNN)
+    {
         LinkedHashMap<String, Double> kNNList = new LinkedHashMap<>();
         // K:userId, V: similarity
         int numNN = 0;
-
+        Iterator<Entry<String, Double>> iter = targetUserSimilarityList.entrySet().iterator();
         while (numNN < kNN && iter.hasNext()) {
             Entry<String, Double> nearestNeighbor = iter.next();
             Integer movieRating = userRateMap.get(nearestNeighbor.getKey())

@@ -78,7 +78,6 @@ public final class UBKNNPrediction extends AbstractPredictionTests
             LinkedList<Integer> targetList,
             final int kNN)
     {
-
         HashObjObjMap<String, Integer> movieRatePair = testDataEntry.getValue();
         double prediction;
         for (Entry<String, Integer> entry : movieRatePair.entrySet()) {

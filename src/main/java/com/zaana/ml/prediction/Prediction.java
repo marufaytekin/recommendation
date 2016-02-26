@@ -23,7 +23,7 @@ public class Prediction
 
         Iterator<Entry<String, Double>> entry = kNNList.entrySet()
                 .iterator();
-        double itemRate = 0.0D;
+        double itemRate = 2.5;
         double wuvRviTotal = 0.0D;
         double wuvTotal = 0.0D;
         while (entry.hasNext()) {
@@ -60,7 +60,7 @@ public class Prediction
             final String testUserId)
     {
         Iterator<Entry<String, Double>> entry = kNNList.entrySet().iterator();
-        double itemRate = 0.0D;
+        double itemRate = 2.5;
         double wijRujTotal = 0.0D;
         double wuvTotal = 0.0D;
         while (entry.hasNext()) {

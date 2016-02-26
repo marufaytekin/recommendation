@@ -31,7 +31,6 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long endTime;
         HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
         HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-        int numOfHashTables = hashTables.size();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
             HashObjObjMap<String, Integer> userRateList = userRateMap.get(userId);
@@ -52,7 +51,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                             LSH2.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
                     HashObjSet<String> intersectionOfCandidateRatedUserSets = HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersectionOfCandidateRatedUserSets.retainAll(ratedUserSet);
-                    if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
+                    //if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
                     //////////////////////////////////
                     startTime = System.currentTimeMillis();
                     prediction = lshRecommender.calculatePrediction
@@ -119,7 +118,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     HashObjSet<String> intersecItemsCandidateSet =
                             HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersecItemsCandidateSet.retainAll(ratedItemsSet);
-                    if (intersecItemsCandidateSet.isEmpty()) continue;
+                    //if (intersecItemsCandidateSet.isEmpty()) continue;
                     //////////////////////////////////
                     startTime = System.currentTimeMillis();
                     prediction = lshRecommender.calculatePrediction(

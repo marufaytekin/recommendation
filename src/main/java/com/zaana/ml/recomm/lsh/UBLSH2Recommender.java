@@ -78,7 +78,7 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
                 kNNList.add(candidateUser);
             }
         }
-        if (kNNList.isEmpty()) return null;
+        if (kNNList.isEmpty()) return 2.5;
         HashObjObjMap<String, Integer> usersRated = itemRateMap.get(movieId);
         for (String candidateUser : kNNList) {
             rating = usersRated.get(candidateUser);

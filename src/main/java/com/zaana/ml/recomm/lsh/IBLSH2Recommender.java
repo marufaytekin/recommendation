@@ -77,7 +77,7 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
                 kNNList.add(candidateUser);
             }
         }
-        if (kNNList.isEmpty()) return null;
+        if (kNNList.isEmpty()) return 2.5;
         HashObjObjMap<String, Integer> userRatings = userRateMap.get(targetUserId);
         for (String candidateItem : kNNList) {
             rating = userRatings.get(candidateItem);

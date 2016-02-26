@@ -78,7 +78,6 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
             LinkedList<Integer> targetList,
             int kNN, int y)
     {
-
         HashObjObjMap<String, Integer> testMovieList = testDataEntry.getValue();
         double prediction;
         for (Entry<String, Integer> entry : testMovieList.entrySet()) {
@@ -86,12 +85,12 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
                 String testMovieId = entry.getKey();
                 LinkedHashMap<String, Double> kNNList = getSimilarItemsListRatedByUser(
                         itemRateMap, testMovieId, ratedItemsSet, kNN, y);
-                if (kNNList != null && !kNNList.isEmpty()) { //BUG: computing prediction with lt k NN
-                    prediction = Prediction.calculateItemBasedPredicitonRate(
-                            itemRateMap, kNNList, testUserId);
-                    targetList.add(entry.getValue()); // add rating to targetList
-                    outputList.add(prediction);
-                }
+                //if (kNNList != null && !kNNList.isEmpty()) { //BUG: computing prediction with lt k NN
+                prediction = Prediction.calculateItemBasedPredicitonRate(
+                        itemRateMap, kNNList, testUserId);
+                targetList.add(entry.getValue()); // add rating to targetList
+                outputList.add(prediction);
+                //}
             } catch (NullPointerException e) {
                 //do nothing
             }
@@ -110,12 +109,9 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
             HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
             String itemId, Set<String> ratedItemsSet, int kNN, int y)
     {
-
         LinkedHashMap<String, Double> sortedSimilarItemsListMap =
                 Cosine.getSimilarityListWithCandidateSet(itemId, ratedItemsSet, itemRateMap, y);
-        if (sortedSimilarItemsListMap == null) {
-        	return null;
-        }
+        if (sortedSimilarItemsListMap == null) { return null; }
         try {
             Iterator<Entry<String, Double>> iter = sortedSimilarItemsListMap.entrySet().iterator();
             LinkedHashMap<String, Double> kNNList = new LinkedHashMap<>();
@@ -127,13 +123,8 @@ public final class IBKNNPrediction extends AbstractPredictionTests {
                         nearestNeighbor.getValue());
                 numNN++;
             }
-            if (kNNList.isEmpty()) {
-            	return null;
-            }
-            else
-            	return kNNList;
-        } catch (NullPointerException e) {
-            return null;
-        }
+            if (kNNList.isEmpty()) { return null; }
+            else return kNNList;
+        } catch (NullPointerException e) { return null; }
     }
 }

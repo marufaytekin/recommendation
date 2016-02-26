@@ -93,14 +93,15 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
                     kRatedSimilarItemsList = IBKNNPrediction.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
                     LOG.debug("kRatedSimilarItemsList :" + kRatedSimilarItemsList.toString());
-                    if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {
+                    //if (kRatedSimilarItemsList != null && !kRatedSimilarItemsList.isEmpty()) {
                         prediction = Prediction.calculateItemBasedPredicitonRate(itemRateMap,
                                 kRatedSimilarItemsList, testUserId);
                         targetList.add(entry.getValue());
                         outputList.add(prediction);
-                    }
+                    //}
                 } else {
-                    // do nothing
+                    targetList.add(entry.getValue());
+                    outputList.add(2.5);
                 }
             }catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());
