@@ -180,7 +180,7 @@ xlim([4, 13])
 xlabel('Number of Hash Functions');
 ylabel('MAE');
 legend boxon;
-write(f, strcat(fileName,'-hash-functions-mae'));
+write(f, strcat(fileName,'-hash-functions-mae2'));
 
 
 f= figure();
