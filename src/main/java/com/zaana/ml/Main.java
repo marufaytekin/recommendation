@@ -29,8 +29,8 @@ public class Main {
     //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/300k/xaa.data";
     //static String dataFileBase = "data/300k/xaa";
-    static String dataFilePath = "data/1m/ml-1m.data";
-    static String dataFileBase = "data/1m/ml-1m";
+    static String dataFilePath = "data/1m-new/ml-new.data";
+    static String dataFileBase = "data/1m-new/ml-new";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;
