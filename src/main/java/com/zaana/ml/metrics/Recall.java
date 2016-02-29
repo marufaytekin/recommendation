@@ -17,6 +17,7 @@ public final class Recall {
     public static Double calculateRecall(final Set<String> relevant,
                                          final Set<String> topNRecommendation)
     {
+        if (relevant.size() == 0) return 0.0;
         try {
             Set<String> intersec = new HashSet<>(topNRecommendation);
             intersec.retainAll(relevant);

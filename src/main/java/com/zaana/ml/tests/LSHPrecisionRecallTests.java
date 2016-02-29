@@ -165,8 +165,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             //////////////////////////////////
             totalReccTime += (endTime - startTime);
 
-            totalPrecision += Precision.getPrecision(topNRecommendedItems, entry);
-            totalRecall += Recall.getRecall(topNRecommendedItems, entry);
+            totalPrecision += Precision.calculatePrecision(entry.getValue().keySet(), topNRecommendedItems);
+            totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItems);
             totalTopN += topNRecommendedItems.size();
             totalCandidateItemList += recommender.getCandidateItemListSize();
             totalUniqueItemList += recommender.getUniqueCandidateItemListSize();

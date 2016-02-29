@@ -101,6 +101,23 @@ legend boxon;
 write(f, strcat(fileName,'-hash-tables-candidate-set'));
 
 
+############
+
+f= figure();
+x = 4:13;
+x1 = UBLSH1HashTablesRuntimeList;
+x2 = UBLSH2HashTablesRuntimeList;
+y1 = IBLSH1HashTablesRuntimeList;
+y2 = IBLSH2HashTablesRuntimeList;
+
+plot (x, x1 ./ x2,'-o', x, y1 ./ y2,'-<');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Tables');
+ylabel('Runtime Gain (times)');
+xlim([4, 13])
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-gain'));
+
 ####################################
 # MAE-Performance tradeoff
 ####################################
@@ -173,8 +190,8 @@ legend boxon;
 write(f, strcat(fileName,'-hash-functions-mae'));
 
 f= figure();
-plot (x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
-h = legend('UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k', x, y5,'-+k', x, y6,'->k', x, y7,'-ok', x, y8,'-<k');
+h = legend('UB-KNN', 'IB-KNN', 'UB-LSH1', 'UB-LSH2', 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
 xlim([4, 13])
 xlabel('Number of Hash Functions');

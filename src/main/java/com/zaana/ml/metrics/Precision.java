@@ -18,6 +18,7 @@ public abstract class Precision {
             final Set<String> relevant,
             final Set<String> topNRecommendation)
     {
+        if (topNRecommendation.size() == 0) return 0.0;
         try {
             Set<String> intersec = new HashSet<>(topNRecommendation);
             intersec.retainAll(relevant);

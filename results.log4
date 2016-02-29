@@ -693,15 +693,6 @@ UBKNNRecommenderAvgRecommTime = 0.5780213990546779;
 
 
 
-
-
-
-
-
-
-
-
-
 # ========================================================
 # test case: UBKNNLSHHashTables Prediction Performance
 # ========================================================
@@ -938,9 +929,9 @@ UBLSH2RecommenderHashTablesUniqueItemListSize = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0
 # test case: IBKNNRecommender Precision
 # ========================================================
 dataFileBase = data/android/andapps
-IBKNNRecommenderPrecision = NaN
+IBKNNRecommenderPrecision = 0.04761904761904758
 IBKNNRecommenderRecall = 0.09589169000933699
-IBKNNRecommenderAvgRecommTime = 0.6106442577030813;
+IBKNNRecommenderAvgRecommTime = 0.7759103641456583;
 # ========================================================
 # test case: UBKNNRecommender Precision
 # ========================================================
