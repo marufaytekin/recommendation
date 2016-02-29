@@ -85,16 +85,17 @@ public final class UBKNNPrediction extends AbstractPredictionTests
                 String movieId = entry.getKey();
                 LinkedHashMap<String, Double> kNNList = Common.getkNNList(
                         similarityListMap, userRateMap, movieId, kNN);
-                if (!kNNList.isEmpty() ) { //&& (kNNList.size()>= kNN)) { //BUG: used to compute prediction with lt k NN
-                    prediction = Prediction.calculateUserBasedPredicitonRate(
+                //if (kNNList != null && !kNNList.isEmpty() ) { //&& (kNNList.size()>= kNN)) { //BUG: used to compute prediction with lt k NN
+                prediction = Prediction.calculateUserBasedPredicitonRate(
                             userRateMap, kNNList, movieId);
-                    outputList.add(prediction);
-                    targetList.add(entry.getValue());
-                }
+                outputList.add(prediction);
+                targetList.add(entry.getValue());
+                //}
             } catch (NullPointerException e) {
                 // do nothing
             }
         }
     }
+
 
 }

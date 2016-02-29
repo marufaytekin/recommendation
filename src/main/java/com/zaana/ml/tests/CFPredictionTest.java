@@ -2,6 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.MAE;
 import com.zaana.ml.prediction.IBKNNPrediction;
+import com.zaana.ml.prediction.RandomPrediction;
 import com.zaana.ml.prediction.UBKNNPrediction;
 
 /**
@@ -27,6 +28,15 @@ public class CFPredictionTest extends AbstractTest {
                         (itemRateMap, userRateMap, testDataMap, kNN, y);
                 mae += MAE.calculateMAE(IBKNNPrediction.getOutputList(),
                         IBKNNPrediction.getTargetList());
+                System.out.println("Predicted Items: " + IBKNNPrediction.getOutputList().size());
+            } else if (type == "R") {
+                runTime += RandomPrediction.runRandomPredictionOnTestData
+                        (userRateMap, testDataMap);
+                mae += MAE.calculateMAE(
+                        RandomPrediction.getOutputList(),
+                        RandomPrediction.getTargetList()
+                );
+                System.out.println("Predicted Items: " + RandomPrediction.getOutputList().size());
             } else {
                 throw new UnsupportedOperationException("Invalid operation for CF type.");
             }
@@ -38,4 +48,5 @@ public class CFPredictionTest extends AbstractTest {
         LOG2.info(type + "MaeList = " + mae/ smoothRun);
         LOG2.info(type + "Runtime = " + runTime / smoothRun);
     }
+
 }
