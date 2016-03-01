@@ -16,6 +16,7 @@ public final class DataParser
 {
 
     static Logger LOG = Logger.getLogger(DataParser.class);
+    static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
 
     private DataParser() {}
 
@@ -321,10 +322,10 @@ public final class DataParser
             total += iterator.next().getValue();
         }
         LinkedHashMap<Integer, Integer> histo = SortHashMap.sortByKeys(histogram);
-        LOG.info("Total number of Ratings: " + total);
-        LOG.info("Histogram = " + histo);
-        LOG.info("numberOfRatings = " + histo.keySet());
-        LOG.info("numberOfUsers = " + histo.values());
+        LOG2.info("Total number of Ratings: " + total);
+        LOG2.info("Histogram = " + histo);
+        LOG2.info("numberOfRatings = " + histo.keySet());
+        LOG2.info("numberOfUsers = " + histo.values());
 
     }
 

@@ -2,8 +2,8 @@
  bar(numberOfRatings * 10, numberOfUsers);
  xlabel('Number of Ratings');
  ylabel('Number of Users');
- title('Amazon 1M Data Set');
- write(f, 'amazon-1m-histo');
+ xlim([5 105])
+ write(f, fileName);
 
 
 function write (f, file_name)

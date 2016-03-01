@@ -15,20 +15,22 @@ public class Main {
     private Main( ) {
     }
 
+    //private static HashMap<String, HashMap<String, Integer>> userRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> itemRateMap = null;
+    //private static HashMap<String, HashMap<String, Integer>> testDataMap = null;
+
     //static String dataFilePath = "data/ymusic/ymusic.data";
     //static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/dmusic/dmusic.dat";
-    //static String dataFileBase = "data/dmusic/dmusic";
+    //static String dataFilePath = "data/android/andapps.data";
+    //static String dataFileBase = "data/android/andapps";
     //static String dataFilePath = "data/100k/ml.data";
     //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/movies_tv/movies_tv.data";
     //static String dataFileBase = "data/movies_tv/movies_tv";
-    static String dataFilePath = "data/android/andapps.data";
-    static String dataFileBase = "data/android/andapps";
     //static String dataFilePath = "data/1m/ml-1m.data";
-    //static String dataFilePath = "data/1m-new/ml-new.data";
-    //static String dataFileBase = "data/1m-new/ml-new";
     //static String dataFileBase = "data/1m/ml-1m";
+    static String dataFilePath = "data/1m-new/ml-new.data";
+    static String dataFileBase = "data/1m-new/ml-new";
     static final String seperator = "\\t";
     static int topN = 20;
     static int kNN = 20;

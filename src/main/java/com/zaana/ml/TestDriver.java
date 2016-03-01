@@ -15,6 +15,7 @@ import java.util.Scanner;
  */
 public class TestDriver {
     static Logger LOG = Logger.getLogger(TestDriver.class);
+    static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static void runSelection(final String selection, String dataFilePath, String dataFileBase, Scanner scanner, String seperator, int numOfRun, int smoothRun, int kNN, int k, int l, int y, int topN)
     {
         IBLSH1Recommender ibLsh1Recommender = new IBLSH1Recommender();
@@ -68,12 +69,11 @@ public class TestDriver {
                 break;
 
             case "02":
-                DataParser.processDataFile(dataFilePath, seperator,5,95);
+                DataParser.readTrainingDataFile(dataFilePath, seperator);
                 HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap = DataParser.getUserRateMap();
-                System.out.println("User based histogram");
+                LOG2.info("User based histogram: " + dataFilePath);
                 DataParser.calculateDataSetHistogram(userRateMap);
-                System.out.println("Item based histogram");
-                DataParser.removeDuplicateData(userRateMap, DataParser.getItemRateMap(), DataParser.getTestDataMap());
+                LOG2.info("Item based histogram: " + dataFilePath);
                 DataParser.calculateDataSetHistogram(DataParser.getItemRateMap());
                 break;
 
