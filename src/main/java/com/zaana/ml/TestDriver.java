@@ -29,12 +29,15 @@ public class TestDriver {
                 break;
 
             case "001":
-                dataFilePath = "data/1m-new/ml-new.data";
-                dataFileBase = "data/1m-new/ml-new";
-                runSelection("01", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/1m/ml-1m.data";
+                dataFileBase = "data/1m/ml-1m";
+                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/movies_tv/movies_tv.data";
+                dataFileBase = "data/movies_tv/movies_tv";
+                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/android/andapps.data";
                 dataFileBase = "data/android/andapps";
-                runSelection("01", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "01": // prediction tests
@@ -108,24 +111,12 @@ public class TestDriver {
 
             case "05":
 
-                runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("73", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("74", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-
-                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-
+                runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "5000":
@@ -179,6 +170,7 @@ public class TestDriver {
 //            case "55":
 //                LSHParameterTest.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase, "val", numOfRun, smoothRun, seperator, kNN, y);
 //                break;
+
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
@@ -191,6 +183,7 @@ public class TestDriver {
             case "56":
                 CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "R", smoothRun, seperator, kNN, y);
                 break;
+
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
@@ -245,6 +238,34 @@ public class TestDriver {
             case "77":
                 LSHPredictionTest.runLSHHashFunctionsAndPrediction(ubLsh2Recommender, "UBLSH2", dataFileBase, "test", seperator,
                         numOfRun, l, k, smoothRun, kNN, y);
+                break;
+
+            ////////////////////////////////////////////////////////////////////
+            //
+            ////////////////////////////////////////////////////////////////////
+            case "80":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ubLsh1Recommender, "UBKNNLSH", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
+                break;
+            case "81":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ibLsh1Recommender, "IBKNNLSH", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
+                break;
+            case "82":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ibLsh1Recommender, "IBLSH1", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
+                break;
+            case "83":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ubLsh1Recommender, "UBLSH1", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
+                break;
+            case "84":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ibLsh2Recommender, "IBLSH2", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
+                break;
+            case "85":
+                LSHPredictionTest.runLSH2DHashFunctionsTablesTest(ubLsh2Recommender, "UBLSH2", dataFileBase, "val", seperator,
+                        numOfRun, smoothRun, kNN, y);
                 break;
 
             ////////////////////////////////////////////////////////////////////

@@ -6,15 +6,16 @@ import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
 
 /**
  * Created by maruf on 06/05/15.
  */
-public class LSHPredictionTest extends AbstractTest
-{
+public class LSHPredictionTest extends AbstractTest {
 
+    private static double runTime;
+    private static Double candidate_set_size;
+    private static double mae;
+    private static int predictedItems;
 
     /**
      * Runs LSH prediction tests for HashTables to detect the effect of changes
@@ -45,6 +46,56 @@ public class LSHPredictionTest extends AbstractTest
 
 
     /**
+     * Runs 2D LSH HashTables and HashFunctions tests to determine the effect
+     * of these parameters on prediction accuracy. Output will be 2D graph.*/
+    public static void runLSH2DHashFunctionsTablesTest(
+            AbstractLSHRecommender lshRecommender, String type, String dataFileBase,
+            String val, String separator, int numOfRun, double smoothRun, int kNN, int y) {
+
+        int numOfBands = 1;
+        int numOfHashFunctions = 1;
+        ArrayList<Object> runTimeList2D = new ArrayList<>();
+        ArrayList<Object> maeList2D = new ArrayList<>();
+        ArrayList<Object> candidate_set_list2D = new ArrayList<>();
+
+        for (int i = 0; i < numOfRun; i++) {
+            ArrayList<Double> hashFuncRuntimeList = new ArrayList<>();
+            ArrayList<Double> hashFuncMaeList = new ArrayList<>();
+            ArrayList<Double> candidate_set_list = new ArrayList<>();
+            for (int j = 0; j < numOfRun; j++) {
+                runTime = 0;
+                mae = 0;
+                candidate_set_size = 0.0;
+                predictedItems = 0;
+                runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
+                LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
+                LOG.info(type + "MAE: " + mae / smoothRun);
+                LOG.info(type + "Runtime: " + runTime / smoothRun);
+                hashFuncMaeList.add(mae / smoothRun);
+                hashFuncRuntimeList.add(runTime / smoothRun);
+                candidate_set_list.add(candidate_set_size / smoothRun);
+                numOfHashFunctions += 1;
+            }
+            runTimeList2D.add(hashFuncRuntimeList);
+            maeList2D.add(hashFuncMaeList);
+            candidate_set_list2D.add(candidate_set_list);
+
+            numOfBands += 1;
+            numOfHashFunctions = 1;
+        }
+        LOG2.info("# ========================================================");
+        LOG2.info("# test case: " + type + " 2D ");
+        LOG2.info("# ========================================================");
+        LOG2.info("dataFileBase = " + dataFileBase);
+        LOG2.info("k = " + kNN);
+        LOG2.info(type + "Mae2D = " + maeList2D.toString() + ";");
+        LOG2.info(type + "Runtime2D = " + runTimeList2D.toString() + ";");
+        LOG2.info(type + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
+
+    }
+
+
+    /**
      * Runs 2D UB LSH HashTables and HashFunctions tests to determine the effect
      * of these parameters on prediction accuracy. Output will be 2D graph.*/
     private static void runLSHPredictionPerformanceTests(
@@ -66,64 +117,17 @@ public class LSHPredictionTest extends AbstractTest
         ArrayList<Double> maeList = new ArrayList<>();
         ArrayList<Double> predictedItemsList = new ArrayList<>();
         ArrayList<Double> candidate_set_list = new ArrayList<>();
-        HashObjObjMap<Object, Object> hashTables;
         for (int i = 0; i < numOfRun; i++) {
-            double runTime = 0;
-            double mae = 0;
-            double candidate_set_size = 0;
-            double predictedItems = 0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j+1), val, separator);
-                lshRecommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                if (type == "UBKNNLSH") {
-                    hashTables = lshRecommender.getHashTables();
-                    hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-                    runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
-                            userRateMap, itemRateMap, testDataMap, hashTables, kNN, y, hashKeyLookupTable);
-                    candidate_set_size += UBKNNLSHPrediction
-                            .getAvg_candidate_set_size();
-                    mae += MAE.calculateMAE(
-                            UBKNNLSHPrediction.getOutputList(),
-                            UBKNNLSHPrediction.getTargetList());
-                    predictedItems += UBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "IBKNNLSH") {
-                    hashTables = lshRecommender.getHashTables();
-                    hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-                    runTime += IBKNNLSHPrediction.
-                            runItemBasedLSHPredictionOnTestData
-                                    (itemRateMap, userRateMap, testDataMap, hashTables, hashKeyLookupTable, kNN, y);
-                    candidate_set_size += IBKNNLSHPrediction
-                            .getAvg_candidate_set_size();
-                    mae += MAE.calculateMAE(
-                            IBKNNLSHPrediction.getOutputList(),
-                            IBKNNLSHPrediction.getTargetList());
-                    predictedItems += IBKNNLSHPrediction.getOutputList().size();
-                } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3") {
-                    runTime += LSHPredictionTests.runUBLSHPredictionOnTestData
-                            (userRateMap, itemRateMap, testDataMap, lshRecommender);
-                    candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
-                    mae += MAE.calculateMAE(
-                            LSHPredictionTests.getOutputList(),
-                            LSHPredictionTests.getTargetList());
-                    predictedItems += LSHPredictionTests.getOutputList().size();
-                } else if (type == "IBLSH1" || type == "IBLSH2" ){
-                    runTime += LSHPredictionTests.runIBLSHPredictionOnTestData
-                            (userRateMap, itemRateMap, testDataMap, lshRecommender);
-                    candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
-                    mae += MAE.calculateMAE(
-                            LSHPredictionTests.getOutputList(),
-                            LSHPredictionTests.getTargetList());
-                    predictedItems += LSHPredictionTests.getOutputList().size();
-                } else throw new UnsupportedOperationException("Invalid type.");
-
-            }
+            runTime = 0;
+            mae = 0;
+            candidate_set_size = 0.0;
+            predictedItems = 0;
+            runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
             maeList.add(mae / smoothRun);
             runtimeList.add(runTime / smoothRun);
             candidate_set_list.add(candidate_set_size / smoothRun);
             predictedItemsList.add(predictedItems / smoothRun);
-
-            LOG.info("numOfBands:" + numOfBands
-                    + " numOfHashFunctions:" + numOfHashFunctions);
+            LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
             LOG.info("Mae: " + mae/ smoothRun);
             LOG.info("Runtime: " + runTime/ smoothRun);
             LOG.info("Predicted Items :" + (predictedItems / smoothRun));
@@ -145,6 +149,61 @@ public class LSHPredictionTest extends AbstractTest
         LOG2.info(type + testType + "CandidateSetList = " + candidate_set_list + ";");
         LOG2.info(type + testType + "PredictedItemsList  = " + predictedItemsList.toString() + ";");
     }
+
+
+
+    private static void runPrediction(
+            AbstractLSHRecommender lshRecommender,
+            String type, String dataFileBase, String separator,
+            double smoothRun, String val, int numOfBands, int numOfHashFunctions,
+            int kNN, int y) {
+        HashObjObjMap<Object, Object> hashTables;
+        for (int s = 0; s < smoothRun; s++) {
+            preprocessDataForValidation(dataFileBase, (s+1), val, separator);
+            lshRecommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
+            if (type == "UBKNNLSH") {
+                hashTables = lshRecommender.getHashTables();
+                hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
+                runTime += UBKNNLSHPrediction.runUserBasedLSHPredictionOnTestData(
+                        userRateMap, itemRateMap, testDataMap, hashTables, kNN, y, hashKeyLookupTable);
+                candidate_set_size += UBKNNLSHPrediction
+                        .getAvg_candidate_set_size();
+                mae += MAE.calculateMAE(
+                        UBKNNLSHPrediction.getOutputList(),
+                        UBKNNLSHPrediction.getTargetList());
+                predictedItems += UBKNNLSHPrediction.getOutputList().size();
+            } else if (type == "IBKNNLSH") {
+                hashTables = lshRecommender.getHashTables();
+                hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
+                runTime += IBKNNLSHPrediction.
+                        runItemBasedLSHPredictionOnTestData
+                                (itemRateMap, userRateMap, testDataMap, hashTables, hashKeyLookupTable, kNN, y);
+                candidate_set_size += IBKNNLSHPrediction
+                        .getAvg_candidate_set_size();
+                mae += MAE.calculateMAE(
+                        IBKNNLSHPrediction.getOutputList(),
+                        IBKNNLSHPrediction.getTargetList());
+                predictedItems += IBKNNLSHPrediction.getOutputList().size();
+            } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3") {
+                runTime += LSHPredictionTests.runUBLSHPredictionOnTestData
+                        (userRateMap, itemRateMap, testDataMap, lshRecommender);
+                candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
+                mae += MAE.calculateMAE(
+                        LSHPredictionTests.getOutputList(),
+                        LSHPredictionTests.getTargetList());
+                predictedItems += LSHPredictionTests.getOutputList().size();
+            } else if (type == "IBLSH1" || type == "IBLSH2" ){
+                runTime += LSHPredictionTests.runIBLSHPredictionOnTestData
+                        (userRateMap, itemRateMap, testDataMap, lshRecommender);
+                candidate_set_size += LSHPredictionTests.getAvg_candidate_set_size();
+                mae += MAE.calculateMAE(
+                        LSHPredictionTests.getOutputList(),
+                        LSHPredictionTests.getTargetList());
+                predictedItems += LSHPredictionTests.getOutputList().size();
+            } else throw new UnsupportedOperationException("Invalid type.");
+        }
+    }
+
 
 
 }
