@@ -393,12 +393,30 @@ xlabel('Number of Hash Functions');
 ylabel('Avg Recc. Time (ms.)')
 write(f, strcat(fileName,'-hash-functions-topn-runtime2'));
 
+f= figure();
+plot (x, y5,'-ok', x, y6,'-<k');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+legend boxon;
+xlim([4, 13])
+xlabel('Number of Hash Functions');
+ylabel('Avg Recc. Time (ms.)')
+write(f, strcat(fileName,'-hash-functions-topn-runtime2-ub'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k');
+h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+legend boxon;
+xlim([4, 13])
+xlabel('Number of Hash Functions');
+ylabel('Avg Recc. Time (ms.)')
+write(f, strcat(fileName,'-hash-functions-topn-runtime2-ib'));
+
 
 #########################
 # Precision-Performance tradeoff
 #########################
-
-f= figure();
 
 x3 = IBLSH1RecommenderHashFunctionsPrecision;
 x4 = IBLSH2RecommenderHashFunctionsPrecision;
@@ -410,6 +428,7 @@ y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime;
 y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime;
 y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime;
 
+f= figure();
 plot (x3, y3,'-+', x4, y4,'->', x5, y5,'-o', x6, y6,'-<');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
 set (h, 'fontsize', 8);
@@ -419,6 +438,25 @@ title('Precision-Performance tradeoff -lower and right is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-topn-comp2'));
 
+f= figure();
+plot (x5, y5,'-o', x6, y6,'-<');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Precision -larger is better');
+ylabel('Running Time(ms) -lower is better');
+title('Precision-Performance tradeoff -lower and right is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-topn-comp2-ub'));
+
+f= figure();
+plot (x3, y3,'-+', x4, y4,'->');
+h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Precision -larger is better');
+ylabel('Running Time(ms) -lower is better');
+title('Precision-Performance tradeoff -lower and right is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-topn-comp2-ib'));
 
 
 # ========================================================
@@ -459,6 +497,25 @@ ylabel('Recommendation Time (ms.)')
 xlim([4 13])
 write(f, strcat(fileName,'-hash-tables-topn-runtime2'));
 
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k');
+h = legend( 'IB-LSH1', 'IB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Recommendation Time (ms.)')
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-topn-runtime2-ib'));
+
+f= figure();
+plot (x, y5,'-ok', x, y6,'-<k');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Recommendation Time (ms.)')
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-topn-runtime2-ub'));
 
 
 ###########################
@@ -488,3 +545,22 @@ title('Precision-Performance tradeoff -lower and right is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-topn-comp2'));
 
+f= figure();
+plot (x5, y5,'-o', x6, y6,'-<');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Precision -larger is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Precision-Performance tradeoff -lower and right is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-topn-comp2-ub'));
+
+f= figure();
+plot (x3, y3,'-+', x4, y4,'->');
+h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Precision -larger is better');
+ylabel('Running Time(ms.) -lower is better');
+title('Precision-Performance tradeoff -lower and right is better');
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-topn-comp2-ib'));

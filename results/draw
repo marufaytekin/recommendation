@@ -34,7 +34,7 @@ y = 1:10;
 f= figure();
 
 # Heatmaps
-data = UBLSHMae2D;
+data = IBLSH1Mae2D;
 contourf(x, y, data);
 axis square;
 colorbar;
@@ -44,7 +44,7 @@ title("MAE");
 write(f, strcat(fileName,'-ublsh-heat-map-mae'));
 
 f= figure();
-data = UBLSHRuntime2D / 1000;
+data = IBLSH1Runtime2D;
 contourf(x, y, data);
 axis square;
 colorbar;
@@ -54,7 +54,7 @@ title("Running Time (sec)");
 write(f, strcat(fileName,'-ublsh-heat-map-runtime'));
 
 f= figure();
-data = UBLSHCandidate_Set_List2D;
+data = IBLSH1Candidate_Set_List2D;
 contourf(x, y, data);
 axis square;
 colorbar;

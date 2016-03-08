@@ -29,14 +29,14 @@ public class TestDriver {
                 break;
 
             case "001":
-                dataFilePath = "data/1m/ml-1m.data";
-                dataFileBase = "data/1m/ml-1m";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/movies_tv/movies_tv.data";
                 dataFileBase = "data/movies_tv/movies_tv";
                 runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/android/andapps.data";
                 dataFileBase = "data/android/andapps";
+                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/1m/ml-1m.data";
+                dataFileBase = "data/1m/ml-1m";
                 runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
