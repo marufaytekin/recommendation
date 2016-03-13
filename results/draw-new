@@ -85,6 +85,26 @@ legend boxon;
 write(f, strcat(fileName,'-hash-tables-runtime2'));
 
 f= figure();
+plot ( x, y5,'-+k', x, y6,'->k');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Tables');
+ylabel('Run Time(ms.)');
+xlim([4, 13])
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-runtime2-ub'));
+
+f= figure();
+plot (x, y7,'-ok', x, y8,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Tables');
+ylabel('Run Time(ms.)');
+xlim([4, 13])
+legend boxon;
+write(f, strcat(fileName,'-hash-tables-runtime2-ib'));
+
+f= figure();
 y3 = UBKNNLSHHashTablesCandidateSetList;
 y4 = IBKNNLSHHashTablesCandidateSetList;
 y5 = UBLSH1HashTablesCandidateSetList;
@@ -162,7 +182,6 @@ title('MAE-Performance tradeoff -lower and left is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-mae-comp2'));
 
-
 f= figure();
 plot (x7, y7,'-o', x8, y8,'-<');
 h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northeast');
@@ -172,7 +191,6 @@ ylabel('Running Time(ms.) -lower is better');
 title('MAE-Performance tradeoff -lower and left is better');
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-mae-comp2-ib'));
-
 
 f= figure();
 plot (x5, y5,'-+', x6, y6,'->');
@@ -249,6 +267,26 @@ ylabel('Run Time(ms.)');
 xlim([4, 13])
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-runtime2'));
+
+f= figure();
+plot (x, y5,'-+k', x, y6,'->k');
+h = legend('UB-LSH1', 'UB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Functions');
+ylabel('Run Time(ms.)');
+xlim([4, 13])
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-runtime2-ub'));
+
+f= figure();
+plot (x, y7,'-ok', x, y8,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'location', 'northeast');
+set (h, 'fontsize', 8);
+xlabel('Number of Hash Functions');
+ylabel('Run Time(ms.)');
+xlim([4, 13])
+legend boxon;
+write(f, strcat(fileName,'-hash-functions-runtime2-ib'));
 
 f= figure();
 y3 = UBKNNLSHHashFunctionsCandidateSetList;
@@ -375,6 +413,17 @@ xlim([4, 13])
 #ylim([-0.01 0.06])
 write(f, strcat(fileName,'-hash-functions-precision'));
 
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Precision');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-precision2'));
+
 max_x = n = 13;
 x = 4:max_x;
 y1 = IBKNNRecommenderAvgRecommTime;
@@ -481,6 +530,16 @@ xlabel('Number of Hash Tables');
 ylabel('Precision');
 xlim([4 13])
 write(f, strcat(fileName,'-hash-tables-precision'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Precision');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-precision2'));
 
 
 y3 = IBLSH1RecommenderHashTablesAvgRecommTime;
