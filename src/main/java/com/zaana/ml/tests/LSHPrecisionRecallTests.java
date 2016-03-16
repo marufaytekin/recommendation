@@ -19,6 +19,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
     private static double topNSize;
     private static double candidateItemListSize;
     private static double uniqueItemListSize;
+    private static double avgTopNRec;
 
 
     public static void runHashFunctionsLSHEvaluation(
@@ -32,6 +33,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+        ArrayList<Double> avgTopNRecListSize = new ArrayList<>();
         int numOfHashFunctions = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
@@ -46,9 +48,11 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
             avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
+            avgTopNRecListSize.add(avgTopNRec/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
             LOG.info("Avg Recommendation Time = " + totalTime/smoothRun);
+            LOG.info("Avg TopNRec = " + avgTopNRec/smoothRun);
             numOfHashFunctions++;
         }
         String reccClassName = recommender.getClass().getSimpleName();
@@ -69,6 +73,9 @@ public class LSHPrecisionRecallTests extends AbstractTest{
                 + avgCandidateItemListSize.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsUniqueItemListSize = "
                 + avgUniqueItemListSize.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsAvgTopNRecListSize = "
+                + avgTopNRecListSize.toString() + ";");
+
 
     }
 
@@ -80,6 +87,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         totalTime = 0;
         candidateItemListSize = 0;
         uniqueItemListSize = 0;
+        avgTopNRec = 0;
     }
 
 
@@ -94,6 +102,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+        ArrayList<Double> avgTopNRecListSize = new ArrayList<>();
         int numOfBands = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
@@ -108,6 +117,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
             avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
+            avgTopNRecListSize.add(avgTopNRec/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
             LOG.info("Avg Evaluation Time = " + totalTime/smoothRun);
@@ -131,6 +141,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
                 + avgCandidateItemListSize.toString() + ";");
         LOG2.info(reccClassName + "HashTablesUniqueItemListSize = "
                 + avgUniqueItemListSize.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsAvgTopNRecListSize = "
+                + avgTopNRecListSize.toString() + ";");
 
     }
 
@@ -149,6 +161,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         long startTime ;
         long endTime;
         long totalReccTime = 0;
+        int cntTotalRec = 0;
         for (Map.Entry<String, HashObjObjMap<String, Integer>> entry : testDataMap.entrySet()) {
             String targetUserId = entry.getKey();
             HashObjSet <String> ratedItemSet = (HashObjSet<String>) userRateSet.get(targetUserId);
@@ -164,7 +177,8 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             endTime = System.currentTimeMillis();
             //////////////////////////////////
             totalReccTime += (endTime - startTime);
-
+            if (topNRecommendedItems.size() != 0)
+                cntTotalRec++;
             totalPrecision += Precision.calculatePrecision(entry.getValue().keySet(), topNRecommendedItems);
             totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItems);
             totalTopN += topNRecommendedItems.size();
@@ -179,6 +193,7 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         totalTime += (double) totalReccTime/cnt;
         candidateItemListSize += totalCandidateItemList/cnt;
         uniqueItemListSize += totalUniqueItemList/cnt;
+        avgTopNRec += (double) cntTotalRec / testDataMap.size() ;
 
     }
 
