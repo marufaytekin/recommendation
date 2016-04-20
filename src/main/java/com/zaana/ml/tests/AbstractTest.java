@@ -1,9 +1,7 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
-import com.zaana.ml.Vector;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
-import net.openhft.koloboke.collect.set.hash.HashObjSet;
 import org.apache.log4j.Logger;
 
 import java.util.*;
@@ -21,6 +19,7 @@ public abstract class AbstractTest {
     static HashObjObjMap<Object, Object> testRateSet;
     static Set<String> itemSet;
     static Set<String> userSet;
+    static HashMap<String, Integer> itemSetCount;
     static Logger LOG = Logger.getLogger(AbstractTest.class);
     static Logger LOG2 = Logger.getLogger("RESULTS_LOGGER");
     static HashObjObjMap<Object, Object> hashKeyLookupTable;
@@ -53,8 +52,24 @@ public abstract class AbstractTest {
         userRateSet = DataParser.getUserRateSet();
         itemRateSet = DataParser.getItemRateSet();
         testRateSet = DataParser.getTestRateSet();
+        userSet = userRateMap.keySet();
+        itemSet = itemRateMap.keySet();
+        itemSetCount = getCounter(itemRateMap);
         //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
 
     }
+
+
+    private static HashMap<String, Integer> getCounter(HashObjObjMap<String, HashObjObjMap<String, Integer>> rateMap)
+
+    {
+        HashMap<String, Integer> map = new HashMap<>();
+
+        for (Map.Entry<String, HashObjObjMap<String, Integer>> entry  : rateMap.entrySet()) {
+            map.put(entry.getKey(), entry.getValue().size());
+        }
+        return map;
+    }
+
 
 }

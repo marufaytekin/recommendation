@@ -1,5 +1,7 @@
 package com.zaana.ml.tests;
 
+import com.zaana.ml.metrics.Diversity;
+import com.zaana.ml.metrics.Novelty;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
@@ -11,11 +13,14 @@ import java.util.*;
 /**
  * Created by maruf on 13/12/15.
  */
-public class LSHPrecisionRecallTests extends AbstractTest{
+public class LSHTopNRecommTests extends AbstractTest{
 
     private static double totalTime;
     private static double precision;
     private static double recall;
+    private static double diversity;
+    private static double aggrDiversity;
+    private static double novelty;
     private static double topNSize;
     private static double candidateItemListSize;
     private static double uniqueItemListSize;
@@ -29,9 +34,12 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
         ArrayList<Double> recallList = new ArrayList<>();
+        ArrayList<Double> diversityList = new ArrayList<>();
+        ArrayList<Double> aggrDiversityList = new ArrayList<>();
+        ArrayList<Double> noveltyList = new ArrayList<>();
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
-        ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+        //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfHashFunctions = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
@@ -42,10 +50,13 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             }
             precisionList.add(precision/smoothRun);
             recallList.add(recall/smoothRun);
+            diversityList.add(diversity/smoothRun);
+            aggrDiversityList.add(aggrDiversity/smoothRun);
+            noveltyList.add(novelty/smoothRun);
             topNList.add(topNSize/smoothRun);
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
-            avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
+            //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
             LOG.info("Avg Recommendation Time = " + totalTime/smoothRun);
@@ -61,14 +72,20 @@ public class LSHPrecisionRecallTests extends AbstractTest{
                 + precisionList.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsPecall = "
                 + recallList.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsDiversity = "
+                + diversityList.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsAggrDiversity = "
+                + aggrDiversityList.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsNovelty = "
+                + noveltyList.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsTopN = "
                 + topNList.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsAvgRecommTime = "
                 + avgRecommTime.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsCandidateItemListSize = "
                 + avgCandidateItemListSize.toString() + ";");
-        LOG2.info(reccClassName + "HashFunctionsUniqueItemListSize = "
-                + avgUniqueItemListSize.toString() + ";");
+        //LOG2.info(reccClassName + "HashFunctionsUniqueItemListSize = "
+        //        + avgUniqueItemListSize.toString() + ";");
 
     }
 
@@ -80,6 +97,9 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         totalTime = 0;
         candidateItemListSize = 0;
         uniqueItemListSize = 0;
+        diversity = 0;
+        aggrDiversity = 0;
+        novelty = 0;
     }
 
 
@@ -91,9 +111,12 @@ public class LSHPrecisionRecallTests extends AbstractTest{
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
         ArrayList<Double> recallList = new ArrayList<>();
+        ArrayList<Double> diversityList = new ArrayList<>();
+        ArrayList<Double> aggrDiversityList = new ArrayList<>();
+        ArrayList<Double> noveltyList = new ArrayList<>();
         ArrayList<Double> topNList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
-        ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
+        //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfBands = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
@@ -104,10 +127,13 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             }
             precisionList.add(precision / smoothRun);
             recallList.add(recall / smoothRun);
+            diversityList.add(diversity/smoothRun);
+            aggrDiversityList.add(aggrDiversity/smoothRun);
+            noveltyList.add(novelty/smoothRun);
             topNList.add(topNSize / smoothRun);
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
-            avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
+            //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
             LOG.info("Avg Evaluation Time = " + totalTime/smoothRun);
@@ -123,14 +149,20 @@ public class LSHPrecisionRecallTests extends AbstractTest{
                 + precisionList.toString() + ";");
         LOG2.info(reccClassName + "HashTablesRecall = "
                 + recallList.toString() + ";");
+        LOG2.info(reccClassName + "HashTablesDiversity = "
+                + diversityList.toString() + ";");
+        LOG2.info(reccClassName + "HashTablesAggrDiversity = "
+                + aggrDiversityList.toString() + ";");
+        LOG2.info(reccClassName + "HashTablesNovelty = "
+                + noveltyList.toString() + ";");
         LOG2.info(reccClassName + "HashTablesTopN = "
                 + topNList.toString() + ";");
         LOG2.info(reccClassName + "HashTablesAvgRecommTime = "
                 + avgRecommTime.toString() + ";");
         LOG2.info(reccClassName + "HashTablesCandidateItemListSize = "
                 + avgCandidateItemListSize.toString() + ";");
-        LOG2.info(reccClassName + "HashTablesUniqueItemListSize = "
-                + avgUniqueItemListSize.toString() + ";");
+        //LOG2.info(reccClassName + "HashTablesUniqueItemListSize = "
+        //        + avgUniqueItemListSize.toString() + ";");
 
     }
 
@@ -141,14 +173,17 @@ public class LSHPrecisionRecallTests extends AbstractTest{
             AbstractLSHRecommender recommender, int topN)
     {
         double totalCandidateItemList = 0;
-        double totalUniqueItemList = 0;
+        //double totalUniqueItemList = 0;
         double totalPrecision = 0;
         double totalRecall = 0;
+        double totalDiversity = 0;
+        double totalNovelty = 0;
         int totalTopN = 0;
         int cnt = 0;
         long startTime ;
         long endTime;
         long totalReccTime = 0;
+        Set <String> uniqueItemSet = new HashSet<>();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> entry : testDataMap.entrySet()) {
             String targetUserId = entry.getKey();
             HashObjSet <String> ratedItemSet = (HashObjSet<String>) userRateSet.get(targetUserId);
@@ -167,18 +202,24 @@ public class LSHPrecisionRecallTests extends AbstractTest{
 
             totalPrecision += Precision.calculatePrecision(entry.getValue().keySet(), topNRecommendedItems);
             totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItems);
+            totalDiversity += Diversity.intraListDissimilarity(topNRecommendedItems, itemRateMap, 5);
+            totalNovelty += Novelty.novelty(topNRecommendedItems, userSet, itemSetCount);
+            uniqueItemSet.addAll(new HashSet<>(topNRecommendedItems));
             totalTopN += topNRecommendedItems.size();
             totalCandidateItemList += recommender.getCandidateItemListSize();
-            totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
+            //totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
             cnt++;
         }
         LOG.info(String.format("Avg Top-N Rec Time for one user = %s", (double) totalReccTime / cnt));
-        precision += totalPrecision / cnt;
+        precision += totalPrecision/cnt;
         recall += totalRecall/cnt;
+        diversity += totalDiversity/cnt;
+        aggrDiversity += uniqueItemSet.size();
+        novelty += totalNovelty/cnt;
         topNSize += totalTopN/cnt;
         totalTime += (double) totalReccTime/cnt;
         candidateItemListSize += totalCandidateItemList/cnt;
-        uniqueItemListSize += totalUniqueItemList/cnt;
+        //uniqueItemListSize += totalUniqueItemList/cnt;
 
     }
 

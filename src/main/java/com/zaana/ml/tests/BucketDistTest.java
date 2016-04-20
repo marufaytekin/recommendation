@@ -2,6 +2,7 @@ package com.zaana.ml.tests;
 
 import com.zaana.ml.*;
 import com.zaana.ml.Vector;
+import com.zaana.ml.similarity.Cosine;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
@@ -12,6 +13,12 @@ import java.util.*;
  */
 public class BucketDistTest extends AbstractTest {
 
+    public static void runModelBuildTest (String dataFileBase, String seperator) {
+        preprocessDataForValidation(dataFileBase, 1, "test", seperator);
+        LOG.info("model build started...");
+        Cosine.createDistanceMatrix(userRateMap, 5);
+        LOG.info("model build completed...");
+    }
     public static void runBucketDistTest(
             String type, String dataFileBase, String seperator, int smoothRun, int k, int l, int maxElem) {
         HashMap <Integer, Integer>histogram = new HashMap<>();
@@ -22,7 +29,6 @@ public class BucketDistTest extends AbstractTest {
         for (int j = 0; j < smoothRun; j++) {
             preprocessDataForValidation(dataFileBase, (j + 1), type, seperator);
             Set<String> itemSet = itemRateMap.keySet();
-            Set<String> userSet = userRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
             HashObjObjMap<Object, Object> hashTables = LSH2.buildModel(userRateMap, vmap, l);
             int size;

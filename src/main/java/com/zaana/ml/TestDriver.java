@@ -7,7 +7,6 @@ import com.zaana.ml.tests.*;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -25,19 +24,21 @@ public class TestDriver {
         switch (selection) {
 
             case "00":
-                BucketDistTest.runBucketDistTest("test", dataFileBase, seperator, smoothRun, k, 1, 50);
+                //BucketDistTest.runBucketDistTest("test", dataFileBase, seperator, smoothRun, k, 1, 50);
+                BucketDistTest.runModelBuildTest(dataFileBase,seperator);
+
                 break;
 
             case "001":
-                dataFilePath = "data/movies_tv/movies_tv.data";
-                dataFileBase = "data/movies_tv/movies_tv";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/android/andapps.data";
                 dataFileBase = "data/android/andapps";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/movies_tv/movies_tv.data";
+                dataFileBase = "data/movies_tv/movies_tv";
+                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/1m/ml-1m.data";
                 dataFileBase = "data/1m/ml-1m";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "01": // prediction tests
@@ -81,7 +82,7 @@ public class TestDriver {
                 break;
 
             case "03":
-                //precision tests
+                //evaluation tests
                 runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
@@ -272,28 +273,28 @@ public class TestDriver {
             //
             ////////////////////////////////////////////////////////////////////
             case "100":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "101":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "102":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "103":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "104":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "105":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
             case "106":
-                LSHPrecisionRecallTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, l, topN);
                 break;
             case "107":
-                LSHPrecisionRecallTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, smoothRun, k, topN);
                 break;
 
             ////////////////////////////////////////////////////////////////////
