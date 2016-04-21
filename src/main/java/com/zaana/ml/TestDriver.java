@@ -32,7 +32,8 @@ public class TestDriver {
             case "001":
                 dataFilePath = "data/android/andapps.data";
                 dataFileBase = "data/android/andapps";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("110", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/movies_tv/movies_tv.data";
                 dataFileBase = "data/movies_tv/movies_tv";
                 runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);

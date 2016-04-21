@@ -1,5 +1,6 @@
 package com.zaana.ml.tests;
 
+import com.zaana.ml.metrics.Diversity;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.cf.AbstractCFRecommender;
@@ -15,7 +16,9 @@ public class CFPrecisionRecallTests extends AbstractTest {
     static double totalPrecision;
     static double totalRecall;
     static double totalTime;
-
+    static double totalDiversity;
+    static double totalAggrDiversity;
+    static double totalNovelty;
 
     /**
      * Runs item-based top-N karypis method.
@@ -28,6 +31,9 @@ public class CFPrecisionRecallTests extends AbstractTest {
         double overAllTotalTime = 0;
         double overAllPrecision = 0;
         double overAllRecall = 0;
+        double overAllDiversity = 0;
+        double overAllAggrDiversity = 0;
+        double overAllNovelty = 0;
         for (int j = 0; j < smoothRun; j++) {
             preprocessDataForRecommendation(dataFileBase, (j + 1), separator);
             int size = testDataMap.size();
@@ -37,6 +43,9 @@ public class CFPrecisionRecallTests extends AbstractTest {
             calculateCFPrecisionRecall(userRateMap, testDataMap, recommender, topN);
             overAllPrecision += totalPrecision/size;
             overAllRecall += totalRecall/size;
+            overAllDiversity += totalDiversity/size;
+            overAllAggrDiversity += totalAggrDiversity;
+            overAllNovelty += totalNovelty/size;
             overAllTotalTime += totalTime/size;
         }
         String reccClassName = recommender.getClass().getSimpleName();
@@ -46,6 +55,9 @@ public class CFPrecisionRecallTests extends AbstractTest {
         LOG2.info("dataFileBase = " + dataFileBase);
         LOG2.info(reccClassName + "Precision = " + overAllPrecision / smoothRun);
         LOG2.info(reccClassName + "Recall = " + overAllRecall / smoothRun);
+        LOG2.info(reccClassName + "Diversity = " + overAllDiversity / smoothRun);
+        LOG2.info(reccClassName + "AggrDiversity = " + overAllAggrDiversity / smoothRun);
+        LOG2.info(reccClassName + "Novelty = " + overAllNovelty / smoothRun);
         LOG2.info(reccClassName + "AvgRecommTime = " + overAllTotalTime / smoothRun + ";");
 
     }
@@ -58,8 +70,13 @@ public class CFPrecisionRecallTests extends AbstractTest {
         totalPrecision = 0;
         totalRecall = 0;
         totalTime = 0;
+        totalDiversity = 0;
+        totalAggrDiversity = 0;
+        totalNovelty = 0;
+
         long startTime;
         long endTime;
+        Set <String> uniqueItemSet = new HashSet<>();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> entry : testDataMap
                 .entrySet()) {
             String userId = entry.getKey();
@@ -75,11 +92,13 @@ public class CFPrecisionRecallTests extends AbstractTest {
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);
+                totalDiversity += Diversity.intraListDissimilarity(retrieved, itemRateMap, 5);
+                uniqueItemSet.addAll(new HashSet<>(retrieved));
             } catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());
             }
         }
-
+        totalAggrDiversity += uniqueItemSet.size();
     }
 
 }
