@@ -1,6 +1,7 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.metrics.Diversity;
+import com.zaana.ml.metrics.Novelty;
 import com.zaana.ml.metrics.Precision;
 import com.zaana.ml.metrics.Recall;
 import com.zaana.ml.recomm.cf.AbstractCFRecommender;
@@ -93,6 +94,7 @@ public class CFPrecisionRecallTests extends AbstractTest {
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);
                 totalDiversity += Diversity.intraListDissimilarity(retrieved, itemRateMap, 5);
+                totalNovelty += Novelty.novelty(retrieved, userSet, itemSetCount);
                 uniqueItemSet.addAll(new HashSet<>(retrieved));
             } catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());

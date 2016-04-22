@@ -36,9 +36,17 @@ public class TestDriver {
                 runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/movies_tv/movies_tv.data";
                 dataFileBase = "data/movies_tv/movies_tv";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("110", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/1m/ml-1m.data";
                 dataFileBase = "data/1m/ml-1m";
+                runSelection("110", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/ymusic/ymusic.data";
+                dataFileBase = "data/ymusic/ymusic";
+                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                dataFilePath = "data/1m-new/ml-new.data";
+                dataFileBase = "data/1m-new/ml-new";
                 runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
