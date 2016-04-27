@@ -424,6 +424,110 @@ xlim([4, 13])
 #ylim([-0.01 0.06])
 write(f, strcat(fileName,'-hash-functions-precision2'));
 
+
+----------
+
+n = 13;
+x = 4:13;
+numOfHashTables = 10;
+
+y1 = IBKNNRecommenderDiversity;
+y2 = UBKNNRecommenderDiversity;
+y3 = IBLSH1RecommenderHashFunctionsDiversity;
+y4 = IBLSH2RecommenderHashFunctionsDiversity;
+y5 = UBLSH1RecommenderHashFunctionsDiversity;
+y6 = UBLSH2RecommenderHashFunctionsDiversity;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Diversity');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-diversity'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Diversity');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-diversity2'));
+
+-----------
+
+n = 13;
+x = 4:13;
+numOfHashTables = 10;
+
+y1 = IBKNNRecommenderAggrDiversity;
+y2 = UBKNNRecommenderAggrDiversity;
+y3 = IBLSH1RecommenderHashFunctionsAggrDiversity;
+y4 = IBLSH2RecommenderHashFunctionsAggrDiversity;
+y5 = UBLSH1RecommenderHashFunctionsAggrDiversity;
+y6 = UBLSH2RecommenderHashFunctionsAggrDiversity;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Aggregate Diversity');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-aggrdiversity'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Aggregate Diversity');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-aggrdiversity2'));
+
+-------------
+n = 13;
+x = 4:13;
+numOfHashTables = 10;
+
+y1 = IBKNNRecommenderNovelty;
+y2 = UBKNNRecommenderNovelty;
+y3 = IBLSH1RecommenderHashFunctionsNovelty;
+y4 = IBLSH2RecommenderHashFunctionsNovelty;
+y5 = UBLSH1RecommenderHashFunctionsNovelty;
+y6 = UBLSH2RecommenderHashFunctionsNovelty;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Novelty');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-novelty'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Functions');
+ylabel('Novelty');
+xlim([4, 13])
+#ylim([-0.01 0.06])
+write(f, strcat(fileName,'-hash-functions-novelty2'));
+
+-----------
+
 max_x = n = 13;
 x = 4:max_x;
 y1 = IBKNNRecommenderAvgRecommTime;
@@ -541,6 +645,100 @@ ylabel('Precision');
 xlim([4 13])
 write(f, strcat(fileName,'-hash-tables-precision2'));
 
+-------------
+n= 13;
+x = 4:1:n;
+numOfHashFunctions = 6;
+
+y1 = IBKNNRecommenderDiversity;
+y2 = UBKNNRecommenderDiversity;
+y3 = IBLSH1RecommenderHashTablesDiversity;
+y4 = IBLSH2RecommenderHashTablesDiversity;
+y5 = UBLSH1RecommenderHashTablesDiversity;
+y6 = UBLSH2RecommenderHashTablesDiversity;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Diversity');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-diversity'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Diversity');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-diversity2'));
+
+-------------
+n= 13;
+x = 4:1:n;
+numOfHashFunctions = 6;
+
+y1 = IBKNNRecommenderAggrDiversity;
+y2 = UBKNNRecommenderAggrDiversity;
+y3 = IBLSH1RecommenderHashTablesAggrDiversity;
+y4 = IBLSH2RecommenderHashTablesAggrDiversity;
+y5 = UBLSH1RecommenderHashTablesAggrDiversity;
+y6 = UBLSH2RecommenderHashTablesAggrDiversity;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Aggregate Diversity');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-aggrdiversity'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Aggregate Diversity');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-aggrdiversity2'));
+
+-------------
+n= 13;
+x = 4:1:n;
+numOfHashFunctions = 6;
+
+y1 = IBKNNRecommenderNovelty;
+y2 = UBKNNRecommenderNovelty;
+y3 = IBLSH1RecommenderHashTablesNovelty;
+y4 = IBLSH2RecommenderHashTablesNovelty;
+y5 = UBLSH1RecommenderHashTablesNovelty;
+y6 = UBLSH2RecommenderHashTablesNovelty;
+f= figure();
+plot ([4,n], [y1, y1],'-.k', [4,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-TOP-N', 'UB-TOP-N', 'IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Novelty');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-novelty'));
+
+f= figure();
+plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
+h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northwest');
+set (h, 'fontsize', 8);
+legend boxon;
+xlabel('Number of Hash Tables');
+ylabel('Novelty');
+xlim([4 13])
+write(f, strcat(fileName,'-hash-tables-novelty2'));
+
+-------------
 
 y3 = IBLSH1RecommenderHashTablesAvgRecommTime;
 y4 = IBLSH2RecommenderHashTablesAvgRecommTime;
