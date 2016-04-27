@@ -44,10 +44,10 @@ public final class Diversity
             }
         }
 
-        double diversity = intraListDistTotal / cnt;
+        double diversity = intraListDistTotal/cnt;
 
         if (Double.isNaN(diversity)) {
-            System.out.println("NANNNN...");
+            return 0;
         }
         
         return diversity;
