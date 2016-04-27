@@ -90,6 +90,7 @@ public class CFPrecisionRecallTests extends AbstractTest {
                 Set<String> retrieved = recommender.recommendItems(userRateMap, userId, topN);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
+                if (retrieved.isEmpty()) continue;
                 Set<String> relevant = entry.getValue().keySet();
                 totalPrecision += Precision.calculatePrecision(relevant, retrieved);
                 totalRecall += Recall.calculateRecall(relevant, retrieved);

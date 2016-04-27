@@ -23,7 +23,7 @@ public class LSHTopNRecommTests extends AbstractTest{
     private static double novelty;
     private static double topNSize;
     private static double candidateItemListSize;
-    private static double uniqueItemListSize;
+    private static double topNRatio;
 
 
     public static void runHashFunctionsLSHEvaluation(
@@ -38,6 +38,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         ArrayList<Double> aggrDiversityList = new ArrayList<>();
         ArrayList<Double> noveltyList = new ArrayList<>();
         ArrayList<Double> topNList = new ArrayList<>();
+        ArrayList<Double> topNRatioList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfHashFunctions = 4;
@@ -46,7 +47,7 @@ public class LSHTopNRecommTests extends AbstractTest{
             for (int s = 0; s < smoothRun; s++) {
                 preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-                calculateLSHMetrics(userRateSet, testDataMap,recommender,topN);
+                calculateLSHMetrics(userRateSet, testDataMap, recommender,topN);
             }
             precisionList.add(precision/smoothRun);
             recallList.add(recall/smoothRun);
@@ -56,6 +57,7 @@ public class LSHTopNRecommTests extends AbstractTest{
             topNList.add(topNSize/smoothRun);
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
+            topNRatioList.add(topNRatio/smoothRun);
             //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
@@ -84,6 +86,8 @@ public class LSHTopNRecommTests extends AbstractTest{
                 + avgRecommTime.toString() + ";");
         LOG2.info(reccClassName + "HashFunctionsCandidateItemListSize = "
                 + avgCandidateItemListSize.toString() + ";");
+        LOG2.info(reccClassName + "HashFunctionsTopNRatioListSize = "
+                + topNRatioList.toString() + ";");
         //LOG2.info(reccClassName + "HashFunctionsUniqueItemListSize = "
         //        + avgUniqueItemListSize.toString() + ";");
 
@@ -96,7 +100,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         topNSize = 0;
         totalTime = 0;
         candidateItemListSize = 0;
-        uniqueItemListSize = 0;
+        topNRatio = 0;
         diversity = 0;
         aggrDiversity = 0;
         novelty = 0;
@@ -115,6 +119,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         ArrayList<Double> aggrDiversityList = new ArrayList<>();
         ArrayList<Double> noveltyList = new ArrayList<>();
         ArrayList<Double> topNList = new ArrayList<>();
+        ArrayList<Double> topNRatioList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
         int numOfBands = 4;
@@ -133,6 +138,7 @@ public class LSHTopNRecommTests extends AbstractTest{
             topNList.add(topNSize / smoothRun);
             avgRecommTime.add(totalTime/smoothRun);
             avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
+            topNRatioList.add(topNRatio/smoothRun);
             //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
@@ -161,9 +167,8 @@ public class LSHTopNRecommTests extends AbstractTest{
                 + avgRecommTime.toString() + ";");
         LOG2.info(reccClassName + "HashTablesCandidateItemListSize = "
                 + avgCandidateItemListSize.toString() + ";");
-        //LOG2.info(reccClassName + "HashTablesUniqueItemListSize = "
-        //        + avgUniqueItemListSize.toString() + ";");
-
+        LOG2.info(reccClassName + "HashTablesTopNRatioListSize = "
+                + topNRatioList.toString() + ";");
     }
 
 
@@ -199,18 +204,20 @@ public class LSHTopNRecommTests extends AbstractTest{
             endTime = System.currentTimeMillis();
             //////////////////////////////////
             totalReccTime += (endTime - startTime);
-
+            if (topNRecommendedItems.isEmpty()) continue;
+            totalTopN += topNRecommendedItems.size();
             totalPrecision += Precision.calculatePrecision(entry.getValue().keySet(), topNRecommendedItems);
             totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItems);
             totalDiversity += Diversity.intraListDissimilarity(topNRecommendedItems, itemRateMap, 5);
             totalNovelty += Novelty.novelty(topNRecommendedItems, userSet, itemSetCount);
             uniqueItemSet.addAll(new HashSet<>(topNRecommendedItems));
-            totalTopN += topNRecommendedItems.size();
             totalCandidateItemList += recommender.getCandidateItemListSize();
             //totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
             cnt++;
         }
         LOG.info(String.format("Avg Top-N Rec Time for one user = %s", (double) totalReccTime / cnt));
+        LOG.debug(String.format("Test data size: %s, ", testDataMap.entrySet().size()));
+        LOG.debug(String.format("Count: %s, ", cnt));
         precision += totalPrecision/cnt;
         recall += totalRecall/cnt;
         diversity += totalDiversity/cnt;
@@ -219,6 +226,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         topNSize += totalTopN/cnt;
         totalTime += (double) totalReccTime/cnt;
         candidateItemListSize += totalCandidateItemList/cnt;
+        topNRatio += (double)cnt/testDataMap.entrySet().size();
         //uniqueItemListSize += totalUniqueItemList/cnt;
 
     }
