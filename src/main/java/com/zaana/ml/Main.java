@@ -21,10 +21,10 @@ public class Main {
 
     //static String dataFilePath = "data/ymusic/ymusic.data";
     //static String dataFileBase = "data/ymusic/ymusic";
-    //static String dataFilePath = "data/android/andapps.data";
-    //static String dataFileBase = "data/android/andapps";
-    static String dataFilePath = "data/100k/ml.data";
-    static String dataFileBase = "data/100k/ml";
+    static String dataFilePath = "data/android/andapps.data";
+    static String dataFileBase = "data/android/andapps";
+    //static String dataFilePath = "data/100k/ml.data";
+    //static String dataFileBase = "data/100k/ml";
     //static String dataFilePath = "data/movies_tv/movies_tv.data";
     //static String dataFileBase = "data/movies_tv/movies_tv";
     //static String dataFilePath = "data/1m/ml-1m.data";
