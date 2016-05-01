@@ -15,7 +15,7 @@ public class LSHPredictionTest extends AbstractTest {
     private static double runTime;
     private static Double candidate_set_size;
     private static double mae;
-    private static int predictedItems;
+    private static double predictionCoverage;
 
     /**
      * Runs LSH prediction tests for HashTables to detect the effect of changes
@@ -57,16 +57,18 @@ public class LSHPredictionTest extends AbstractTest {
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
+        ArrayList<Object> prediction_coverage_list2D = new ArrayList<>();
 
         for (int i = 0; i < numOfRun; i++) {
             ArrayList<Double> hashFuncRuntimeList = new ArrayList<>();
             ArrayList<Double> hashFuncMaeList = new ArrayList<>();
             ArrayList<Double> candidate_set_list = new ArrayList<>();
+            ArrayList<Double> prediction_coverage_list = new ArrayList<>();
             for (int j = 0; j < numOfRun; j++) {
                 runTime = 0;
                 mae = 0;
                 candidate_set_size = 0.0;
-                predictedItems = 0;
+                predictionCoverage = 0;
                 runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
                 LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
                 LOG.info(type + "MAE: " + mae / smoothRun);
@@ -74,11 +76,13 @@ public class LSHPredictionTest extends AbstractTest {
                 hashFuncMaeList.add(mae / smoothRun);
                 hashFuncRuntimeList.add(runTime / smoothRun);
                 candidate_set_list.add(candidate_set_size / smoothRun);
+                prediction_coverage_list.add(predictionCoverage / smoothRun);
                 numOfHashFunctions += 1;
             }
             runTimeList2D.add(hashFuncRuntimeList);
             maeList2D.add(hashFuncMaeList);
             candidate_set_list2D.add(candidate_set_list);
+            prediction_coverage_list2D.add(prediction_coverage_list);
 
             numOfBands += 1;
             numOfHashFunctions = 1;
@@ -90,8 +94,8 @@ public class LSHPredictionTest extends AbstractTest {
         LOG2.info("k = " + kNN);
         LOG2.info(type + "Mae2D = " + maeList2D.toString() + ";");
         LOG2.info(type + "Runtime2D = " + runTimeList2D.toString() + ";");
-        LOG2.info(type + "Candidate_Set_List2D = " + candidate_set_list2D.toString() + ";");
-
+        LOG2.info(type + "CandidateSetList2D = " + candidate_set_list2D.toString() + ";");
+        LOG2.info(type + "PredictionCoverageList2D = " + prediction_coverage_list2D.toString() + ";");
     }
 
 
@@ -115,22 +119,22 @@ public class LSHPredictionTest extends AbstractTest {
         }
         ArrayList<Double> runtimeList = new ArrayList<>();
         ArrayList<Double> maeList = new ArrayList<>();
-        ArrayList<Double> predictedItemsList = new ArrayList<>();
+        ArrayList<Double> predictionCoverageList = new ArrayList<>();
         ArrayList<Double> candidate_set_list = new ArrayList<>();
         for (int i = 0; i < numOfRun; i++) {
             runTime = 0;
             mae = 0;
             candidate_set_size = 0.0;
-            predictedItems = 0;
+            predictionCoverage = 0;
             runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
-            maeList.add(mae / smoothRun);
-            runtimeList.add(runTime / smoothRun);
-            candidate_set_list.add(candidate_set_size / smoothRun);
-            predictedItemsList.add(predictedItems / smoothRun);
+            maeList.add(mae/smoothRun);
+            runtimeList.add(runTime/smoothRun);
+            candidate_set_list.add(candidate_set_size/smoothRun);
+            predictionCoverageList.add(predictionCoverage/smoothRun);
             LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
-            LOG.info("Mae: " + mae/ smoothRun);
-            LOG.info("Runtime: " + runTime/ smoothRun);
-            LOG.info("Predicted Items :" + (predictedItems / smoothRun));
+            LOG.info("Mae: " + mae/smoothRun);
+            LOG.info("Runtime: " + runTime/smoothRun);
+            LOG.info("Predicted Items :" + (predictionCoverage/smoothRun));
             if (testType == "HashFunctions") {
                 numOfHashFunctions++;
             } else {
@@ -147,7 +151,7 @@ public class LSHPredictionTest extends AbstractTest {
         LOG2.info(type + testType+ "MaeList =  " + maeList.toString() + ";");
         LOG2.info(type + testType + "RuntimeList = " + runtimeList.toString() + ";");
         LOG2.info(type + testType + "CandidateSetList = " + candidate_set_list + ";");
-        LOG2.info(type + testType + "PredictedItemsList  = " + predictedItemsList.toString() + ";");
+        LOG2.info(type + testType + "PredictionCoverageList  = " + predictionCoverageList.toString() + ";");
     }
 
 
@@ -161,6 +165,7 @@ public class LSHPredictionTest extends AbstractTest {
         for (int s = 0; s < smoothRun; s++) {
             preprocessDataForValidation(dataFileBase, (s+1), val, separator);
             lshRecommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
+            //int testDataSize = testDataMap.size();
             if (type == "UBKNNLSH") {
                 hashTables = lshRecommender.getHashTables();
                 hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
@@ -171,19 +176,22 @@ public class LSHPredictionTest extends AbstractTest {
                 mae += MAE.calculateMAE(
                         UBKNNLSHPrediction.getOutputList(),
                         UBKNNLSHPrediction.getTargetList());
-                predictedItems += UBKNNLSHPrediction.getOutputList().size();
+                predictionCoverage +=
+                        (double)UBKNNLSHPrediction.getOutputList().size()/UBKNNLSHPrediction.getTestQueryCnt();
+
             } else if (type == "IBKNNLSH") {
                 hashTables = lshRecommender.getHashTables();
                 hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
-                runTime += IBKNNLSHPrediction.
-                        runItemBasedLSHPredictionOnTestData
+                runTime +=
+                        IBKNNLSHPrediction.runItemBasedLSHPredictionOnTestData
                                 (itemRateMap, userRateMap, testDataMap, hashTables, hashKeyLookupTable, kNN, y);
                 candidate_set_size += IBKNNLSHPrediction
                         .getAvg_candidate_set_size();
                 mae += MAE.calculateMAE(
                         IBKNNLSHPrediction.getOutputList(),
                         IBKNNLSHPrediction.getTargetList());
-                predictedItems += IBKNNLSHPrediction.getOutputList().size();
+                predictionCoverage +=
+                        (double)IBKNNLSHPrediction.getOutputList().size()/IBKNNLSHPrediction.getTestQueryCnt();
             } else if (type == "UBLSH1" || type == "UBLSH2" || type == "UBLSH3") {
                 runTime += LSHPredictionTests.runUBLSHPredictionOnTestData
                         (userRateMap, itemRateMap, testDataMap, lshRecommender);
@@ -191,7 +199,8 @@ public class LSHPredictionTest extends AbstractTest {
                 mae += MAE.calculateMAE(
                         LSHPredictionTests.getOutputList(),
                         LSHPredictionTests.getTargetList());
-                predictedItems += LSHPredictionTests.getOutputList().size();
+                predictionCoverage +=
+                        (double) LSHPredictionTests.getOutputList().size()/LSHPredictionTests.getTestQueryCnt();
             } else if (type == "IBLSH1" || type == "IBLSH2" ){
                 runTime += LSHPredictionTests.runIBLSHPredictionOnTestData
                         (userRateMap, itemRateMap, testDataMap, lshRecommender);
@@ -199,7 +208,8 @@ public class LSHPredictionTest extends AbstractTest {
                 mae += MAE.calculateMAE(
                         LSHPredictionTests.getOutputList(),
                         LSHPredictionTests.getTargetList());
-                predictedItems += LSHPredictionTests.getOutputList().size();
+                predictionCoverage +=
+                        (double) LSHPredictionTests.getOutputList().size()/LSHPredictionTests.getTestQueryCnt();
             } else throw new UnsupportedOperationException("Invalid type.");
         }
     }

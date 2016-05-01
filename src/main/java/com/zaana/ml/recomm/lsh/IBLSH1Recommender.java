@@ -79,7 +79,7 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
         int weightsTotal = 0;
         HashMap <String, Integer> frequencyMap =
                 Common.getCandidateFrequentNElementsMap(candidateSetList, intersectItemsCandidateSet, 20);
-        if (frequencyMap.isEmpty()) return 2.5;
+        if (frequencyMap.isEmpty()) return null; //2.5;
         HashObjObjMap<String, Integer> userRatings = userRateMap.get(targetUserId);
         for (String item : frequencyMap.keySet()) {
             frequency = frequencyMap.get(item);

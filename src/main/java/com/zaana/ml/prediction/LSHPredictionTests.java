@@ -29,6 +29,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
         long totalTime = 0;
         long startTime;
         long endTime;
+        testQueryCnt = 0;
         HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
         HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
@@ -46,6 +47,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     Integer givenRating = entry.getValue();
                     HashObjObjMap<String, Integer> itemRatings = itemRateMap.get(movieId);
                     if (itemRatings == null) continue;
+                    testQueryCnt++;
                     Set<String> ratedUserSet = itemRatings.keySet();
                     List<String> candidateSetList =
                             LSH2.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
@@ -91,13 +93,13 @@ public class LSHPredictionTests extends AbstractPredictionTests {
     {
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
+        testQueryCnt = 0;
         Integer total_candidate_set_size = 0;
         int cnt = 0;
         long totalTime = 0;
         long startTime;
         long endTime;
         HashObjObjMap<Object, Object> hashTables = lshRecommender.getHashTables();
-        int numOfHashTables = hashTables.size();
         HashObjObjMap<Object, Object> hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
@@ -118,6 +120,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     HashObjSet<String> intersecItemsCandidateSet =
                             HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersecItemsCandidateSet.retainAll(ratedItemsSet);
+                    testQueryCnt ++;
                     //if (intersecItemsCandidateSet.isEmpty()) continue;
                     //////////////////////////////////
                     startTime = System.currentTimeMillis();

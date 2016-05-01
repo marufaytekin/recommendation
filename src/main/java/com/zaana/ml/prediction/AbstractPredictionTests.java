@@ -10,6 +10,7 @@ public abstract class AbstractPredictionTests
 
     static LinkedList<Double> outputList;
     static LinkedList<Integer> targetList;
+    static double testQueryCnt;
     static Double avg_candidate_set_size;
 
     public static LinkedList<Double> getOutputList()
@@ -20,6 +21,10 @@ public abstract class AbstractPredictionTests
     public static LinkedList<Integer> getTargetList()
     {
         return targetList;
+    }
+
+    public static double getTestQueryCnt() {
+        return testQueryCnt;
     }
 
     public static Double getAvg_candidate_set_size()

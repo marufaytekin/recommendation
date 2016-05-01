@@ -1,0 +1,36 @@
+
+\begin{figure}[h!]
+
+  \begin{subfigure}[b]{0.30\textwidth}
+  \includegraphics[width=\textwidth]{figs/ml-hash-tables-novelty.eps}
+  \caption{ML-1M}
+  \label{fig:ml-hash-tables-novelty-plot}
+ \end{subfigure}
+   \quad
+  \begin{subfigure}[b]{0.30\textwidth}
+  \includegraphics[width=\textwidth]{figs/mtv-hash-tables-novelty.eps}
+  \caption{Amazon MoviesTV}
+  \label{fig:mtv-hash-tables-novelty-plot}
+ \end{subfigure}
+   \quad
+ \begin{subfigure}[b]{0.30\textwidth}
+  \includegraphics[width=\textwidth]{figs/ymusic-hash-tables-novelty.eps}
+  \caption{Yahoo Music}
+  \label{fig:ymusic-hash-tables-novelty-plot}
+ \end{subfigure}
+
+  \begin{subfigure}[b]{0.30\textwidth}
+  \includegraphics[width=\textwidth]{figs/andapps-hash-tables-novelty.eps}
+  \caption{Apps for Android}
+  \label{fig:andapps-hash-tables-novelty-plot}
+ \end{subfigure}
+    \quad
+   \begin{subfigure}[b]{0.30\textwidth}
+  \includegraphics[width=\textwidth]{figs/ml-new-hash-tables-novelty.eps}
+  \caption{ML-1M-LATEST}
+  \label{fig:ml-new-hash-tables-novelty-plot}
+ \end{subfigure}
+
+ \caption{Novelty and number of hash tables in LSH. }
+ \label{fig:novelty-prediction-plot}
+\end{figure}

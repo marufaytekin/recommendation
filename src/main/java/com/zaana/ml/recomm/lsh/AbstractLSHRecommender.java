@@ -12,7 +12,9 @@ public abstract class AbstractLSHRecommender {
 
     HashObjObjMap<Object, Object> hashTables;
     HashObjObjMap<Object, Object> hashKeyLookupTable;
-    int uniqueCandidateItemListSize;
+    private static int uniqueCandidateItemListSize;
+    private static int candidateItemListSize;
+    private static int testQueryCnt;
 
     public HashObjObjMap<Object, Object> getHashTables() {
         return hashTables;
@@ -30,7 +32,9 @@ public abstract class AbstractLSHRecommender {
         return uniqueCandidateItemListSize;
     }
 
-    int candidateItemListSize;
+    public static int getTestQueryCnt() {
+        return testQueryCnt;
+    }
 
     public abstract void buildModel(HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
                                     HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,

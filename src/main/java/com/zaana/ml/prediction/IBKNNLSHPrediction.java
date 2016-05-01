@@ -1,6 +1,5 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.LSH;
 import com.zaana.ml.LSH2;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
@@ -23,6 +22,8 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         outputList = new LinkedList<>();
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
+        testQueryCnt = 0;
+        int cnt = 0;
         final long startTime = System.currentTimeMillis();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap
                 .entrySet()) {
@@ -31,13 +32,14 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
             if (userRateList == null) {
                 continue;
             }
+            cnt++;
             total_candidate_set_size += predictRatingsForTestEntry(
                     testDataEntry, userRateMap, itemRateMap, hashTables, hashKeyLookupTable, outputList, targetList, kNN, y);
         }
 
         final long endTime = System.currentTimeMillis();
         final double runningTime = (double) (endTime - startTime)/outputList.size();
-        avg_candidate_set_size = (double) total_candidate_set_size / testDataMap.size();
+        avg_candidate_set_size = (double) total_candidate_set_size / cnt;
         LOG.info("ItemBasedLSH Running time: " + runningTime);
         LOG.info("Avg Candidate Set Size: " + avg_candidate_set_size);
 
@@ -66,7 +68,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
      * @param kNN
      * @param y
      */
-    private  static int predictRatingsForTestEntry(
+    private  static Integer predictRatingsForTestEntry(
             Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry,
             HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
@@ -89,6 +91,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);
                 LinkedHashMap<String, Double> kRatedSimilarItemsList;
+                testQueryCnt++;
                 if (!intersectionOfCandidateRatedItemSets.isEmpty()) {
                     kRatedSimilarItemsList = IBKNNPrediction.getSimilarItemsListRatedByUser(
                             itemRateMap, testMovieId, intersectionOfCandidateRatedItemSets, kNN, y);
@@ -100,8 +103,8 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
                         outputList.add(prediction);
                     //}
                 } else {
-                    targetList.add(entry.getValue());
-                    outputList.add(2.5);
+                    //targetList.add(entry.getValue());
+                    //outputList.add(2.5);
                 }
             }catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());

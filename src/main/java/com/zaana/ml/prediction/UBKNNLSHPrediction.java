@@ -55,6 +55,7 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
         targetList = new LinkedList<>();
         Integer total_candidate_set_size = 0;
         int cnt = 0;
+        testQueryCnt = 0;
         final long startTime = System.currentTimeMillis();
         for (Map.Entry<String, HashObjObjMap<String, Integer>> testDataEntry : testDataMap.entrySet()) {
             String userId = testDataEntry.getKey();
@@ -98,6 +99,7 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                 Set<String> ratedUserSet = itemRateMap.get(movieId).keySet();
                 Set<String> intersectionOfCandidateRatedUserSets = new HashSet<>(ratedUserSet);
                 intersectionOfCandidateRatedUserSets.retainAll(candidateSet);
+                testQueryCnt++;
                 if (!intersectionOfCandidateRatedUserSets.isEmpty()) {
                     similarityListMap =
                             Cosine.getSimilarityListWithCandidateSet(userId,
@@ -111,8 +113,8 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                     targetList.add(givenRating);
                     //}
                 } else {
-                    outputList.add(2.5);
-                    targetList.add(givenRating);
+                    //outputList.add(2.5);
+                    //targetList.add(givenRating);
                 }
             } catch (NullPointerException e) {
                 // do nothing

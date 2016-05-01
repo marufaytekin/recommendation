@@ -537,6 +537,7 @@ y4 = IBLSH2RecommenderHashFunctionsAvgRecommTime;
 y5 = UBLSH1RecommenderHashFunctionsAvgRecommTime;
 y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime;
 f= figure();
+plot (x, y3 ./ y4,'-+k', x, y5 ./ y6,'->k');
 plot (x, y3,'-+k', x, y4,'->k', x, y5,'-ok', x, y6,'-<k');
 h = legend('IB-LSH1', 'IB-LSH2', 'UB-LSH1', 'UB-LSH2', 'location', 'northeast');
 set (h, 'fontsize', 8);
