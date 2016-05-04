@@ -32,19 +32,19 @@ public class TestDriver {
             case "001":
                 dataFilePath = "data/android/andapps.data";
                 dataFileBase = "data/android/andapps";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("04", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/movies_tv/movies_tv.data";
                 dataFileBase = "data/movies_tv/movies_tv";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("04", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/1m/ml-1m.data";
                 dataFileBase = "data/1m/ml-1m";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("04", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/ymusic/ymusic.data";
                 dataFileBase = "data/ymusic/ymusic";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("04", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 dataFilePath = "data/1m-new/ml-new.data";
                 dataFileBase = "data/1m-new/ml-new";
-                runSelection("03", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("04", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "002":
@@ -120,6 +120,11 @@ public class TestDriver {
                 break;
 
             case "04":
+                // prediction tests
+                runSelection("60", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("61", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("62", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
@@ -128,10 +133,6 @@ public class TestDriver {
                 runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("60", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("61", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("62", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
                 break;
 
             case "05":
