@@ -1,6 +1,7 @@
 package com.zaana.ml;
 
 import com.google.common.collect.MinMaxPriorityQueue;
+import net.openhft.koloboke.collect.map.hash.HashObjIntMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
@@ -92,7 +93,7 @@ public final class Common
         HashObjObjMap<String, Integer> frequencyMapList = HashObjObjMaps.getDefaultFactory().newMutableMap();
         for (;0 < q.size() && frequencyMapList.size() < n;)
             try {
-                HashMap.Entry<String, Integer> entry = q.remove();
+                HashObjObjMap.Entry<String, Integer> entry = q.remove();
                 frequencyMapList.put(entry.getKey(), entry.getValue());
             } catch (NoSuchElementException ignored) {}
         return frequencyMapList;
@@ -123,7 +124,7 @@ public final class Common
         HashMap <String, Integer> topNFrequencyMap = new HashMap<>();
         for (;0 < q.size() && topNFrequencyMap.size() < n;)
             try {
-                HashMap.Entry<String, Integer> entry = q.remove();
+                HashObjIntMap.Entry<String, Integer> entry = q.remove();
                 topNFrequencyMap.put(entry.getKey(), entry.getValue());
             } catch (NoSuchElementException ignored) {}
 
