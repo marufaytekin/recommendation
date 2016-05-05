@@ -35,7 +35,7 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
             HashObjObjMap<Object, Object> userRateSet,
             String userId,
             HashObjSet<String> ratedItemSet) {
-        ratedItemSet = Common.sortByValueAndGetTopNItems(userRateMap.get(userId), 20);
+        //ratedItemSet = Common.sortByValueAndGetTopNItems(userRateMap.get(userId), 20);
         //ratedItemSet = (HashObjSet<String>) userRateSet.get(userId);
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : ratedItemSet) {
