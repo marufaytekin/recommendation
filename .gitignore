@@ -15,5 +15,4 @@ data/ymusic.data
 data/xaa
 **/*.pdf
 *.aux
-*.log
 *.gz
