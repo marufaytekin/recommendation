@@ -72,6 +72,14 @@ public final class Cosine implements Similarity {
 
     }
 
+    /**
+     * This implementation calculates cosine similarity based on common ratings.
+     * @param intersection
+     * @param map1
+     * @param map2
+     * @param y
+     * @return
+     */
     public static double calculateCosineSimilarity(
             final Set<String> intersection,
             final HashObjObjMap<String, Integer> map1,
@@ -96,6 +104,47 @@ public final class Cosine implements Similarity {
 
         return signif_weight * sim; // account for significance
 
+    }
+
+    /**
+     * This implementation calculates cosine with all ratings in l2 form.
+     * @param intersection
+     * @param map1
+     * @param map2
+     * @param y
+     * @return
+     */
+    public static double calculateCosineSimilarity2(
+            final Set<String> intersection,
+            final HashObjObjMap<String, Integer> map1,
+            final HashObjObjMap<String, Integer> map2, int y)
+    {
+        int intersec_size = intersection.size();
+        int num = 0;
+        int a;
+        int b;
+        for (String key : intersection) {
+            a = map1.get(key);
+            b = map2.get(key);
+            num += a * b;
+        }
+        double denum1 = l2NormOfVector(map1);
+        double denum2 = l2NormOfVector(map2);
+        double sim = (double) num / (denum1 * denum2);
+
+        double signif_weight = (double) Math.min(y, intersec_size) / y;
+
+        return signif_weight * sim; // account for significance
+
+    }
+
+    private static double l2NormOfVector(HashObjObjMap<String, Integer> map) {
+        int total = 0;
+        for (String key : map.keySet()) {
+            int value = map.get(key);
+            total += value * value;
+        }
+        return Math.sqrt(total);
     }
 
     /**
