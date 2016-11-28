@@ -1,0 +1,50 @@
+User based histogram: data/1m-new/ml-new.data
+Total number of Ratings: 65271
+Histogram = {0=34722, 1=15951, 2=6157, 3=3076, 4=1837, 5=1081, 6=722, 7=481, 8=339, 9=226, 10=679}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+numberOfUsers = [34722, 15951, 6157, 3076, 1837, 1081, 722, 481, 339, 905] ./ 1000
+fileName = "ml-new"
+draw (fileName, numberOfRatings, numberOfUsers);
+title("(a) ML-NEW")
+write(f, fileName);
+
+
+User based histogram: data/1m/ml-1m.data
+Total number of Ratings: 6040
+Histogram = {0=0, 1=0, 2=751, 3=552, 4=440, 5=359, 6=307, 7=274, 8=224, 9=188, 10=2945}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [0, 0, 751, 552, 440, 359, 307, 274, 224, 3133] ./ 1000
+fileName = "ml"
+draw (fileName, numberOfRatings, numberOfUsers);
+title("(b) ML")
+write(f, fileName);
+
+User based histogram: data/movies_tv/movies_tv.data
+Total number of Ratings: 16057
+Histogram = {0=1137, 1=4174, 2=4764, 3=1968, 4=1106, 5=660, 6=428, 7=294, 8=213, 9=177, 10=1136}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [1137, 4174, 4764, 1968, 1106, 660, 428, 294, 213, 1313] ./ 1000
+fileName = "mtv"
+draw (fileName, numberOfRatings, numberOfUsers);
+title("(c) Amazon Movies")
+write(f, fileName);
+
+User based histogram: data/android/andapps.data
+Total number of Ratings: 22679
+Histogram = {0=1, 1=18104, 2=2843, 3=870, 4=375, 5=168, 6=109, 7=53, 8=42, 9=34, 10=80}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [1, 18104, 2843, 870, 375, 168, 109, 53, 42, 114] ./ 1000
+fileName = "andapps"
+draw (fileName, numberOfRatings, numberOfUsers);
+title("(d) Android Apps")
+write(f, fileName);
+
+User based histogram: data/ymusic/ymusic.data
+Total number of Ratings: 15400
+Histogram = {0=0, 1=7311, 2=4703, 3=1741, 4=804, 5=366, 6=188, 7=96, 8=56, 9=33, 10=102}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [0, 7311, 4703, 1741, 804, 366, 188, 96, 56, 135] ./ 1000
+fileName = "ymusic"
+draw (fileName, numberOfRatings, numberOfUsers);
+title("(e) Yahoo Music!")
+write(f, fileName);

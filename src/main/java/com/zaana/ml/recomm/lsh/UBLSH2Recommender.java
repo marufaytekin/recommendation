@@ -1,7 +1,7 @@
 package com.zaana.ml.recomm.lsh;
 
-import com.zaana.ml.LSH2;
-import com.zaana.ml.Vector;
+import com.zaana.ml.lsh.LSH;
+import com.zaana.ml.tools.Vector;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 import net.openhft.koloboke.collect.set.hash.HashObjSets;
@@ -20,8 +20,8 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
         Set<String> itemSet = itemRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, itemSet);
-        hashTables = LSH2.buildModel(userRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH2.getHashKeyLookupTable();
+        hashTables = LSH.buildModel(userRateMap, vmap, numOfBands);
+        hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
     public List<String> getCandidateItemList(
@@ -31,7 +31,7 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
             HashObjSet<String> ratedItemSet)
     {
         HashObjSet<String> userCandidateSet =
-                LSH2.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+                LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
         HashObjSet<String> neighborsRatingSet;
         List<String> ratedItemList = new ArrayList<>();
         for (String neighborId : userCandidateSet) {

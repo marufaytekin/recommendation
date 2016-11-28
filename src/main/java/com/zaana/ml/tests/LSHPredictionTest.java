@@ -1,6 +1,6 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.*;
+import com.zaana.ml.metrics.MAE;
 import com.zaana.ml.prediction.*;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;

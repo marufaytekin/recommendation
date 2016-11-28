@@ -1,0 +1,39 @@
+Item based histogram: data/1m-new/ml-new.data
+Total number of Ratings: 5728
+Histogram = {0=1550, 1=658, 2=433, 3=271, 4=198, 5=173, 6=163, 7=126, 8=100, 9=88, 10=1968}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [1550, 658, 433, 271, 198, 173, 163, 126, 100, 2056]
+fileName = "ml-new"
+
+Item based histogram: data/1m/ml-1m.data
+Total number of Ratings: 3706
+Histogram = {0=446, 1=217, 2=207, 3=163, 4=159, 5=122, 6=122, 7=85, 8=81, 9=85, 10=2019}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [446, 217, 207, 163, 159, 122, 122, 85, 81, 3004]
+fileName = "ml"
+
+Item based histogram: data/movies_tv/movies_tv.data
+Total number of Ratings: 17454
+Histogram = {0=0, 1=7632, 2=3308, 3=1733, 4=1006, 5=761, 6=546, 7=401, 8=322, 9=238, 10=1507}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [0, 7632, 3308, 1733, 1006, 761, 546, 401, 322, 1745]
+fileName = "mtv"
+
+
+Item based histogram: data/android/andapps.data
+Total number of Ratings: 34185
+Histogram = {0=28541, 1=2060, 2=924, 3=635, 4=427, 5=292, 6=214, 7=181, 8=129, 9=89, 10=693}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [28541, 2060, 924, 635, 427, 292, 214, 181, 129, 782]
+fileName = "andapps"
+
+
+Item based histogram: data/ymusic/ymusic.data
+Total number of Ratings: 1000
+Histogram = {0=0, 1=0, 2=0, 3=0, 4=0, 5=0, 6=2, 7=4, 8=9, 9=10, 10=975}
+numberOfRatings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+numberOfUsers = [0, 0, 0, 0, 0, 0, 2, 4, 9, 985]
+fileName = "ymusic"
+
+
+

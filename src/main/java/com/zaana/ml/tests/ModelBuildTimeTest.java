@@ -1,8 +1,8 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.DataParser;
-import com.zaana.ml.LSH;
-import com.zaana.ml.Vector;
+import com.zaana.ml.lsh.LSH;
+import com.zaana.ml.tools.DataParser;
+import com.zaana.ml.tools.Vector;
 import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import net.openhft.koloboke.collect.ObjIterator;

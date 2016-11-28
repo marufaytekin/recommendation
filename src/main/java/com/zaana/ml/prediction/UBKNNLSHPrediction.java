@@ -1,8 +1,7 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.Common;
-import com.zaana.ml.LSH;
-import com.zaana.ml.LSH2;
+import com.zaana.ml.tools.Common;
+import com.zaana.ml.lsh.LSH;
 import com.zaana.ml.similarity.Cosine;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
@@ -64,7 +63,7 @@ public class UBKNNLSHPrediction extends AbstractPredictionTests {
                 continue;
             }
             cnt++;
-            Set<String> candidateSet = LSH2.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
+            Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, userId, hashKeyLookupTable);
             total_candidate_set_size += candidateSet.size();
             predictRatingsForTestUsers
                     (testDataEntry, userRateMap, itemRateMap, candidateSet, userId, outputList, targetList, kNN, y);

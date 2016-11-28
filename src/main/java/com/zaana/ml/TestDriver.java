@@ -4,6 +4,7 @@ import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import com.zaana.ml.recomm.lsh.*;
 import com.zaana.ml.tests.*;
+import com.zaana.ml.tools.DataParser;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 

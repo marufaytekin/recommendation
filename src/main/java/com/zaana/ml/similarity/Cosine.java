@@ -1,6 +1,6 @@
 package com.zaana.ml.similarity;
 
-import com.zaana.ml.SortHashMap;
+import com.zaana.ml.tools.SortHashMap;
 import net.openhft.koloboke.collect.ObjIterator;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMaps;

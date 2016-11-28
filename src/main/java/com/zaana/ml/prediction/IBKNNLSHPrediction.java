@@ -1,6 +1,6 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.LSH2;
+import com.zaana.ml.lsh.LSH;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;
@@ -86,7 +86,7 @@ public class IBKNNLSHPrediction extends AbstractPredictionTests
         for (Map.Entry<String, Integer> entry : testMovieList.entrySet()) {
             try {
                 String testMovieId = entry.getKey();
-                Set<String> candidateSet = LSH2.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
+                Set<String> candidateSet = LSH.getCandidateSetFromHashTables(hashTables, testMovieId, hashKeyLookupTable);
                 total_candidate_set_size += candidateSet.size();
                 Set<String> intersectionOfCandidateRatedItemSets = new HashSet<>(candidateSet);
                 intersectionOfCandidateRatedItemSets.retainAll(ratedItemsSet);

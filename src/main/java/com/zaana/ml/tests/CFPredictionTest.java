@@ -1,6 +1,6 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.MAE;
+import com.zaana.ml.metrics.MAE;
 import com.zaana.ml.prediction.IBKNNPrediction;
 import com.zaana.ml.prediction.RandomPrediction;
 import com.zaana.ml.prediction.UBKNNPrediction;

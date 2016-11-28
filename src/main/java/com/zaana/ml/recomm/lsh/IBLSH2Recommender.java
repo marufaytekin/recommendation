@@ -1,7 +1,7 @@
 package com.zaana.ml.recomm.lsh;
 
-import com.zaana.ml.*;
-import com.zaana.ml.Vector;
+import com.zaana.ml.lsh.LSH;
+import com.zaana.ml.tools.Vector;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 import net.openhft.koloboke.collect.set.hash.HashObjSets;
@@ -25,8 +25,8 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         Set<String> userSet = userRateMap.keySet();
         HashMap<Integer, HashMap<Integer, HashMap<String, Integer>>> vmap =
                 Vector.generateHashFunctions(-5, 5, numOfBands, numOfHashFunctions, userSet);
-        hashTables = LSH2.buildModel(itemRateMap, vmap, numOfBands);
-        hashKeyLookupTable = LSH2.getHashKeyLookupTable();
+        hashTables = LSH.buildModel(itemRateMap, vmap, numOfBands);
+        hashKeyLookupTable = LSH.getHashKeyLookupTable();
     }
 
     @Override
@@ -39,7 +39,7 @@ public class IBLSH2Recommender extends AbstractLSHRecommender {
         //ratedItemSet = (HashObjSet<String>) userRateSet.get(userId);
         List<String> candidateList = new ArrayList<>();
         for (String testItemId : ratedItemSet) {
-            HashObjSet<String> candidateSet = LSH2.getCandidateItemSetForTopNRecommendation
+            HashObjSet<String> candidateSet = LSH.getCandidateItemSetForTopNRecommendation
                     (hashTables, ratedItemSet, testItemId, hashKeyLookupTable);
             candidateList.addAll(candidateSet);
         }

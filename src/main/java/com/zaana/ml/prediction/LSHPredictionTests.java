@@ -1,7 +1,6 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.LSH;
-import com.zaana.ml.LSH2;
+import com.zaana.ml.lsh.LSH;
 import com.zaana.ml.recomm.lsh.AbstractLSHRecommender;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
@@ -50,7 +49,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     testQueryCnt++;
                     Set<String> ratedUserSet = itemRatings.keySet();
                     List<String> candidateSetList =
-                            LSH2.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
+                            LSH.getCandidateListFromHashTables(hashTables, targetUserId, hashKeyLookupTable);
                     HashObjSet<String> intersectionOfCandidateRatedUserSets = HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersectionOfCandidateRatedUserSets.retainAll(ratedUserSet);
                     //if (intersectionOfCandidateRatedUserSets.isEmpty()) continue;
@@ -116,7 +115,7 @@ public class LSHPredictionTests extends AbstractPredictionTests {
                     Integer givenRating = entry.getValue();
                     Set<String> ratedItemsSet = userRateMap.get(targetUserId).keySet();
                     List <String> candidateSetList =
-                            LSH2.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
+                            LSH.getCandidateListFromHashTables(hashTables, movieId, hashKeyLookupTable);
                     HashObjSet<String> intersecItemsCandidateSet =
                             HashObjSets.getDefaultFactory().newMutableSet(candidateSetList);
                     intersecItemsCandidateSet.retainAll(ratedItemsSet);

@@ -2,9 +2,8 @@ package com.zaana.ml;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+
+import org.junit.*;
 
 public class IBNNPredictionTest
 {
@@ -19,8 +18,8 @@ public class IBNNPredictionTest
     private static HashMap<String, HashMap<String, Integer>> userRateMap;
     private static HashMap<String, HashMap<String, Integer>> testDataMap;
 
-    @BeforeClass
-    public static void testSetup()
+    @Before
+    public void testSetup()
     {
 
         // insertDataInMap( itemID, userID, rating, itemRateMap );
@@ -47,8 +46,8 @@ public class IBNNPredictionTest
 
     }
 
-    @AfterClass
-    public static void testCleanup()
+    @After
+    public void testCleanup()
     {
         userRateMap = null;
         testDataMap = null;

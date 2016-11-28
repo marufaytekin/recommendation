@@ -1,8 +1,9 @@
 package com.zaana.ml.tests;
 
-import com.zaana.ml.*;
-import com.zaana.ml.Vector;
+import com.zaana.ml.lsh.LSH;
+import com.zaana.ml.tools.Vector;
 import com.zaana.ml.similarity.Cosine;
+import com.zaana.ml.tools.SortHashMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 
@@ -30,7 +31,7 @@ public class BucketDistTest extends AbstractTest {
             preprocessDataForValidation(dataFileBase, (j + 1), type, seperator);
             Set<String> itemSet = itemRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
-            HashObjObjMap<Object, Object> hashTables = LSH2.buildModel(userRateMap, vmap, l);
+            HashObjObjMap<Object, Object> hashTables = LSH.buildModel(userRateMap, vmap, l);
             int size;
             int maxSize = 0;
             HashObjObjMap<String, HashObjSet> hashTable = (HashObjObjMap<String, HashObjSet>) hashTables.get(0);

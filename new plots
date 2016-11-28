@@ -1,8 +1,0 @@
-plot (1000 ./ UBLSH1RecommenderHashTablesAvgRecommTime, UBLSH1RecommenderHashTablesPrecision,
-1000 ./ UBLSH2RecommenderHashTablesAvgRecommTime, UBLSH2RecommenderHashTablesPrecision)
-1000 ./ IBLSH1RecommenderHashTablesAvgRecommTime, IBLSH1RecommenderHashTablesPrecision,
-1000 ./ IBLSH2RecommenderHashTablesAvgRecommTime, IBLSH2RecommenderHashTablesPrecision)
-
-
-plot (1000 ./ UBLSH1RecommenderHashFunctionsAvgRecommTime, UBLSH1RecommenderHashFunctionsPrecision,
-1000 ./ UBLSH2RecommenderHashFunctionsAvgRecommTime, UBLSH2RecommenderHashFunctionsPrecision)
