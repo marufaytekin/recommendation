@@ -11,9 +11,7 @@ public final class Novelty
     /**
      * u: number of users
      * k_i : the number of users who have collected/rated item i
-     * 
-     * olmak uzere:
-     * 
+     *
      * for each item i in top N recommendation list:
      *     calculate its self information I_i = log2(u / k_i)  and add the result to I_total
      * compute mean self information (top-L surprisal/novelty) as I(L) = I_total / N
