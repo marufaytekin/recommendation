@@ -1,4 +1,4 @@
-package com.zaana.ml.tools;
+package com.zaana.ml.utils;
 
 import net.openhft.koloboke.collect.ObjIterator;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;

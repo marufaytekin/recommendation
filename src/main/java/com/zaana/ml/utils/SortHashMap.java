@@ -1,4 +1,4 @@
-package com.zaana.ml.tools;
+package com.zaana.ml.utils;
 
 import java.util.*;
 import java.util.Map.Entry;

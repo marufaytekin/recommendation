@@ -1,6 +1,6 @@
 package com.zaana.ml.metrics;
 
-import com.zaana.ml.tools.DataParser;
+import com.zaana.ml.utils.DataParser;
 import org.apache.log4j.Logger;
 
 import java.util.Iterator;

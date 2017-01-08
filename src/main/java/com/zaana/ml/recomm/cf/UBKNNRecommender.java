@@ -1,7 +1,7 @@
 package com.zaana.ml.recomm.cf;
 
 import com.google.common.collect.MinMaxPriorityQueue;
-import com.zaana.ml.tools.Common;
+import com.zaana.ml.utils.Common;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 
 import java.util.*;

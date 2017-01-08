@@ -1,7 +1,7 @@
 package com.zaana.ml.recomm.lsh;
 
 import com.zaana.ml.lsh.LSH;
-import com.zaana.ml.tools.Vector;
+import com.zaana.ml.utils.Vector;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 import net.openhft.koloboke.collect.set.hash.HashObjSets;

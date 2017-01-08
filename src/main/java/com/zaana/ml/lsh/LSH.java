@@ -169,7 +169,7 @@ public final class LSH {
         ArrayList<Integer> key = new ArrayList<>();
         for (int i = 0; i < vectors.size(); i++) {
             HashMap<String, Integer> vector = vectors.get(Integer.valueOf(i));
-            int dotProduct = com.zaana.ml.tools.Vector.calculateDotProduct(V, vector);
+            int dotProduct = com.zaana.ml.utils.Vector.calculateDotProduct(V, vector);
             if (dotProduct < 0) key.add(0);
             else key.add(1);
         }

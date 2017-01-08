@@ -1,9 +1,9 @@
 package com.zaana.ml.tests;
 
 import com.zaana.ml.lsh.LSH;
-import com.zaana.ml.tools.Vector;
+import com.zaana.ml.utils.Vector;
 import com.zaana.ml.similarity.Cosine;
-import com.zaana.ml.tools.SortHashMap;
+import com.zaana.ml.utils.SortHashMap;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import net.openhft.koloboke.collect.set.hash.HashObjSet;
 

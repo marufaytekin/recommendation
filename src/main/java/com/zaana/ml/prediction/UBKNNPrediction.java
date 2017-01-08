@@ -1,6 +1,6 @@
 package com.zaana.ml.prediction;
 
-import com.zaana.ml.tools.Common;
+import com.zaana.ml.utils.Common;
 import com.zaana.ml.similarity.Cosine;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 

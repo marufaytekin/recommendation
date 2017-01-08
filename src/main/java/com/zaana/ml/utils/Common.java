@@ -1,4 +1,4 @@
-package com.zaana.ml.tools;
+package com.zaana.ml.utils;
 
 import com.google.common.collect.MinMaxPriorityQueue;
 import net.openhft.koloboke.collect.map.hash.HashObjIntMap;
