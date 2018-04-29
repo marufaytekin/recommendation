@@ -1,5 +1,6 @@
 package com.zaana.ml;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import com.zaana.ml.recomm.lsh.*;
@@ -8,6 +9,9 @@ import com.zaana.ml.utils.DataParser;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -22,6 +26,8 @@ public class TestDriver {
         IBLSH2Recommender ibLsh2Recommender = new IBLSH2Recommender();
         UBLSH1Recommender ubLsh1Recommender = new UBLSH1Recommender();
         UBLSH2Recommender ubLsh2Recommender = new UBLSH2Recommender();
+        List<String> dataList = Arrays.asList("android-apps", "yahoo-music", "amazon-movies-tv", "ml-1m", "ml-1m-new");
+
         switch (selection) {
 
             case "00":
@@ -142,13 +148,17 @@ public class TestDriver {
                 break;
 
             case "05":
-
-                runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                for (int i=0; i<5; i++) {
+                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    LOG.info("Processing =========================" + dataFileBase + "=========================================");
+                    runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                    runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                    runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                    runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                    runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                    runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                };
                 break;
 
             case "5000":
