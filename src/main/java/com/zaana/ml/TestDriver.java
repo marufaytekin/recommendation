@@ -1,6 +1,5 @@
 package com.zaana.ml;
 
-import com.sun.javafx.scene.control.skin.VirtualFlow;
 import com.zaana.ml.recomm.cf.IBKNNRecommender;
 import com.zaana.ml.recomm.cf.UBKNNRecommender;
 import com.zaana.ml.recomm.lsh.*;
@@ -8,8 +7,6 @@ import com.zaana.ml.tests.*;
 import com.zaana.ml.utils.DataParser;
 import net.openhft.koloboke.collect.map.hash.HashObjObjMap;
 import org.apache.log4j.Logger;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
