@@ -27,7 +27,7 @@
 						<manifest>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<mainClass>main.java.ml.lsh</mainClass>
+							<mainClass>com.zaana.ml.Main</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
