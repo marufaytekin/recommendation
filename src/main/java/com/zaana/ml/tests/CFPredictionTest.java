@@ -17,7 +17,7 @@ public class CFPredictionTest extends AbstractTest {
         double mae = 0;
         double runTime = 0;
         for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForValidation(dataFileBase, (j+1), "test", seperator);
+            preprocessDataForValidation(dataFileBase, (j+1), seperator);
             if (type == "UBKNN") {
                 runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData
                         (userRateMap, testDataMap, kNN, y);

@@ -15,7 +15,7 @@ import java.util.*;
 public class BucketDistTest extends AbstractTest {
 
     public static void runModelBuildTest (String dataFileBase, String seperator) {
-        preprocessDataForValidation(dataFileBase, 1, "test", seperator);
+        preprocessDataForValidation(dataFileBase, 1, seperator);
         LOG.info("model build started...");
         Cosine.createDistanceMatrix(userRateMap, 5);
         LOG.info("model build completed...");
@@ -28,7 +28,7 @@ public class BucketDistTest extends AbstractTest {
             histogram.put(i, 0); //init historgram
         }
         for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForValidation(dataFileBase, (j + 1), type, seperator);
+            preprocessDataForValidation(dataFileBase, (j + 1), seperator);
             Set<String> itemSet = itemRateMap.keySet();
             vmap = Vector.generateHashFunctions(-5, 5, l, k, itemSet);
             HashObjObjMap<Object, Object> hashTables = LSH.buildModel(userRateMap, vmap, l);
