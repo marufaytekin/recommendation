@@ -10,7 +10,7 @@ function write (f, file_name)
   set (h,'papersize',[H W])
   set (h,'paperposition', [0,0,[W H]])
   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
-  set (0,'defaultaxesfontsize', 14)
+  set (0,'defaultaxesfontsize', 10)
   out_file_name = strcat (file_name,'.eps');
   print('-depsc', out_file_name);
 endfunction
@@ -39,8 +39,8 @@ y4 = movies_tv_ub_cover(5,:);
 y5 = ymusic_ub_cover(5,:);
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
-h = legend('Apps for Android', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies and TV', 'Yahoo Music!', 'location', 'southwest');
-set (h, 'fontsize', 14);
+h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontsize', 10);
 xlabel('Number of Hash Functions');
 ylabel('Prediction Ratio');
 title('UB-KNN-LSH')
@@ -58,8 +58,8 @@ y4 = movies_tv_ub_cover(:,6);
 y5 = ymusic_ub_cover(:,6);
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
-h = legend('Apps for Android', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies and TV', 'Yahoo Music!', 'location', 'southeast');
-set (h, 'fontsize', 14);
+h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontsize', 10);
 xlabel('Number of Hash Tables');
 ylabel('Prediction Ratio');
 title('UB-KNN-LSH')
@@ -78,8 +78,8 @@ y4 = movies_tv_ib_cover(5,:);
 y5 = ymusic_ib_cover(5,:);
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
-h = legend('Apps for Android', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies and TV', 'Yahoo Music!', 'location', 'southwest');
-set (h, 'fontsize', 14);
+h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontsize', 10);
 xlabel('Number of Hash Functions');
 ylabel('Prediction Ratio');
 title('IB-KNN-LSH')
@@ -98,8 +98,8 @@ y4 = movies_tv_ib_cover(:,6);
 y5 = ymusic_ib_cover(:,6);
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
-h = legend('Apps for Android', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies and TV', 'Yahoo Music!', 'location', 'southeast');
-set (h, 'fontsize', 14);
+h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontsize', 10);
 xlabel('Number of Hash Tables');
 ylabel('Prediction Ratio');
 title('IB-KNN-LSH')
