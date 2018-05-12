@@ -193,6 +193,16 @@ public class TestDriver {
                     CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 10, seperator);
                 }
                 break;
+
+            case "51":
+                for (int i=0; i<5; i++) {
+                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 10, seperator, 20);
+                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 10, seperator, 20);
+                }
+                break;
 //            case "500":
 //                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", cvFoldK, seperator, kNN);
 //                break;

@@ -40,7 +40,7 @@ public class Main {
     {
         Scanner scanner = new Scanner(System.in);
         String selection;
-        //TestDriver.runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+        TestDriver.runSelection("51", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
         do {
             System.out.println("");
             System.out.println("Options");

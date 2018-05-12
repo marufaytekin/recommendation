@@ -68,6 +68,7 @@ public class CFPredictionValidationTest extends AbstractTest
             double mae = 0;
             double runTime = 0;
             for (int j = 0; j < cvFoldNum; j++) {
+                LOG.info("cv fold: " + (j+1));
                 preprocessDataForValidation(dataFileBase, j, seperator);
                 if (type == "UB") {
                     runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
