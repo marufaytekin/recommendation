@@ -7,7 +7,7 @@ function write (f, file_name)
   H = 3.2; W = 4;
   h = f;
   set (h,'papertype', '<custom>')
-  set (h,'paperunits','inches');
+  set (h,'paperunits','inches');N
   set (h,'papersize',[H W])
   set (h,'paperposition', [0,0,[W H]])
   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])

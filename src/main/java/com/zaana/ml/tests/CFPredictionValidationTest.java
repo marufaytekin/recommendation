@@ -17,7 +17,7 @@ public class CFPredictionValidationTest extends AbstractTest
 
     public static void runCFPredictionAndKTest(
             String dataFilePath, String dataFileBase, String type,
-            int smoothRun, String seperator, int y)
+            int cvFoldNum, String seperator, int y)
     {
         ArrayList<Double> maeList = new ArrayList<>();
         ArrayList<Double> runTimeList = new ArrayList<>();
@@ -26,8 +26,8 @@ public class CFPredictionValidationTest extends AbstractTest
         for (int i = 0; i < 10; i++) {
             double mae = 0;
             double runTime = 0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j+1), "val", seperator);
+            for (int j = 0; j < cvFoldNum; j++) {
+                preprocessDataForValidation(dataFileBase, j, seperator);
                 if (type == "UB") {
                     runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                             testDataMap, kNN, y);
@@ -42,9 +42,9 @@ public class CFPredictionValidationTest extends AbstractTest
                     throw new UnsupportedOperationException("Invalid operation for CF type.");
                 }
             }
-            LOG.info(type + "MAE = " + mae / smoothRun);
-            maeList.add(mae/ smoothRun);
-            runTimeList.add(runTime/ smoothRun);
+            LOG.info(type + "MAE = " + mae / cvFoldNum);
+            maeList.add(mae / cvFoldNum);
+            runTimeList.add(runTime / cvFoldNum);
             kNN += 3;
             LOG.info("k = " + kNN);
         }
@@ -58,7 +58,7 @@ public class CFPredictionValidationTest extends AbstractTest
 
     public static void runCFPredictionAndYTest(
             String dataFilePath, String dataFileBase, String type,
-            int smoothRun, String seperator, int kNN)
+            int cvFoldNum, String seperator, int kNN)
     {
         ArrayList<Double> maeList = new ArrayList<>();
         ArrayList<Double> runTimeList = new ArrayList<>();
@@ -67,8 +67,8 @@ public class CFPredictionValidationTest extends AbstractTest
         for (int i = 0; i < 10; i++) {
             double mae = 0;
             double runTime = 0;
-            for (int j = 0; j < smoothRun; j++) {
-                preprocessDataForValidation(dataFileBase, (j+1), "val", seperator);
+            for (int j = 0; j < cvFoldNum; j++) {
+                preprocessDataForValidation(dataFileBase, j, seperator);
                 if (type == "UB") {
                     runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                             testDataMap, kNN, y);
@@ -83,9 +83,9 @@ public class CFPredictionValidationTest extends AbstractTest
                     throw new UnsupportedOperationException("Invalid operation for CF type.");
                 }
             }
-            LOG.info(type + "MAE = " + mae / smoothRun);
-            maeList.add(mae/ smoothRun);
-            runTimeList.add(runTime/ smoothRun);
+            LOG.info(type + "MAE = " + mae / cvFoldNum);
+            maeList.add(mae / cvFoldNum);
+            runTimeList.add(runTime / cvFoldNum);
             y += 3;
             LOG.info("y = " + y);
         }
@@ -98,7 +98,7 @@ public class CFPredictionValidationTest extends AbstractTest
     }
 
     public static void runCFPredictionKAndY2DTest(
-            String type, String dataFileBase, int numOfRun, long smoothRun, String seperator)
+            String dataFileBase, String type, int numOfRun, long cvFoldNum, String seperator)
     {
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
@@ -110,8 +110,9 @@ public class CFPredictionValidationTest extends AbstractTest
             for (int j = 0; j < numOfRun; j++) {
                 long runTime = (long) 0;
                 double mae = 0;
-                for (int s = 0; s < smoothRun; s++) {
-                    preprocessDataForValidation(dataFileBase, (s + 1), "val", seperator);
+                for (int s = 0; s < cvFoldNum; s++) {
+                    LOG.info("cv fold: " + (s+1));
+                    preprocessDataForValidation(dataFileBase, s, seperator);
                     if (type == "UB") {
                         runTime += UBKNNPrediction.runUserBasedNNPredictionOnTestData(userRateMap,
                                 testDataMap, kNN, y);
@@ -128,15 +129,15 @@ public class CFPredictionValidationTest extends AbstractTest
                 }
                 LOG.info("k: " + kNN);
                 LOG.info("y: " + y);
-                LOG.info(type + "Mae2D: " + mae / smoothRun);
-                LOG.info(type + "Runtime2D: " + runTime / smoothRun);
-                maeList.add(mae / smoothRun);
-                runtimeList.add(runTime / smoothRun);
-                y += 3;
+                LOG.info(type + "Mae2D: " + mae / cvFoldNum);
+                LOG.info(type + "Runtime2D: " + runTime / cvFoldNum);
+                maeList.add(mae / cvFoldNum);
+                runtimeList.add(runTime / cvFoldNum);
+                y += 2;
             }
             runTimeList2D.add(runtimeList);
             maeList2D.add(maeList);
-            kNN += 3;
+            kNN += 5;
             y = 1;
         }
         LOG2.info("# ========================================================");

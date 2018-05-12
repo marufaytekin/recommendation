@@ -184,9 +184,15 @@ public class TestDriver {
                 ModelBuildTimeTest.runModelBuildTimeTest("IBLSH", dataFilePath, seperator, k, l);
                 break;
 
-//            case "50":
-//                CFPredictionValidationTest.runCFPredictionAndKTest(dataFilePath, dataFileBase, "UB", cvFoldK, seperator, y);
-//                break;
+            case "50":
+                for (int i=0; i<5; i++) {
+                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "UB", 10, 10, seperator);
+                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 10, seperator);
+                }
+                break;
 //            case "500":
 //                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", cvFoldK, seperator, kNN);
 //                break;
