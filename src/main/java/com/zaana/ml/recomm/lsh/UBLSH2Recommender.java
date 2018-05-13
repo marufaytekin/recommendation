@@ -44,17 +44,17 @@ public class UBLSH2Recommender extends AbstractLSHRecommender {
     }
 
     @Override
-    public HashObjSet<String> recommendItems(
+    public List<String> recommendItems(
             String userId, List<String> candidateList, int topN)
     {
-        HashObjSet<String> recSet = HashObjSets.getDefaultFactory().newMutableSet();
+        List<String> recList = new ArrayList<>();
         int size = candidateList.size();
         int idx;
-        for (int i = size; i > 0 && recSet.size() < topN; i--) {
+        for (int i = size; i > 0 && recList.size() < topN; i--) {
             idx = (int) Math.floor(Math.random()*size);
-            recSet.add(candidateList.get(idx));
+            recList.add(candidateList.get(idx));
         }
-        return recSet;
+        return recList;
     }
 
     @Override

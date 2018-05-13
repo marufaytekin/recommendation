@@ -31,7 +31,7 @@ public abstract class Precision {
     }
 
     public static Double calculateMeanAveragePrecision(
-            final List<String> relevantList,
+            final Set<String> relevantList,
             final List<String> topNRecommendation)
     {
         if (topNRecommendation.size() == 0) return 0.0;

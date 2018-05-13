@@ -164,13 +164,13 @@ public class TestDriver {
 
             case "1":
                 System.out.println("Enter k-NN: ");
-                Main.kNN = Integer.parseInt(scanner.nextLine());
+                kNN = Integer.parseInt(scanner.nextLine());
                 break;
             case "2":
                 System.out.println("Enter number of bands ( l ) :");
-                Main.l = Integer.parseInt(scanner.nextLine());
+                l = Integer.parseInt(scanner.nextLine());
                 System.out.println("Enter of hash functions ( k ) :");
-                Main.k = Integer.parseInt(scanner.nextLine());
+                k = Integer.parseInt(scanner.nextLine());
                 break;
             case "3":
                 System.out.println("Enter data file path: ");
@@ -327,20 +327,24 @@ public class TestDriver {
             // All top-N recommendation tests
             ////////////////////////////////////////////////////////////////////
             case "100":
-                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                IBKNNRecommender ibRecommender = new IBKNNRecommender();
-                CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
-                UBKNNRecommender ubRecommender = new UBKNNRecommender();
-                CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                for (int i=0; i<5; i++) {
+                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
+                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                    UBKNNRecommender ubRecommender = new UBKNNRecommender();
+                    CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                    IBKNNRecommender ibRecommender = new IBKNNRecommender();
+                    CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                }
                 break;
-
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////

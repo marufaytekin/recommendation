@@ -52,16 +52,13 @@ public class IBLSH1Recommender extends AbstractLSHRecommender {
      * Instead of merged similarity value we use frequency of items in candidate list.
      * @param userId
      * @param candidateList
-     * @param topN    @return      */
+     * @param topN    @return       */
     @Override
-    public HashObjSet<String> recommendItems(
+    public List<String> recommendItems(
             String userId, List<String> candidateList, int topN)
     {
-
-        //candidateItemListSize = candidateList.size();
-        //uniqueCandidateItemListSize = uniqueueItemsSet.size();
-
-        return Common.getMostFrequentTopNElementSet(candidateList, topN);
+        //return Common.getMostFrequentTopNElementSet(candidateList, topN);
+        return Common.getMostFrequentTopNElementList(candidateList, topN);
 
     }
 

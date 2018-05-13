@@ -199,18 +199,19 @@ public class LSHTopNRecommTests extends AbstractTest{
             startTime = System.currentTimeMillis();
             List<String> candidateList =
                     recommender.getCandidateItemList(userRateMap, userRateSet, targetUserId, ratedItemSet);
-            Set<String> topNRecommendedItems =
+            List<String> topNRecommendedItemsList =
                     recommender.recommendItems(targetUserId, candidateList, topN);
             endTime = System.currentTimeMillis();
             //////////////////////////////////
+            Set <String> topNRecommendedItemsSet = new HashSet<>(topNRecommendedItemsList);
             totalReccTime += (endTime - startTime);
-            if (topNRecommendedItems.isEmpty()) continue;
-            totalTopN += topNRecommendedItems.size();
-            totalPrecision += Precision.calculatePrecision(entry.getValue().keySet(), topNRecommendedItems);
-            totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItems);
-            totalDiversity += Diversity.intraListDissimilarity(topNRecommendedItems, itemRateMap, 5);
-            totalNovelty += Novelty.novelty(topNRecommendedItems, userSet, itemSetCount);
-            uniqueItemSet.addAll(new HashSet<>(topNRecommendedItems));
+            if (topNRecommendedItemsList.isEmpty()) continue;
+            totalTopN += topNRecommendedItemsList.size();
+            totalPrecision += Precision.calculateMeanAveragePrecision(entry.getValue().keySet(), topNRecommendedItemsList);
+            totalRecall += Recall.calculateRecall(entry.getValue().keySet(), topNRecommendedItemsSet);
+            totalDiversity += Diversity.intraListDissimilarity(topNRecommendedItemsSet, itemRateMap, 5);
+            totalNovelty += Novelty.novelty(topNRecommendedItemsSet, userSet, itemSetCount);
+            uniqueItemSet.addAll(new HashSet<>(topNRecommendedItemsList));
             totalCandidateItemList += recommender.getCandidateItemListSize();
             //totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
             cnt++;
