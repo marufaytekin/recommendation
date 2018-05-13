@@ -29,7 +29,7 @@ public class LSHTopNRecommTests extends AbstractTest{
     public static void runHashFunctionsLSHEvaluation(
             AbstractLSHRecommender recommender,
             String dataFileBase, String separator,
-            int numOfRun, int smoothRun, int numOfBands, int topN)
+            int numOfRun, int cvFoldNum, int numOfBands, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
@@ -44,24 +44,24 @@ public class LSHTopNRecommTests extends AbstractTest{
         int numOfHashFunctions = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
-            for (int s = 0; s < smoothRun; s++) {
-                preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
+            for (int s = 0; s < cvFoldNum; s++) {
+                preprocessDataForRecommendation(dataFileBase, s, separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
                 calculateLSHMetrics(userRateSet, testDataMap, recommender,topN);
             }
-            precisionList.add(precision/smoothRun);
-            recallList.add(recall/smoothRun);
-            diversityList.add(diversity/smoothRun);
-            aggrDiversityList.add(aggrDiversity/smoothRun);
-            noveltyList.add(novelty/smoothRun);
-            topNList.add(topNSize/smoothRun);
-            avgRecommTime.add(totalTime/smoothRun);
-            avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
-            topNRatioList.add(topNRatio/smoothRun);
+            precisionList.add(precision/ cvFoldNum);
+            recallList.add(recall/ cvFoldNum);
+            diversityList.add(diversity/ cvFoldNum);
+            aggrDiversityList.add(aggrDiversity/ cvFoldNum);
+            noveltyList.add(novelty/ cvFoldNum);
+            topNList.add(topNSize/ cvFoldNum);
+            avgRecommTime.add(totalTime/ cvFoldNum);
+            avgCandidateItemListSize.add(candidateItemListSize/ cvFoldNum);
+            topNRatioList.add(topNRatio/ cvFoldNum);
             //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
-            LOG.info("Avg Recommendation Time = " + totalTime/smoothRun);
+            LOG.info("Avg Recommendation Time = " + totalTime/ cvFoldNum);
             numOfHashFunctions++;
         }
         String reccClassName = recommender.getClass().getSimpleName();
@@ -110,7 +110,7 @@ public class LSHTopNRecommTests extends AbstractTest{
     public static void runHashTablesLSHEvaluation(
             AbstractLSHRecommender recommender,
             String dataFileBase, String separator,
-            int numOfRun, int smoothRun, int numOfHashFunctions, int topN)
+            int numOfRun, int cvFoldNum, int numOfHashFunctions, int topN)
     {
         ArrayList<Double> avgRecommTime = new ArrayList<>();
         ArrayList<Double> precisionList = new ArrayList<>();
@@ -125,24 +125,24 @@ public class LSHTopNRecommTests extends AbstractTest{
         int numOfBands = 4;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
-            for (int s = 0; s < smoothRun; s++) {
-                preprocessDataForRecommendation(dataFileBase, (s + 1), separator);
+            for (int s = 0; s < cvFoldNum; s++) {
+                preprocessDataForRecommendation(dataFileBase, s, separator);
                 recommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
                 calculateLSHMetrics(userRateSet, testDataMap,recommender,topN);
             }
-            precisionList.add(precision / smoothRun);
-            recallList.add(recall / smoothRun);
-            diversityList.add(diversity/smoothRun);
-            aggrDiversityList.add(aggrDiversity/smoothRun);
-            noveltyList.add(novelty/smoothRun);
-            topNList.add(topNSize / smoothRun);
-            avgRecommTime.add(totalTime/smoothRun);
-            avgCandidateItemListSize.add(candidateItemListSize/smoothRun);
-            topNRatioList.add(topNRatio/smoothRun);
+            precisionList.add(precision / cvFoldNum);
+            recallList.add(recall / cvFoldNum);
+            diversityList.add(diversity/ cvFoldNum);
+            aggrDiversityList.add(aggrDiversity/ cvFoldNum);
+            noveltyList.add(novelty/ cvFoldNum);
+            topNList.add(topNSize / cvFoldNum);
+            avgRecommTime.add(totalTime/ cvFoldNum);
+            avgCandidateItemListSize.add(candidateItemListSize/ cvFoldNum);
+            topNRatioList.add(topNRatio/ cvFoldNum);
             //avgUniqueItemListSize.add(uniqueItemListSize/smoothRun);
             LOG.info("numOfBands = " + numOfBands);
             LOG.info("numOfHashFunctions = " + numOfHashFunctions);
-            LOG.info("Avg Evaluation Time = " + totalTime/smoothRun);
+            LOG.info("Avg Evaluation Time = " + totalTime/ cvFoldNum);
             numOfBands++;
         }
         String reccClassName = recommender.getClass().getSimpleName();

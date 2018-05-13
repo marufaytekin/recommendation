@@ -189,8 +189,8 @@ public class TestDriver {
                     dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
                     dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
                     LOG.info("Processing ======================== " + dataFileBase + " ========================");
-                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "UB", 10, 10, seperator);
-                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 10, seperator);
+                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "UB", 10, 5, seperator);
+                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 5, seperator);
                 }
                 break;
 
@@ -199,8 +199,8 @@ public class TestDriver {
                     dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
                     dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
                     LOG.info("Processing ======================== " + dataFileBase + " ========================");
-                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 10, seperator, 20);
-                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 10, seperator, 20);
+                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 5, seperator, 20);
+                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 5, seperator, 20);
                 }
                 break;
 //            case "500":
@@ -324,44 +324,26 @@ public class TestDriver {
                 break;
 
             ////////////////////////////////////////////////////////////////////
-            //
+            // All top-N recommendation tests
             ////////////////////////////////////////////////////////////////////
             case "100":
                 LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                break;
-            case "101":
                 LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                break;
-            case "102":
                 LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                break;
-            case "103":
                 LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                break;
-            case "104":
                 LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                break;
-            case "105":
                 LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                break;
-            case "106":
                 LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                break;
-            case "107":
                 LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                IBKNNRecommender ibRecommender = new IBKNNRecommender();
+                CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                UBKNNRecommender ubRecommender = new UBKNNRecommender();
+                CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
                 break;
 
             ////////////////////////////////////////////////////////////////////
             //
             ////////////////////////////////////////////////////////////////////
-            case "110":
-                IBKNNRecommender ibRecommender = new IBKNNRecommender();
-                CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
-                break;
-            case "111":
-                UBKNNRecommender ubRecommender = new UBKNNRecommender();
-                CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
-                break;
 
             case "99":
                 LOG.info("bye...\n");

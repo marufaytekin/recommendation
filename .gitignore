@@ -8,3 +8,5 @@ recomm.log
 **/*.pdf
 *.aux
 *.gz
+target
+.DS_Store
