@@ -7,7 +7,7 @@ function write (f, file_name)
   H = 3.2; W = 4;
   h = f;
   set (h,'papertype', '<custom>')
-  set (h,'paperunits','inches');N
+  set (h,'paperunits','inches');
   set (h,'papersize',[H W])
   set (h,'paperposition', [0,0,[W H]])
   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
@@ -525,7 +525,7 @@ set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("Hash Functions");
 ylabel("Hash Tables");
-title("(a) Amazon Movies - MAE");
+title("MAE");
 
 file = strcat(fileName, '-ublsh-heat-map-mae');
 write (f, file);
@@ -540,13 +540,13 @@ set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("Hash Functions");
 ylabel("Hash Tables");
-title("(c) Amazon Movies - Running Time (sec)");
+title("Running Time (ms)");
 file = strcat(fileName, '-ublsh-heat-map-runtime');
 write(f, file);
 
 
 f= figure();
-data = UBKNNLSHCandidate_Set_List2D;
+data = UBKNNLSHCandidateSetList2D;
 contourf(x, y, data ./ 1000);
 axis square;
 colorbar;
@@ -554,6 +554,6 @@ set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("Hash Functions");
 ylabel("Hash Tables");
-title("(e) Amazon Movies - Candidate Set Size (K)");
+title("Candidate Set Size (K)");
 file = strcat(fileName, '-ublsh-heat-map-candidate');
 write(f, file);
