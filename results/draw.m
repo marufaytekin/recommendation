@@ -285,6 +285,7 @@ legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('Aggregate Diversity');
 xlim([4, 13])
+#ylim([6000 24000])
 write(f, strcat(fileName,'-hash-functions-aggrdiversity'));
 
 -------------
@@ -416,6 +417,7 @@ legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Aggregate Diversity');
 xlim([4 13])
+#ylim([6000 24000])
 write(f, strcat(fileName,'-hash-tables-aggrdiversity'));
 
 -------------
