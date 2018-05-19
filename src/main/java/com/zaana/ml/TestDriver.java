@@ -158,6 +158,18 @@ public class TestDriver {
                 };
                 break;
 
+            case "06":
+                dataFilePath = "data/ml-1m-new/ml-new.data";
+                dataFileBase = "data/ml-1m-new/ml-new";
+                LOG.info("Processing =========================" + dataFileBase + "=========================================");
+                runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                break;
+
             case "5000":
                 runLSHPredictionTests(dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
                 break;
