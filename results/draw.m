@@ -262,7 +262,7 @@ legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('Diversity');
 xlim([4, 13])
-ylim([0.2 1.4])
+#ylim([0.2 1.4])
 write(f, strcat(fileName,'-hash-functions-diversity'));
 
 -----------
@@ -308,7 +308,7 @@ legend boxon;
 xlabel('Number of Hash Functions');
 ylabel('Novelty');
 xlim([4, 13])
-ylim([4 9])
+#ylim([4 9])
 write(f, strcat(fileName,'-hash-functions-novelty'));
 
 -----------
@@ -395,7 +395,7 @@ legend boxon;
 xlabel('Number of Hash Tables');
 ylabel('Diversity');
 xlim([4 13])
-ylim([0.2 1.35])
+#ylim([0.2 1.35])
 write(f, strcat(fileName,'-hash-tables-diversity'));
 
 -------------
