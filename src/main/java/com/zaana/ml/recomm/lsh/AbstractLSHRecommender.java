@@ -40,7 +40,7 @@ public abstract class AbstractLSHRecommender {
                                     HashObjObjMap<String, HashObjObjMap<String, Integer>> itemRateMap,
                                     int numOfBands, int numOfHashFunctions);
 
-    public abstract Set<String> recommendItems(
+    public abstract List<String> recommendItems(
             String userId, List<String> candidateList, int topN);
 
     public abstract List<String> getCandidateItemList(

@@ -25,27 +25,20 @@ public abstract class AbstractTest {
     static HashObjObjMap<Object, Object> hashKeyLookupTable;
 
 
-    public static void preprocessDataForValidation(
-            String baseUrl, int num, String type, String seperator)
+    public static void preprocessDataForValidation(String baseUrl, int cvFoldNum, String seperator)
     {
-        String trainDataFilePath = baseUrl + num + ".base";
-        String testDataFilePath = baseUrl + num + "." + type;
-        DataParser.readTrainingDataFile(trainDataFilePath, seperator);
-        DataParser.readTestDataFile(testDataFilePath, seperator);
+        DataParser.readTrainingDataFile(baseUrl, cvFoldNum, seperator);
+        DataParser.readTestDataFile(baseUrl, cvFoldNum, seperator);
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
-        //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
     }
 
 
-    public static void preprocessDataForRecommendation(
-            String baseUrl, int num, String seperator)
+    public static void preprocessDataForRecommendation(String baseUrl, int cvFoldNum, String seperator)
     {
-        String trainDataFilePath = baseUrl + num + ".recomm.base";
-        String testDataFilePath = baseUrl + num + ".recomm.test";
-        DataParser.readTrainingDataFile(trainDataFilePath, seperator);
-        DataParser.readTestDataFile(testDataFilePath, seperator);
+        DataParser.readTrainingDataFile(baseUrl, cvFoldNum, seperator);
+        DataParser.readTestDataFile(baseUrl, cvFoldNum, seperator);
         userRateMap = DataParser.getUserRateMap();
         itemRateMap = DataParser.getItemRateMap();
         testDataMap = DataParser.getTestDataMap();
@@ -55,8 +48,6 @@ public abstract class AbstractTest {
         userSet = userRateMap.keySet();
         itemSet = itemRateMap.keySet();
         itemSetCount = getCounter(itemRateMap);
-        //DataParser.removeDuplicateData(userRateMap, itemRateMap, testDataMap);
-
     }
 
 

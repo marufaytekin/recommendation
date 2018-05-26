@@ -30,6 +30,34 @@ public abstract class Precision {
         }
     }
 
+    public static Double calculateMeanAveragePrecision(
+            final Set<String> relevantList,
+            final List<String> topNRecommendation)
+    {
+        if (topNRecommendation.size() == 0) return 0.0;
+        int N = topNRecommendation.size();
+        int relevant = relevantList.size();
+
+        try {
+            int hits = 0;
+            double ap = 0;
+            int i = 0;
+            for (String itemId : topNRecommendation) {
+                if (relevantList.contains(itemId)){
+                    hits++;
+                    ap += (double) hits / (i+1);
+                }
+                i++;
+            }
+            ap = ap / relevant;
+            return(ap);
+        } catch (NullPointerException e) {
+            LOG.debug(e.getStackTrace());
+            return 0.0;
+        }
+    }
+
+
     public static Double getPrecision(
             Set<String> topNRecommendation,
             Map.Entry<String, HashObjObjMap<String, Integer>> entry)

@@ -15,7 +15,7 @@ public abstract class AbstractCFRecommender implements Serializable {
 
     HashMap<String, MinMaxPriorityQueue<Map.Entry<String, Double>>> model;
 
-    public abstract Set<String> recommendItems(
+    public abstract List<String> recommendItems(
             HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String userId, int topN);
 

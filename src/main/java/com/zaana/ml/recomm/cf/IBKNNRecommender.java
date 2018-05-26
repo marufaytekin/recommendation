@@ -29,7 +29,7 @@ public class IBKNNRecommender extends AbstractCFRecommender {
      * @return
      */
     @Override
-    public Set<String> recommendItems(
+    public List<String> recommendItems(
             HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String userId, int topN)
     {
@@ -54,7 +54,7 @@ public class IBKNNRecommender extends AbstractCFRecommender {
             }
         }
 
-        return Common.sortByValueAndGetTopN(simList, topN);
+        return Common.sortByValueAndGetTopNList(simList, topN);
     }
 
 

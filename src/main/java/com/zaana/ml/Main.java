@@ -15,31 +15,33 @@ public class Main {
     private Main( ) {
     }
 
+    static String dataFilePath;
+    static String dataFileBase;
     //static String dataFilePath = "data/yahoo-music/ymusic.data";
     //static String dataFileBase = "data/yahoo-music/ymusic";
-    //static String dataFilePath = "data/android-apps/andapps.data";
-    //static String dataFileBase = "data/android-apps/andapps";
-    static String dataFilePath = "data/amazon-movies-tv/movies_tv.data";
-    static String dataFileBase = "data/amazon-movies-tv/movies_tv";
-    //static String dataFilePath = "data/ml-1m/ml-1m.data";
+    //static String dataFilePath = "data/android-apps/android-apps";
+    //static String dataFileBase = "data/android-apps/android-apps";
+    //static String dataFilePath = "data/amazon-movies-tv/movies_tv.data";
+    //static String dataFileBase = "data/amazon-movies-tv/movies_tv";
+    //static String dataFilePath = "data/ml-1m/ml-1m";
     //static String dataFileBase = "data/ml-1m/ml-1m";
     //static String dataFilePath = "data/ml-1m-new/ml-new.data";
     //static String dataFileBase = "data/ml-1m-new/ml-new";
-    static final String seperator = "\\t";
-    static int topN = 20;
-    static int kNN = 20;
-    static int y = 5; // significance value. Must not be 0!
-    static int numOfRun = 10;
-    static final int smoothRun = 3;
-    // l: number of bands
-    // k: number of hash functions
-    static int l = 5;
-    static int k = 6;
 
     public static void main(final String[] args) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
+        String seperator = "\\t";
         String selection;
+        int topN = 20;
+        int y = 5;
+        int kNN = 20;
+        int numOfRun = 10;
+        int smoothRun = 3;
+        int l = 5; // number of bands
+        int k = 6; // number of hash functions
+
+        TestDriver.runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
         do {
             System.out.println("");
             System.out.println("Options");
@@ -49,6 +51,8 @@ public class Main {
             System.out.println("Parameter CV Tests");
             System.out.println("50 - User-based - Prediction vs. k - test");
             System.out.println("51 - User-based - Prediction 2D (y & k) test");
+            System.out.println("");
+            System.out.println("05 - 2D Prediction Tests");
             System.out.println("");
             System.out.println("100 - User-based - Prediction - test");
             System.out.println("");
@@ -70,8 +74,8 @@ public class Main {
 
             selection = scanner.nextLine();
             LOG.info("Selected menu: " + selection);
-            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
 
+            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
         } while (!selection.equals("99"));
 
         scanner.close();

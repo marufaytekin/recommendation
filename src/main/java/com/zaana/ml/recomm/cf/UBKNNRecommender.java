@@ -29,7 +29,7 @@ public class UBKNNRecommender extends AbstractCFRecommender {
      * @return
      */
     @Override
-    public Set<String> recommendItems(
+    public List<String> recommendItems(
             HashObjObjMap<String, HashObjObjMap<String, Integer>> userRateMap,
             String userId, int topN)
     {
@@ -48,7 +48,7 @@ public class UBKNNRecommender extends AbstractCFRecommender {
             ratedItemList.addAll(neighborsRatingList);
         }
 
-        return Common.getMostFrequentTopNElementSet(ratedItemList, topN);
+        return Common.getMostFrequentTopNElementList(ratedItemList, topN);
 
     }
 

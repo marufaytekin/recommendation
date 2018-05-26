@@ -26,7 +26,7 @@ public class CFPrecisionRecallTests extends AbstractTest {
      */
     public static void runCFRecommendation(
             AbstractCFRecommender recommender, String dataFileBase, String separator,
-            double smoothRun, int topN, int y)
+            double cvFoldNum, int topN, int y)
     {
         LOG.info("Running runItemBasedTopNRecommendation...");
         double overAllTotalTime = 0;
@@ -35,8 +35,8 @@ public class CFPrecisionRecallTests extends AbstractTest {
         double overAllDiversity = 0;
         double overAllAggrDiversity = 0;
         double overAllNovelty = 0;
-        for (int j = 0; j < smoothRun; j++) {
-            preprocessDataForRecommendation(dataFileBase, (j + 1), separator);
+        for (int j = 0; j < cvFoldNum; j++) {
+            preprocessDataForRecommendation(dataFileBase, j, separator);
             int size = testDataMap.size();
             LOG.info("Model build started...");
             recommender.buildModel(userRateMap, itemRateMap, y, 30);
@@ -54,12 +54,12 @@ public class CFPrecisionRecallTests extends AbstractTest {
         LOG2.info("# test case: " + reccClassName + " Precision");
         LOG2.info("# ========================================================");
         LOG2.info("dataFileBase = " + dataFileBase);
-        LOG2.info(reccClassName + "Precision = " + overAllPrecision / smoothRun);
-        LOG2.info(reccClassName + "Recall = " + overAllRecall / smoothRun);
-        LOG2.info(reccClassName + "Diversity = " + overAllDiversity / smoothRun);
-        LOG2.info(reccClassName + "AggrDiversity = " + overAllAggrDiversity / smoothRun);
-        LOG2.info(reccClassName + "Novelty = " + overAllNovelty / smoothRun);
-        LOG2.info(reccClassName + "AvgRecommTime = " + overAllTotalTime / smoothRun + ";");
+        LOG2.info(reccClassName + "Precision = " + overAllPrecision / cvFoldNum);
+        LOG2.info(reccClassName + "Recall = " + overAllRecall / cvFoldNum);
+        LOG2.info(reccClassName + "Diversity = " + overAllDiversity / cvFoldNum);
+        LOG2.info(reccClassName + "AggrDiversity = " + overAllAggrDiversity / cvFoldNum);
+        LOG2.info(reccClassName + "Novelty = " + overAllNovelty / cvFoldNum);
+        LOG2.info(reccClassName + "AvgRecommTime = " + overAllTotalTime / cvFoldNum + ";");
 
     }
 
@@ -87,16 +87,17 @@ public class CFPrecisionRecallTests extends AbstractTest {
             }
             try {
                 startTime = System.currentTimeMillis();
-                Set<String> retrieved = recommender.recommendItems(userRateMap, userId, topN);
+                List<String> retrievedList = recommender.recommendItems(userRateMap, userId, topN);
+                Set<String> retrievedSet = new HashSet<>(retrievedList);
                 endTime = System.currentTimeMillis();
                 totalTime += (endTime - startTime);
-                if (retrieved.isEmpty()) continue;
+                if (retrievedList.isEmpty()) continue;
                 Set<String> relevant = entry.getValue().keySet();
-                totalPrecision += Precision.calculatePrecision(relevant, retrieved);
-                totalRecall += Recall.calculateRecall(relevant, retrieved);
-                totalDiversity += Diversity.intraListDissimilarity(retrieved, itemRateMap, 5);
-                totalNovelty += Novelty.novelty(retrieved, userSet, itemSetCount);
-                uniqueItemSet.addAll(new HashSet<>(retrieved));
+                totalPrecision += Precision.calculateMeanAveragePrecision(relevant, retrievedList);
+                totalRecall += Recall.calculateRecall(relevant, retrievedSet);
+                totalDiversity += Diversity.intraListDissimilarity(retrievedSet, itemRateMap, 5);
+                totalNovelty += Novelty.novelty(retrievedSet, userSet, itemSetCount);
+                uniqueItemSet.addAll(retrievedSet);
             } catch (NullPointerException e) {
                 //LOG.error(e.getLocalizedMessage());
             }

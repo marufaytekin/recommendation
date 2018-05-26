@@ -21,13 +21,13 @@ public class LSHPredictionTest extends AbstractTest {
      * Runs LSH prediction tests for HashTables to detect the effect of changes
      * in HashTable to the prediction accuracy.*/
     public static void runLSHHashTablesAndPrediction(
-            AbstractLSHRecommender lshRecommender, String type, String dataFileBase, String val, String separator,
+            AbstractLSHRecommender lshRecommender, String type, String dataFileBase, String separator,
             int numOfRun, int numberOfHashTables, int numOfHashFunctions,
-            double smoothRun, int kNN, int y) {
+            double cvFoldNum, int kNN, int y) {
 
         runLSHPredictionPerformanceTests(
-                lshRecommender, type, "HashTables", dataFileBase, val, numOfRun, numberOfHashTables, numOfHashFunctions,
-                separator, smoothRun, kNN, y);
+                lshRecommender, type, "HashTables", dataFileBase, numOfRun, numberOfHashTables, numOfHashFunctions,
+                separator, cvFoldNum, kNN, y);
     }
 
 
@@ -35,13 +35,13 @@ public class LSHPredictionTest extends AbstractTest {
      * Runs LSH prediction tests for HashFunctions to detect the effect of changes
      * in HashFunctions to the prediction accuracy.*/
     public static void runLSHHashFunctionsAndPrediction(
-            AbstractLSHRecommender lshRecommender, String type, String dataFileBase, String val, String separator,
+            AbstractLSHRecommender lshRecommender, String type, String dataFileBase, String separator,
             int numOfRun, int numberOfHashTables, int numOfHashFunctions,
-            double smoothRun, int kNN, int y) {
+            double cvFoldNum, int kNN, int y) {
 
         runLSHPredictionPerformanceTests(
-                lshRecommender, type, "HashFunctions", dataFileBase, val, numOfRun, numberOfHashTables, numOfHashFunctions,
-                separator, smoothRun, kNN, y);
+                lshRecommender, type, "HashFunctions", dataFileBase, numOfRun, numberOfHashTables, numOfHashFunctions,
+                separator, cvFoldNum, kNN, y);
     }
 
 
@@ -50,10 +50,10 @@ public class LSHPredictionTest extends AbstractTest {
      * of these parameters on prediction accuracy. Output will be 2D graph.*/
     public static void runLSH2DHashFunctionsTablesTest(
             AbstractLSHRecommender lshRecommender, String type, String dataFileBase,
-            String val, String separator, int numOfRun, double smoothRun, int kNN, int y) {
+            String separator, int numOfRun, double cvFoldNum, int kNN, int y) {
 
         int numOfBands = 1;
-        int numOfHashFunctions = 1;
+        int numOfHashFunctions = 3;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -69,14 +69,14 @@ public class LSHPredictionTest extends AbstractTest {
                 mae = 0;
                 candidate_set_size = 0.0;
                 predictionCoverage = 0;
-                runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
+                runPrediction(lshRecommender, type, dataFileBase, separator, cvFoldNum, numOfBands, numOfHashFunctions, kNN, y);
                 LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
-                LOG.info(type + "MAE: " + mae / smoothRun);
-                LOG.info(type + "Runtime: " + runTime / smoothRun);
-                hashFuncMaeList.add(mae / smoothRun);
-                hashFuncRuntimeList.add(runTime / smoothRun);
-                candidate_set_list.add(candidate_set_size / smoothRun);
-                prediction_coverage_list.add(predictionCoverage / smoothRun);
+                LOG.info(type + "MAE: " + mae / cvFoldNum);
+                LOG.info(type + "Runtime: " + runTime / cvFoldNum);
+                hashFuncMaeList.add(mae / cvFoldNum);
+                hashFuncRuntimeList.add(runTime / cvFoldNum);
+                candidate_set_list.add(candidate_set_size / cvFoldNum);
+                prediction_coverage_list.add(predictionCoverage / cvFoldNum);
                 numOfHashFunctions += 1;
             }
             runTimeList2D.add(hashFuncRuntimeList);
@@ -85,7 +85,7 @@ public class LSHPredictionTest extends AbstractTest {
             prediction_coverage_list2D.add(prediction_coverage_list);
 
             numOfBands += 1;
-            numOfHashFunctions = 1;
+            numOfHashFunctions = 3;
         }
         LOG2.info("# ========================================================");
         LOG2.info("# test case: " + type + " 2D ");
@@ -103,8 +103,8 @@ public class LSHPredictionTest extends AbstractTest {
      * Runs 2D UB LSH HashTables and HashFunctions tests to determine the effect
      * of these parameters on prediction accuracy. Output will be 2D graph.*/
     private static void runLSHPredictionPerformanceTests(
-            AbstractLSHRecommender lshRecommender, String type, String testType, String dataFileBase, String val,
-            int numOfRun, int l, int k, String separator, double smoothRun, int kNN, int y)
+            AbstractLSHRecommender lshRecommender, String type, String testType, String dataFileBase,
+            int numOfRun, int l, int k, String separator, double cvFoldNum, int kNN, int y)
     {
         int numOfBands;
         int numOfHashFunctions;
@@ -126,15 +126,15 @@ public class LSHPredictionTest extends AbstractTest {
             mae = 0;
             candidate_set_size = 0.0;
             predictionCoverage = 0;
-            runPrediction(lshRecommender, type, dataFileBase, separator, smoothRun, val, numOfBands, numOfHashFunctions, kNN, y);
-            maeList.add(mae/smoothRun);
-            runtimeList.add(runTime/smoothRun);
-            candidate_set_list.add(candidate_set_size/smoothRun);
-            predictionCoverageList.add(predictionCoverage/smoothRun);
+            runPrediction(lshRecommender, type, dataFileBase, separator, cvFoldNum, numOfBands, numOfHashFunctions, kNN, y);
+            maeList.add(mae/cvFoldNum);
+            runtimeList.add(runTime/cvFoldNum);
+            candidate_set_list.add(candidate_set_size/cvFoldNum);
+            predictionCoverageList.add(predictionCoverage/cvFoldNum);
             LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
-            LOG.info("Mae: " + mae/smoothRun);
-            LOG.info("Runtime: " + runTime/smoothRun);
-            LOG.info("Predicted Items :" + (predictionCoverage/smoothRun));
+            LOG.info("Mae: " + mae/cvFoldNum);
+            LOG.info("Runtime: " + runTime/cvFoldNum);
+            LOG.info("Predicted Items :" + (predictionCoverage/cvFoldNum));
             if (testType == "HashFunctions") {
                 numOfHashFunctions++;
             } else {
@@ -159,13 +159,13 @@ public class LSHPredictionTest extends AbstractTest {
     private static void runPrediction(
             AbstractLSHRecommender lshRecommender,
             String type, String dataFileBase, String separator,
-            double smoothRun, String val, int numOfBands, int numOfHashFunctions,
+            double cvFoldNum, int numOfBands, int numOfHashFunctions,
             int kNN, int y) {
         HashObjObjMap<Object, Object> hashTables;
-        for (int s = 0; s < smoothRun; s++) {
-            preprocessDataForValidation(dataFileBase, (s+1), val, separator);
+        for (int i = 0; i < cvFoldNum; i++) {
+            preprocessDataForValidation(dataFileBase, i, separator);
             lshRecommender.buildModel(userRateMap, itemRateMap, numOfBands, numOfHashFunctions);
-            //int testDataSize = testDataMap.size();
+            //int testDataSize = testDataMap.size(  );
             if (type == "UBKNNLSH") {
                 hashTables = lshRecommender.getHashTables();
                 hashKeyLookupTable = lshRecommender.getHashKeyLookupTable();

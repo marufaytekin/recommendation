@@ -145,6 +145,40 @@ public final class Common
         return s.keySet();
     }
 
+    /**
+     * Returns most frequent n elements.
+     *
+     * @param candidateList
+     * @param n
+     * @return
+     */
+    public static List<String> getMostFrequentTopNElementList(List<String> candidateList, int n) {
+        HashObjObjMap<String, Integer> s = getFrequentTopNElementsMap(candidateList, n);
+
+        Comparator<Entry<String, Integer>> comparator = new Comparator<Entry <String, Integer>>() {
+            public int compare(Entry <String, Integer> o1, Entry<String, Integer> o2) {
+                return Integer.compare(o2.getValue(), o1.getValue());
+            }
+        };
+
+        HashObjObjMap <String,Integer> frequencyMap = getFrequencyMap(candidateList);
+
+        MinMaxPriorityQueue<Map.Entry<String, Integer>> q = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(n)
+                .create();
+        for (Map.Entry<String, Integer> elementId : frequencyMap.entrySet()) q.offer(elementId);
+
+        List<String> frequencyList = new ArrayList<>();
+        for (;0 < q.size() && frequencyList.size() < n;)
+            try {
+                HashObjObjMap.Entry<String, Integer> entry = q.remove();
+                frequencyList.add(entry.getKey());
+            } catch (NoSuchElementException ignored) {}
+        return frequencyList;
+
+    }
+
 
     public static HashObjSet<String> sortByValueAndGetTopNItems(HashObjObjMap<String, Integer> ratingsSet, int n) {
 
@@ -199,6 +233,32 @@ public final class Common
         }
         return topNSet;
     }
+
+
+    public static List<String> sortByValueAndGetTopNList(HashMap<String, Double> simList, int topN) {
+        Comparator<Entry <String, Double>> comparator = new Comparator<Entry <String, Double>>() {
+            public int compare(Map.Entry <String, Double> o1, Map.Entry<String, Double> o2) {
+                return Double.compare(o2.getValue(), o1.getValue());
+            }
+        };
+        MinMaxPriorityQueue<Entry<String, Double>> topNReccQueue = MinMaxPriorityQueue
+                .orderedBy(comparator)
+                .maximumSize(topN)
+                .create();
+        for (Map.Entry<String, Double> entry : simList.entrySet()) {
+            topNReccQueue.offer(entry);
+        }
+        List<String> topNList = new ArrayList<>();
+        while (!topNReccQueue.isEmpty()) {
+            try {
+                topNList.add(topNReccQueue.poll().getKey());
+            } catch (NoSuchElementException e) {
+                //none
+            }
+        }
+        return topNList;
+    }
+
 
 
 }

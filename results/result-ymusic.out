@@ -317,4 +317,4 @@ UBLSHmodelBuildTimeList = [34, 60, 89, 131, 161, 181, 266, 269, 295, 313];
 fileName = "ymusic";
 IBLSHnumOfUsersList = [1540, 3080, 4620, 6160, 7700, 9240, 10780, 12320, 13860, 15400];
 IBLSHnumOfItemsList = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-IBLSHmodelBuildTimeList = [85, 171, 222, 360, 453, 510, 596, 632, 860, 944]
+IBLSHmodelBuildTimeList = [85, 171, 222, 360, 453, 510, 596, 632, 860, 944];
