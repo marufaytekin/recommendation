@@ -41,9 +41,8 @@ y5 = ymusic_ub_cover(5,:);
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
 h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
 set (h, 'fontsize', 10);
-xlabel('Number of Hash Functions');
+xlabel("K");
 ylabel('Prediction Ratio');
-title('UB-KNN-LSH')
 xlim([4, 13])
 ylim([0 1])
 write(f, 'ub-lsh-hash-functions-prediction-coverage');
@@ -60,9 +59,8 @@ y5 = ymusic_ub_cover(:,6);
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
 h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
 set (h, 'fontsize', 10);
-xlabel('Number of Hash Tables');
+xlabel("L");
 ylabel('Prediction Ratio');
-title('UB-KNN-LSH')
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ub-lsh-hash-tables-prediction-coverage');
@@ -80,9 +78,8 @@ y5 = ymusic_ib_cover(5,:);
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
 h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
 set (h, 'fontsize', 10);
-xlabel('Number of Hash Functions');
+xlabel("K");
 ylabel('Prediction Ratio');
-title('IB-KNN-LSH')
 xlim([4, 13])
 ylim([0 1])
 write(f, 'ib-lsh-hash-functions-prediction-coverage');
@@ -100,9 +97,8 @@ y5 = ymusic_ib_cover(:,6);
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k', x, y4,'->k', x, y5,'-ok');
 h = legend('Android Apps', 'ML-1M', 'ML-1M-LATEST', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
 set (h, 'fontsize', 10);
-xlabel('Number of Hash Tables');
+xlabel("L");
 ylabel('Prediction Ratio');
-title('IB-KNN-LSH')
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ib-lsh-hash-tables-prediction-coverage');
