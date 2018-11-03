@@ -53,7 +53,7 @@ public class LSHPredictionTest extends AbstractTest {
             String separator, int numOfRun, double cvFoldNum, int kNN, int y) {
 
         int numOfBands = 1;
-        int numOfHashFunctions = 3;
+        int numOfHashFunctions = 4;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -85,7 +85,7 @@ public class LSHPredictionTest extends AbstractTest {
             prediction_coverage_list2D.add(prediction_coverage_list);
 
             numOfBands += 1;
-            numOfHashFunctions = 3;
+            numOfHashFunctions = 4;
         }
         LOG2.info("# ========================================================");
         LOG2.info("# test case: " + type + " 2D ");
@@ -112,7 +112,7 @@ public class LSHPredictionTest extends AbstractTest {
             numOfBands = l;
             numOfHashFunctions = 4;
         } else if (testType == "HashTables"){
-            numOfBands = 4;
+            numOfBands = 1;
             numOfHashFunctions = k;
         } else {
             throw new UnsupportedOperationException("Invalid type.");
