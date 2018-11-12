@@ -62,16 +62,17 @@ public class Main {
     }
 
     private static void printHelpAndExit(){
-        System.out.println("Usage: 'java lsh <dataFileBase> <test_type:100|101'");
+        System.out.println("Usage: java -jar lsh-jar-with-dependencies.jar <dataFileBase> <test_type:100|101>");
+        System.out.println("===========================================");
         System.out.println("dataFileBase is one of following: \n" +
-                        "yahoo-music\n" +
-                        "amazon-movies-tv\n" +
-                        "ml-1m\n" +
-                "android-apps\n" +
-                "ml-1m-new"
+                        "   * yahoo-music\n" +
+                        "   * amazon-movies-tv\n" +
+                        "   * ml-1m\n" +
+                "   * android-apps\n" +
+                "   * ml-1m-new"
         );
-        System.out.println("est_type 100 for all prediction tests");
-        System.out.println("est_type 101 for all top-n recommendation tests");
+        System.out.println("test_type 100 for all prediction tests");
+        System.out.println("test_type 101 for all top-n recommendation tests");
         System.exit(0);
 
     }
