@@ -23,86 +23,12 @@ public class TestDriver {
         IBLSH2Recommender ibLsh2Recommender = new IBLSH2Recommender();
         UBLSH1Recommender ubLsh1Recommender = new UBLSH1Recommender();
         UBLSH2Recommender ubLsh2Recommender = new UBLSH2Recommender();
-        List<String> dataList = Arrays.asList("android-apps", "yahoo-music", "amazon-movies-tv", "ml-1m", "ml-1m-new");
 
         switch (selection) {
 
             case "00":
                 //BucketDistTest.runBucketDistTest("test", dataFileBase, seperator, cvFoldK, k, 1, 50);
-                BucketDistTest.runModelBuildTest(dataFileBase,seperator);
-
-                break;
-
-            case "001":
-                dataFilePath = "data/android/andapps.data";
-                dataFileBase = "data/android/andapps";
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/movies_tv/movies_tv.data";
-                dataFileBase = "data/movies_tv/movies_tv";
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/1m/ml-1m.data";
-                dataFileBase = "data/1m/ml-1m";
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/ymusic/ymusic.data";
-                dataFileBase = "data/ymusic/ymusic";
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/1m-new/ml-new.data";
-                dataFileBase = "data/1m-new/ml-new";
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                break;
-
-            case "002":
-                dataFilePath = "data/android/andapps.data";
-                dataFileBase = "data/android/andapps";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/movies_tv/movies_tv.data";
-                dataFileBase = "data/movies_tv/movies_tv";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/1m/ml-1m.data";
-                dataFileBase = "data/1m/ml-1m";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/ymusic/ymusic.data";
-                dataFileBase = "data/ymusic/ymusic";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                dataFilePath = "data/1m-new/ml-new.data";
-                dataFileBase = "data/1m-new/ml-new";
-                runSelection("05", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                break;
-
-            case "01": // prediction tests
-                runSelection("60", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("61", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("62", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-
-                runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("73", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("74", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-
-                runSelection("54", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("55", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-
-                //precision tests
-                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("110", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                BucketDistTest.runModelBuildTest(dataFileBase, seperator);
                 break;
 
             case "02":
@@ -112,66 +38,6 @@ public class TestDriver {
                 DataParser.calculateDataSetHistogram(userRateMap);
                 LOG2.info("Item based histogram: " + dataFilePath);
                 DataParser.calculateDataSetHistogram(DataParser.getItemRateMap());
-                break;
-
-            case "03":
-                //evaluation tests
-                runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("101", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("102", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("103", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("104", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("105", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("106", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("107", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("110", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("111", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                break;
-
-            case "04":
-                // prediction tests
-                runSelection("60", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("61", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("62", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("73", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("74", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                break;
-
-            case "05":
-                for (int i=0; i<5; i++) {
-                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    LOG.info("Processing =========================" + dataFileBase + "=========================================");
-                    runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                    runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                    runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                    runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                    runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                    runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                };
-                break;
-
-            case "06":
-                dataFilePath = "data/ml-1m-new/ml-new.data";
-                dataFileBase = "data/ml-1m-new/ml-new";
-                LOG.info("Processing =========================" + dataFileBase + "=========================================");
-                runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
-                break;
-
-            case "5000":
-                runLSHPredictionTests(dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
                 break;
 
             case "1":
@@ -197,46 +63,60 @@ public class TestDriver {
                 break;
 
             case "50":
-                for (int i=0; i<5; i++) {
-                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
-                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "UB", 10, 5, seperator);
-                    CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 5, seperator);
-                }
+                LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "UB", 10, 5, seperator);
+                CFPredictionValidationTest.runCFPredictionKAndY2DTest(dataFileBase, "IB", 10, 5, seperator);
                 break;
 
             case "51":
-                for (int i=0; i<5; i++) {
-                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
-                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 5, seperator, 20);
-                    CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 5, seperator, 20);
-                }
+                LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 5, seperator, 20);
+                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 5, seperator, 20);
                 break;
-//            case "500":
-//                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", cvFoldK, seperator, kNN);
-//                break;
-//            case "51":
-//                CFPredictionValidationTest.runCFPredictionKAndY2DTest("UB", dataFileBase, numOfRun, cvFoldK, seperator);
-//                break;
-//            case "52":
-//                CFPredictionValidationTest.runCFPredictionAndKTest(dataFilePath, dataFileBase, "IB", cvFoldK, seperator, y);
-//                break;
-//            case "520":
-//                CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", cvFoldK, seperator, kNN);
-//                break;
-//            case "53":
-//                CFPredictionValidationTest.runCFPredictionKAndY2DTest("IB", dataFileBase, numOfRun, cvFoldK, seperator);
-//                break;
 
-//            case "54":
-//                LSHParameterTest.runLSHHashFunctionsAndKTest("UBLSH", dataFileBase, "val", numOfRun, cvFoldK, seperator, kNN, y);
-//                break;
-//            case "55":
-//                LSHParameterTest.runLSHHashFunctionsAndYTest("UBLSH", dataFileBase, "val", numOfRun, cvFoldK, seperator, kNN, y);
-//                break;
+            ////////////////////////////////////////////////////////////////////
+            // All Prediction Tests
+            ////////////////////////////////////////////////////////////////////
+            case "100":
+                LOG.info("Processing =========================" + dataFileBase + "=========================================");
+                LOG.info("Starting prediction tests...");
+                runSelection("60", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("61", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("62", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("63", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+
+                runSelection("70", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("71", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("72", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("73", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("74", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("75", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("76", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("77", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                break;
+
+            ////////////////////////////////////////////////////////////////////
+            // All top-N recommendation tests
+            ////////////////////////////////////////////////////////////////////
+            case "101":
+                LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                LOG.info("Starting top-n recommendation tests...");
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
+                LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
+                break;
+
+            case "102":
+                UBKNNRecommender ubRecommender = new UBKNNRecommender();
+                CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                IBKNNRecommender ibRecommender = new IBKNNRecommender();
+                CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
+                break;
 
             ////////////////////////////////////////////////////////////////////
             //
@@ -247,13 +127,7 @@ public class TestDriver {
             case "55":
                 CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "IBKNN", cvFoldK, seperator, kNN, y);
                 break;
-            case "56":
-                CFPredictionTest.runCFPredictionTests(dataFilePath, dataFileBase, "R", cvFoldK, seperator, kNN, y);
-                break;
 
-            ////////////////////////////////////////////////////////////////////
-            //
-            ////////////////////////////////////////////////////////////////////
             case "60":
                 LSHPredictionTest.runLSHHashTablesAndPrediction(ubLsh1Recommender, "UBKNNLSH", dataFileBase, seperator,
                         numOfRun, l, k, cvFoldK, kNN, y);
@@ -271,9 +145,6 @@ public class TestDriver {
                         numOfRun, l, k, cvFoldK, kNN, y);
                 break;
 
-            ////////////////////////////////////////////////////////////////////
-            //
-            ////////////////////////////////////////////////////////////////////
             case "70":
                 LSHPredictionTest.runLSHHashTablesAndPrediction(ibLsh1Recommender, "IBLSH1", dataFileBase, seperator,
                         numOfRun, l, k, cvFoldK, kNN, y);
@@ -334,32 +205,6 @@ public class TestDriver {
                 LSHPredictionTest.runLSH2DHashFunctionsTablesTest(
                         ubLsh2Recommender, "UBLSH2", dataFileBase, seperator, numOfRun, cvFoldK, kNN, y);
                 break;
-
-            ////////////////////////////////////////////////////////////////////
-            // All top-N recommendation tests
-            ////////////////////////////////////////////////////////////////////
-            case "100":
-                for (int i=0; i<5; i++) {
-                    dataFilePath = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    dataFileBase = "data/" + dataList.get(i) + "/" + dataList.get(i);
-                    LOG.info("Processing ======================== " + dataFileBase + " ========================");
-                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ibLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh1Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                    LSHTopNRecommTests.runHashFunctionsLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, l, topN);
-                    LSHTopNRecommTests.runHashTablesLSHEvaluation(ubLsh2Recommender, dataFileBase, seperator, numOfRun, cvFoldK, k, topN);
-                    UBKNNRecommender ubRecommender = new UBKNNRecommender();
-                    CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
-                    IBKNNRecommender ibRecommender = new IBKNNRecommender();
-                    CFPrecisionRecallTests.runCFRecommendation(ibRecommender, dataFileBase, seperator, cvFoldK, topN, y);
-                }
-                break;
-            ////////////////////////////////////////////////////////////////////
-            //
-            ////////////////////////////////////////////////////////////////////
 
             case "99":
                 LOG.info("bye...\n");

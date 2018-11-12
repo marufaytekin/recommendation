@@ -3,7 +3,8 @@ package com.zaana.ml;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -17,68 +18,61 @@ public class Main {
 
     static String dataFilePath;
     static String dataFileBase;
-    //static String dataFilePath = "data/yahoo-music/ymusic.data";
-    //static String dataFileBase = "data/yahoo-music/ymusic";
-    //static String dataFilePath = "data/android-apps/android-apps";
-    //static String dataFileBase = "data/android-apps/android-apps";
-    //static String dataFilePath = "data/amazon-movies-tv/movies_tv.data";
-    //static String dataFileBase = "data/amazon-movies-tv/movies_tv";
-    //static String dataFilePath = "data/ml-1m/ml-1m";
-    //static String dataFileBase = "data/ml-1m/ml-1m";
-    //static String dataFilePath = "data/ml-1m-new/ml-new.data";
-    //static String dataFileBase = "data/ml-1m-new/ml-new";
 
     public static void main(final String[] args) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
         String seperator = "\\t";
-        String selection;
+
         int topN = 20;
         int y = 5;
         int kNN = 20;
         int numOfRun = 10;
-        int smoothRun = 3;
+        int smoothRun = 10;
         int l = 5; // number of bands
         int k = 6; // number of hash functions
+        List<String> dataList = Arrays.asList("yahoo-music", "amazon-movies-tv", "ml-1m");
+        List<String> testType = Arrays.asList("100", "101");
+        String test = null;
 
-        TestDriver.runSelection("100", dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-        do {
-            System.out.println("");
-            System.out.println("Options");
-            System.out.println("===================================");
-            System.out.println("0 - preprocess train/test data sets");
-            System.out.println("");
-            System.out.println("Parameter CV Tests");
-            System.out.println("50 - User-based - Prediction vs. k - test");
-            System.out.println("51 - User-based - Prediction 2D (y & k) test");
-            System.out.println("");
-            System.out.println("05 - 2D Prediction Tests");
-            System.out.println("");
-            System.out.println("100 - User-based - Prediction - test");
-            System.out.println("");
-            System.out.println("63 - LSH - Prediction - HashTables change ( inc. by 1 )");
-            System.out.println("64 - LSH - Prediction - HashFunctions change ( inc. by 1 )");
-            System.out.println("65 - LSH - Prediction - 2D test");
-            System.out.println("106 - LSH - top-N Precision - 2D test");
-            System.out.println("107 - LSH - top-N Evaluation - HashFunctions test");
-            System.out.println("108 - LSH - top-N Evaluation - HashTables test");
-            System.out.println("");
-            System.out.println("Experimental Tests");
-            System.out.println("10 - Model Build Time - All");
-            System.out.println("11 - Create cluster");
-            System.out.println("12 - Run Cluster Tests");
-            System.out.println("");
-            System.out.println("99 - Exit");
-            System.out.println("===================================");
-            System.out.println("Enter a command number to execute:");
+        //TestDriver.runSelection(null, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+        //System.out.println(args.length);
+        //System.out.println(args[0]);
+        //System.out.println(args[1]);
 
-            selection = scanner.nextLine();
-            LOG.info("Selected menu: " + selection);
+        if (args.length == 2) {
+            if (!dataList.contains(args[0])) {
+                System.out.println("first case");
+                printHelpAndExit();
+            }
+            if (!testType.contains(args[1])){
+                System.out.println("second case");
+                printHelpAndExit();
+            }
+            dataFilePath = "data/" + args[0] + "/" + args[0];
+            dataFileBase = "data/" + args[0] + "/" + args[0];
+            test = args[1];
 
-            TestDriver.runSelection(selection, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-        } while (!selection.equals("99"));
+        } else {
+            printHelpAndExit();
+        }
 
-        scanner.close();
+        TestDriver.runSelection(test, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+
+    }
+
+    private static void printHelpAndExit(){
+        System.out.println("Usage: 'java lsh <dataFileBase> <test_type:100|101'");
+        System.out.println("dataFileBase is one of following: \n" +
+                        "yahoo-music\n" +
+                        "amazon-movies-tv\n" +
+                        "ml-1m\n" +
+                "android-apps\n" +
+                "ml-1m-new"
+        );
+        System.out.println("est_type 100 for all prediction tests");
+        System.out.println("est_type 101 for all top-n recommendation tests");
+        System.exit(0);
 
     }
 
