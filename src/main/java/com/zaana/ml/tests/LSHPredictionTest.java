@@ -53,7 +53,10 @@ public class LSHPredictionTest extends AbstractTest {
             String separator, int numOfRun, double cvFoldNum, int kNN, int y) {
 
         int numOfBands = 1;
-        int numOfHashFunctions = 4;
+        int numOfHashFunctions = 1;
+        double avgMae;
+        double avgCoverage;
+        double avgRuntime;
         ArrayList<Object> runTimeList2D = new ArrayList<>();
         ArrayList<Object> maeList2D = new ArrayList<>();
         ArrayList<Object> candidate_set_list2D = new ArrayList<>();
@@ -70,13 +73,16 @@ public class LSHPredictionTest extends AbstractTest {
                 candidate_set_size = 0.0;
                 predictionCoverage = 0;
                 runPrediction(lshRecommender, type, dataFileBase, separator, cvFoldNum, numOfBands, numOfHashFunctions, kNN, y);
-                LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
-                LOG.info(type + "MAE: " + mae / cvFoldNum);
-                LOG.info(type + "Runtime: " + runTime / cvFoldNum);
-                hashFuncMaeList.add(mae / cvFoldNum);
-                hashFuncRuntimeList.add(runTime / cvFoldNum);
+                avgCoverage = predictionCoverage/cvFoldNum;
+                avgMae = mae/cvFoldNum/avgCoverage;
+                avgRuntime = runTime/cvFoldNum;
+                LOG.debug("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
+                LOG.debug(type + "MAE: " + avgMae);
+                LOG.debug(type + "Runtime: " + avgRuntime);
+                hashFuncMaeList.add(avgMae);
+                hashFuncRuntimeList.add(avgRuntime);
                 candidate_set_list.add(candidate_set_size / cvFoldNum);
-                prediction_coverage_list.add(predictionCoverage / cvFoldNum);
+                prediction_coverage_list.add(avgCoverage);
                 numOfHashFunctions += 1;
             }
             runTimeList2D.add(hashFuncRuntimeList);
@@ -85,7 +91,7 @@ public class LSHPredictionTest extends AbstractTest {
             prediction_coverage_list2D.add(prediction_coverage_list);
 
             numOfBands += 1;
-            numOfHashFunctions = 4;
+            numOfHashFunctions = 1;
         }
         LOG2.info("# ========================================================");
         LOG2.info("# test case: " + type + " 2D ");
@@ -108,9 +114,12 @@ public class LSHPredictionTest extends AbstractTest {
     {
         int numOfBands;
         int numOfHashFunctions;
+        double avgMae;
+        double avgCoverage;
+        double avgRuntime;
         if (testType == "HashFunctions") {
             numOfBands = l;
-            numOfHashFunctions = 4;
+            numOfHashFunctions = 1;
         } else if (testType == "HashTables"){
             numOfBands = 1;
             numOfHashFunctions = k;
@@ -127,14 +136,17 @@ public class LSHPredictionTest extends AbstractTest {
             candidate_set_size = 0.0;
             predictionCoverage = 0;
             runPrediction(lshRecommender, type, dataFileBase, separator, cvFoldNum, numOfBands, numOfHashFunctions, kNN, y);
-            maeList.add(mae/cvFoldNum);
-            runtimeList.add(runTime/cvFoldNum);
+            avgCoverage = predictionCoverage/cvFoldNum;
+            avgMae = mae/cvFoldNum/avgCoverage;
+            avgRuntime = runTime/cvFoldNum;
+            maeList.add(avgMae);
+            runtimeList.add(avgRuntime);
+            predictionCoverageList.add(avgCoverage);
             candidate_set_list.add(candidate_set_size/cvFoldNum);
-            predictionCoverageList.add(predictionCoverage/cvFoldNum);
-            LOG.info("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
-            LOG.info("Mae: " + mae/cvFoldNum);
-            LOG.info("Runtime: " + runTime/cvFoldNum);
-            LOG.info("Predicted Items :" + (predictionCoverage/cvFoldNum));
+            LOG.debug("numOfBands:" + numOfBands + " numOfHashFunctions:" + numOfHashFunctions);
+            LOG.debug("Mae: " + avgMae);
+            LOG.debug("Runtime: " + avgRuntime);
+            LOG.debug("Predicted Items :" + avgCoverage);
             if (testType == "HashFunctions") {
                 numOfHashFunctions++;
             } else {
