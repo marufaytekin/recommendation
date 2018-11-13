@@ -40,22 +40,12 @@ public class Main {
         //System.out.println(args[0]);
         //System.out.println(args[1]);
 
-        if (args.length == 2) {
-            if (!dataList.contains(args[0])) {
-                System.out.println("first case");
-                printHelpAndExit();
-            }
-            if (!testType.contains(args[1])){
-                System.out.println("second case");
-                printHelpAndExit();
-            }
-            dataFilePath = args[0];
-            dataFileBase = args[0];
-            test = args[1];
-
-        } else {
+        if (args.length != 2) {
             printHelpAndExit();
         }
+        dataFilePath = args[0];
+        dataFileBase = args[0];
+        test = args[1];
 
         TestDriver.runSelection(test, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
 
