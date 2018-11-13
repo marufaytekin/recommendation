@@ -31,21 +31,13 @@ public class Main {
         int smoothRun = 10;
         int l = 5; // number of bands
         int k = 6; // number of hash functions
-        List<String> dataList = Arrays.asList("yahoo-music", "amazon-movies-tv", "ml-1m");
-        List<String> testType = Arrays.asList("100", "101");
-        String test = null;
-
-        //TestDriver.runSelection(null, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
-        //System.out.println(args.length);
-        //System.out.println(args[0]);
-        //System.out.println(args[1]);
 
         if (args.length != 2) {
             printHelpAndExit();
         }
         dataFilePath = args[0];
         dataFileBase = args[0];
-        test = args[1];
+        String test = args[1];
 
         TestDriver.runSelection(test, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
 
