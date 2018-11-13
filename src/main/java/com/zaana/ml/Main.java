@@ -49,8 +49,8 @@ public class Main {
                 System.out.println("second case");
                 printHelpAndExit();
             }
-            dataFilePath = "data/" + args[0] + "/" + args[0];
-            dataFileBase = "data/" + args[0] + "/" + args[0];
+            dataFilePath = args[0];
+            dataFileBase = args[0];
             test = args[1];
 
         } else {
