@@ -112,6 +112,17 @@ public class TestDriver {
                 break;
 
             case "102":
+                LOG.info("Processing =========================" + dataFileBase + "=========================================");
+                LOG.info("Starting 2D prediction tests...");
+                runSelection("80", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("81", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("82", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("83", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("84", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                runSelection("85", dataFilePath, dataFileBase, scanner, seperator, numOfRun, cvFoldK, kNN, k, l, y, topN);
+                break;
+
+            case "103":
                 UBKNNRecommender ubRecommender = new UBKNNRecommender();
                 CFPrecisionRecallTests.runCFRecommendation(ubRecommender, dataFileBase, seperator, cvFoldK, topN, y);
                 IBKNNRecommender ibRecommender = new IBKNNRecommender();
