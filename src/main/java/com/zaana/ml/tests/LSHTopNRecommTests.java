@@ -41,7 +41,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         ArrayList<Double> topNRatioList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfHashFunctions = 4;
+        int numOfHashFunctions = 1;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < cvFoldNum; s++) {
@@ -122,7 +122,7 @@ public class LSHTopNRecommTests extends AbstractTest{
         ArrayList<Double> topNRatioList = new ArrayList<>();
         ArrayList<Double> avgCandidateItemListSize = new ArrayList<>();
         //ArrayList<Double> avgUniqueItemListSize = new ArrayList<>();
-        int numOfBands = 4;
+        int numOfBands = 1;
         for (int i = 0; i < numOfRun; i++) {
             initMetrics();
             for (int s = 0; s < cvFoldNum; s++) {
