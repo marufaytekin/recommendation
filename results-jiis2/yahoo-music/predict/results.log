@@ -1,7 +1,21 @@
+ ========================================================
+# test case: UBKNN Prediction
+# ========================================================
+fileName = "yahoo-music"
+UBKNNMaeList = 1.248997513509842
+UBKNNRuntime = 17.582702259161564
+# ========================================================
+# test case: IBKNN Prediction
+# ========================================================
+fileName = "yahoo-music"
+IBKNNMaeList = 1.0233401319649393
+IBKNNRuntime = 2.412779905514359
+
+
 # ========================================================
 # test case: UBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -12,7 +26,7 @@ UBKNNLSHHashTablesPredictionCoverageList  = [0.9545437972837482, 0.9952055418831
 # ========================================================
 # test case: UBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -23,7 +37,7 @@ UBKNNLSHHashFunctionsPredictionCoverageList  = [1.0, 1.0, 1.0, 1.0, 1.0, 0.99997
 # ========================================================
 # test case: IBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -34,7 +48,7 @@ IBKNNLSHHashTablesPredictionCoverageList  = [0.4092243186582809, 0.5980767477896
 # ========================================================
 # test case: IBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -45,7 +59,7 @@ IBKNNLSHHashFunctionsPredictionCoverageList  = [1.0, 1.0, 0.9997174368790448, 0.
 # ========================================================
 # test case: IBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -56,7 +70,7 @@ IBLSH1HashTablesPredictionCoverageList  = [0.41123872026251024, 0.62227691185853
 # ========================================================
 # test case: IBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -67,7 +81,7 @@ IBLSH1HashFunctionsPredictionCoverageList  = [1.0, 1.0, 0.9997538966365873, 0.99
 # ========================================================
 # test case: IBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -78,7 +92,7 @@ IBLSH2HashTablesPredictionCoverageList  = [0.2954334153677878, 0.506653905751526
 # ========================================================
 # test case: IBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -89,7 +103,7 @@ IBLSH2HashFunctionsPredictionCoverageList  = [1.0, 0.9999270804849147, 0.9975389
 # ========================================================
 # test case: UBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -100,7 +114,7 @@ UBLSH1HashTablesPredictionCoverageList  = [0.9554461762829277, 0.994786254671406
 # ========================================================
 # test case: UBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -111,7 +125,7 @@ UBLSH1HashFunctionsPredictionCoverageList  = [1.0, 1.0, 1.0, 1.0, 1.0, 0.9999817
 # ========================================================
 # test case: UBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -122,7 +136,7 @@ UBLSH2HashTablesPredictionCoverageList  = [0.9159146841673502, 0.984431683529304
 # ========================================================
 # test case: UBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/yahoo-music/yahoo-music
+fileName = "yahoo-music"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6

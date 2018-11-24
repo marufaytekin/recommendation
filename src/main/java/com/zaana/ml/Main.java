@@ -22,13 +22,13 @@ public class Main {
     public static void main(final String[] args) throws IOException
     {
         Scanner scanner = new Scanner(System.in);
-        String seperator = "\\t";
+        String separator = "\\t";
 
         int topN = 20;
         int y = 5;
         int kNN = 20;
         int numOfRun = 10;
-        int smoothRun = 10;
+        int smoothRun = 5;
         int l = 5; // number of bands
         int k = 6; // number of hash functions
 
@@ -39,7 +39,7 @@ public class Main {
         dataFileBase = args[0];
         String test = args[1];
 
-        TestDriver.runSelection(test, dataFilePath, dataFileBase, scanner, seperator, numOfRun, smoothRun, kNN, k, l, y, topN);
+        TestDriver.runSelection(test, dataFilePath, dataFileBase, scanner, separator, numOfRun, smoothRun, kNN, k, l, y, topN);
 
     }
 
