@@ -95,7 +95,7 @@ plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x,
 h = legend('UBP-CF', 'IBP-CF', 'UBP-LSH', 'IBP-LSH', 'UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northwest');
 set (h, 'fontsize', 8);
 xlim([1, 10]);
-ylim([1 4]);
+#ylim([1 4]);
 xlabel("K");
 ylabel('MAE');
 legend boxon;
