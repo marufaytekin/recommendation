@@ -1,7 +1,20 @@
 # ========================================================
+# test case: UBKNN Prediction
+# ========================================================
+fileName = "ml-1m"
+UBKNNMaeList = 0.7705713374749159
+UBKNNRuntime = 10.948279235659259
+# ========================================================
+# test case: IBKNN Prediction
+# ========================================================
+fileName = "ml-1m"
+IBKNNMaeList = 0.7727368855103013
+IBKNNRuntime = 25.664617792594587
+
+# ========================================================
 # test case: UBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -12,7 +25,7 @@ UBKNNLSHHashTablesPredictionCoverageList  = [0.9569506760532956, 0.9897909546758
 # ========================================================
 # test case: UBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -23,7 +36,7 @@ UBKNNLSHHashFunctionsPredictionCoverageList  = [0.9999966670332929, 0.9999800019
 # ========================================================
 # test case: IBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -34,7 +47,7 @@ IBKNNLSHHashTablesPredictionCoverageList  = [0.9137380588006104, 0.9761189040197
 # ========================================================
 # test case: IBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -45,7 +58,7 @@ IBKNNLSHHashFunctionsPredictionCoverageList  = [1.0, 1.0, 0.9999966669666396, 0.
 # ========================================================
 # test case: IBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -56,7 +69,7 @@ IBLSH1HashTablesPredictionCoverageList  = [0.9059388122375526, 0.976554689062187
 # ========================================================
 # test case: IBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -67,7 +80,7 @@ IBLSH1HashFunctionsPredictionCoverageList  = [0.9998933546624009, 0.999893354662
 # ========================================================
 # test case: IBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -78,7 +91,7 @@ IBLSH2HashTablesPredictionCoverageList  = [0.8574085182963408, 0.957855095647537
 # ========================================================
 # test case: IBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -89,7 +102,7 @@ IBLSH2HashFunctionsPredictionCoverageList  = [0.9998933546624009, 0.999893354662
 # ========================================================
 # test case: UBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -100,7 +113,7 @@ UBLSH1HashTablesPredictionCoverageList  = [0.9593971312715374, 0.989804290841856
 # ========================================================
 # test case: UBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -111,7 +124,7 @@ UBLSH1HashFunctionsPredictionCoverageList  = [1.0, 0.9999566708995804, 0.9998933
 # ========================================================
 # test case: UBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -122,7 +135,7 @@ UBLSH2HashTablesPredictionCoverageList  = [0.9290165920434293, 0.981418413299482
 # ========================================================
 # test case: UBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = ../../../data/ml-1m/ml-1m
+fileName = "ml-1m"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6

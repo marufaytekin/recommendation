@@ -1,4 +1,25 @@
 # ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+fileName = "ml-1m"
+UBKNNRecommenderPrecision = 0.006891569264076623
+UBKNNRecommenderRecall = 0.033886129906941176
+UBKNNRecommenderDiversity = 0.070239469394936
+UBKNNRecommenderAggrDiversity = 2548.0
+UBKNNRecommenderNovelty = 2.7022997177143377
+UBKNNRecommenderAvgRecommTime = 0.839502275346106;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+fileName = "ml-1m"
+IBKNNRecommenderPrecision = 1.2180740352454494E-4
+IBKNNRecommenderRecall = 5.4532979014278E-4
+IBKNNRecommenderDiversity = 0.8075029112987738
+IBKNNRecommenderAggrDiversity = 733.6666666666666
+IBKNNRecommenderNovelty = 8.171017426960832
+IBKNNRecommenderAvgRecommTime = 0.5938896805430088
+
+# ========================================================
 # test case : IBLSH1Recommender Hash Functions Evaluation
 # ========================================================
 fileName = ../../../data/ml-1m/ml-1m

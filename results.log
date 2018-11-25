@@ -130,3 +130,83 @@ UBLSH2HashFunctionsMaeList =  [0.8632988832331546, 0.8688835237989375, 0.8779752
 UBLSH2HashFunctionsRuntimeList = [0.5287415142968119, 0.4091960716474148, 0.2604048946161734, 0.15475384365455194, 0.08025773670896648, 0.040694082092370853, 0.020184884328091828, 0.010354759377664119, 0.005151147172648126, 0.0026566597596596533];
 UBLSH2HashFunctionsCandidateSetList = [15555.595213309896, 12285.125680169103, 7877.326249799217, 4513.5461368065635, 2404.786830261126, 1253.6010405337054, 635.6558589960281, 328.97258461491685, 164.51364123106285, 83.43305763068454];
 UBLSH2HashFunctionsPredictionCoverageList  = [1.0, 0.99997138251078, 0.998554817408555, 0.9841221057432059, 0.9373992539327647, 0.8483082283065041, 0.712141375378577, 0.5609553693594159, 0.38983228330712344, 0.24911567643019192];
+# ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/yahoo-music/yahoo-music
+UBKNNRecommenderPrecision = 0.012845148135263317
+UBKNNRecommenderRecall = 0.0594182575307823
+UBKNNRecommenderDiversity = 0.19232880443602288
+UBKNNRecommenderAggrDiversity = 1000.0
+UBKNNRecommenderNovelty = 5.438028269197765
+UBKNNRecommenderAvgRecommTime = 0.21227288507156525;
+# ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/yahoo-music/yahoo-music
+UBKNNRecommenderPrecision = 0.012845148135263317
+UBKNNRecommenderRecall = 0.0594182575307823
+UBKNNRecommenderDiversity = 0.19232880443602288
+UBKNNRecommenderAggrDiversity = 1000.0
+UBKNNRecommenderNovelty = 5.438028269197765
+UBKNNRecommenderAvgRecommTime = 0.21913510452777238;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/yahoo-music/yahoo-music
+IBKNNRecommenderPrecision = 0.0028440972391157696
+IBKNNRecommenderRecall = 0.017193970866489862
+IBKNNRecommenderDiversity = 0.2711260412634496
+IBKNNRecommenderAggrDiversity = 930.3333333333334
+IBKNNRecommenderNovelty = 6.677317216245881
+IBKNNRecommenderAvgRecommTime = 0.13539488636213848;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/yahoo-music/yahoo-music
+IBKNNRecommenderPrecision = 0.0028440972391157696
+IBKNNRecommenderRecall = 0.017193970866489862
+IBKNNRecommenderDiversity = 0.2711260412634496
+IBKNNRecommenderAggrDiversity = 930.3333333333334
+IBKNNRecommenderNovelty = 6.677317216245881
+IBKNNRecommenderAvgRecommTime = 0.12535438876816826;
+# ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/ml-1m/ml-1m
+UBKNNRecommenderPrecision = 0.006891569264076623
+UBKNNRecommenderRecall = 0.033886129906941176
+UBKNNRecommenderDiversity = 0.070239469394936
+UBKNNRecommenderAggrDiversity = 2548.0
+UBKNNRecommenderNovelty = 2.7022997177143377
+UBKNNRecommenderAvgRecommTime = 0.839502275346106;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/ml-1m/ml-1m
+IBKNNRecommenderPrecision = 1.2180740352454494E-4
+IBKNNRecommenderRecall = 5.4532979014278E-4
+IBKNNRecommenderDiversity = 0.8075029112987738
+IBKNNRecommenderAggrDiversity = 733.6666666666666
+IBKNNRecommenderNovelty = 8.171017426960832
+IBKNNRecommenderAvgRecommTime = 0.5938896805430088;
+# ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+UBKNNRecommenderPrecision = 0.004690977992016525
+UBKNNRecommenderRecall = 0.017076765898357743
+UBKNNRecommenderDiversity = 0.6008810453089019
+UBKNNRecommenderAggrDiversity = 13214.0
+UBKNNRecommenderNovelty = 8.814080381586102
+UBKNNRecommenderAvgRecommTime = 1.1387985563997765;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+IBKNNRecommenderPrecision = 0.012296965564303453
+IBKNNRecommenderRecall = 0.04442393241801847
+IBKNNRecommenderDiversity = 0.2298506690358686
+IBKNNRecommenderAggrDiversity = 7659.333333333333
+IBKNNRecommenderNovelty = 6.989589893561931
+IBKNNRecommenderAvgRecommTime = 0.3350492436972911;

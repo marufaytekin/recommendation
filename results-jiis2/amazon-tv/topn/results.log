@@ -1,7 +1,27 @@
 # ========================================================
+# test case: UBKNNRecommender Precision
+# ========================================================
+fileName = "amazon-movies-tv"
+UBKNNRecommenderPrecision = 0.004690977992016525
+UBKNNRecommenderRecall = 0.017076765898357743
+UBKNNRecommenderDiversity = 0.6008810453089017
+UBKNNRecommenderAggrDiversity = 13214.0
+UBKNNRecommenderNovelty = 8.814080381586102
+UBKNNRecommenderAvgRecommTime = 5.4831571594669315;
+# ========================================================
+# test case: IBKNNRecommender Precision
+# ========================================================
+fileName = "amazon-movies-tv"
+IBKNNRecommenderPrecision = 0.012292645309642733
+IBKNNRecommenderRecall = 0.04434399465056949
+IBKNNRecommenderDiversity = 0.2298330025949931
+IBKNNRecommenderAggrDiversity = 7659.666666666667
+IBKNNRecommenderNovelty = 6.989666405835529
+IBKNNRecommenderAvgRecommTime = 1.2051581382207268;
+# ========================================================
 # test case : IBLSH1Recommender Hash Functions Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashTables = 5
 IBLSH1RecommenderHashFunctionsPrecision = [1.5747899129068516E-4, 2.3101724582980923E-4, 3.202297836265987E-4, 3.854124825138022E-4, 4.562372234731501E-4, 4.6368280527323756E-4, 5.2208923416221E-4, 4.5253926540283275E-4, 4.410593086267736E-4, 4.853606319988612E-4];
 IBLSH1RecommenderHashFunctionsPecall = [9.419860740601003E-4, 0.0014683470357389518, 0.0016588652009012486, 0.00208210453514597, 0.002217302113809545, 0.0023792768953108116, 0.0028410889092048866, 0.002314509219800717, 0.0018954899862270106, 0.0021279507275268517];
@@ -15,7 +35,7 @@ IBLSH1RecommenderHashFunctionsTopNRatioListSize = [0.9992645513444637, 0.9992645
 # ========================================================
 # test case : IBLSH1Recommender Hash Tables Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashFunctions = 6
 IBLSH1RecommenderHashTablesPrecision = [2.736992022721728E-4, 2.845131851863047E-4, 4.175032515020118E-4, 4.270295438663535E-4, 4.504460215478988E-4, 5.178121115385779E-4, 4.368156212046321E-4, 6.012631294836944E-4, 6.415081492194114E-4, 5.434126974787051E-4];
 IBLSH1RecommenderHashTablesRecall = [0.0015993327737668253, 0.001659761739054557, 0.0021125222397427768, 0.0023436347306434544, 0.002364383569006531, 0.0025190403652627625, 0.0024187846271222467, 0.003033412086103289, 0.0029185252747610285, 0.0027411312264981305];
@@ -29,7 +49,7 @@ IBLSH1RecommenderHashTablesTopNRatioListSize = [0.9992645513444637, 0.9992645513
 # ========================================================
 # test case : IBLSH2Recommender Hash Functions Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashTables = 5
 IBLSH2RecommenderHashFunctionsPrecision = [2.0736884865000678E-4, 2.0263197521458933E-4, 2.2422057997270332E-4, 1.99356640263549E-4, 2.430869023106417E-4, 2.6059145325000644E-4, 1.922432209843947E-4, 2.3039459013850128E-4, 2.88163334669561E-4, 2.8545301907006423E-4];
 IBLSH2RecommenderHashFunctionsPecall = [0.001020159067641671, 0.0012753633057568938, 0.001303646421953096, 0.0011690009328146058, 0.001223889857348499, 0.0012570585588104804, 0.0013021474894642261, 0.001377837379399411, 0.0013307357030304383, 0.0014563098657665158];
@@ -43,7 +63,7 @@ IBLSH2RecommenderHashFunctionsTopNRatioListSize = [0.9992645513444637, 0.9992645
 # ========================================================
 # test case : IBLSH2Recommender Hash Tables Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashFunctions = 6
 IBLSH2RecommenderHashTablesPrecision = [2.4396879175516664E-4, 2.3332965422191197E-4, 2.0494044299602983E-4, 2.2106242276459133E-4, 2.5880243581737306E-4, 2.027535046397746E-4, 1.816643742116291E-4, 1.9983165662378638E-4, 1.6957681506869405E-4, 2.416713204156554E-4];
 IBLSH2RecommenderHashTablesRecall = [0.0013422572036539025, 0.0013195985233671631, 0.0012453339318524365, 0.001291767740761397, 0.0012940465872370653, 0.0012257148478578346, 0.0011430043186988394, 0.0010912524275509645, 0.0011367935166762902, 0.0013016782215566263];
@@ -57,7 +77,7 @@ IBLSH2RecommenderHashTablesTopNRatioListSize = [0.9992645513444637, 0.9992645513
 # ========================================================
 # test case : UBLSH1Recommender Hash Functions Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashTables = 5
 UBLSH1RecommenderHashFunctionsPrecision = [3.7689254856613087E-4, 3.766218252536711E-4, 5.532006100476506E-4, 7.997049795364692E-4, 9.297483883154214E-4, 0.0010386853146640799, 0.0013012056150897677, 0.0015424317940035627, 0.0014758487027742328, 0.001507348559276915];
 UBLSH1RecommenderHashFunctionsPecall = [0.001972899193713577, 0.002167844916377355, 0.0030131340829954757, 0.0037309147992850397, 0.004617010672652259, 0.005364975012042601, 0.0063087035475539385, 0.007478093756350504, 0.007608174105599823, 0.006785176294581009];
@@ -71,7 +91,7 @@ UBLSH1RecommenderHashFunctionsTopNRatioListSize = [0.9992645513444637, 0.9992645
 # ========================================================
 # test case : UBLSH1Recommender Hash Tables Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashFunctions = 6
 UBLSH1RecommenderHashTablesPrecision = [0.001248447342410262, 0.001161513893666328, 0.0011063931668680738, 0.0010685705312086801, 0.0010998597107386944, 0.0012064338005598368, 0.0010928156037643849, 0.0011833671182672608, 0.0010411025893441155, 0.0011304705056651865];
 UBLSH1RecommenderHashTablesRecall = [0.00553884283716732, 0.005174581227586662, 0.005341301147658638, 0.005499720896717529, 0.005823627899909423, 0.005774157662443449, 0.005610295289540444, 0.00575537814900787, 0.005562104783181702, 0.005358883483313338];
@@ -85,7 +105,7 @@ UBLSH1RecommenderHashTablesTopNRatioListSize = [0.9992645513444637, 0.9992645513
 # ========================================================
 # test case : UBLSH2Recommender Hash Functions Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashTables = 5
 UBLSH2RecommenderHashFunctionsPrecision = [2.1814097965414925E-4, 2.993592280391292E-4, 2.2119661592211016E-4, 2.419878281442159E-4, 3.1441562916099594E-4, 3.2889306789894544E-4, 3.118890626207144E-4, 3.5245197552127627E-4, 4.6334053752166587E-4, 5.038277235722604E-4];
 UBLSH2RecommenderHashFunctionsPecall = [0.0014644201006306454, 0.001316815643895148, 0.0013593175810820135, 0.0014374256930842135, 0.0016111229686849762, 0.0015828174169892674, 0.0019795850553686587, 0.0021124027820503765, 0.0027078402652773565, 0.0026040657335475166];
@@ -99,7 +119,7 @@ UBLSH2RecommenderHashFunctionsTopNRatioListSize = [0.9992645513444637, 0.9992645
 # ========================================================
 # test case : UBLSH2Recommender Hash Tables Evaluation
 # ========================================================
-fileName = ../../../data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 numOfHashFunctions = 6
 UBLSH2RecommenderHashTablesPrecision = [3.80439256451999E-4, 3.5085284067673224E-4, 3.5253643999559364E-4, 2.758071606004874E-4, 3.1941156922194467E-4, 3.1447985983029756E-4, 2.76071285978253E-4, 3.2425955640335864E-4, 2.831941148822628E-4, 2.9587691432765166E-4];
 UBLSH2RecommenderHashTablesRecall = [0.002090019652740464, 0.001824613036534569, 0.0019865865794032977, 0.0016920565040434998, 0.0016312842072196253, 0.0016959268339541086, 0.001552639392698913, 0.001712123113997175, 0.0014876240294087626, 0.001703386498765739];
