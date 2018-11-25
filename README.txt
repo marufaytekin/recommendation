@@ -7,7 +7,7 @@ submitted to Journal of Intelligent Information Systems.
 === Contact ===
 
 Maruf Aytekin
-E-mail: ahmetmaruf.aytekin@stu.bahcesehir.edu.tr
+E-mail: aaytekin@gmail.com
 
 
 === Copyright ===
