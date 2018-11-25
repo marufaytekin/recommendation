@@ -28,7 +28,7 @@ public class Main {
         int y = 5;
         int kNN = 20;
         int numOfRun = 10;
-        int smoothRun = 5;
+        int smoothRun = 10;
         int l = 5; // number of bands
         int k = 6; // number of hash functions
 
