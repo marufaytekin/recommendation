@@ -1,0 +1,66 @@
+ function write (f, file_name)
+   H = 3.2; W = 4;
+   h = f;
+   set (h,'papertype', '<custom>')
+   set (h,'paperunits','inches');
+   set (h,'papersize',[H W])
+   set (h,'paperposition', [0,0,[W H]])
+   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
+   set (0,'defaultaxesfontsize', 8)
+   out_file_name = strcat (file_name,'.eps');
+   print('-depsc', out_file_name);
+ endfunction
+
+# ===========================================
+# Heat-maps
+# ===========================================
+
+x = 1:10;
+y = 1:10;
+xx = [2 4 6 8 10]
+yy = [2 4 6 8 10]
+
+f= figure();
+data = UBKNNLSHMae2D;
+contourf(x, y, data);
+axis square;
+c = colorbar ('southoutside');
+set (c, 'fontsize', 8);
+set(gca,'XTick',xx);
+set(gca,'YTick',yy);
+xlabel("K");
+ylabel("L");
+title("MAE");
+
+file = strcat(fileName, '-ublsh-heat-map-mae');
+write (f, file);
+
+
+f= figure();
+data = UBKNNLSHRuntime2D;
+contourf(x, y, data);
+axis square;
+c = colorbar ('southoutside');
+set (c, 'fontsize', 8);
+set(gca,'XTick',xx);
+set(gca,'YTick',yy);
+xlabel("K");
+ylabel("L");
+title("Running Time (ms)");
+file = strcat(fileName, '-ublsh-heat-map-runtime');
+write(f, file);
+
+
+f= figure();
+data = UBKNNLSHCandidateSetList2D;
+contourf(x, y, data ./ 1000);
+axis square;
+c = colorbar ('southoutside');
+set (c, 'fontsize', 8);
+set(gca,'XTick',xx);
+set(gca,'YTick',yy);
+xlabel("K");
+ylabel("L");
+title("Candidate Set Size (K)");
+file = strcat(fileName, '-ublsh-heat-map-candidate');
+write(f, file);

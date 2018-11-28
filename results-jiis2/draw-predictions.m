@@ -59,6 +59,7 @@ set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Run Time(ms)');
 xlim([1, 10])
+ylim([0 1.6]);
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-runtime'));
 
