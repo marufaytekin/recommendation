@@ -21,7 +21,7 @@ legend boxon;
 xlabel("K");
 ylabel('MAP');
 xlim([1, 10]);
-ylim([-0.001 0.016]);
+ylim([-0.001 0.017]);
 write(f, strcat(fileName,'-hash-functions-precision'));
 
 ----------
@@ -136,7 +136,7 @@ legend boxon;
 xlabel("L");
 ylabel('MAP');
 xlim([1 10])
-ylim([-0.001 0.016]);
+ylim([-0.001 0.017]);
 write(f, strcat(fileName,'-hash-tables-precision'));
 
 -------------
