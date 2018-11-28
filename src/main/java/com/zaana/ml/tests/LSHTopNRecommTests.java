@@ -212,7 +212,7 @@ public class LSHTopNRecommTests extends AbstractTest{
             totalDiversity += Diversity.intraListDissimilarity(topNRecommendedItemsSet, itemRateMap, 5);
             totalNovelty += Novelty.novelty(topNRecommendedItemsSet, userSet, itemSetCount);
             uniqueItemSet.addAll(new HashSet<>(topNRecommendedItemsList));
-            totalCandidateItemList += recommender.getCandidateItemListSize();
+            totalCandidateItemList += topNRecommendedItemsList.size();
             //totalUniqueItemList += recommender.getUniqueCandidateItemListSize();
             cnt++;
         }

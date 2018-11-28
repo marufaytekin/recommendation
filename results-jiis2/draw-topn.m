@@ -19,7 +19,7 @@ h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', '
 set (h, 'fontsize', 8);
 legend boxon;
 xlabel("K");
-ylabel('Precision');
+ylabel('MAP');
 xlim([1, 10]);
 ylim([-0.001 0.016]);
 write(f, strcat(fileName,'-hash-functions-precision'));
@@ -134,7 +134,7 @@ h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', '
 set (h, 'fontsize', 8);
 legend boxon;
 xlabel("L");
-ylabel('Precision');
+ylabel('MAP');
 xlim([1 10])
 ylim([-0.001 0.016]);
 write(f, strcat(fileName,'-hash-tables-precision'));

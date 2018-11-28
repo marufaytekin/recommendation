@@ -47,7 +47,7 @@ plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
 set (h, 'fontsize', 8);
 xlabel("K");
-ylabel('Prediction Ratio');
+ylabel('Coverage');
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ub-lsh-hash-functions-prediction-coverage');
@@ -64,7 +64,7 @@ plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
 set (h, 'fontsize', 8);
 xlabel("L");
-ylabel('Prediction Ratio');
+ylabel('Coverage');
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ub-lsh-hash-tables-prediction-coverage');
@@ -82,7 +82,7 @@ plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
 set (h, 'fontsize', 8);
 xlabel("K");
-ylabel('Prediction Ratio');
+ylabel('Coverage');
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ib-lsh-hash-functions-prediction-coverage');
@@ -99,7 +99,7 @@ plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
 set (h, 'fontsize', 8);
 xlabel("L");
-ylabel('Prediction Ratio');
+ylabel('Coverage');
 xlim([1, 10])
 ylim([0 1])
 write(f, 'ib-lsh-hash-tables-prediction-coverage');
