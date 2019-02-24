@@ -70,6 +70,8 @@ public class TestDriver {
 
             case "51":
                 LOG.info("Processing ======================== " + dataFileBase + " ========================");
+                CFPredictionValidationTest.runCFPredictionAndKTest(dataFilePath, dataFileBase, "IB", cvFoldK, seperator, y);
+                CFPredictionValidationTest.runCFPredictionAndKTest(dataFilePath, dataFileBase, "UB", cvFoldK, seperator, y);
                 CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "UB", 5, seperator, 20);
                 CFPredictionValidationTest.runCFPredictionAndYTest(dataFilePath, dataFileBase, "IB", 5, seperator, 20);
                 break;

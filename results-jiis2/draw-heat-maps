@@ -1,11 +1,11 @@
  function write (f, file_name)
-   H = 3.2; W = 4;
+   H = 4; W = 3.2;
    h = f;
    set (h,'papertype', '<custom>')
    set (h,'paperunits','inches');
    set (h,'papersize',[H W])
    set (h,'paperposition', [0,0,[W H]])
-   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
+   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.5])
    set (0,'defaultaxesfontsize', 8)
    out_file_name = strcat (file_name,'.eps');
    print('-depsc', out_file_name);
@@ -26,6 +26,7 @@ contourf(x, y, data);
 axis square;
 c = colorbar ('southoutside');
 set (c, 'fontsize', 8);
+set (c, 'position', [0.13 0.15 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");
@@ -42,6 +43,7 @@ contourf(x, y, data);
 axis square;
 c = colorbar ('southoutside');
 set (c, 'fontsize', 8);
+set (c, 'position', [0.13 0.15 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");
@@ -57,6 +59,7 @@ contourf(x, y, data ./ 1000);
 axis square;
 c = colorbar ('southoutside');
 set (c, 'fontsize', 8);
+set (c, 'position', [0.13 0.15 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");
