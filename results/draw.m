@@ -237,7 +237,7 @@ f= figure();
 plot (x, y1, '-dk', x, y3, '--*k');
 legend("UBP-CF","UBP-LSH", "location", "northwest");
 xlabel("users(x1000)")
-ylabel("Model Build Time (sec)");
+ylabel("Model Building Time (sec)");
 xlim([x(1) x(10)])
 write(f, strcat(fileName,'-model-build-time-ub'));
 
@@ -245,7 +245,7 @@ f= figure();
 plot (x2, y2, '-dk', x2, y4, '--*k' );
 legend("IBP-CF", "IBP-LSH", "location", "northwest");
 xlabel("items(x1000)")
-ylabel("Model Build Time(sec)");
+ylabel("Model Building Time(sec)");
 xlim([x2(1) x2(10)])
 write(f, strcat(fileName,'-model-build-time-ib'));
 

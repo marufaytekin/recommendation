@@ -44,7 +44,7 @@ legend boxon;
 xlabel("K");
 ylabel('Diversity');
 xlim([1, 10]);
-ylim([0.2 1.2])
+ylim([0.16 0.3])
 write(f, strcat(fileName,'-hash-functions-diversity'));
 
 -----------
@@ -158,7 +158,7 @@ legend boxon;
 xlabel("L");
 ylabel('Diversity');
 xlim([1 10])
-ylim([0.2 1.2])
+ylim([0.16 0.3])
 write(f, strcat(fileName,'-hash-tables-diversity'));
 
 -------------
