@@ -2,7 +2,7 @@
 # 10-fold CV Tests
 # =======================================================
 
-function write (f, file_name)
+ function write (f, file_name)
    H = 3.2; W = 4;
    h = f;
    set (h,'papertype', '<custom>')
@@ -83,6 +83,7 @@ y3 = ymusic_ub_lsh_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -100,6 +101,7 @@ y3 = ymusic_ub_lsh_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');
@@ -118,6 +120,7 @@ y3 = ymusic_ib_lsh_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -135,6 +138,7 @@ y3 = ymusic_ib_lsh_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');
@@ -155,6 +159,7 @@ y3 = ymusic_ub_lsh1_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -172,6 +177,7 @@ y3 = ymusic_ub_lsh1_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');
@@ -190,6 +196,7 @@ y3 = ymusic_ib_lsh1_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -207,6 +214,7 @@ y3 = ymusic_ib_lsh1_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');
@@ -228,6 +236,7 @@ y3 = ymusic_ub_lsh2_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -245,6 +254,7 @@ y3 = ymusic_ub_lsh2_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');
@@ -263,6 +273,7 @@ y3 = ymusic_ib_lsh2_hash_functions_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Coverage');
@@ -280,6 +291,7 @@ y3 = ymusic_ib_lsh2_hash_tables_prediction_coverage;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'southeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Coverage');

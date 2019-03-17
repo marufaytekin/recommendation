@@ -34,11 +34,12 @@ y7 = IBLSH1HashTablesMaeList;
 y8 = IBLSH2HashTablesMaeList;
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
 h = legend('UBP-CF', 'IBP-CF', 'UBP-LSH', 'IBP-LSH', 'UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('MAE');
 xlim([1, 10]);
-ylim([0.8 4]);
+ylim([1 4]);
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-mae'));
 
@@ -55,25 +56,14 @@ y7 = IBLSH1HashTablesRuntimeList;
 y8 = IBLSH2HashTablesRuntimeList;
 plot (x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
 h = legend('UBP-LSH', 'IBP-LSH','UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("L");
 ylabel('Run Time(ms)');
 xlim([1, 10])
-ylim([0 1.6]);
+#ylim([0 1.6]);
 legend boxon;
 write(f, strcat(fileName,'-hash-tables-runtime'));
-
-f= figure();
-plot ( x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
-h = legend('UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northwest');
-set (h, 'fontsize', 8);
-xlabel("L");
-ylabel('Run Time(ms.)');
-xlim([1, 10])
-#ylim([0 0.4]);
-legend boxon;
-write(f, strcat(fileName,'-hash-tables-runtime2'));
-
 
 
 # ========================================================
@@ -94,9 +84,10 @@ y7 = IBLSH1HashFunctionsMaeList;
 y8 = IBLSH2HashFunctionsMaeList;
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k', x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
 h = legend('UBP-CF', 'IBP-CF', 'UBP-LSH', 'IBP-LSH', 'UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northwest');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlim([1, 10]);
-ylim([0.8 4]);
+ylim([1 4]);
 xlabel("K");
 ylabel('MAE');
 legend boxon;
@@ -114,6 +105,7 @@ y7 = IBLSH1HashFunctionsRuntimeList;
 y8 = IBLSH2HashFunctionsRuntimeList;
 plot (x, y3,'-dk', x, y4,'-*k', x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
 h = legend( 'UBP-LSH', 'IBP-LSH', 'UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("K");
 ylabel('Run Time(ms)');
@@ -121,15 +113,5 @@ xlim([1, 10])
 legend boxon;
 write(f, strcat(fileName,'-hash-functions-runtime'));
 
-f= figure();
-plot (x, y5,'-+k', x, y6,'-xk', x, y7,'-ok', x, y8,'-<k');
-h = legend('UBP-LSH1', 'UBP-LSH2', 'IBP-LSH1', 'IBP-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
-xlabel("K");
-ylabel('Run Time(ms.)');
-xlim([1, 10])
-#ylim([0 0.4]);
-legend boxon;
-write(f, strcat(fileName,'-hash-functions-runtime2'));
 
 

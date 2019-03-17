@@ -6,7 +6,7 @@
    set (h,'papersize',[H W])
    set (h,'paperposition', [0,0,[W H]])
    set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.5])
-   set (0,'defaultaxesfontsize', 8)
+   set (0,'defaultaxesfontsize', 10)
    out_file_name = strcat (file_name,'.eps');
    print('-depsc', out_file_name);
  endfunction
@@ -25,8 +25,9 @@ data = UBKNNLSHMae2D;
 contourf(x, y, data);
 axis square;
 c = colorbar ('southoutside');
-set (c, 'fontsize', 8);
-set (c, 'position', [0.13 0.15 0.78 0.05]);
+set (c, 'fontunits', "points");
+set (c, 'fontsize', 10);
+set (c, 'position', [0.13 0.12 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");
@@ -42,8 +43,8 @@ data = UBKNNLSHRuntime2D;
 contourf(x, y, data);
 axis square;
 c = colorbar ('southoutside');
-set (c, 'fontsize', 8);
-set (c, 'position', [0.13 0.15 0.78 0.05]);
+set (c, 'fontsize', 10);
+set (c, 'position', [0.13 0.12 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");
@@ -58,8 +59,8 @@ data = UBKNNLSHCandidateSetList2D;
 contourf(x, y, data ./ 1000);
 axis square;
 c = colorbar ('southoutside');
-set (c, 'fontsize', 8);
-set (c, 'position', [0.13 0.15 0.78 0.05]);
+set (c, 'fontsize', 10);
+set (c, 'position', [0.13 0.12 0.78 0.05]);
 set(gca,'XTick',xx);
 set(gca,'YTick',yy);
 xlabel("K");

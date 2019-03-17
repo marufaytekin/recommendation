@@ -23,6 +23,18 @@ ub_y_ml_1m = [0.8043789618062921, 0.7989129663861, 0.7979647599681283, 0.7980813
 ib_y_ml_1m = [0.8343789618062921, 0.8089129663861, 0.809652666386, 0.813652666386, 0.8175803817706735, 0.8204551546706365, 0.8228994145971619, 0.8275929756138755, 0.830592975613875, 0.8328992975613875]
 
 
+function write (f, file_name)
+   H = 3.2; W = 4;
+   h = f;
+   set (h,'papertype', '<custom>')
+   set (h,'paperunits','inches');
+   set (h,'papersize',[H W])
+   set (h,'paperposition', [0,0,[W H]])
+   set (h,'defaultaxesposition', [0.15, 0.15, 0.75, 0.75])
+   set (0,'defaultaxesfontsize', 10)
+   out_file_name = strcat (file_name,'.eps');
+   print('-depsc', out_file_name);
+ endfunction
 
 
 #============================================================================
@@ -38,12 +50,13 @@ y3 = ub_k_ymusic;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'northeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("MAE");
 ylabel('k');
 xlim([1, 46])
 #ylim([0 1])
-write(f, 'ub-k-mae');
+write(f, 'ub-k-mae2');
 
 
 f= figure();
@@ -53,6 +66,7 @@ y3 = ib_k_ymusic;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'northeast');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("MAE");
 ylabel('k');
@@ -75,6 +89,7 @@ y3 = ub_y_ymusic;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'east');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel('MAE');
 ylabel('Significance(Y)');
@@ -89,6 +104,7 @@ y3 = ib_y_ymusic;
 
 plot (x, y1,'-dk', x, y2,'-*k',x, y3,'-+k');
 h = legend('ML-1M', 'Amazon Movies', 'Yahoo Music!', 'location', 'east');
+set (h, 'fontunits', "points");
 set (h, 'fontsize', 8);
 xlabel("MAE");
 ylabel('Significance(Y)');

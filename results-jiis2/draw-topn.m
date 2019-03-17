@@ -16,15 +16,16 @@ f= figure();
 p = plot ([1, n], [y1, y1],'-.k', [1, n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 #h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'northwest');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'north', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("K");
 ylabel('MAP');
 xlim([1, 10]);
-ylim([-0.001 0.017]);
+ylim([0.001 0.025]);
 write(f, strcat(fileName,'-hash-functions-precision'));
 
-----------
+###############
 
 n = 10;
 x = 1:10;
@@ -39,7 +40,8 @@ y6 = UBLSH2RecommenderHashFunctionsDiversity;
 f= figure();
 plot ([1, n], [y1, y1],'-.k', [1, n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'north', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("K");
 ylabel('Diversity');
@@ -47,7 +49,7 @@ xlim([1, 10]);
 ylim([0.16 0.3])
 write(f, strcat(fileName,'-hash-functions-diversity'));
 
------------
+###############-
 
 n = 10;
 x = 1:10;
@@ -62,15 +64,16 @@ y6 = UBLSH2RecommenderHashFunctionsAggrDiversity;
 f= figure();
 plot ([1, n], [y1, y1],'-.k', [1, n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'south', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("K");
 ylabel('Aggregate Diversity');
 xlim([1, 10]);
-ylim([-3500, 20000]);
+ylim([260, 1000]);
 write(f, strcat(fileName,'-hash-functions-aggrdiversity'));
 
--------------
+################
 
 n = 10;
 x = 1:10;
@@ -85,7 +88,8 @@ y6 = UBLSH2RecommenderHashFunctionsNovelty;
 f= figure();
 plot ([1, n], [y1, y1],'-.k', [1, n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'south', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("K");
 ylabel('Novelty');
@@ -93,7 +97,7 @@ xlim([1, 10]);
 ylim([3.5 7])
 write(f, strcat(fileName,'-hash-functions-novelty'));
 
------------
+###############-
 
 n = 10;
 x = 1:n;
@@ -106,7 +110,8 @@ y6 = UBLSH2RecommenderHashFunctionsAvgRecommTime;
 f= figure();
 plot (x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'northeast');
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlim([1, 10]);
 xlabel("K");
@@ -131,15 +136,17 @@ f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 #h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'northwest');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'north', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("L");
 ylabel('MAP');
 xlim([1 10])
-ylim([-0.001 0.017]);
+ylim([0 0.025]);
 write(f, strcat(fileName,'-hash-tables-precision'));
 
--------------
+################
+
 n = 10;
 x = 1:10;
 numOfHashFunctions = 6;
@@ -153,7 +160,8 @@ y6 = UBLSH2RecommenderHashTablesDiversity;
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'north', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("L");
 ylabel('Diversity');
@@ -161,7 +169,8 @@ xlim([1 10])
 ylim([0.16 0.3])
 write(f, strcat(fileName,'-hash-tables-diversity'));
 
--------------
+################
+
 n = 10;
 x = 1:10;
 numOfHashFunctions = 6;
@@ -175,15 +184,16 @@ y6 = UBLSH2RecommenderHashTablesAggrDiversity;
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'south', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("L");
 ylabel('Aggregate Diversity');
 xlim([1 10])
-ylim([0, 20000]);
+ylim([910, 1000]);
 write(f, strcat(fileName,'-hash-tables-aggrdiversity'));
 
--------------
+################
 
 n = 10;
 x = 1:10;
@@ -198,7 +208,8 @@ y6 = UBLSH2RecommenderHashTablesNovelty;
 f= figure();
 plot ([1,n], [y1, y1],'-.k', [1,n], [y2, y2],'--k',x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend('IBR-CF', 'UBR-CF', 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'south', "orientation", "horizontal");
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("L");
 ylabel('Novelty');
@@ -206,7 +217,7 @@ xlim([1 10])
 ylim([3.5 7])
 write(f, strcat(fileName,'-hash-tables-novelty'));
 
--------------
+################
 
 y3 = IBLSH1RecommenderHashTablesAvgRecommTime;
 y4 = IBLSH2RecommenderHashTablesAvgRecommTime;
@@ -215,7 +226,8 @@ y6 = UBLSH2RecommenderHashTablesAvgRecommTime;
 f= figure();
 plot (x, y3,'-+k', x, y4,'-xk', x, y5,'-ok', x, y6,'-<k');
 h = legend( 'IBR-LSH1', 'IBR-LSH2', 'UBR-LSH1', 'UBR-LSH2', 'location', 'northwest');
-set (h, 'fontsize', 8);
+set (h, 'fontunits', "points");
+set (h, 'fontsize', 10);
 legend boxon;
 xlabel("L");
 ylabel('Avg Recc. Time (ms.)');

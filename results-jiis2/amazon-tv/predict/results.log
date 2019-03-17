@@ -13,7 +13,7 @@ IBKNNRuntime = 1.0349189836822195
 # ========================================================
 # test case: UBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -24,7 +24,7 @@ UBKNNLSHHashTablesPredictionCoverageList  = [0.5886615889096092, 0.7548672183996
 # ========================================================
 # test case: UBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -35,7 +35,7 @@ UBKNNLSHHashFunctionsPredictionCoverageList  = [1.0, 1.0, 0.9998139888453216, 0.
 # ========================================================
 # test case: IBKNNLSHHashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -46,7 +46,7 @@ IBKNNLSHHashTablesPredictionCoverageList  = [0.6245908022592087, 0.7735738525850
 # ========================================================
 # test case: IBKNNLSHHashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -57,7 +57,7 @@ IBKNNLSHHashFunctionsPredictionCoverageList  = [0.9999904605866821, 0.9999189150
 # ========================================================
 # test case: IBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -68,7 +68,7 @@ IBLSH1HashTablesPredictionCoverageList  = [0.621591122473975, 0.7756100083591212
 # ========================================================
 # test case: IBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -79,7 +79,7 @@ IBLSH1HashFunctionsPredictionCoverageList  = [0.9999809212416046, 0.999895068705
 # ========================================================
 # test case: IBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -90,7 +90,7 @@ IBLSH2HashTablesPredictionCoverageList  = [0.5259941165669635, 0.680948418256793
 # ========================================================
 # test case: IBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -101,7 +101,7 @@ IBLSH2HashFunctionsPredictionCoverageList  = [0.9999284580514677, 0.999618430292
 # ========================================================
 # test case: UBLSH1HashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -112,7 +112,7 @@ UBLSH1HashTablesPredictionCoverageList  = [0.5855663377442372, 0.756002391659051
 # ========================================================
 # test case: UBLSH1HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -123,7 +123,7 @@ UBLSH1HashFunctionsPredictionCoverageList  = [1.0, 1.0, 0.9998664524449895, 0.99
 # ========================================================
 # test case: UBLSH2HashTables Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
@@ -134,7 +134,7 @@ UBLSH2HashTablesPredictionCoverageList  = [0.47290373956902837, 0.65188716433324
 # ========================================================
 # test case: UBLSH2HashFunctions Prediction Performance
 # ========================================================
-dataFileBase = data/amazon-movies-tv/amazon-movies-tv
+fileName = "amazon-movies-tv"
 k = 20
 numOfHashTables = 5
 numOfHashFunctions = 6
