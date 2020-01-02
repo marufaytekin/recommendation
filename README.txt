@@ -1,8 +1,4 @@
-Implementation issues for real-time recommendation with Locality Sensitive Hashing
-
-This repository provides source code used for the generation of results in
-"Real-time Recommendation with Locality Sensitive Hashing" paper which is
-submitted to Journal of Intelligent Information Systems.
+This repository provides the source code for the Real-time Recommendation with Locality Sensitive Hashin (LSH) paper. The repo includes source code for the algorithm, experiments, and results. The study is published in Journal of Intelligent Information Systems. The final publication is available at link.springer.com.
 
 === Contact ===
 
