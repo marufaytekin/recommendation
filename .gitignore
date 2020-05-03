@@ -5,7 +5,6 @@ lsh.iml
 .idea/**
 recomm.log
 /project
-**/*.pdf
 *.aux
 *.gz
 target
